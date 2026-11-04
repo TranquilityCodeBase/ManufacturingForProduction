@@ -466,9 +466,11 @@
     }
     initSizeFilters(document);
     initDiameterToggles(document);
-    // Content was added after main.js ran, so wire up tabs again
+    // Content was added after main.js ran, so wire up tabs and the table helpers
+    // (tall tables scroll in their own box so the header row stays visible) again
     if (window.DFM) {
       window.DFM.initTabs();
+      window.DFM.enhanceTables();
     }
   });
 })();

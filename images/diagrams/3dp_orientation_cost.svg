@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320" role="img" aria-label="The same bar printed flat, tilted 30 to 45 degrees, and standing up: build height, supports and print time">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="The same bar printed flat, tilted 30 to 45 degrees, and standing up: build height, supports and print time">
 <title>The same bar printed flat, tilted 30 to 45 degrees, and standing up: build height, supports and print time</title>
 <style>
   text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
@@ -57,5 +57,4 @@
 <text x="800" y="154" text-anchor="start">most layers</text>
 <text x="750" y="264" text-anchor="middle" class="bad">Slowest</text>
 <text x="750" y="284" text-anchor="middle" class="s">best round holes along Z</text>
-<text x="450" y="312" text-anchor="middle" class="s">SLS and MJF are priced on packed volume, so orientation matters less there.</text>
 </svg>

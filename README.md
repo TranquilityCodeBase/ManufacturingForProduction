@@ -24,17 +24,35 @@ js/site_nav.js          Left navigation definition (add a page here to add it to
 js/main.js              Shared behavior: sidebar, section links, theme toggle, tabs, table filters
 js/reference_tables.js  Renders thread and tap drill tables from the data files
 js/corner_radius_tool.js  Inside corner / pocket radius picker
-js/calculators.js       Unit converters, part mass, drill finder, scratch pad
+js/calculators.js       Unit converters, part mass, drill finder, thread and countersink calculators
+js/scratch_pad.js       Scratch pad (calculators page panel, drawer on every other page)
+js/site_search.js       Top bar search box
+tools/                  build_search_index.js (regenerates js/data/search_index.js)
 js/data/                Data files (thread pilot tables, tap drills, standard cutters)
 images/diagrams/        SVG diagrams used on the pages
 obsidian_notes/         The same reference data as Obsidian notes, ready to copy into a vault
 ```
+
+## Search index
+
+The search box uses a static index. After changing page content or data files, rebuild it:
+
+```
+node tools/build_search_index.js
+```
+
+## Link previews
+
+Each page head has Open Graph tags (title, description, `images/og_image.png`) so links pasted into Teams or Slack show a preview. They assume the GitHub Pages URL `https://tranquilitycodebase.github.io/ManufacturingForProduction/`; update them if the site is hosted elsewhere.
 
 ## Adding a page
 
 1. Copy an existing page in `pages/` and change the `<title>`, `data-page` id and content.
 2. Add an entry with the same id to `js/site_nav.js`.
 3. Give every `<h2>` an `id`; it appears automatically as a section link in the sidebar.
+4. Copy the head tags (favicon, link previews, scripts) from an existing page, then rebuild the search index.
+
+Planned and suggested improvements are tracked in `.claude/suggested_improvements.md`.
 
 ## Data and sources
 
