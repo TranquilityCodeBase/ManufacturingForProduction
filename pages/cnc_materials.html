@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Machining Materials | DFM Reference</title>
+  <meta name="description" content="Common CNC metals and plastics compared by machinability, relative cost and typical use, with substitution tips.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="cnc_materials" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Machining Materials</h1>
+          <p class="lead">Material choice sets both the raw stock price and how fast the part can be cut. Soft, free-machining materials are cheaper to machine; choose harder or exotic alloys only when the application needs them.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">~4x</span><span class="label">Aluminum cuts faster than carbon steel</span></div>
+          <div class="key-card"><span class="value">~0.5x</span><span class="label">Stainless vs carbon steel cutting speed</span></div>
+          <div class="key-card"><span class="value">6061-T6</span><span class="label">Default general-purpose metal</span></div>
+          <div class="key-card"><span class="value">POM / Delrin</span><span class="label">Default general-purpose plastic</span></div>
+        </div>
+
+        <h2 id="cost-drivers">Machinability and stock price</h2>
+        <div class="two-col">
+          <figure class="diagram">
+            <img src="../images/diagrams/materials_machining_speed.svg" alt="Bar chart of relative machining speed: aluminum about 4 times, carbon steel 1 times, stainless about half" width="760" height="200" loading="lazy">
+            <figcaption>Relative material removal rate.</figcaption>
+          </figure>
+          <figure class="diagram">
+            <img src="../images/diagrams/materials_relative_cost.svg" alt="Example bulk prices: aluminum 6061 25, 7075 80, stainless 304 90, brass C360 148, stainless 303 150, ABS 17, POM 27, nylon 6 30, PEEK 300 dollars" width="820" height="420" loading="lazy">
+            <figcaption>Example bulk material price for the same blank (relative ranking only).</figcaption>
+          </figure>
+        </div>
+        <ul>
+          <li><strong>Machine time usually outweighs material cost</strong> on prototypes. On production runs, free-machining grades (303 stainless, C360 brass, 12L14 steel) often win even at a higher stock price because cycle times are much shorter.</li>
+          <li><strong>Plastics are easy to cut</strong> and polyethylene can be about one third the cost of 6061, but plastics hold tolerance less well and can warp after machining.</li>
+          <li><strong>Exotics</strong> (titanium, Inconel, PEEK, PEI) cost more as stock and to machine. Use them only where heat, strength-to-weight or chemistry demands it.</li>
+        </ul>
+
+        <h2 id="metals">Metals</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Material</th><th>Machinability</th><th>Key properties</th><th>Typical uses</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Aluminum 6061-T6</td><td><span class="badge good">Excellent</span></td><td>Good strength, corrosion resistant, weldable, anodizes well, low cost</td><td>Brackets, housings, fixtures, general parts</td></tr>
+              <tr><td>Aluminum 7075-T6</td><td><span class="badge good">Excellent</span></td><td>Much higher strength and hardness, less corrosion resistant, not weldable</td><td>Aerospace, high-load parts, molds</td></tr>
+              <tr><td>Brass C360</td><td><span class="badge good">Excellent (free machining)</span></td><td>Low friction, corrosion resistant, conductive</td><td>Fittings, valves, bushings, electrical parts</td></tr>
+              <tr><td>Copper C101 / C110</td><td><span class="badge warn">Fair (gummy)</span></td><td>Highest electrical and thermal conductivity, expensive</td><td>Bus bars, heat spreaders, electrodes</td></tr>
+              <tr><td>Steel 1018 (low carbon)</td><td><span class="badge good">Good</span></td><td>Low cost, weldable, case hardenable</td><td>Shafts, pins, fixtures, general structural</td></tr>
+              <tr><td>Steel 4140 (alloy)</td><td><span class="badge">Good</span></td><td>High strength and toughness, through hardenable</td><td>Gears, axles, tooling, high-load shafts</td></tr>
+              <tr><td>Stainless 303</td><td><span class="badge good">Good (free machining)</span></td><td>Corrosion resistant; sulfur added for chip breaking; not weldable</td><td>Fasteners, fittings, production turned parts</td></tr>
+              <tr><td>Stainless 304 / 304L</td><td><span class="badge warn">Fair</span></td><td>General corrosion resistance, weldable, work hardens</td><td>Food, medical, enclosures</td></tr>
+              <tr><td>Stainless 316 / 316L</td><td><span class="badge warn">Fair</span></td><td>Better chemical and marine resistance than 304</td><td>Marine, chemical, medical</td></tr>
+              <tr><td>Stainless 17-4 PH</td><td><span class="badge bad">Difficult</span></td><td>High strength, heat treatable, good corrosion resistance</td><td>Aerospace, valves, high-strength parts</td></tr>
+              <tr><td>Titanium Ti-6Al-4V</td><td><span class="badge bad">Difficult</span></td><td>Best strength to weight, biocompatible, high temperature</td><td>Aerospace, medical implants, racing</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="plastics">Plastics</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Material</th><th>Key properties</th><th>Typical uses</th><th>Machining notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>POM / acetal (Delrin)</td><td>Stiff, low friction, low moisture uptake, dimensionally stable</td><td>Gears, bearings, rollers, fixtures</td><td>Machines beautifully; first choice for precise plastic parts</td></tr>
+              <tr><td>ABS</td><td>Tough, impact resistant, low cost</td><td>Housings, prototypes of molded parts</td><td>Easy to machine; lower heat resistance</td></tr>
+              <tr><td>Nylon 6 / 6/6</td><td>Wear and impact resistant, absorbs moisture</td><td>Wear pads, gears, sprockets</td><td>Moves with humidity; tolerance accordingly</td></tr>
+              <tr><td>Polycarbonate (PC)</td><td>Clear, very impact resistant</td><td>Covers, light pipes, guards</td><td>Machined faces are matte; polishing costs extra</td></tr>
+              <tr><td>Acrylic (PMMA)</td><td>Clear, stiff, scratch resistant</td><td>Display, optics, windows</td><td>Brittle; chips at edges and thin walls</td></tr>
+              <tr><td>UHMW / HDPE</td><td>Very low friction, chemical resistant, cheap</td><td>Wear strips, guides, cutting boards</td><td>Soft and springy; tolerances loose</td></tr>
+              <tr><td>PTFE (Teflon)</td><td>Lowest friction, chemical resistant</td><td>Seals, insulators</td><td>Creeps and moves; hard to hold tolerance</td></tr>
+              <tr><td>PEI (Ultem)</td><td>High heat, flame resistant, strong</td><td>Electrical, aerospace, medical</td><td>Expensive; glass-filled grades available</td></tr>
+              <tr><td>PEEK</td><td>Top heat, chemical and strength performance; can replace metal</td><td>Medical, semiconductor, aerospace</td><td>Very expensive stock (about 5x other engineering plastics)</td></tr>
+              <tr><td>Glass-filled grades</td><td>Stiffer, more stable</td><td>Structural plastic parts</td><td>Abrasive; wears cutters faster</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <span class="callout-title">Plastic parts move</span>
+          <p>Removing a lot of material from one side of a plastic plate releases stress and bows the part. Keep walls even, machine symmetrically where possible and allow looser tolerances than for metal.</p>
+        </div>
+
+        <h2 id="substitutions">Substitution tips</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>If you specified</th><th>Consider</th><th>When</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>17-4 PH stainless</td><td>304 or 316L</td><td>High strength is not critical</td></tr>
+              <tr><td>Copper</td><td>Aluminum (6061 or 6101)</td><td>Good conductivity is enough; much easier to machine and cheaper</td></tr>
+              <tr><td>4140 for hardness</td><td>1018, case hardened</td><td>Only a hard surface is needed</td></tr>
+              <tr><td>304 stainless, turned in volume</td><td>303 stainless</td><td>No welding; much faster machining</td></tr>
+              <tr><td>Steel for small fittings</td><td>C360 brass</td><td>Moderate loads; free machining, no plating needed</td></tr>
+              <tr><td>7075 aluminum</td><td>6061 aluminum</td><td>Strength margin allows it; cheaper stock, weldable</td></tr>
+              <tr><td>Titanium</td><td>7075 aluminum or stainless</td><td>Weight or temperature is not the driver</td></tr>
+              <tr><td>PEEK or PEI</td><td>POM or nylon</td><td>No high heat or harsh chemicals</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Also consider which finish you need: aluminum anodizes, stainless passivates, steel needs a coating to resist rust. See <a href="tolerances_finishes.html#finishes">Finishes</a>.</p>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs Definitive Guide to CNC Machining and Design Essentials (material notes, substitutions) &middot; ProtoLabs "15 Design Tips to Reduce the Cost of CNC Machining" (bulk material price example) &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (relative machining speeds).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

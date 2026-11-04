@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cost Reduction Tips | DFM Reference</title>
+  <meta name="description" content="A grouped checklist of design changes that reduce CNC machining cost: geometry, holes and threads, setups, tolerances, materials and quantity.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="cost_reduction" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Cost Reduction Tips</h1>
+          <p class="lead">Machining cost is mostly machine time plus setup time. These design changes shorten one or both. Use this page as a checklist before sending a part for quote.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">Run time</span><span class="label">The biggest cost driver</span></div>
+          <div class="key-card"><span class="value">Setups</span><span class="label">Second biggest: each flip costs</span></div>
+          <div class="key-card"><span class="value">Tolerances</span><span class="label">Tight callouts can double price</span></div>
+          <div class="key-card"><span class="value">Quantity</span><span class="label">Setup cost spread over more parts</span></div>
+        </div>
+
+        <h2 id="geometry">Geometry</h2>
+        <ol>
+          <li><strong>Radius inside vertical corners.</strong> At least one third of the cavity depth, larger is better, and slightly larger than a standard cutter radius. Use the same radius everywhere. <a href="corners_pockets.html">Corners &amp; pockets</a></li>
+          <li><strong>Keep floor fillets small or zero.</strong> Use a standard bullnose radius (about 0.5 to 1 mm) or none.</li>
+          <li><strong>Limit cavity depth.</strong> Keep depth under 4x the largest XY dimension of the cavity.</li>
+          <li><strong>Relieve corners instead of shrinking the radius</strong> when a square part must fit. Dog-bone and T-bone reliefs allow deep, functionally sharp corners with a big cutter. <a href="corners_pockets.html#reliefs">Reliefs</a></li>
+          <li><strong>Thicken thin walls.</strong> Over 0.8 mm (0.030 in) in metal and 1.5 mm (0.060 in) in plastic; thicker is better. <a href="walls_features.html#wall-thickness">Walls</a></li>
+          <li><strong>Avoid small features with a high aspect ratio.</strong> Keep height under 4x width, or brace them.</li>
+          <li><strong>Don't machine what you don't need.</strong> Let waste fall away instead of pocketing it into chips; keep the part close to its bounding box. <a href="walls_features.html#unnecessary-machining">Example</a></li>
+          <li><strong>Skip decorative edge fillets.</strong> Use chamfers or a "break sharp edges" note, or deburr prototypes yourself.</li>
+        </ol>
+
+        <h2 id="holes-threads">Holes and threads</h2>
+        <ol start="9">
+          <li><strong>Use standard drill sizes.</strong> Up to 10 mm, use 0.1 mm increments; above 10 mm, 0.5 mm increments. In inch, use fractional, number or letter drill sizes. <a href="tap_drill_charts.html">Drill charts</a></li>
+          <li><strong>Use standard threads</strong> (UNC, UNF, ISO metric coarse/fine). Odd pitches need custom tools. <a href="thread_tables.html">Thread tables</a></li>
+          <li><strong>Limit thread length</strong> to about 2 to 3x the diameter, and leave at least half a diameter of unthreaded depth at the bottom of blind holes. <a href="holes_threading.html">Thread rules</a></li>
+          <li><strong>Don't model threads.</strong> Model the pilot hole and call the thread out. Modeled threads confuse quoting and may be milled as geometry.</li>
+          <li><strong>Prefer through holes</strong> to blind holes, and keep hole depth under about 4x diameter (10x maximum).</li>
+        </ol>
+
+        <h2 id="setups">Setups and process</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/cost_process_multipliers.svg" alt="Relative cost: turning minus 15 percent, 3-axis baseline, 3+2 plus 25 percent, continuous 5-axis plus 60 percent, mill-turn plus 100 percent" width="820" height="300" loading="lazy">
+          <figcaption>Process choice matters: turn round parts, keep prismatic parts 3-axis where possible.</figcaption>
+        </figure>
+        <ol start="14">
+          <li><strong>Minimize setups.</strong> Aim for simple 2.5D geometry that can be cut from one side. If that is not possible, split the part into pieces that are assembled later. <a href="setups_orientation.html">Setups</a></li>
+          <li><strong>Design round parts for the lathe.</strong> Axially symmetric parts are cheaper to turn than to mill. <a href="cnc_turning.html">Turning</a></li>
+          <li><strong>Save 5-axis for geometry that needs it.</strong> Group angled features onto as few angles as possible. <a href="cnc_milling.html">Milling</a></li>
+          <li><strong>Size the part to stock.</strong> Keep the finished part a few millimetres under a standard blank size. <a href="stock_sizes.html">Stock sizes</a></li>
+        </ol>
+
+        <h2 id="tolerances-finishes" data-nav="Tolerances &amp; finish">Tolerances, finish and marking</h2>
+        <ol start="18">
+          <li><strong>Specify tight tolerances only where needed</strong>, and reference them all from a single datum. <a href="tolerances_finishes.html">Tolerances</a></li>
+          <li><strong>Avoid multiple surface finishes</strong> on one part; each adds a process step.</li>
+          <li><strong>Laser mark instead of machining text.</strong> If text must be machined, engrave rather than emboss, use 20 pt or larger sans serif fonts, and supply vector artwork. <a href="walls_features.html#text">Text</a></li>
+        </ol>
+
+        <h2 id="material-quantity" data-nav="Material &amp; quantity">Material and quantity</h2>
+        <ol start="21">
+          <li><strong>Choose machinable materials.</strong> Soft metals like aluminum and brass cut much faster than steel, stainless or titanium. <a href="cnc_materials.html">Materials</a></li>
+          <li><strong>Consider stock price.</strong> 6061 aluminum is cheap; 7075, stainless and brass cost several times more; PEEK costs roughly ten times more than common plastics.</li>
+          <li><strong>For volume, free-machining grades pay off.</strong> 303 stainless and C360 brass cost more per pound but cut so much faster that unit price drops.</li>
+          <li><strong>Order in sensible quantities.</strong> Programming and setup are paid once per batch, so unit price falls quickly as quantity rises, then flattens past a few hundred to a few thousand parts.</li>
+        </ol>
+
+        <h2 id="six-ways" data-nav="Six quick wins">Six quick wins</h2>
+        <div class="card-grid">
+          <div class="card"><h3>Relieve corner pockets</h3><p>Add a U or C shaped relief in each corner so a large cutter can finish deep pockets that fit square parts.</p></div>
+          <div class="card"><h3>Deburr it yourself</h3><p>Edge breaks milled with a ball end mill take a long 3D pass. A file or deburr tool on prototypes is cheaper.</p></div>
+          <div class="card"><h3>Leave text for production</h3><p>Engraving needs tiny, slow cutters. Add text later by laser or in the mold.</p></div>
+          <div class="card"><h3>Beef up thin walls</h3><p>Walls at 0.020 in (0.5 mm) or less can break, flex or warp. Make them as thick as the design allows.</p></div>
+          <div class="card"><h3>Keep it simple</h3><p>Very deep pockets, sculpted surfaces, deep holes and long threads drive cost. Split complex parts into simpler ones.</p></div>
+          <div class="card"><h3>Try another material</h3><p>Swap 17-4 for 304/316L, copper for aluminum, 4140 for case-hardened 1018 when the application allows.</p></div>
+        </div>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs "15 Design Tips to Reduce the Cost of CNC Machining" &middot; <a href="https://www.protolabs.com/resources/design-tips/6-ways-to-optimize-part-design-for-cnc-machining/">ProtoLabs: 6 ways to optimize part design for CNC machining</a> &middot; ProtoLabs Definitive Guide to CNC Machining (mistakes to avoid) &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (hole ratios, thread length).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
