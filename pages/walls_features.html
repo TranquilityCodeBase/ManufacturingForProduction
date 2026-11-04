@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Walls, Features &amp; Text | DFM Reference</title>
+  <meta name="description" content="Minimum wall thickness, wall height ratios, small features, undercuts, edge breaks and machined text guidelines for CNC parts.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="walls_features" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Walls, Features &amp; Text</h1>
+          <p class="lead">Cutters and parts both deflect. Keep walls thick enough for their height, avoid tall skinny features, and skip machining that does not add function: decorative edge fillets, raised text and pockets cut only to remove material.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">0.030 in</span><span class="label">Min wall, metals (0.8 mm)</span></div>
+          <div class="key-card"><span class="value">0.060 in</span><span class="label">Min wall, plastics (1.5 mm)</span></div>
+          <div class="key-card"><span class="value">3 : 1</span><span class="label">Good wall height to thickness</span></div>
+          <div class="key-card"><span class="value">0.020 in</span><span class="label">Min text stroke and spacing (0.5 mm)</span></div>
+        </div>
+
+        <h2 id="wall-thickness">Wall thickness</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Guideline</th><th>Value</th><th>Source / note</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Minimum wall, metal parts</td><td>0.030 in (0.76 mm); thicker is better</td><td>Network shop guideline. A cost guide gives 0.8 mm.</td></tr>
+              <tr><td>Minimum wall, plastic parts</td><td>0.060 in (1.5 mm)</td><td>Plastics flex and warp after cutting</td></tr>
+              <tr><td>Absolute minimum feature (automated shop)</td><td>0.020 in (0.5 mm) anywhere on the part</td><td>Flagged as thin; may break, flex or warp</td></tr>
+              <tr><td>Minimum nominal part thickness (automated shop)</td><td>0.040 in (1.0 mm)</td><td>Below this the part cannot be held well</td></tr>
+              <tr><td>Wall height to thickness</td><td>About 3 : 1 is comfortable; keep under 4 : 1</td><td>Taller walls chatter and leave ripples</td></tr>
+              <tr><td>Maximum wall / feature height</td><td>About 2 in (51 mm) with standard tooling</td><td>Taller walls need to be thicker</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="diagram">
+          <img src="../images/diagrams/walls_aspect_ratio.svg" alt="A thin tall wall flexes under the cutter; a 3 to 1 wall is rigid; a drafted or braced wall can be tall" width="900" height="330" loading="lazy">
+          <figcaption>Thin walls push away from the cutter and spring back, leaving chatter, ripples and out-of-tolerance thickness.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Add 1 to 3 degrees of draft</strong> to tall walls when function allows. The base gets thicker and stiffer, and less stock is left behind.</li>
+          <li><strong>Brace tall walls</strong> with gussets or tie them into another wall.</li>
+          <li><strong>Do not go overboard:</strong> very thick walls just mean more material to remove. Size walls for function plus rigidity, not maximum mass.</li>
+          <li><strong>Plastic walls</strong> often move after machining as internal stress is released. Leave extra thickness and avoid big one-sided material removal.</li>
+        </ul>
+
+        <h2 id="small-features">Small and slender features</h2>
+        <ul>
+          <li><strong>Aspect ratio:</strong> keep standing pins, ribs and bosses under about 4 : 1 height to width.</li>
+          <li><strong>Connect small features to a wall</strong> or add bracing so they do not vibrate under the cutter.</li>
+          <li><strong>Deep slots:</strong> keep depth under about 6x the slot width, and leave at least 0.020 in (0.5 mm) of wall next to them.</li>
+          <li><strong>Holes near walls and edges:</strong> keep at least 0.030 in (0.8 mm) of material in metal parts, about double that in plastics.</li>
+          <li><strong>Avoid partial holes</strong> breaking out of an edge. If you must, keep at least 75% of the hole inside the part.</li>
+          <li><strong>Heat-sink style fins</strong> are among the most expensive features to cut. Check if an extrusion or a purchased heat sink would work.</li>
+        </ul>
+
+        <h2 id="unnecessary-machining" data-nav="Unnecessary machining">Avoid machining that adds no function</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/walls_unnecessary_machining.svg" alt="Left: the design leaves a large pocket of waste to clear around the part. Right: the part is profiled out with a narrow cut" width="900" height="340" loading="lazy">
+          <figcaption>In this example, changing how the part is cut from the block roughly halves machine time.</figcaption>
+        </figure>
+        <ul>
+          <li>Run time drives price. If material only has to go away, ask whether the design can let it fall away as an offcut instead of being pocketed into chips.</li>
+          <li>Keep the outside shape close to its bounding box. Material that never has to be cut costs nothing to machine.</li>
+          <li>If a part is very complex, consider <strong>splitting it into two simpler parts</strong> joined with fasteners or pins.</li>
+        </ul>
+
+        <h2 id="edges">Edge breaks, chamfers and fillets</h2>
+        <div class="do-dont">
+          <div class="do">
+            <h4>Do</h4>
+            <ul>
+              <li>Use a 45&deg; chamfer for edge breaks; one chamfer tool pass is fast.</li>
+              <li>Add a note like "break all sharp edges 0.005 to 0.015 in" and let the shop deburr.</li>
+              <li>Deburr prototypes yourself with a file or deburring tool if cost matters.</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Avoid</h4>
+            <ul>
+              <li>Outside edge fillets on every edge. Each needs a ball or corner-rounding tool and 3D passes.</li>
+              <li>Mixed chamfer and fillet sizes across a part.</li>
+              <li>Fillets added only because the CAD tool made them easy.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="undercuts">Undercuts</h2>
+        <ul>
+          <li>An undercut is any surface the cutter cannot see from straight above (for the current setup). They are made with <strong>T-slot, keyseat or dovetail cutters</strong> or a lollipop (ball) cutter.</li>
+          <li>Size undercut slot widths and depths to <strong>standard cutter sizes</strong> (for example 1/8, 3/16, 1/4 in wide). Non-standard sizes need custom tools.</li>
+          <li>Keep undercuts <strong>shallow and near an open face</strong> where the cutter's shank can reach. The cutter disc is supported only by a thin neck.</li>
+          <li>Leave clearance above and below the undercut so the cutter can enter and exit.</li>
+          <li>If the undercut is for a retaining ring or O-ring, check whether a turned groove (lathe) is possible instead.</li>
+        </ul>
+
+        <h2 id="text">Text, logos and part marking</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/walls_text_engraving.svg" alt="Engraved text removes only the letters; embossed text removes everything around the letters" width="860" height="280" loading="lazy">
+          <figcaption>Engraved (recessed) text is far cheaper than embossed (raised) text on a milled part.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Engrave, do not emboss.</strong> Recessed text removes only the letter strokes.</li>
+          <li><strong>Size:</strong> stroke width and character spacing at least 0.020 in (0.5 mm). Use 20 point or larger sans serif fonts (Arial, Helvetica, Verdana).</li>
+          <li><strong>Depth:</strong> shallow is enough; about 0.3 mm (0.012 in) is common. One guide suggests Arial Rounded 14 pt in soft metals and plastics, 22 pt in hard metals.</li>
+          <li><strong>Consider laser marking or etching</strong> for part numbers and logos. It is cheaper, crisper and scales better with quantity. Provide vector artwork (DXF, AI) for logos.</li>
+          <li>On turned parts, raised text can work, but the same 0.020 in minimum applies.</li>
+          <li>Leave text off prototypes unless it is needed for the test; add it when the part goes to molding or production marking.</li>
+        </ul>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p><a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (wall minimums, hole spacing, text) &middot; <a href="https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/">ProtoLabs CNC milling design guidelines</a> &middot; <a href="https://www.protolabs.com/resources/design-tips/mastering-complex-features-on-machined-parts/">ProtoLabs: complex features on machined parts</a> &middot; ProtoLabs Definitive Guide to CNC Machining (walls, draft, unnecessary machining).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

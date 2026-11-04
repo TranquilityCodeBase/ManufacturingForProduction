@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200" role="img" aria-label="Relative machining speed: aluminum about 4 times carbon steel, stainless about half of carbon steel">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .v { font-weight: 600; }
+    .s { font-size: 13px; fill: #4a5868; }
+    .bar { fill: #1d7a4f; }
+    .base { fill: #7b8896; }
+    .slow { fill: #b0590e; }
+  </style>
+  <!-- scale: 1x = 100 px, origin x=200 -->
+  <line x1="200" y1="15" x2="200" y2="150" stroke="#34495e" stroke-width="1.5"/>
+  <text x="185" y="44" text-anchor="end">Aluminum</text>
+  <rect x="200" y="28" width="400" height="24" class="bar"/>
+  <text x="608" y="45" class="v">about 4x</text>
+  <text x="185" y="89" text-anchor="end">Carbon steel</text>
+  <rect x="200" y="73" width="100" height="24" class="base"/>
+  <text x="308" y="90" class="v">1x (baseline)</text>
+  <text x="185" y="134" text-anchor="end">Stainless steel</text>
+  <rect x="200" y="118" width="50" height="24" class="slow"/>
+  <text x="258" y="135" class="v">about 0.5x</text>
+  <text x="200" y="180" class="s">Material removal rate. Faster cutting means less machine time and a lower price.</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" width="900" height="330" role="img" aria-label="Finished part inside a raw stock blank with clean-up allowance on every face">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .dimt { fill: #1f6fb2; font-weight: 600; }
+    .s { font-size: 13px; fill: #4a5868; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .stock { fill: #f4e9da; stroke: #8a6d45; stroke-width: 2; stroke-dasharray: 8 5; }
+    .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  </style>
+  <defs>
+    <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+    </marker>
+  </defs>
+
+  <line x1="520" y1="15" x2="520" y2="315" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Plan view -->
+  <text x="260" y="30" text-anchor="middle" class="h">Plan view: blank vs finished part</text>
+  <rect x="60" y="60" width="400" height="220" class="stock"/>
+  <rect x="90" y="90" width="340" height="160" class="part"/>
+  <text x="260" y="175" text-anchor="middle">Finished part 1.000 x 1.000 in</text>
+  <line x1="60" y1="295" x2="460" y2="295" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+  <text x="260" y="315" text-anchor="middle" class="dimt">Blank about 1.125 in (part + 1/8 in)</text>
+  <line x1="60" y1="75" x2="90" y2="75" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+  <text x="96" y="80" class="dimt">0.06 in per side</text>
+
+  <!-- Section view of plate -->
+  <g transform="translate(520,0)">
+    <text x="190" y="30" text-anchor="middle" class="h">Plate thickness</text>
+    <rect x="40" y="90" width="300" height="70" class="stock"/>
+    <rect x="40" y="97" width="300" height="56" class="part"/>
+    <text x="190" y="130" text-anchor="middle">Finished 0.950 in</text>
+    <text x="190" y="82" text-anchor="middle" class="s">skim top</text>
+    <text x="190" y="178" text-anchor="middle" class="s">skim bottom</text>
+    <text x="190" y="225" text-anchor="middle" class="dimt">Buy 1.000 in plate</text>
+    <text x="190" y="250" text-anchor="middle">Finished thickness a little under nominal</text>
+    <text x="190" y="270" text-anchor="middle">lets both faces be cleaned up flat.</text>
+  </g>
+</svg>

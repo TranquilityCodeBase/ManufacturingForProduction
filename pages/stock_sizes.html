@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Sizes &amp; Design Extents | DFM Reference</title>
+  <meta name="description" content="Choose part extents from common plate, bar and rod stock sizes, with blank allowances and worked examples in inch and metric.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="stock_sizes" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Stock Sizes &amp; Design Extents</h1>
+          <p class="lead">Machined parts start as a standard plate, bar or rod. Choose your overall extents so the part fits inside a common stock size with a little clean-up allowance. Landing a few thousandths over a stock size forces the next size up and pays for material you then cut away.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">+1/8 in</span><span class="label">Typical blank over finished size (about 3 mm)</span></div>
+          <div class="key-card"><span class="value">0.06 to 0.125 in</span><span class="label">Clean-up per side on sawn stock</span></div>
+          <div class="key-card"><span class="value">Under nominal</span><span class="label">Design plate thickness slightly under stock</span></div>
+          <div class="key-card"><span class="value">Bounding box</span><span class="label">Closer to the blank = less to remove</span></div>
+        </div>
+
+        <h2 id="allowance">Blank allowance</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/stock_blank_allowance.svg" alt="Finished part inside a larger blank with clean-up allowance on each side; plate thickness skimmed on both faces" width="900" height="330" loading="lazy">
+          <figcaption>The blank must be a little larger than the finished part so saw cuts, mill scale and rolled surfaces can be cleaned up.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Rule of thumb:</strong> a 1.000 x 1.000 x 1.000 in finished part comes from about a 1.125 in blank. In metric, keep the part at least 3 mm smaller than the blank in each direction.</li>
+          <li><strong>Sawn faces</strong> need about 0.06 to 0.125 in (1.5 to 3 mm) per side to clean up.</li>
+          <li><strong>Plate thickness:</strong> plate is sold at nominal thickness with a mill tolerance. If both faces must be machined flat, make the finished thickness a little under nominal (for example 0.950 in from 1.000 in plate, or 23 to 24 mm from 25 mm).</li>
+          <li><strong>Use the as-supplied surface</strong> when tolerance and finish allow. Precision ground flat stock and cast tooling plate (for example MIC-6 style aluminum) are flat enough that some faces need no machining.</li>
+          <li><strong>Leave clamping stock</strong> on parts that must be held by extra material and faced off later. See <a href="setups_orientation.html#first-last-op">First vs final op</a>.</li>
+        </ul>
+
+        <h2 id="size-jump">Watch for the size jump</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/stock_size_jump.svg" alt="0.990 in part fits 1 in plate; 1.010 in part needs 1.25 in plate" width="860" height="280" loading="lazy">
+          <figcaption>Going 0.010 in over 1 in plate means buying 1.25 in plate and machining away almost a quarter inch.</figcaption>
+        </figure>
+        <p>Before you finalize the bounding box, compare each extent with the stock tables below. If a dimension lands just over a standard size, either shrink it under the size (keeping the clean-up allowance) or deliberately design up to use the next size.</p>
+
+        <h2 id="inch-plate">Common inch stock: plate and flat bar</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Form</th><th>Common sizes (inches)</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Aluminum plate / sheet thickness</td><td>1/8, 3/16, 1/4, 5/16, 3/8, 1/2, 5/8, 3/4, 1, 1-1/4, 1-1/2, 1-3/4, 2, 2-1/2, 3, 3-1/2, 4</td><td>6061-T6 and 7075-T6 widely stocked; cut to size by suppliers</td></tr>
+              <tr><td>Aluminum flat bar thickness</td><td>1/8, 3/16, 1/4, 3/8, 1/2, 5/8, 3/4, 1, 1-1/4, 1-1/2, 2</td><td>Usually 12 ft lengths or cut pieces</td></tr>
+              <tr><td>Flat bar widths</td><td>1/2, 3/4, 1, 1-1/4, 1-1/2, 2, 2-1/2, 3, 3-1/2, 4, 5, 6, 8</td><td>Width is a near-finished size; often only thickness and length get machined</td></tr>
+              <tr><td>Square bar</td><td>1/4, 3/8, 1/2, 5/8, 3/4, 1, 1-1/4, 1-1/2, 2, 2-1/2, 3, 4</td><td>Good starting blank for small cubic parts</td></tr>
+              <tr><td>Steel and stainless plate / flat bar</td><td>1/8, 3/16, 1/4, 3/8, 1/2, 5/8, 3/4, 1, 1-1/4, 1-1/2, 2, 3</td><td>Thicker sizes less common in stainless; check your supplier</td></tr>
+              <tr><td>Plastic sheet (acetal, nylon, UHMW, PC, acrylic)</td><td>1/16, 1/8, 3/16, 1/4, 3/8, 1/2, 3/4, 1, 1-1/4, 1-1/2, 2, 2-1/2, 3, 4</td><td>Thickness tolerance is looser than metal; plan to skim both faces</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="round-bar">Common inch stock: round bar</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Diameter range</th><th>Typical steps</th><th>Example sizes (inches)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1/8 to 1 in</td><td>1/16 in (some 1/32 in)</td><td>1/8, 3/16, 1/4, 5/16, 3/8, 7/16, 1/2, 9/16, 5/8, 3/4, 7/8, 1</td></tr>
+              <tr><td>1 to 2 in</td><td>1/8 in</td><td>1-1/8, 1-1/4, 1-3/8, 1-1/2, 1-5/8, 1-3/4, 2</td></tr>
+              <tr><td>2 to 4 in</td><td>1/4 in</td><td>2-1/4, 2-1/2, 2-3/4, 3, 3-1/4, 3-1/2, 4</td></tr>
+              <tr><td>Over 4 in</td><td>1/2 in</td><td>4-1/2, 5, 5-1/2, 6, 7, 8</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Availability varies by alloy. 6061, 2011, 12L14, 1018, 303 and C360 brass are the most common free-machining choices for turned parts.</p>
+
+        <h2 id="metric">Common metric stock</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Form</th><th>Common sizes (mm)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Plate / sheet thickness</td><td>3, 4, 5, 6, 8, 10, 12, 15, 16, 20, 25, 30, 35, 40, 50, 60, 80, 100</td></tr>
+              <tr><td>Flat bar thickness</td><td>3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50</td></tr>
+              <tr><td>Flat bar width</td><td>10, 12, 15, 20, 25, 30, 40, 50, 60, 80, 100, 120, 150, 200</td></tr>
+              <tr><td>Round bar diameter</td><td>3, 4, 5, 6, 8, 10, 12, 14, 15, 16, 18, 20, 22, 25, 28, 30, 32, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 100</td></tr>
+              <tr><td>Square bar</td><td>6, 8, 10, 12, 15, 20, 25, 30, 40, 50, 60</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Common European stock lists. Exact sizes and tolerances vary by supplier and alloy.</p>
+
+        <h2 id="examples">Worked examples: finished part to stock</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Finished part</th><th>Stock to buy</th><th>Comment</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Plate 4.00 x 6.00 x 0.45 in, both faces machined</td><td>1/2 in plate, cut 4.25 x 6.25 in</td><td>0.05 in for facing, 1/8 in per side on X and Y</td></tr>
+              <tr><td>Plate 4.00 x 6.00 x 0.52 in</td><td>5/8 in plate</td><td>Just over 1/2 in: consider 0.48 in to stay in 1/2 in plate</td></tr>
+              <tr><td>Block 1.90 x 1.90 x 3.00 in</td><td>2 in square bar, cut 3.125 in long</td><td>Fits with 0.05 in per side on the square</td></tr>
+              <tr><td>Shaft 0.990 in max diameter</td><td>1 in round bar</td><td>OD cleans up; tight but common</td></tr>
+              <tr><td>Shaft 1.010 in max diameter</td><td>1-1/8 in round bar</td><td>Consider 0.990 in, or use 1 in as-rolled OD if the tolerance allows</td></tr>
+              <tr><td>Bracket 80 x 50 x 18 mm</td><td>20 mm plate, cut 85 x 55 mm</td><td>2 mm for facing, 2.5 mm per side</td></tr>
+              <tr><td>Bushing 24 mm OD</td><td>25 mm round bar</td><td>1 mm on diameter for clean-up</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="automated">Automated services and pre-stocked blocks</h2>
+        <ul>
+          <li>Automated quick-turn services keep <strong>a fixed set of pre-cut blocks</strong> per material instead of ordering stock per job. Your part is matched to the smallest block it fits in.</li>
+          <li>Block thicknesses step in fixed increments (for example around 0.75, 1.25, 1.75, 2.25, 2.75, 3.25 and 3.75 in for aluminum). Not every size exists in every material; harder metals usually have fewer and thinner blocks.</li>
+          <li>The same "size jump" rule applies: a part slightly over one block thickness gets the next block and pays for more stock and machining.</li>
+          <li>Check the vendor's published maximum part extents by material before finalizing a large part. See <a href="cnc_milling.html#envelopes">typical machine envelopes</a>.</li>
+        </ul>
+        <div class="callout tip">
+          <span class="callout-title">Keep the bounding box tight</span>
+          <p>The closer the finished shape is to its bounding box, the less material has to be removed. A part with one long thin arm sticking out forces a large blank and lots of waste. Could the arm be a separate piece?</p>
+        </div>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p><a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (material blank size) &middot; ProtoLabs "15 Design Tips to Reduce the Cost of CNC Machining" (account for blank size) &middot; <a href="https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/">ProtoLabs CNC milling design guidelines</a> (maximum extents by material) &middot; common metal supplier stock lists (general).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

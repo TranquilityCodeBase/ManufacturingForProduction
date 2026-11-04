@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320" role="img" aria-label="First operation machines most features while the part is well supported; the final flip only removes the clamping stock">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .good { fill: #1d7a4f; font-weight: 600; }
+    .warn { fill: #b0590e; font-weight: 600; }
+    .dimt { fill: #1f6fb2; font-weight: 600; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .skin { fill: #eef2f7; stroke: #34495e; stroke-width: 1.5; stroke-dasharray: 6 4; }
+    .vise { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+    .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  </style>
+
+  <line x1="450" y1="15" x2="450" y2="305" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Op 1 -->
+  <text x="225" y="30" text-anchor="middle" class="h">Op 1: most of the work</text>
+  <rect x="70" y="200" width="310" height="40" class="skin"/>
+  <path d="M90 110 H180 V150 H270 V110 H360 V200 H90 Z" class="part"/>
+  <rect x="300" y="110" width="20" height="90" fill="#ffffff" stroke="#34495e" stroke-width="1.5"/>
+  <rect x="40" y="215" width="30" height="50" class="vise"/>
+  <rect x="380" y="215" width="30" height="50" class="vise"/>
+  <rect x="215" y="40" width="20" height="110" class="tool"/>
+  <text x="225" y="232" text-anchor="middle" class="dimt">clamping stock</text>
+  <text x="225" y="285" text-anchor="middle">Profile, pockets, through holes, critical bores</text>
+  <text x="225" y="305" text-anchor="middle" class="good">Rigid part, one datum: tightest relationships</text>
+
+  <!-- Op 2 -->
+  <g transform="translate(450,0)">
+    <text x="225" y="30" text-anchor="middle" class="h">Final flip: keep it light</text>
+    <path d="M90 140 H360 V230 H270 V190 H180 V230 H90 Z" class="part"/>
+    <rect x="70" y="100" width="310" height="40" class="skin"/>
+    <rect x="40" y="160" width="50" height="50" class="vise"/>
+    <rect x="360" y="160" width="50" height="50" class="vise"/>
+    <rect x="300" y="40" width="20" height="60" class="tool"/>
+    <text x="225" y="125" text-anchor="middle" class="dimt">face off the clamping stock</text>
+    <text x="225" y="285" text-anchor="middle">Few features here; part is least supported</text>
+    <text x="225" y="305" text-anchor="middle" class="warn">Features cut here stack flip error onto Op 1</text>
+  </g>
+</svg>

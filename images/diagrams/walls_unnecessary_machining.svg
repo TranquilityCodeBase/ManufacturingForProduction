@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340" role="img" aria-label="Pocketing away all material around a part versus profiling the part out of the block">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .good { fill: #1d7a4f; font-weight: 600; }
+    .bad { fill: #b3261e; font-weight: 600; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .stock { fill: #eef2f7; stroke: #34495e; stroke-width: 1.5; stroke-dasharray: 6 4; }
+  </style>
+  <defs>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#fbe3e1"/>
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#b3261e" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <line x1="450" y1="15" x2="450" y2="325" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Left: pocket all the waste away -->
+  <text x="225" y="30" text-anchor="middle" class="h">Design leaves a pocket to clear</text>
+  <rect x="70" y="50" width="310" height="220" fill="url(#hatch)" stroke="#34495e" stroke-width="2"/>
+  <rect x="70" y="50" width="310" height="22" class="part"/>
+  <rect x="70" y="248" width="310" height="22" class="part"/>
+  <circle cx="225" cy="160" r="70" class="part"/>
+  <rect x="205" y="140" width="40" height="40" fill="#ffffff" stroke="#34495e" stroke-width="2"/>
+  <text x="225" y="300" text-anchor="middle" class="bad">All hatched stock is machined away</text>
+  <text x="225" y="320" text-anchor="middle">Long run time drives the price</text>
+
+  <!-- Right: profile the part free -->
+  <g transform="translate(450,0)">
+    <text x="225" y="30" text-anchor="middle" class="h">Part is profiled out of the block</text>
+    <rect x="70" y="50" width="310" height="220" class="stock"/>
+    <circle cx="225" cy="160" r="80" fill="url(#hatch)" stroke="none"/>
+    <circle cx="225" cy="160" r="70" class="part"/>
+    <rect x="205" y="140" width="40" height="40" fill="#ffffff" stroke="#34495e" stroke-width="2"/>
+    <text x="225" y="300" text-anchor="middle" class="good">Only a narrow profile path is cut</text>
+    <text x="225" y="320" text-anchor="middle">About half the machine time in this example</text>
+  </g>
+</svg>

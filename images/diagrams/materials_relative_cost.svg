@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" width="820" height="420" role="img" aria-label="Example relative bulk material prices for common machining metals and plastics">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .g { font-weight: 700; font-size: 13px; fill: #4a5868; letter-spacing: 1px; }
+    .v { font-weight: 600; }
+    .s { font-size: 13px; fill: #4a5868; }
+    .bar { fill: #1f6fb2; }
+  </style>
+
+  <!-- scale: $300 = 450 px, origin x=220 (1.5 px per $) -->
+  <line x1="220" y1="20" x2="220" y2="350" stroke="#34495e" stroke-width="1.5"/>
+
+  <text x="20" y="30" class="g">METALS</text>
+  <text x="205" y="58" text-anchor="end">Aluminum 6061</text>
+  <rect x="220" y="44" width="37.5" height="20" class="bar"/>
+  <text x="264" y="59" class="v">$25</text>
+  <text x="205" y="88" text-anchor="end">Aluminum 7075</text>
+  <rect x="220" y="74" width="120" height="20" class="bar"/>
+  <text x="347" y="89" class="v">$80</text>
+  <text x="205" y="118" text-anchor="end">Stainless 304</text>
+  <rect x="220" y="104" width="135" height="20" class="bar"/>
+  <text x="362" y="119" class="v">$90</text>
+  <text x="205" y="148" text-anchor="end">Brass C360</text>
+  <rect x="220" y="134" width="222" height="20" class="bar"/>
+  <text x="449" y="149" class="v">$148</text>
+  <text x="205" y="178" text-anchor="end">Stainless 303</text>
+  <rect x="220" y="164" width="225" height="20" class="bar"/>
+  <text x="452" y="179" class="v">$150</text>
+
+  <text x="20" y="218" class="g">PLASTICS</text>
+  <text x="205" y="246" text-anchor="end">ABS</text>
+  <rect x="220" y="232" width="25.5" height="20" class="bar"/>
+  <text x="252" y="247" class="v">$17</text>
+  <text x="205" y="276" text-anchor="end">POM (Delrin)</text>
+  <rect x="220" y="262" width="40.5" height="20" class="bar"/>
+  <text x="267" y="277" class="v">$27</text>
+  <text x="205" y="306" text-anchor="end">Nylon 6</text>
+  <rect x="220" y="292" width="45" height="20" class="bar"/>
+  <text x="272" y="307" class="v">$30</text>
+  <text x="205" y="336" text-anchor="end">PEEK</text>
+  <rect x="220" y="322" width="450" height="20" class="bar"/>
+  <text x="677" y="337" class="v">$300</text>
+
+  <text x="220" y="372" class="s">Example bulk price for the same blank size. Use for ranking only;</text>
+  <text x="220" y="390" class="s">actual prices vary by supplier, size and date.</text>
+</svg>

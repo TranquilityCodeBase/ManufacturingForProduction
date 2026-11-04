@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Setups &amp; Part Orientation | DFM Reference</title>
+  <meta name="description" content="Design machined parts that need fewer setups and orientation changes, with a setup-count checklist and workholding tips.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="setups_orientation" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Setups &amp; Part Orientation</h1>
+          <p class="lead">Every time a part is unclamped and turned to reach another face, someone has to fixture it, find it again and accept some position error. Designing for fewer setups is one of the biggest levers on cost and accuracy.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">1 setup</span><span class="label">Goal for simple 2.5D parts</span></div>
+          <div class="key-card"><span class="value">6 faces</span><span class="label">Max orthogonal sides on 3-axis</span></div>
+          <div class="key-card"><span class="value">1 datum</span><span class="label">Dimension everything from one reference</span></div>
+          <div class="key-card"><span class="value">Op 1</span><span class="label">Holds the tightest relationships</span></div>
+        </div>
+
+        <h2 id="why">What each setup costs</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/setups_one_vs_three.svg" alt="Left: part with all features on top needs one setup. Right: features on top, front and side need three setups" width="900" height="340" loading="lazy">
+          <figcaption>Same block, same feature count. Moving the side holes to the top face drops the part from three setups to one.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Time:</strong> design and build or adjust a fixture, load, indicate (find zero), prove out the program, inspect.</li>
+          <li><strong>Accuracy:</strong> features cut in the same setup are positioned by the machine (very repeatable). Features cut in different setups also carry the re-clamping error, so tolerances stack.</li>
+          <li><strong>Risk:</strong> every flip clamps on already-machined surfaces that can be marred or distorted.</li>
+        </ul>
+
+        <h2 id="rules">Design rules to cut setups</h2>
+        <ol>
+          <li><strong>Put features on as few faces as possible.</strong> A 2.5D design (outline, pockets and holes all from the top) is the cheapest milled part there is.</li>
+          <li><strong>Keep features on the six orthogonal faces</strong> for 3-axis work, and align every hole and pocket with an X, Y or Z axis.</li>
+          <li><strong>Move side holes to the top</strong> when function allows, or turn a side tapped hole into a through hole from the top with a nut or insert.</li>
+          <li><strong>Group angled features onto one angle</strong> so a 3+2 machine can reach them in one index, instead of several.</li>
+          <li><strong>Put critical relationships on one face.</strong> If two bores must be concentric or a hole pattern must be accurate to an edge, design them to be cut from the same side.</li>
+          <li><strong>Use mill-turn or a live-tool lathe</strong> for round parts with flats and cross holes, instead of turning then moving to a mill.</li>
+          <li><strong>Split the part</strong> into simpler pieces if one design needs many setups. Two simple 1-setup parts plus two dowel pins can beat one 5-setup part.</li>
+          <li><strong>Avoid features that need the part to be clamped on a thin or curved face.</strong></li>
+        </ol>
+
+        <h2 id="first-last-op" data-nav="First vs final op">First operation vs final flip</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/setups_first_last_op.svg" alt="Op 1 cuts the profile, pockets and through holes while the part is held by clamping stock; the final flip only faces off the clamping stock" width="900" height="320" loading="lazy">
+          <figcaption>A common two-op strategy: machine almost everything in Op 1 while the part is still rigid, then flip and face off the extra stock.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>The first setup usually holds the tightest relationships</strong> because nothing has moved yet. Put critical bores, hole patterns and the outside profile there.</li>
+          <li><strong>Minimize work in the final flip.</strong> By then the part is thinner and less supported, and anything cut there inherits the flip error.</li>
+          <li><strong>Leave clamping stock</strong> (or let the shop add it): extra material on the bottom or sides that is held in the vise and faced off at the end.</li>
+          <li><strong>Avoid cuts that separate the part from its holding stock early.</strong> If a large opening would cut the block into pieces during the first op, the shop needs a different strategy and the price goes up.</li>
+          <li>Automated services may orient the part themselves and report which side is cut first. Check the DFM feedback and ask for a human review if a critical feature lands on the last side.</li>
+        </ul>
+
+        <h2 id="datums">Datums and dimensioning</h2>
+        <ul>
+          <li><strong>Pick one datum scheme</strong> (for example the intersection of two edges and the bottom face) and dimension all toleranced features from it.</li>
+          <li>Choose datums that are <strong>machined in the first setup</strong> and that the shop can clamp and indicate on.</li>
+          <li>Avoid chain dimensioning across features cut in different setups; tolerances add up.</li>
+          <li>Call out tight tolerances only where needed. See <a href="tolerances_finishes.html">Tolerances &amp; Finishes</a>.</li>
+        </ul>
+
+        <h2 id="workholding">Workholding friendly design</h2>
+        <div class="do-dont">
+          <div class="do">
+            <h4>Helps the shop</h4>
+            <ul>
+              <li>Two flat, parallel faces to clamp on</li>
+              <li>Square outside edges or a rectangular bounding box</li>
+              <li>Extra stock or tabs where a curved or organic part can be held, removed last</li>
+              <li>Through holes that can double as bolt-down points for a fixture plate</li>
+              <li>Features kept clear of the clamping zone (bottom 0.125 to 0.25 in of each side)</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Makes holding hard</h4>
+            <ul>
+              <li>Fully curved or organic outer surfaces with no flats</li>
+              <li>Thin plates with heavy pocketing (they warp when unclamped)</li>
+              <li>Critical features on every face</li>
+              <li>Long, slender parts held from one end</li>
+              <li>Tapered or drafted outer walls with no parallel faces</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="checklist">Setup count checklist</h2>
+        <p>Run through this before releasing a model for quote. Each "no" usually means one more setup or a more expensive machine.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Check</th><th>If not</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Can every feature be reached from the top and bottom only?</td><td>Each extra face = +1 setup on 3-axis</td></tr>
+              <tr><td>2</td><td>Are all holes and pockets on X, Y or Z axes?</td><td>Angled features need 3+2 or 5-axis</td></tr>
+              <tr><td>3</td><td>Are critical relationships cut from the same face?</td><td>Tolerance stack between setups</td></tr>
+              <tr><td>4</td><td>Is there a flat, parallel pair of faces to clamp?</td><td>Custom fixture or soft jaws needed</td></tr>
+              <tr><td>5</td><td>Are inside corners and pockets sized for standard cutters?</td><td>Extra tools, slow small-tool passes</td></tr>
+              <tr><td>6</td><td>Is the part round? Could it be turned instead?</td><td>Milling a round part wastes time and stock</td></tr>
+              <tr><td>7</td><td>Could one complex part be two simple parts?</td><td>Many setups and long cycle time</td></tr>
+              <tr><td>8</td><td>Are threads limited to faces already being machined?</td><td>A thread on another face adds a setup</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs "15 Design Tips to Reduce the Cost of CNC Machining" (minimize setups, single datum, split parts) &middot; <a href="https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/">ProtoLabs CNC milling design guidelines</a> &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (part complexity) &middot; general machining practice.</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

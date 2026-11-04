@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="900" height="360" role="img" aria-label="Corner radius versus dog-bone and T-bone reliefs for a square mating part">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .good { fill: #1d7a4f; font-weight: 600; }
+    .bad { fill: #b3261e; font-weight: 600; }
+    .muted { fill: #7b8896; font-size: 13px; letter-spacing: 2px; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .mate { fill: none; stroke: #1f6fb2; stroke-width: 2.5; stroke-dasharray: 8 5; }
+  </style>
+
+  <line x1="300" y1="15" x2="300" y2="345" stroke="#d6dde6" stroke-width="2"/>
+  <line x1="600" y1="15" x2="600" y2="345" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Panel A: plain corner radius -->
+  <text x="150" y="30" text-anchor="middle" class="h">Corner radius only</text>
+  <g transform="translate(-40,0)">
+    <path d="M40 50 H300 V260 H260 V110 A30 30 0 0 0 230 80 H40 Z" class="part"/>
+    <path d="M232 82 H258 V108 A28 28 0 0 0 232 82 Z" fill="#b3261e" opacity="0.6"/>
+    <polyline points="90,82 258,82 258,230" class="mate"/>
+    <text x="110" y="200" class="muted">POCKET</text>
+  </g>
+  <text x="150" y="290" text-anchor="middle" class="bad">Square part cannot seat</text>
+  <text x="150" y="310" text-anchor="middle">Corner of the mating part hits</text>
+  <text x="150" y="328" text-anchor="middle">the radius (red)</text>
+
+  <!-- Panel B: dog-bone relief -->
+  <g transform="translate(300,0)">
+    <text x="150" y="30" text-anchor="middle" class="h">Dog-bone relief</text>
+    <g transform="translate(-40,0)">
+      <path d="M40 50 H300 V260 H260 V136.6 A40 40 0 0 0 203.4 80 H40 Z" class="part"/>
+      <polyline points="90,82 258,82 258,230" class="mate"/>
+      <text x="110" y="200" class="muted">POCKET</text>
+    </g>
+    <text x="150" y="290" text-anchor="middle" class="good">Square part seats fully</text>
+    <text x="150" y="310" text-anchor="middle">Tool plunges at 45 degrees</text>
+    <text x="150" y="328" text-anchor="middle">into the corner</text>
+  </g>
+
+  <!-- Panel C: T-bone relief -->
+  <g transform="translate(600,0)">
+    <text x="150" y="30" text-anchor="middle" class="h">T-bone relief</text>
+    <g transform="translate(-40,0)">
+      <path d="M40 50 H300 V260 H260 V80 A26 26 0 0 0 208 80 H40 Z" class="part"/>
+      <polyline points="90,82 258,82 258,230" class="mate"/>
+      <text x="110" y="200" class="muted">POCKET</text>
+    </g>
+    <text x="150" y="290" text-anchor="middle" class="good">Square part seats fully</text>
+    <text x="150" y="310" text-anchor="middle">Relief cut into one wall only,</text>
+    <text x="150" y="328" text-anchor="middle">hidden on the other face</text>
+  </g>
+</svg>

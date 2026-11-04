@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400" role="img" aria-label="Top view of a pocket corner: corner radius equal to tool radius versus corner radius 1.3 times tool radius">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 17px; font-weight: 700; }
+    .good { fill: #1d7a4f; }
+    .bad { fill: #b3261e; }
+    .muted { fill: #7b8896; font-size: 13px; letter-spacing: 2px; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; opacity: 0.92; }
+    .path { fill: none; stroke: #1f6fb2; stroke-width: 2.5; stroke-dasharray: 7 5; }
+  </style>
+  <defs>
+    <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1f6fb2"/>
+    </marker>
+  </defs>
+
+  <line x1="450" y1="15" x2="450" y2="385" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- ===== Left: corner radius equals tool radius ===== -->
+  <text x="225" y="30" text-anchor="middle" class="h bad">Corner R = tool R</text>
+  <!-- material with R40 inside corner -->
+  <path d="M20 50 H420 V330 H300 V120 A40 40 0 0 0 260 80 H20 Z" class="part"/>
+  <text x="120" y="260" class="muted">POCKET</text>
+  <!-- tool centre path with a hard 90 degree turn -->
+  <path d="M60 120 H260 V290" class="path" marker-end="url(#arrB)"/>
+  <circle cx="260" cy="120" r="40" class="tool"/>
+  <circle cx="260" cy="120" r="7" fill="none" stroke="#b3261e" stroke-width="3"/>
+  <text x="310" y="200" class="bad">Tool stops</text>
+  <text x="310" y="218" class="bad">and pivots</text>
+  <line x1="306" y1="196" x2="268" y2="128" stroke="#b3261e" stroke-width="1.5"/>
+  <text x="225" y="355" text-anchor="middle">Tool wraps the full corner: chatter, dwell marks</text>
+  <text x="225" y="375" text-anchor="middle" class="bad">Example: 0.125 in R with a 1/4 in cutter</text>
+
+  <!-- ===== Right: corner radius 1.3x tool radius ===== -->
+  <g transform="translate(450,0)">
+    <text x="225" y="30" text-anchor="middle" class="h good">Corner R about 1.3 x tool R</text>
+    <path d="M20 50 H420 V330 H300 V132 A52 52 0 0 0 248 80 H20 Z" class="part"/>
+    <text x="120" y="260" class="muted">POCKET</text>
+    <!-- tool centre path sweeps a small arc -->
+    <path d="M60 120 H248 A12 12 0 0 1 260 132 V290" class="path" marker-end="url(#arrB)"/>
+    <circle cx="256.5" cy="123.5" r="40" class="tool"/>
+    <text x="310" y="200" class="good">Tool sweeps</text>
+    <text x="310" y="218" class="good">a small arc</text>
+    <text x="225" y="355" text-anchor="middle">Lighter engagement, better finish, faster cycle</text>
+    <text x="225" y="375" text-anchor="middle" class="good">Example: 0.165 in R with a 1/4 in cutter</text>
+  </g>
+</svg>

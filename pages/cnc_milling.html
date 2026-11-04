@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Milling: 3-Axis, 3+2, 5-Axis | DFM Reference</title>
+  <meta name="description" content="When to design for 3-axis, 3+2 indexed or continuous 5-axis milling, with design rules, cutter types and typical machine envelopes.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="cnc_milling" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Milling: 3-Axis, 3+2 and 5-Axis</h1>
+          <p class="lead">Pick the simplest machine that can make the part. Every extra axis adds programming, fixturing and cost, so design for 3-axis first and only reach for 3+2 or full 5-axis when the geometry truly needs it.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">&plusmn;0.005 in</span><span class="label">Typical standard tolerance (&plusmn;0.13 mm)</span></div>
+          <div class="key-card"><span class="value">~2 in</span><span class="label">Practical max feature depth (51 mm)</span></div>
+          <div class="key-card"><span class="value">+25%</span><span class="label">3+2 indexed vs 3-axis (typical)</span></div>
+          <div class="key-card"><span class="value">+60%</span><span class="label">Continuous 5-axis vs 3-axis (typical)</span></div>
+        </div>
+
+        <h2 id="compare">The three ways to mill</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/milling_axes_compare.svg" alt="3-axis keeps the tool vertical, 3+2 tilts and locks the part, continuous 5-axis tilts the tool while cutting" width="900" height="340" loading="lazy">
+          <figcaption>3-axis moves the tool in X, Y and Z only. 3+2 tilts the part to a fixed angle, locks it, then cuts as a 3-axis machine. Continuous 5-axis tilts while cutting.</figcaption>
+        </figure>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Method</th><th>What moves</th><th>Best for</th><th>Watch out for</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>3-axis</strong></td>
+                <td>Tool moves X, Y, Z. Tool axis always vertical. Part is flipped by hand for other faces.</td>
+                <td>Plates, brackets, housings, 2.5D pockets and holes square to the faces.</td>
+                <td>Each face the tool must reach is another setup. Angled holes and undercuts are not possible.</td>
+              </tr>
+              <tr>
+                <td><strong>3+2 (indexed 5-axis)</strong></td>
+                <td>Two rotary axes tilt the part to a fixed angle and lock. Cutting is still 3-axis.</td>
+                <td>Angled holes and faces, several sides in one fixture, shorter tools on deep features.</td>
+                <td>Rotary table space limits part size. Some programming and fixture cost.</td>
+              </tr>
+              <tr>
+                <td><strong>Continuous 5-axis</strong></td>
+                <td>All five axes move together while the tool is cutting.</td>
+                <td>Swept and organic surfaces: impellers, blades, ports, implants, sculpted molds.</td>
+                <td>Highest programming and machine cost. Usually smaller work envelope.</td>
+              </tr>
+              <tr>
+                <td><strong>Mill-turn</strong></td>
+                <td>Lathe spindle plus milling head (often with B-axis).</td>
+                <td>Round parts with flats, cross holes and off-axis features done complete.</td>
+                <td>Most expensive machine hour. Worth it at volume or for complex round parts.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="cost">Relative cost by process</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/cost_process_multipliers.svg" alt="Bar chart: CNC turning minus 15 percent, 3-axis baseline, 3+2 plus 25 percent, continuous 5-axis plus 60 percent, 5-axis mill-turn plus 100 percent" width="820" height="300" loading="lazy">
+          <figcaption>Typical cost relative to 3-axis milling for a comparable part (from a published cost-reduction guide).</figcaption>
+        </figure>
+        <div class="callout tip">
+          <span class="callout-title">Design for the cheapest process that works</span>
+          <p>If the part is round, turn it. If it can be cut from one or two directions, keep it 3-axis. If one or two features force extra setups, ask whether they can move, be re-oriented, or become a separate part.</p>
+        </div>
+
+        <h2 id="three-axis">Designing for 3-axis</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/milling_feature_direction.svg" alt="A vertical hole and a side hole can be cut on a 3-axis mill; an angled hole needs 3+2 or 5-axis" width="660" height="330" loading="lazy">
+          <figcaption>Keep features parallel or perpendicular to the block faces. Angled features push the part to 3+2 or 5-axis.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Work from as few faces as possible.</strong> A 2.5D part (profile, pockets and holes from the top) can often be made in one setup. See <a href="setups_orientation.html">Setups &amp; Part Orientation</a>.</li>
+          <li><strong>Align every hole and pocket with a cardinal axis</strong> (X, Y or Z of the part). Holes that will be threaded must line up with a machining direction.</li>
+          <li><strong>Avoid undercuts</strong> unless they can be cut with a standard T-slot or keyseat cutter. See <a href="walls_features.html#undercuts">Undercuts</a>.</li>
+          <li><strong>Give inside vertical corners a radius</strong> larger than the cutter radius. See <a href="corners_pockets.html">Inside Corners &amp; Pockets</a>.</li>
+          <li><strong>Keep features shallow:</strong> deep, narrow features need long, slender tools that deflect and cut slowly. Plan on about 2 in (51 mm) maximum feature depth for standard tooling.</li>
+          <li><strong>Prefer flat floors and vertical walls.</strong> Sloped or curved surfaces need ball end mill passes, which add time.</li>
+        </ul>
+
+        <h2 id="three-plus-two">Designing for 3+2 (indexed)</h2>
+        <ul>
+          <li>Use it when a part has <strong>angled holes or faces</strong>, or features on four or five sides that would otherwise need many manual flips.</li>
+          <li>Each angled feature should still be a <strong>simple prismatic feature</strong> once the part is tilted: flat face, straight hole, square pocket.</li>
+          <li>Group angled features onto <strong>as few distinct angles as possible</strong>. Every new index angle is a new program section and inspection setup.</li>
+          <li>Indexing lets the machine use a <strong>shorter, stiffer tool</strong> on deep features by tilting the part toward the spindle, which improves finish and accuracy.</li>
+          <li>Many 5-axis machines cut from round bar or small blocks. One automated service lists roughly <strong>2.6 x 2.9 x 3.9 in</strong> (66 x 74 x 99 mm) as its 5-axis part envelope.</li>
+        </ul>
+
+        <h2 id="five-axis">Designing for continuous 5-axis</h2>
+        <ul>
+          <li>Reserve it for <strong>swept and freeform surfaces</strong> that cannot be broken into flat faces: turbine blades, impellers, ports, ergonomic shapes.</li>
+          <li><strong>Large, gentle curvature</strong> lets the machine use a larger ball or bullnose tool and wider stepovers. Tight concave radii force small tools and long run times.</li>
+          <li>Leave <strong>flat datum and clamping features</strong> (or extra stock to cut off later) so the part can be held and inspected.</li>
+          <li>Specify surface finish only where needed. Fine scallop height on a freeform surface multiplies cycle time.</li>
+        </ul>
+        <div class="callout warn">
+          <span class="callout-title">Organic CAD shapes cost money</span>
+          <p>Fillets on every edge, variable draft and blended surfaces look nice in CAD but each one turns a fast 3-axis toolpath into a slow surface-finishing pass. Use them only where function needs them.</p>
+        </div>
+
+        <h2 id="cutters">End mill types and what they leave</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/milling_endmill_types.svg" alt="Flat, bullnose and ball end mill profiles with typical uses" width="900" height="300" loading="lazy">
+          <figcaption>Flat end mills do most of the cutting. Bullnose tools leave a small floor fillet. Ball end mills finish curved surfaces.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Cutter</th><th>Used for</th><th>Design takeaway</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Flat end mill</td><td>Roughing, profiles, flat floors, vertical walls</td><td>Fastest. Sharp floor edge, inside vertical corners equal at least the tool radius.</td></tr>
+              <tr><td>Bullnose (corner radius)</td><td>Same as flat; preferred in hard metals (stainless, titanium) because the corner lasts longer</td><td>Floor fillet equals the tool corner radius. Use a standard radius such as 0.010, 0.020, 0.030 or 0.060 in.</td></tr>
+              <tr><td>Ball end mill</td><td>3D contours, fillets, chamfers, sloped walls</td><td>Finishing only, many small passes. Large fillets and sloped faces add time.</td></tr>
+              <tr><td>Chamfer / spot / T-slot</td><td>Edge chamfers, hole spotting, undercut slots</td><td>A 45&deg; chamfer is much faster than an edge fillet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Cutters are only stiff for a few diameters of length. Small tools are short and slow: a 1/32 in (0.8 mm) end mill typically reaches only about 5x its diameter. Larger corner radii and shallower features let the shop use bigger, faster tools.</p>
+
+        <h2 id="envelopes">Typical machine envelopes</h2>
+        <p>Part size is limited by the machine travel, the stock the shop keeps on hand, and how the part is held. These are published figures from automated and network vendors and are useful as planning targets.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Process / material</th><th class="num">Max part size</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Automated 3-axis, aluminum and most plastics</td><td class="num">10 x 7 x 3.75 in (254 x 178 x 95 mm)</td><td>Can be milled from all six orthogonal sides</td></tr>
+              <tr><td>Automated 3-axis, steels, stainless, titanium, brass</td><td class="num">about 10 x 7 x 1.75 in deep</td><td>Depth varies by material, check the vendor chart</td></tr>
+              <tr><td>Automated large blocks (aluminum, some plastics)</td><td class="num">up to 22 x 14 x 3.75 in (559 x 356 x 95 mm)</td><td>Top and bottom only, no side setups</td></tr>
+              <tr><td>Automated 5-axis</td><td class="num">about 2.6 x 2.9 x 3.9 in</td><td>Cut from round bar stock</td></tr>
+              <tr><td>Network / job shop milling</td><td class="num">up to about 80 x 48 x 24 in</td><td>Larger parts need manual review</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Envelopes change as vendors add equipment. Use the vendor's current material chart before committing a design to a size limit.</p>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p><a href="https://www.protolabs.com/services/cnc-machining/cnc-milling/design-guidelines/">ProtoLabs CNC milling design guidelines</a> &middot; <a href="https://www.protolabs.com/resources/design-tips/mastering-complex-features-on-machined-parts/">ProtoLabs: complex features on machined parts</a> &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide &middot; ProtoLabs "15 Design Tips to Reduce the Cost of CNC Machining" (process cost comparison).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

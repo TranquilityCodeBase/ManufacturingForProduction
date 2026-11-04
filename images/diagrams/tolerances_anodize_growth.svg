@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 300" width="860" height="300" role="img" aria-label="Anodize grows outward and penetrates inward; hardcoat adds noticeable size to diameters and threads">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .dimt { fill: #1f6fb2; font-weight: 600; }
+    .s { font-size: 13px; fill: #4a5868; }
+    .metal { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .out { fill: #6a3fb5; opacity: 0.45; }
+    .in { fill: #6a3fb5; opacity: 0.22; }
+  </style>
+
+  <line x1="430" y1="15" x2="430" y2="285" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Type II -->
+  <text x="215" y="30" text-anchor="middle" class="h">Type II (decorative)</text>
+  <rect x="60" y="120" width="310" height="110" class="metal"/>
+  <rect x="60" y="112" width="310" height="8" class="out"/>
+  <rect x="60" y="120" width="310" height="8" class="in"/>
+  <line x1="60" y1="120" x2="370" y2="120" stroke="#34495e" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="215" y="100" text-anchor="middle" class="dimt">up to about 0.001 in film</text>
+  <text x="215" y="180" text-anchor="middle">Aluminum</text>
+  <text x="215" y="255" text-anchor="middle">Roughly half grows out, half penetrates</text>
+  <text x="215" y="275" text-anchor="middle" class="s">Takes dye colors; small effect on size</text>
+
+  <!-- Type III -->
+  <g transform="translate(430,0)">
+    <text x="215" y="30" text-anchor="middle" class="h">Type III (hardcoat)</text>
+    <rect x="60" y="120" width="310" height="110" class="metal"/>
+    <rect x="60" y="100" width="310" height="20" class="out"/>
+    <rect x="60" y="120" width="310" height="20" class="in"/>
+    <line x1="60" y1="120" x2="370" y2="120" stroke="#34495e" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="215" y="88" text-anchor="middle" class="dimt">adds up to about 0.003 in to a diameter</text>
+    <text x="215" y="190" text-anchor="middle">Aluminum</text>
+    <text x="215" y="255" text-anchor="middle">Threads see about twice the diameter growth</text>
+    <text x="215" y="275" text-anchor="middle" class="s">Plan fits and threads for the coating</text>
+  </g>
+</svg>

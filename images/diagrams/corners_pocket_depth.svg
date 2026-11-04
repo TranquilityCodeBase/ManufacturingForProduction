@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-label="Pocket section view showing depth, width and tool stick-out rules">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .dimt { fill: #1f6fb2; font-weight: 600; }
+    .h { font-size: 16px; font-weight: 700; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+    .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+    .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  </style>
+  <defs>
+    <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+    </marker>
+  </defs>
+
+  <!-- block with pocket -->
+  <path d="M40 110 H160 V280 H300 V110 H420 V310 H40 Z" class="part"/>
+  <!-- tool in pocket -->
+  <rect x="190" y="20" width="80" height="40" class="holder"/>
+  <rect x="212" y="60" width="36" height="220" class="tool"/>
+
+  <!-- depth dimension -->
+  <line x1="440" y1="110" x2="470" y2="110" class="dim"/>
+  <line x1="440" y1="280" x2="470" y2="280" class="dim"/>
+  <line x1="460" y1="112" x2="460" y2="278" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+  <text x="472" y="200" class="dimt">D (depth)</text>
+  <!-- width dimension -->
+  <line x1="160" y1="96" x2="300" y2="96" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+  <text x="310" y="92" class="dimt">W (width)</text>
+
+  <text x="560" y="140" class="h">Rules of thumb</text>
+  <text x="560" y="166">D &lt; 4 x W (cavity)</text>
+  <text x="560" y="190">D &lt; 3 x tool dia (ideal)</text>
+  <text x="560" y="214">Corner R &gt;= D / 3</text>
+  <text x="560" y="238">Max feature depth</text>
+  <text x="560" y="258">about 2 in (51 mm)</text>
+</svg>

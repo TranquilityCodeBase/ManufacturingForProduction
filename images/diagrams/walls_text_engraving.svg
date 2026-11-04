@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 280" width="860" height="280" role="img" aria-label="Section view of engraved versus embossed text">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .good { fill: #1d7a4f; font-weight: 600; }
+    .bad { fill: #b3261e; font-weight: 600; }
+    .dimt { fill: #1f6fb2; font-weight: 600; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  </style>
+  <defs>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#fbe3e1"/>
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#b3261e" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <line x1="430" y1="15" x2="430" y2="265" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Engraved -->
+  <text x="215" y="30" text-anchor="middle" class="h">Engraved (recessed)</text>
+  <path d="M40 110 H110 V130 H126 V110 H170 V130 H186 V110 H230 V130 H246 V110 H290 V130 H306 V110 H390 V200 H40 Z" class="part"/>
+  <text x="118" y="98" text-anchor="middle" class="dimt">stroke</text>
+  <text x="215" y="235" text-anchor="middle" class="good">Removes only the letters</text>
+  <text x="215" y="255" text-anchor="middle">Stroke and spacing at least 0.020 in (0.5 mm)</text>
+
+  <!-- Embossed -->
+  <g transform="translate(430,0)">
+    <text x="215" y="30" text-anchor="middle" class="h">Embossed (raised)</text>
+    <rect x="40" y="90" width="350" height="30" fill="url(#hatch)" stroke="#34495e" stroke-width="1" stroke-dasharray="4 3"/>
+    <path d="M40 120 H110 V90 H126 V120 H170 V90 H186 V120 H230 V90 H246 V120 H290 V90 H306 V120 H390 V200 H40 Z" class="part"/>
+    <text x="215" y="235" text-anchor="middle" class="bad">Everything around the letters is cut</text>
+    <text x="215" y="255" text-anchor="middle">More tool time, small cutters, higher cost</text>
+  </g>
+</svg>

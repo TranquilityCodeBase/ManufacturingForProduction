@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tolerances &amp; Finishes | DFM Reference</title>
+  <meta name="description" content="Standard machining tolerances, general tolerance tables, GD&amp;T basics, surface roughness and finish options with their effect on part size.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="tolerances_finishes" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Tolerances &amp; Finishes</h1>
+          <p class="lead">Use the shop's standard tolerance everywhere it works, tighten only the features that control fit or function, and remember that coatings change size.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">&plusmn;0.005 in</span><span class="label">Standard machining tolerance (&plusmn;0.13 mm)</span></div>
+          <div class="key-card"><span class="value">&plusmn;0.002 in</span><span class="label">Precision / production option (&plusmn;0.05 mm)</span></div>
+          <div class="key-card"><span class="value">&plusmn;0.0005 in</span><span class="label">Reamed holes (&plusmn;0.013 mm)</span></div>
+          <div class="key-card"><span class="value">125 &micro;in Ra</span><span class="label">Typical as-machined finish (3.2 &micro;m)</span></div>
+        </div>
+
+        <h2 id="standard">Standard tolerances</h2>
+        <ul>
+          <li><strong>&plusmn;0.005 in (&plusmn;0.13 mm)</strong> is the common default for metal features of size and location at quick-turn and network shops. A 1.000 in wide bracket will measure 0.995 to 1.005 in.</li>
+          <li><strong>&plusmn;0.002 in</strong> is a common precision option. <strong>&plusmn;0.001 in</strong> and tighter is possible with extra operations (reaming, boring, grinding) and costs more.</li>
+          <li><strong>Reamed holes</strong> can hold about &plusmn;0.0005 in; design them to a standard reamer size.</li>
+          <li><strong>Plastics:</strong> expect roughly double the metal tolerance. Plastics move with temperature, moisture and released stress.</li>
+          <li>Tighter tolerances raise scrap, inspection and cycle time. A tight callout can more than double the part price.</li>
+        </ul>
+
+        <h3 id="iso2768">General tolerances by part length (ISO 2768 style, metals)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Part length</th><th class="num">Orientation and form (flatness, straightness, perpendicularity...)</th><th class="num">Angularity</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0 to 12 in</td><td class="num">&plusmn;0.005 in</td><td class="num">&plusmn;0.5&deg;</td></tr>
+              <tr><td>12 to 24 in</td><td class="num">&plusmn;0.010 in</td><td class="num">&plusmn;0.5&deg;</td></tr>
+              <tr><td>24 to 36 in</td><td class="num">&plusmn;0.016 in (1/64)</td><td class="num">&plusmn;1.0&deg;</td></tr>
+              <tr><td>36 to 60 in</td><td class="num">&plusmn;0.031 in (1/32)</td><td class="num">&plusmn;1.0&deg;</td></tr>
+              <tr><td>Over 60 in</td><td class="num">&plusmn;0.063 in (1/16)</td><td class="num">&plusmn;1.0&deg;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Features of size and location default to &plusmn;0.005 in at this network shop. Plastic and composite parts typically get about double.</p>
+
+        <h2 id="writing">Writing tolerances</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/tolerances_bilateral.svg" alt="Number line comparing bilateral plus or minus 0.005, unilateral plus 0.000 minus 0.010, and limit dimensions 1.005 over 0.995" width="860" height="250" loading="lazy">
+          <figcaption>The same 0.010 in tolerance band written three ways. Unilateral moves the band to one side of nominal.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Bilateral</strong> (1.000 &plusmn;0.005), <strong>unilateral</strong> (1.000 +0.000/-0.010) and <strong>limit</strong> (1.005/0.995) are all acceptable. Pick the one that best states the fit.</li>
+          <li>Use <strong>three-place decimals</strong> for normal features (0.250, not 0.2500). An extra zero implies a tighter tolerance to many shops.</li>
+          <li><strong>Only tolerance what matters:</strong> mating bores, bearing fits, sealing faces, hole patterns. Leave everything else to the general note.</li>
+          <li><strong>Use a single datum scheme</strong> and dimension toleranced features from it, not from each other. See <a href="setups_orientation.html#datums">Datums</a>.</li>
+          <li>Send a <strong>2D drawing</strong> with the 3D model when anything is tighter than standard, or when threads, inserts or finishes are specified.</li>
+        </ul>
+
+        <h2 id="gdt">GD&amp;T basics</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Control</th><th>What it controls</th><th>Typical use</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>True position</td><td>Location of a hole or feature from datums, often with MMC/LMC bonus</td><td>Bolt patterns, dowel holes</td></tr>
+              <tr><td>Flatness</td><td>Surface must lie between two parallel planes</td><td>Sealing faces, thin plates that may warp</td></tr>
+              <tr><td>Cylindricity</td><td>Roundness and straightness together</td><td>Bearing bores, shafts</td></tr>
+              <tr><td>Concentricity / runout</td><td>Axis of one diameter relative to another</td><td>Shoulders, counterbores, turned steps</td></tr>
+              <tr><td>Perpendicularity</td><td>Squareness of a face or axis to a datum</td><td>Mounting faces, shoulders on shafts</td></tr>
+              <tr><td>Parallelism, profile, angularity, straightness</td><td>See ASME Y14.5</td><td>As required by function</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout warn">
+          <span class="callout-title">GD&amp;T usually leaves the instant-quote lane</span>
+          <p>Automated quoting systems generally route parts with GD&amp;T or tighter-than-standard callouts to manual review. Expect a longer quote, a longer lead time and a 2D drawing requirement. CMM reports, FAI and material certs are available on request.</p>
+        </div>
+
+        <h2 id="roughness">Surface roughness</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Surface</th><th class="num">Typical as-machined</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Flat and perpendicular milled faces</td><td class="num">63 &micro;in Ra (1.6 &micro;m)</td><td>Quick-turn standard</td></tr>
+              <tr><td>Curved / 3D surfaces</td><td class="num">125 &micro;in Ra (3.2 &micro;m) or better</td><td>Scallops from ball end mill passes</td></tr>
+              <tr><td>General as-machined spec</td><td class="num">125 &micro;in Ra</td><td>Tool marks may show a swirl pattern</td></tr>
+              <tr><td>Turned diameters</td><td class="num">Usually smoother than milled</td><td>Single-point turning on center</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Sharp edges are broken and deburred by default at many shops; note any edge that must stay sharp. Clear plastics come out matte or with swirl marks on machined faces.</p>
+
+        <h2 id="finishes">Finishes and their effect on size</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/tolerances_anodize_growth.svg" alt="Type II anodize grows about half outward and half inward; Type III hardcoat adds noticeable size to diameters and twice that to threads" width="860" height="300" loading="lazy">
+          <figcaption>Anodize converts the surface: part of the film grows outward. Hardcoat is thick enough to affect fits and threads.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Finish</th><th>Materials</th><th>Size effect</th><th>Use it for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>As machined</td><td>All</td><td>None</td><td>Prototypes, internal parts</td></tr>
+              <tr><td>Bead blast</td><td>Metals</td><td>Negligible; softens edges</td><td>Uniform matte look, hides tool marks</td></tr>
+              <tr><td>Anodize Type II (MIL-A-8625 Type II)</td><td>Aluminum</td><td>Film up to about 0.001 in; roughly half is growth</td><td>Corrosion protection, dyed colors</td></tr>
+              <tr><td>Hardcoat Type III (MIL-A-8625 Type III)</td><td>Aluminum</td><td>Up to about 0.003 in on a diameter, about twice that on threads</td><td>Wear surfaces; plan fits for the growth</td></tr>
+              <tr><td>Chromate / chem film (MIL-DTL-5541)</td><td>Aluminum</td><td>Negligible</td><td>Conductive corrosion protection, paint base</td></tr>
+              <tr><td>Passivation</td><td>Stainless</td><td>None</td><td>Removes free iron, improves corrosion resistance</td></tr>
+              <tr><td>Bright nickel plating</td><td>Steel, brass, aluminum and others</td><td>About 0.00005 to 0.001 in</td><td>Decorative, corrosion and wear resistance</td></tr>
+              <tr><td>Electroless nickel</td><td>Most metals</td><td>Even thickness, including inside bores</td><td>Uniform coating on complex parts, wear</td></tr>
+              <tr><td>Zinc plating (ASTM B633)</td><td>Steel, iron</td><td>Thin</td><td>Corrosion protection; not above 500&deg;F or in marine use</td></tr>
+              <tr><td>Black oxide</td><td>Steel</td><td>Negligible</td><td>Mild corrosion resistance, dark look</td></tr>
+              <tr><td>Powder coat</td><td>Conductive metals</td><td>Thick (several thousandths)</td><td>Durable color; mask threads and fits</td></tr>
+              <tr><td>Wet paint</td><td>Most</td><td>Thinner than powder</td><td>Color match, heat-sensitive parts</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><strong>Threads and fits:</strong> tapped holes are often plugged during anodize, and quick-turn anodize may offer no masking. Call out masking for bores, threads and electrical contact areas on the drawing.</li>
+          <li><strong>Specify by standard</strong> (MIL, AMS, ASTM) and type/class. "Anodize black" alone leaves the shop guessing.</li>
+          <li><strong>Avoid multiple finishes on one part.</strong> Each extra finish or masked zone adds a process step and cost.</li>
+          <li>Color matching is generally not available for anodize; specify a paint code if color must match.</li>
+        </ul>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs Definitive Guide to CNC Machining (tolerances, GD&amp;T, roughness, finishes) &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (ISO 2768 general tolerances, standard finish) &middot; <a href="https://www.protolabs.com/services/cnc-machining/precision-machining/">ProtoLabs precision machining</a>.</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

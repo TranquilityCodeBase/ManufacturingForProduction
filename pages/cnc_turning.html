@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CNC Turning (Lathe) | DFM Reference</title>
+  <meta name="description" content="When to turn instead of mill, lathe size limits, live tooling, hole types, grooves and design rules for turned parts.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="cnc_turning" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>CNC Turning (Lathe)</h1>
+          <p class="lead">If a part is mostly round, turn it from bar stock. Turning is usually cheaper than milling a round part out of a block, gives a smoother and rounder surface, and live tooling adds flats, cross holes and slots in the same setup.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">-15%</span><span class="label">Typical cost vs 3-axis milling</span></div>
+          <div class="key-card"><span class="value">3.95 in</span><span class="label">Max diameter, automated lathe (100 mm)</span></div>
+          <div class="key-card"><span class="value">9 in</span><span class="label">Max length, automated lathe (228 mm)</span></div>
+          <div class="key-card"><span class="value">0.016 in</span><span class="label">Typical finishing tool nose radius</span></div>
+        </div>
+
+        <h2 id="turn-or-mill">Turn or mill?</h2>
+        <div class="do-dont">
+          <div class="do">
+            <h4>Good lathe parts</h4>
+            <ul>
+              <li>Shafts, pins, pistons, spacers, bushings, nozzles</li>
+              <li>Hydraulic fittings and hose barbs (V-grooves use a standard tool)</li>
+              <li>Long parts several times longer than their diameter</li>
+              <li>Recessed grip areas and wide grooves (simple grooving)</li>
+              <li>Round parts with a few flats or cross holes (live tooling)</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Better on a mill</h4>
+            <ul>
+              <li>Rectangular bodies, manifolds, brackets, housings</li>
+              <li>Parts with handles or lugs sticking out of a round body</li>
+              <li>Large flat faces with detailed pockets</li>
+              <li>Face patterns that are not on the turning axis (cut-outs like wheel spokes can go either way)</li>
+            </ul>
+          </div>
+        </div>
+        <p>Rule of thumb: if you picture the part spinning on its long axis and most surfaces are circles around that axis, it is a lathe part. A pint glass or soup can turns easily; a coffee mug with a handle does not.</p>
+
+        <h2 id="capability">Typical lathe capability</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Automated lathe guideline</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Maximum part size</td><td>3.95 in diameter x 9 in long (100 x 228 mm)</td></tr>
+              <tr><td>Minimum part size</td><td>0.16 in diameter x 0.050 in long (4 x 1.3 mm)</td></tr>
+              <tr><td>Conical points</td><td>Included angle greater than 30&deg;</td></tr>
+              <tr><td>On-axis and axial holes</td><td>Minimum 0.040 in (1 mm) diameter, depth up to 6x diameter</td></tr>
+              <tr><td>Radial (cross) holes</td><td>Minimum 0.080 in (2 mm) diameter</td></tr>
+              <tr><td>External grooves</td><td>No narrower than 0.047 in (1.2 mm), no deeper than 0.95 in (24 mm)</td></tr>
+              <tr><td>Milled grooves / slots (live tool)</td><td>Wider than 0.047 in (1.2 mm)</td></tr>
+              <tr><td>Text</td><td>Raised text preferred; stroke and spacing at least 0.020 in (0.5 mm)</td></tr>
+              <tr><td>Materials</td><td>Aluminum, brass, copper, low carbon and alloy steel, stainless, titanium (this vendor turns metals only)</td></tr>
+              <tr><td>Large turning (network shops)</td><td>Up to about 32 in diameter x 62 in long (813 x 1575 mm)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Values are published limits from automated (ProtoLabs) and network (Xometry) services. A local job shop's limits depend on its machines and bar feeder.</p>
+
+        <h2 id="features">Features on a turned part</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/turning_shaft_features.svg" alt="Turned shaft with wrench flats, groove, radial cross hole, shoulder chamfer, OD thread and end chamfer labelled" width="900" height="340" loading="lazy">
+          <figcaption>A live-tool lathe can finish a shaft like this complete: turned diameters, groove and thread, plus milled flats and a cross hole.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Inside shoulders:</strong> the turning insert leaves a small nose radius (about 0.016 in / 0.4 mm). Add a chamfer or radius to the mating part's bore or edge so it seats against the shoulder.</li>
+          <li><strong>Thread run-out:</strong> leave a relief groove or unthreaded length at the end of an OD thread next to a shoulder.</li>
+          <li><strong>Chamfer the ends</strong> of shafts and the entries of bores. Lathes do this almost for free.</li>
+          <li><strong>Live-tool features</strong> (flats, cross holes, keyways, slots) should be parallel or perpendicular to the part axis. A Y-axis lathe can place them off-center.</li>
+          <li><strong>Keep diameters stepping one way</strong> where possible (largest at the chuck end) so the part can be cut in one chucking and parted off.</li>
+        </ul>
+
+        <h2 id="hole-types">On-axis, axial and radial holes</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/turning_hole_types.svg" alt="On-axis hole on the centerline, axial hole parallel but offset, radial hole through the side" width="900" height="300" loading="lazy">
+          <figcaption>Turned parts support three hole directions. Threads are offered on all three in many cases, but availability differs by size.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>On-axis</strong> holes are drilled and bored on the spindle centerline. Most accurate and concentric.</li>
+          <li><strong>Axial</strong> holes run parallel to the axis but off-center (for example a bolt circle on a flange face). Cut with live tooling.</li>
+          <li><strong>Radial</strong> holes go through the side, square to the axis. Add a small flat if the hole must start on a curved surface with a clean edge.</li>
+          <li>Through holes on long or tubular parts may need drilling from both ends; check the DFM feedback.</li>
+        </ul>
+
+        <h2 id="threads">Threads on turned parts</h2>
+        <ul>
+          <li><strong>External (OD) threads:</strong> model the plain shaft at the diameter listed in the OD thread table (just under the major diameter), and do not model the thread. Assign the thread in the quote or call it out on the drawing. See the <a href="thread_tables.html#od">OD thread table</a>.</li>
+          <li><strong>Internal threads:</strong> model the pilot (tap drill) diameter. See <a href="holes_threading.html">Hole &amp; Thread Design Rules</a>.</li>
+          <li>Turned OD threads are cut with a single-point tool on the part centerline and are far better than threads milled on a 3-axis machine.</li>
+        </ul>
+
+        <h2 id="tips">Design tips for cheaper turned parts</h2>
+        <ul>
+          <li><strong>Start from standard bar sizes.</strong> Make the largest diameter slightly under a common bar size so the outside can clean up. See <a href="stock_sizes.html#round-bar">round bar sizes</a>.</li>
+          <li><strong>Avoid deep, narrow internal grooves</strong> and internal features far from the open end; boring bars deflect as they get longer.</li>
+          <li><strong>Keep length to diameter reasonable.</strong> Long slender parts (over about 4 : 1 unsupported) need a tailstock or steady rest.</li>
+          <li><strong>Use standard groove widths</strong> for retaining rings and O-rings, and standard drill sizes for holes.</li>
+          <li><strong>Turning plastics</strong> is possible at job shops; some automated services turn metals only and mill plastic round parts instead.</li>
+        </ul>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p><a href="https://www.protolabs.com/services/cnc-machining/cnc-turning/design-guidelines/">ProtoLabs CNC turning design guidelines</a> &middot; <a href="https://www.protolabs.com/resources/design-tips/mastering-complex-features-on-machined-parts/">ProtoLabs: complex features on machined parts</a> &middot; ProtoLabs Design Essentials and Definitive Guide to CNC Machining &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (lathe size limits).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340" role="img" aria-label="A part with all features from one side needs one setup; features on three faces need three setups">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 17px; font-weight: 700; }
+    .good { fill: #1d7a4f; font-weight: 600; }
+    .bad { fill: #b3261e; font-weight: 600; }
+    .top { fill: #dfe6ee; stroke: #34495e; stroke-width: 2; }
+    .front { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .side { fill: #b8c4d2; stroke: #34495e; stroke-width: 2; }
+    .feat { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+  </style>
+  <defs>
+    <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1d7a4f"/>
+    </marker>
+    <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#b3261e"/>
+    </marker>
+  </defs>
+
+  <line x1="450" y1="15" x2="450" y2="325" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Left: everything from the top -->
+  <text x="225" y="30" text-anchor="middle" class="h good">1 setup: all features from the top</text>
+  <g transform="translate(40,40)">
+    <polygon points="60,130 260,130 320,90 120,90" class="top"/>
+    <polygon points="60,130 260,130 260,230 60,230" class="front"/>
+    <polygon points="260,130 320,90 320,190 260,230" class="side"/>
+    <!-- top features: pocket and holes -->
+    <polygon points="120,120 200,120 225,103 145,103" class="feat"/>
+    <ellipse cx="240" cy="112" rx="12" ry="6" class="feat"/>
+    <ellipse cx="100" cy="122" rx="10" ry="5" class="feat"/>
+    <ellipse cx="270" cy="98" rx="10" ry="5" class="feat"/>
+    <line x1="175" y1="20" x2="175" y2="95" stroke="#1d7a4f" stroke-width="3" marker-end="url(#arrG)"/>
+  </g>
+  <text x="225" y="300" text-anchor="middle">2.5D: pockets, holes and profile from one direction</text>
+  <text x="225" y="320" text-anchor="middle" class="good">Fastest, best feature-to-feature accuracy</text>
+
+  <!-- Right: features on three faces -->
+  <g transform="translate(450,0)">
+    <text x="225" y="30" text-anchor="middle" class="h bad">3 setups: top, front and side</text>
+    <g transform="translate(40,40)">
+      <polygon points="60,130 260,130 320,90 120,90" class="top"/>
+      <polygon points="60,130 260,130 260,230 60,230" class="front"/>
+      <polygon points="260,130 320,90 320,190 260,230" class="side"/>
+      <polygon points="120,120 200,120 225,103 145,103" class="feat"/>
+      <circle cx="140" cy="180" r="16" class="feat"/>
+      <ellipse cx="290" cy="160" rx="8" ry="14" class="feat"/>
+      <line x1="175" y1="20" x2="175" y2="95" stroke="#b3261e" stroke-width="3" marker-end="url(#arrR)"/>
+      <line x1="30" y1="240" x2="122" y2="192" stroke="#b3261e" stroke-width="3" marker-end="url(#arrR)"/>
+      <line x1="380" y1="150" x2="305" y2="160" stroke="#b3261e" stroke-width="3" marker-end="url(#arrR)"/>
+    </g>
+    <text x="225" y="300" text-anchor="middle">Holes on the front and side faces add two flips</text>
+    <text x="225" y="320" text-anchor="middle" class="bad">Each flip: refixture, re-indicate, tolerance stack</text>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 280" width="860" height="280" role="img" aria-label="A part 0.990 in thick fits 1 in plate; a part 1.010 in thick forces 1.25 in plate">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .good { fill: #1d7a4f; font-weight: 600; }
+    .bad { fill: #b3261e; font-weight: 600; }
+    .s { font-size: 13px; fill: #4a5868; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .stock { fill: #f4e9da; stroke: #8a6d45; stroke-width: 2; stroke-dasharray: 8 5; }
+  </style>
+  <defs>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="10" height="10" fill="#fbe3e1"/>
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#b3261e" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <line x1="430" y1="15" x2="430" y2="265" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Fits -->
+  <text x="215" y="30" text-anchor="middle" class="h">Part 0.990 in thick</text>
+  <rect x="60" y="80" width="310" height="100" class="stock"/>
+  <rect x="60" y="82" width="310" height="96" class="part"/>
+  <text x="215" y="136" text-anchor="middle">0.990 in from 1.000 in plate</text>
+  <text x="215" y="215" text-anchor="middle" class="good">Fits standard 1 in plate</text>
+  <text x="215" y="235" text-anchor="middle" class="s">Light skim on each face</text>
+
+  <!-- Jumps -->
+  <g transform="translate(430,0)">
+    <text x="215" y="30" text-anchor="middle" class="h">Part 1.010 in thick</text>
+    <rect x="60" y="55" width="310" height="125" fill="url(#hatch)" stroke="#8a6d45" stroke-width="2" stroke-dasharray="8 5"/>
+    <rect x="60" y="78" width="310" height="101" class="part"/>
+    <text x="215" y="136" text-anchor="middle">1.010 in from 1.250 in plate</text>
+    <text x="215" y="215" text-anchor="middle" class="bad">0.010 in over: next plate size</text>
+    <text x="215" y="235" text-anchor="middle" class="s">Removes 0.24 in of stock you paid for</text>
+  </g>
+</svg>

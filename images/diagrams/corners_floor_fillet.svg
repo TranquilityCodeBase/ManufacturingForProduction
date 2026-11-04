@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" width="900" height="330" role="img" aria-label="Section view of pocket floor edges: flat, small standard floor fillet, and large floor fillet">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-size: 16px; font-weight: 700; }
+    .good { fill: #1d7a4f; font-weight: 600; }
+    .warn { fill: #b0590e; font-weight: 600; }
+    .bad { fill: #b3261e; font-weight: 600; }
+    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+    .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+    .ghost { fill: none; stroke: #b9772c; stroke-width: 1.5; stroke-dasharray: 4 3; }
+  </style>
+
+  <line x1="300" y1="15" x2="300" y2="315" stroke="#d6dde6" stroke-width="2"/>
+  <line x1="600" y1="15" x2="600" y2="315" stroke="#d6dde6" stroke-width="2"/>
+
+  <!-- Panel A: no floor fillet -->
+  <text x="150" y="30" text-anchor="middle" class="h">No floor fillet</text>
+  <path d="M30 230 H200 V60 H270 V260 H30 Z" class="part"/>
+  <rect x="150" y="80" width="50" height="150" class="tool"/>
+  <text x="150" y="285" text-anchor="middle" class="good">Fastest: flat end mill</text>
+  <text x="150" y="305" text-anchor="middle">One tool cuts floor and wall</text>
+
+  <!-- Panel B: small standard floor fillet -->
+  <g transform="translate(300,0)">
+    <text x="150" y="30" text-anchor="middle" class="h">Small standard floor fillet</text>
+    <path d="M30 230 H188 A12 12 0 0 0 200 218 V60 H270 V260 H30 Z" class="part"/>
+    <path d="M150 80 V218 A12 12 0 0 0 162 230 H188 A12 12 0 0 0 200 218 V80 Z" class="tool"/>
+    <text x="150" y="285" text-anchor="middle" class="good">Good: bullnose radius</text>
+    <text x="150" y="305" text-anchor="middle">e.g. 0.020 / 0.030 / 0.060 in</text>
+  </g>
+
+  <!-- Panel C: large floor fillet needs ball mill passes -->
+  <g transform="translate(600,0)">
+    <text x="150" y="30" text-anchor="middle" class="h">Large floor fillet</text>
+    <path d="M30 230 H150 A50 50 0 0 0 200 180 V60 H270 V260 H30 Z" class="part"/>
+    <circle cx="162.3" cy="213.8" r="14" class="ghost"/>
+    <circle cx="183.8" cy="192.3" r="14" class="ghost"/>
+    <path d="M161.5 80 V205.5 A14 14 0 0 0 189.5 205.5 V80 Z" class="tool"/>
+    <text x="150" y="285" text-anchor="middle" class="warn">Slow: ball mill 3D passes</text>
+    <text x="150" y="305" text-anchor="middle">Only when the design needs it</text>
+  </g>
+</svg>

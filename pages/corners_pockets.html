@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inside Corners &amp; Pockets | DFM Reference</title>
+  <meta name="description" content="How to size inside corner radii, floor fillets, corner reliefs and pocket depths so standard end mills can cut them quickly.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/data/cutter_data.js" defer></script>
+  <script src="../js/corner_radius_tool.js" defer></script>
+</head>
+<body data-page="corners_pockets" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">CNC Machining</p>
+          <h1>Inside Corners &amp; Pockets</h1>
+          <p class="lead">A spinning round cutter cannot make a sharp inside corner. Size corner radii a little larger than a standard cutter, keep floor fillets small and standard, and keep pockets shallow relative to their width.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">1.3 x tool R</span><span class="label">Recommended inside corner radius</span></div>
+          <div class="key-card"><span class="value">R &ge; D / 3</span><span class="label">Corner radius vs pocket depth</span></div>
+          <div class="key-card"><span class="value">D &lt; 4 x W</span><span class="label">Pocket depth vs width</span></div>
+          <div class="key-card"><span class="value">Floor R &lt; wall R</span><span class="label">Floor fillet smaller than corner radius</span></div>
+        </div>
+
+        <h2 id="corner-radius">Inside vertical corner radius</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/corners_tool_clearance.svg" alt="Left: corner radius equals tool radius so the tool stops and pivots. Right: corner radius 1.3 times tool radius so the tool sweeps a small arc" width="900" height="400" loading="lazy">
+          <figcaption>Top view of a pocket corner. When the corner radius equals the cutter radius the tool has to stop, pivot and wrap the full corner. A slightly larger radius lets it sweep through.</figcaption>
+        </figure>
+        <div class="callout rule">
+          <span class="callout-title">The rule</span>
+          <p>Make the inside corner radius about <strong>1.3 x the radius of the cutter you expect</strong>, and never exactly equal to a standard cutter radius. For a 1/4 in (6 mm) cutter, design about 0.165 in (4 mm) radius, not 0.125 in (3 mm).</p>
+        </div>
+        <ul>
+          <li><strong>Why not equal?</strong> With zero clearance the cutter is fully wrapped in material at the corner. Load spikes, the tool chatters and dwell marks are left on the walls. The machinist must slow down or drop to a smaller tool.</li>
+          <li><strong>Bigger is cheaper.</strong> A larger radius allows a larger, stiffer cutter that removes more material per pass. Aim for a corner radius of at least one third of the pocket depth.</li>
+          <li><strong>Use one radius for every inside corner</strong> on the part so a single tool finishes all of them with no tool changes.</li>
+          <li><strong>Minimum practical:</strong> keep radii above 1/32 in (0.8 mm). Smaller tools exist but are short, slow and fragile.</li>
+          <li><strong>Small tools are depth limited.</strong> A 1/32 in end mill reaches only about 5x its diameter (roughly 0.15 in). Deep pockets need big corners.</li>
+        </ul>
+
+        <h3 id="quick-table">Quick pick table</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Cutter</th><th class="num">Tool radius</th><th class="num">Minimum corner R (tool R + 0.005 in)</th><th class="num">Recommended corner R (1.3x)</th><th class="num">Comfortable pocket depth (soft metal, 3x D)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1/16 in</td><td class="num">0.031</td><td class="num">0.036</td><td class="num">0.045</td><td class="num">0.19 in</td></tr>
+              <tr><td>1/8 in</td><td class="num">0.063</td><td class="num">0.068</td><td class="num">0.085</td><td class="num">0.38 in</td></tr>
+              <tr><td>3/16 in</td><td class="num">0.094</td><td class="num">0.099</td><td class="num">0.125</td><td class="num">0.56 in</td></tr>
+              <tr><td>1/4 in</td><td class="num">0.125</td><td class="num">0.130</td><td class="num">0.165</td><td class="num">0.75 in</td></tr>
+              <tr><td>3/8 in</td><td class="num">0.188</td><td class="num">0.193</td><td class="num">0.245</td><td class="num">1.13 in</td></tr>
+              <tr><td>1/2 in</td><td class="num">0.250</td><td class="num">0.255</td><td class="num">0.325</td><td class="num">1.50 in</td></tr>
+              <tr><td>3 mm</td><td class="num">1.5 mm</td><td class="num">1.6 mm</td><td class="num">2.0 mm</td><td class="num">9 mm</td></tr>
+              <tr><td>6 mm</td><td class="num">3.0 mm</td><td class="num">3.1 mm</td><td class="num">3.9 mm</td><td class="num">18 mm</td></tr>
+              <tr><td>10 mm</td><td class="num">5.0 mm</td><td class="num">5.1 mm</td><td class="num">6.5 mm</td><td class="num">30 mm</td></tr>
+              <tr><td>12 mm</td><td class="num">6.0 mm</td><td class="num">6.1 mm</td><td class="num">7.8 mm</td><td class="num">36 mm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Inch values in inches. Recommended radii rounded up to 0.005 in / 0.1 mm. Hard metals (steel, stainless, titanium): plan on about 2x D comfortable depth instead of 3x D.</p>
+
+        <h2 id="corner-picker">Corner &amp; floor radius picker</h2>
+        <p>Enter your pocket depth and the corner radius you were planning. The picker shows which standard cutters fit, flags radii that match a cutter exactly, and suggests floor fillets. The same tool is on the <a href="calculators.html#corner-picker">Calculators</a> page.</p>
+        <div data-corner-tool></div>
+
+        <h2 id="floor-fillets">Floor fillets</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/corners_floor_fillet.svg" alt="Section views: no floor fillet with a flat end mill, small floor fillet with a bullnose cutter, large floor fillet needing ball end mill passes" width="900" height="330" loading="lazy">
+          <figcaption>Floor-to-wall edges in section. A flat floor or a standard bullnose radius is fast; a large floor fillet needs many ball end mill passes.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>No fillet is fastest.</strong> A flat end mill cuts floor and wall in one pass. Add a floor fillet only for strength or fatigue.</li>
+          <li><strong>Use a standard bullnose radius</strong>: 0.010, 0.015, 0.020, 0.030, 0.060 in (0.2, 0.5, 1.0 mm). The cutter's corner radius becomes the fillet.</li>
+          <li><strong>Keep the floor fillet smaller than the wall corner radius</strong>, so the same cutter finishes the wall corner and the floor fillet in one smooth motion.</li>
+          <li><strong>Large floor fillets</strong> (anything bigger than a standard bullnose radius) are cut with a ball end mill in many 3D passes. Avoid unless the function needs it.</li>
+        </ul>
+
+        <h2 id="reliefs">Corner reliefs for square mating parts</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/corners_dogbone.svg" alt="A square part cannot seat against a corner radius; dog-bone and T-bone reliefs let it seat fully" width="900" height="360" loading="lazy">
+          <figcaption>If a square part, PCB or block must sit fully into the corner, relieve the corner instead of shrinking the radius.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Dog-bone:</strong> a round relief at 45&deg; into the corner. Easy to model and cut, but visible from both walls.</li>
+          <li><strong>T-bone:</strong> the relief runs into one wall only. Use it when one wall is cosmetic or sealing.</li>
+          <li>A 1/4 in (6 mm) relief allows functionally sharp corners far deeper (around 1.25 in in steel, about double that in aluminum or plastic) than a tiny radius cutter ever could.</li>
+          <li>Size the relief to a standard cutter diameter plus a little clearance, the same as any slot.</li>
+          <li>Often the cheaper fix is on the <em>mating</em> part: add a chamfer or radius to its outside corners so it clears the pocket radius.</li>
+        </ul>
+
+        <h2 id="pocket-depth">Pocket depth and width</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/corners_pocket_depth.svg" alt="Section of a pocket showing depth, width and rules of thumb" width="760" height="330" loading="lazy">
+          <figcaption>Deep, narrow pockets need long tools that deflect. Keep depth in proportion to width and tool size.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Guideline</th><th>Value</th><th>Why</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Cavity depth vs width</td><td>Depth &lt; 4 x width (more than 6x is considered too deep)</td><td>Tool reach, deflection and chip evacuation</td></tr>
+              <tr><td>Depth vs cutter diameter</td><td>Up to 3x D is fast; 3 to 4x D needs care; over 4 to 6x D needs long reach tools</td><td>Feed rates drop once depth passes about 2x D</td></tr>
+              <tr><td>Corner radius vs depth</td><td>R &ge; depth / 3</td><td>Lets a cutter big enough for the depth fit the corner</td></tr>
+              <tr><td>Maximum feature depth</td><td>About 2 in (51 mm) with standard tooling</td><td>Longest common stiff cutters</td></tr>
+              <tr><td>Deep pockets</td><td>Make them wider at the top, or step the walls</td><td>Lets a shorter, larger tool reach the floor</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <span class="callout-title">Pockets just for weight?</span>
+          <p>Pockets added only to save weight often cost more in machine time than the material they save. Fewer, larger pockets with big corner radii are far cheaper than many small ones that need six to eight different cutters.</p>
+        </div>
+
+        <h2 id="milled-holes-slots" data-nav="Milled holes &amp; slots">Holes and slots cut with an end mill</h2>
+        <p>Holes that are not a standard drill size, and all slots, are cut by an end mill moving around the feature. The cutter needs room for chips to escape.</p>
+        <ul>
+          <li>Make an end-milled hole or closed slot <strong>noticeably larger than a standard cutter</strong>, roughly 1.2x to 1.5x the cutter diameter, so chips can clear. A slot exactly one cutter wide forces full-width cutting with no room for chips.</li>
+          <li>If you need a precise hole size, <strong>design it to a standard drill or reamer size</strong> instead. See <a href="tap_drill_charts.html">Tap &amp; Clearance Drill Charts</a> and <a href="holes_threading.html">Hole &amp; Thread Design Rules</a>.</li>
+          <li>Keep slot depth under about 6x the slot width.</li>
+        </ul>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p><a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (1.3x radius rule, depth ratios) &middot; ProtoLabs "15 Design Tips to Reduce the Cost of CNC Machining" (R &ge; 1/3 depth, same radius on all corners) &middot; <a href="https://www.protolabs.com/resources/design-tips/6-ways-to-optimize-part-design-for-cnc-machining/">ProtoLabs: 6 ways to optimize part design</a> (corner reliefs).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

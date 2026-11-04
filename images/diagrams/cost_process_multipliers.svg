@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 300" width="820" height="300" role="img" aria-label="Relative machining cost by process compared with 3-axis milling">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .s { font-size: 13px; fill: #4a5868; }
+    .v { font-weight: 700; }
+    .bar { fill: #1f6fb2; }
+    .base { fill: #7b8896; }
+    .low { fill: #1d7a4f; }
+    .grid { stroke: #d6dde6; stroke-width: 1; }
+  </style>
+
+  <!-- scale: 100% = 220 px wide, origin x=230 -->
+  <line x1="230" y1="20" x2="230" y2="255" stroke="#34495e" stroke-width="1.5"/>
+  <line x1="450" y1="20" x2="450" y2="255" class="grid" stroke-dasharray="4 4"/>
+  <text x="450" y="275" text-anchor="middle" class="s">3-axis = 100%</text>
+
+  <text x="215" y="50" text-anchor="end">CNC turning (lathe)</text>
+  <rect x="230" y="34" width="187" height="24" class="low"/>
+  <text x="425" y="51" class="v">-15%</text>
+
+  <text x="215" y="95" text-anchor="end">3-axis milling</text>
+  <rect x="230" y="79" width="220" height="24" class="base"/>
+  <text x="458" y="96" class="v">baseline</text>
+
+  <text x="215" y="140" text-anchor="end">3+2 indexed milling</text>
+  <rect x="230" y="124" width="275" height="24" class="bar"/>
+  <text x="513" y="141" class="v">+25%</text>
+
+  <text x="215" y="185" text-anchor="end">Continuous 5-axis</text>
+  <rect x="230" y="169" width="352" height="24" class="bar"/>
+  <text x="590" y="186" class="v">+60%</text>
+
+  <text x="215" y="230" text-anchor="end">5-axis mill-turn</text>
+  <rect x="230" y="214" width="440" height="24" class="bar"/>
+  <text x="678" y="231" class="v">+100%</text>
+
+  <text x="20" y="295" class="s">Typical relative cost for a comparable part. Real quotes depend on geometry, material and quantity.</text>
+</svg>

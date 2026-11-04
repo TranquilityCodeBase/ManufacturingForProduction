@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 250" width="860" height="250" role="img" aria-label="Bilateral, unilateral and limit tolerances shown on a number line">
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+    .h { font-weight: 700; }
+    .s { font-size: 13px; fill: #4a5868; }
+    .band { fill: #1f6fb2; opacity: 0.25; stroke: #1f6fb2; stroke-width: 1.5; }
+    .axis { stroke: #34495e; stroke-width: 1.5; }
+    .nom { stroke: #1d7a4f; stroke-width: 2; stroke-dasharray: 5 4; }
+  </style>
+
+  <!-- scale: 0.990 at x=260, 1.010 at x=760, 25 px per 0.001 -->
+  <line x1="260" y1="200" x2="760" y2="200" class="axis"/>
+  <line x1="260" y1="195" x2="260" y2="205" class="axis"/>
+  <line x1="385" y1="195" x2="385" y2="205" class="axis"/>
+  <line x1="510" y1="195" x2="510" y2="205" class="axis"/>
+  <line x1="635" y1="195" x2="635" y2="205" class="axis"/>
+  <line x1="760" y1="195" x2="760" y2="205" class="axis"/>
+  <text x="260" y="224" text-anchor="middle" class="s">0.990</text>
+  <text x="385" y="224" text-anchor="middle" class="s">0.995</text>
+  <text x="510" y="224" text-anchor="middle" class="s">1.000</text>
+  <text x="635" y="224" text-anchor="middle" class="s">1.005</text>
+  <text x="760" y="224" text-anchor="middle" class="s">1.010</text>
+  <line x1="510" y1="30" x2="510" y2="195" class="nom"/>
+  <text x="516" y="26" class="s">nominal 1.000 in</text>
+
+  <text x="20" y="62" class="h">Bilateral</text>
+  <text x="20" y="80" class="s">1.000 +/- 0.005</text>
+  <rect x="385" y="50" width="250" height="26" class="band"/>
+
+  <text x="20" y="112" class="h">Unilateral</text>
+  <text x="20" y="130" class="s">1.000 +0.000 / -0.010</text>
+  <rect x="260" y="100" width="250" height="26" class="band"/>
+
+  <text x="20" y="162" class="h">Limits</text>
+  <text x="20" y="180" class="s">1.005 / 0.995</text>
+  <rect x="385" y="150" width="250" height="26" class="band"/>
+</svg>
