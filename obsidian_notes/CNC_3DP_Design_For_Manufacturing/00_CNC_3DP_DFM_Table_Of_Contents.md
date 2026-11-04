@@ -13,7 +13,7 @@ One-stop quick reference for machining and 3D printing rules while designing.
 |---|---|
 | Standard CNC tolerance | ±0.005 in (±0.13 mm) |
 | Inside corner radius | 1.3 x tool radius (never equal to it); R >= depth / 3 |
-| Floor fillet | Smaller than wall radius, or none |
+| Floor fillet | Standard bullnose R of the wall cutter, smaller than wall radius; no sharp floors in hard metals |
 | Pocket depth | < 4 x width (6 x max) |
 | Min wall | Metal 0.030 in (0.8 mm), plastic 0.060 in (1.5 mm) |
 | Hole depth | < 10 x D, 4 x D optimal |

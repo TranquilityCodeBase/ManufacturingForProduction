@@ -16,7 +16,7 @@ Pick inside corner and floor radii that a standard cutter can actually cut, quic
 - Make the corner radius about **1.3 x the tool radius** (1/4 in cutter -> R 0.165 in). Bare minimum is tool radius + 0.005 in (0.1 mm).
 - Bigger is better: corner R of at least **1/3 of the pocket depth** lets a stiff, fast tool reach the floor.
 - Use **one radius for all inside corners** on a part to avoid tool changes.
-- **Floor fillet smaller than the wall radius**, or none. Use 0, a standard bullnose corner radius (0.010-0.030 in, 0.5-1 mm), or a full ball radius.
+- **Always give the floor a standard bullnose fillet**, smaller than the wall radius and offered on the wall cutter (e.g. 0.030 in on 1/4 in, 0.5 mm on 6 mm). Sharp floors are not accepted in hard metals and are often rejected in soft metals.
 - Pocket depth **< 4 x pocket width** is ideal; > 6 x is "too deep".
 - Need a sharp corner for a square mating part? Use a **dog-bone or T-bone relief**, not a tiny radius.
 
@@ -59,8 +59,33 @@ Example: 0.75 in deep aluminum pocket -> d/3 = 0.25 in -> 3/8 in cutter (R 0.245
 ## Floor Fillets
 - A floor-to-wall fillet is cut by the **corner radius of the tool** (bullnose) or a ball end mill. Ball-milled floor fillets are slow 3D surfacing.
 - Keep floor fillet < wall corner radius so one tool cuts both and flows through the corner.
-- Standard bullnose corner radii: 0.005, 0.010, 0.015, 0.020, 0.030, 0.060, 0.090, 0.125 in; 0.2, 0.5, 1.0, 1.5, 2.0, 3.0 mm.
-- No functional need? Leave the floor sharp (flat end mill) or use the smallest standard bullnose radius.
+- Pick a bullnose radius the **wall cutter** offers so walls and floor come out of one pass (suggested values below are about 12-15% of the cutter diameter).
+
+> [!warning] Sharp floors
+> Most automated and rapid prototyping services (ProtoLabs and similar) cut pockets with bullnose cutters. A sharp (0 radius) floor is **not accepted in hard metals** (steel, stainless, titanium) and is case by case, often rejected or re-quoted, in **soft metals**. Plastics usually accept it, but a bullnose radius is still preferred.
+
+| Cutter | Suggested floor R | Standard bullnose radii |
+|---|---|---|
+| 1/16 in | **0.005 in** | 0.005, 0.010, 0.015 in |
+| 1/8 in | **0.015 in** | 0.010, 0.015, 0.020, 0.030 in |
+| 3/16 in | **0.020 in** | 0.015, 0.020, 0.030, 0.040 in |
+| 1/4 in | **0.030 in** | 0.015, 0.020, 0.030, 0.060 in |
+| 3/8 in | **0.030 in** | 0.020, 0.030, 0.060, 0.090 in |
+| 1/2 in | **0.060 in** | 0.030, 0.060, 0.090, 0.125 in |
+| 3/4 in | **0.090 in** | 0.030, 0.060, 0.090, 0.125 in |
+
+| Cutter | Suggested floor R | Standard bullnose radii |
+|---|---|---|
+| 2 mm | **0.2 mm** | 0.2, 0.5 mm |
+| 3 mm | **0.2 mm** | 0.2, 0.5 mm |
+| 4 mm | **0.5 mm** | 0.2, 0.5, 1 mm |
+| 6 mm | **0.5 mm** | 0.5, 1 mm |
+| 8 mm | **1 mm** | 0.5, 1, 1.5 mm |
+| 10 mm | **1 mm** | 0.5, 1, 2 mm |
+| 12 mm | **1 mm** | 0.5, 1, 2, 3 mm |
+| 16 mm | **2 mm** | 1, 2, 3 mm |
+
+Typical catalog sizes; confirm against your vendor's tool list. The website picker suggests these automatically.
 
 ## Corner Reliefs (Dog-bones / T-bones)
 - Drill or mill a relief into the corner so a square part seats fully.

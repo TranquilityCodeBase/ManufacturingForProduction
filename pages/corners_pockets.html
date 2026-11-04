@@ -20,14 +20,14 @@
         <header class="page-header">
           <p class="eyebrow">CNC Machining</p>
           <h1>Inside Corners &amp; Pockets</h1>
-          <p class="lead">A spinning round cutter cannot make a sharp inside corner. Size corner radii a little larger than a standard cutter, keep floor fillets small and standard, and keep pockets shallow relative to their width.</p>
+          <p class="lead">A spinning round cutter cannot make a sharp inside corner. Size corner radii a little larger than a standard cutter, give every pocket floor a small standard bullnose fillet, and keep pockets shallow relative to their width.</p>
         </header>
 
         <div class="key-grid">
           <div class="key-card"><span class="value">1.3 x tool R</span><span class="label">Recommended inside corner radius</span></div>
           <div class="key-card"><span class="value">R &ge; D / 3</span><span class="label">Corner radius vs pocket depth</span></div>
           <div class="key-card"><span class="value">D &lt; 4 x W</span><span class="label">Pocket depth vs width</span></div>
-          <div class="key-card"><span class="value">Floor R &lt; wall R</span><span class="label">Floor fillet smaller than corner radius</span></div>
+          <div class="key-card"><span class="value">Bullnose floor R</span><span class="label">Standard floor fillet, smaller than the corner radius; no sharp floors in hard metals</span></div>
         </div>
 
         <h2 id="corner-radius">Inside vertical corner radius</h2>
@@ -75,12 +75,12 @@
 
         <h2 id="floor-fillets">Floor fillets</h2>
         <figure class="diagram">
-          <img src="../images/diagrams/corners_floor_fillet.svg" alt="Section views: no floor fillet with a flat end mill, small floor fillet with a bullnose cutter, large floor fillet needing ball end mill passes" width="900" height="330" loading="lazy">
-          <figcaption>Floor-to-wall edges in section. A flat floor or a standard bullnose radius is fast; a large floor fillet needs many ball end mill passes.</figcaption>
+          <img src="../images/diagrams/corners_floor_fillet.svg" alt="Section views: a sharp floor marked as often rejected, a standard bullnose floor fillet marked preferred, and a large floor fillet needing ball end mill passes" width="900" height="330" loading="lazy">
+          <figcaption>Floor-to-wall edges in section. A standard bullnose radius is the default; sharp floors are often rejected and large floor fillets need many ball end mill passes.</figcaption>
         </figure>
         <ul>
-          <li><strong>No fillet is fastest.</strong> A flat end mill cuts floor and wall in one pass. Add a floor fillet only for strength or fatigue.</li>
-          <li><strong>Use a standard bullnose radius</strong>: 0.010, 0.015, 0.020, 0.030, 0.060 in (0.2, 0.5, 1.0 mm). The cutter's corner radius becomes the fillet.</li>
+          <li><strong>Default to a floor fillet.</strong> Most automated and rapid prototyping services cut pockets with bullnose (corner radius) cutters and no longer accept sharp floor-to-wall edges in hard metals (steel, stainless, titanium). In soft metals sharp floors are case by case and are often rejected or re-quoted. Only plastics reliably accept a sharp floor, and a bullnose radius is still preferred.</li>
+          <li><strong>Use a standard bullnose radius that the wall cutter offers</strong>: for example 0.030 in on a 1/4 in cutter, 0.015 in on a 1/8 in cutter, 0.5 mm on a 6 mm cutter, 1.0 mm on a 10 mm cutter. The cutter's corner radius becomes the fillet, so walls and floor are cut in one pass. The <a href="#corner-picker">picker</a> suggests one automatically.</li>
           <li><strong>Keep the floor fillet smaller than the wall corner radius</strong>, so the same cutter finishes the wall corner and the floor fillet in one smooth motion.</li>
           <li><strong>Large floor fillets</strong> (anything bigger than a standard bullnose radius) are cut with a ball end mill in many 3D passes. Avoid unless the function needs it.</li>
         </ul>

@@ -6,7 +6,8 @@
    What it answers:
      1. "I drew corner radius R in a pocket D deep - is that OK?"
      2. "My pocket is D deep - which corner radius should I draw?"
-     3. "Is my floor fillet machinable with a standard cutter?"
+     3. "What floor fillet should I draw?" (suggested by default from the
+        standard bullnose radii of the cutter that finishes the walls)
 
    Core rules used:
      - Corner radius must be LARGER than the cutter radius. A radius that
@@ -16,8 +17,10 @@
      - Recommended corner radius = 1.3 x cutter radius (rounded up).
      - Pocket depth / cutter diameter decides if a standard length
        cutter can reach (bands in cutter_data.js).
-     - Floor radius should be smaller than the wall radius and match
-       a flat (0), bullnose corner radius, or ball (cutter radius).
+     - Floor radius should be smaller than the wall radius and match a
+       standard bullnose corner radius of the finishing cutter. Sharp (0)
+       floors are rejected by many rapid prototyping services: never in
+       hard metals, case by case in soft metals.
    ===================================================================== */
 
 (function () {
@@ -53,7 +56,8 @@
 
   // ---------- Reach band lookup ----------
   function reachBand(ratio, material) {
-    const bands = window.DFM_CUTTERS.reachBands[material];
+    const bandKey = material === "hard" ? "hard" : "soft";   // plastics reach like soft metals
+    const bands = window.DFM_CUTTERS.reachBands[bandKey];
     for (let i = 0; i < bands.length; i += 1) {
       if (ratio <= bands[i].maxRatio) {
         return bands[i];
@@ -71,10 +75,17 @@
       const ratio = depth > 0 ? depth / cutter.value : 0;                   // pocket depth in cutter diameters
       const band = reachBand(ratio, material);
 
-      // Floor radius options this cutter family can leave
-      const bullnose = set.cornerRadii.filter(function (r) {
+      // Standard bullnose corner radii offered for this diameter
+      const bullnose = (cutter.bullnose || []).filter(function (r) {
         return r < toolRadius - epsilon;                                    // corner radius must be smaller than the tool radius
       });
+
+      // Default floor suggestion: largest catalog radius up to about 15% of D, else the smallest offered
+      const limit = cutter.value * window.DFM_CUTTERS.preferredFloorFraction;
+      const fitting = bullnose.filter(function (r) {
+        return r <= limit + epsilon;
+      });
+      const suggestedFloor = fitting.length ? fitting[fitting.length - 1] : (bullnose.length ? bullnose[0] : null);
 
       return {
         label: cutter.label,
@@ -84,7 +95,8 @@
         recRadius: recRadius,
         ratio: ratio,
         band: band,
-        bullnoseMax: bullnose.length ? bullnose[bullnose.length - 1] : null
+        bullnose: bullnose,
+        suggestedFloor: suggestedFloor
       };
     });
   }
@@ -214,49 +226,84 @@
     return { level: level, messages: messages, best: best };
   }
 
-  // ---------- Floor fillet check ----------
-  function checkFloor(rows, set, floorRadius, wallRadius) {
+  // ---------- Floor fillet advice ----------
+  // cutter = the row that finishes the walls (recommended or finishing cutter)
+  function floorAdvice(rows, set, floorRadius, wallRadius, cutter, material) {
     const unit = set.unit;
-    if (floorRadius === null) {
-      return null;
+    const policy = window.DFM_CUTTERS.sharpFloor[material];
+
+    // List of this cutter's standard radii, suggested one in bold
+    function optionList(row) {
+      return row.bullnose.map(function (r) {
+        return r === row.suggestedFloor ? "<strong>" + format(r, unit) + "</strong>" : format(r, unit);
+      }).join(", ");
     }
+
+    function suggestion(row) {
+      if (!row || row.suggestedFloor === null) {
+        return "";
+      }
+      return "Suggested floor radius: <strong>" + format(row.suggestedFloor, unit) + "</strong>, a standard bullnose on the " +
+        row.label + " " + unit + " cutter that finishes the walls, so walls and floor are cut in one pass. " +
+        "Other standard radii for this cutter: " + optionList(row) + ".";
+    }
+
+    // Nothing entered: suggest a floor radius by default
+    if (floorRadius === null) {
+      if (!cutter) {
+        return null;                             // nothing to base a suggestion on yet
+      }
+      return { level: "good", text: suggestion(cutter) };
+    }
+
+    // Sharp floor: depends on material
     if (floorRadius === 0) {
-      return { level: "good", text: "Sharp floor (0 radius): cut with a flat end mill. Cheapest option." };
+      return { level: policy.status, text: "<strong>Sharp floor (0 radius).</strong> " + policy.text + " " + suggestion(cutter) };
     }
 
     const messages = [];
     let level = "good";
 
-    // Floor radius should be smaller than the wall radius
+    // Floor radius must be smaller than the wall radius
     if (wallRadius !== null && floorRadius >= wallRadius - epsilon) {
       level = "warn";
       messages.push("Floor radius (" + format(floorRadius, unit) + ") should be smaller than the wall corner radius (" +
         format(wallRadius, unit) + ") so one cutter can do both and blend through the corner.");
     }
 
-    // Standard bullnose corner radius?
-    const isBullnose = set.cornerRadii.some(function (r) {
+    // Best case: a standard bullnose radius on the cutter that finishes the walls
+    const onCutter = cutter && cutter.bullnose.some(function (r) {
       return nearlyEqual(r, floorRadius, unit);
     });
-    // Ball end mill (radius = half a standard diameter)?
+    // Next best: a standard bullnose on some other cutter that still fits the wall radius
+    const otherCutter = rows.find(function (row) {
+      const fitsWall = wallRadius === null || row.minRadius <= wallRadius + epsilon;
+      return fitsWall && row !== cutter && row.bullnose.some(function (r) {
+        return nearlyEqual(r, floorRadius, unit);
+      });
+    });
+    // Ball end mill (radius = half a standard diameter)
     const ball = rows.find(function (row) {
       return nearlyEqual(row.toolRadius, floorRadius, unit);
     });
 
-    if (isBullnose) {
-      messages.push(format(floorRadius, unit) + " matches a standard bullnose (corner radius) end mill: machined in the same pass as the walls.");
-    } else if (ball) {
-      messages.push(format(floorRadius, unit) + " matches a " + ball.label + " " + unit +
-        " ball end mill. Works, but ball finishing is slower than a bullnose.");
+    if (onCutter) {
+      messages.push(format(floorRadius, unit) + " is a standard bullnose radius on the " + cutter.label + " " + unit +
+        " cutter: walls and floor are machined in the same pass.");
+    } else if (otherCutter) {
       if (level === "good") {
         level = "ok";
       }
+      messages.push(format(floorRadius, unit) + " is a standard bullnose on a " + otherCutter.label + " " + unit +
+        " cutter, not on the " + (cutter ? cutter.label + " " + unit : "wall") + " cutter, so it adds a tool. " + suggestion(cutter));
+    } else if (ball) {
+      level = "warn";
+      messages.push(format(floorRadius, unit) + " matches a " + ball.label + " " + unit +
+        " ball end mill. That means slower 3D finishing passes along the floor edge. " + suggestion(cutter));
     } else {
       level = "warn";
-      messages.push(format(floorRadius, unit) + " is not a standard bullnose or ball size, so it needs 3D profiling with a smaller ball mill (slow). " +
-        "Use a standard value such as " + set.cornerRadii.slice(1, 6).map(function (r) {
-          return format(r, unit);
-        }).join(", ") + ", or no floor radius.");
+      messages.push(format(floorRadius, unit) + " is not a standard bullnose or ball size, so it needs 3D profiling with a small ball mill (slow). " +
+        suggestion(cutter));
     }
 
     return { level: level, text: messages.join(" ") };
@@ -270,29 +317,30 @@
     host.innerHTML =
       (host.hasAttribute("data-hide-title") ? "" : '<h3>Inside corner &amp; pocket radius picker</h3>') +
       '<p class="table-note" style="margin:0 0 12px">Enter the pocket depth. Optionally enter the corner radius you drew to check it, ' +
-      'the largest radius your design can tolerate, and a floor fillet.</p>' +
+      'the largest radius your design can tolerate, and a floor fillet. A floor radius is suggested from standard bullnose cutters unless you enter one.</p>' +
       '<div class="field-grid">' +
       '  <div class="field"><label for="' + uid + '-unit">Units</label>' +
       '    <select id="' + uid + '-unit"><option value="in">Inch</option><option value="mm">Metric (mm)</option></select></div>' +
       '  <div class="field"><label for="' + uid + '-mat">Material</label>' +
-      '    <select id="' + uid + '-mat"><option value="soft">Aluminum, brass, plastic</option><option value="hard">Steel, stainless, titanium</option></select></div>' +
+      '    <select id="' + uid + '-mat"><option value="soft">Soft metal (aluminum, brass, copper)</option><option value="hard">Hard metal (steel, stainless, titanium)</option><option value="plastic">Plastic</option></select></div>' +
       '  <div class="field"><label for="' + uid + '-depth">Pocket / wall depth</label>' +
       '    <input id="' + uid + '-depth" type="number" step="any" min="0" placeholder="e.g. 0.75"></div>' +
       '  <div class="field"><label for="' + uid + '-radius">Corner radius you drew (optional)</label>' +
       '    <input id="' + uid + '-radius" type="number" step="any" min="0" placeholder="e.g. 0.125"></div>' +
       '  <div class="field"><label for="' + uid + '-max">Largest corner radius allowed (optional)</label>' +
       '    <input id="' + uid + '-max" type="number" step="any" min="0" placeholder="leave blank if any"></div>' +
-      '  <div class="field"><label for="' + uid + '-floor">Floor fillet radius (optional, 0 = sharp)</label>' +
+      '  <div class="field"><label for="' + uid + '-floor">Floor fillet radius (blank = suggest one)</label>' +
       '    <input id="' + uid + '-floor" type="number" step="any" min="0" placeholder="e.g. 0.030"></div>' +
       '</div>' +
       '<div id="' + uid + '-verdict"></div>' +
-      '<div class="calc-row" id="' + uid + '-pad" hidden><button type="button" class="btn">Send result to pad</button></div>' +
       '<div id="' + uid + '-floor-out"></div>' +
+      '<div class="calc-row" id="' + uid + '-pad" hidden><button type="button" class="btn">Send result to pad</button></div>' +
       '<div class="table-wrap"><table id="' + uid + '-table"><thead><tr>' +
       '<th>Cutter dia</th><th class="num">Tool radius</th><th class="num">Min corner R</th><th class="num">Recommended R</th>' +
-      '<th class="num">Depth / dia</th><th>Reach</th><th>Floor radius options</th></tr></thead><tbody></tbody></table></div>' +
+      '<th class="num">Depth / dia</th><th>Reach</th><th class="num">Suggested floor R</th><th>Standard bullnose radii</th></tr></thead><tbody></tbody></table></div>' +
       '<p class="table-note">Min corner R = tool radius + ' + '0.005 in / 0.1 mm clearance. Recommended R = 1.3 x tool radius, rounded up. ' +
-      'Reach bands are general guidance for standard-length cutters; long-reach tools exist but cost time.</p>';
+      'Reach bands are general guidance for standard-length cutters; long-reach tools exist but cost time. ' +
+      'Bullnose radii are typical catalog sizes; check your shop or vendor tool list.</p>';
 
     // Element references
     const unitSel = host.querySelector("#" + uid + "-unit");
@@ -346,9 +394,13 @@
         highlight = result.best;
       }
 
+      // Floor fillet advice (a suggestion by default)
+      const wallRadius = radius !== null && radius > 0 ? radius : (highlight ? highlight.recRadius : null);
+      const floorResult = floorAdvice(rows, set, floorRadius, wallRadius, highlight, material);
+
       // Plain-text summary (tags stripped) for the scratch pad
       lastSummary = result ? "Corner check (" + unit + ", depth " + depth + "): " +
-        result.messages.map(function (m) {
+        result.messages.concat(floorResult ? ["Floor: " + floorResult.text] : []).map(function (m) {
           return m.replace(/<[^>]+>/g, "");
         }).join(" ") : "";
 
@@ -361,8 +413,6 @@
       }
 
       // Floor fillet verdict
-      const wallRadius = radius !== null && radius > 0 ? radius : (highlight ? highlight.recRadius : null);
-      const floorResult = checkFloor(rows, set, floorRadius, wallRadius);
       floorOut.innerHTML = floorResult ?
         '<div class="verdict ' + (floorResult.level === "ok" ? "" : floorResult.level) + '"><p style="margin:0"><strong>Floor:</strong> ' + floorResult.text + "</p></div>" : "";
 
@@ -370,8 +420,10 @@
       tbody.innerHTML = rows.map(function (row) {
         const statusClass = row.band.status === "good" ? "good" : (row.band.status === "bad" ? "bad" : "warn");
         const reach = depth > 0 ? '<span class="badge ' + statusClass + '">' + row.band.label + "</span>" : "-";
-        const floorOpts = "Flat" + (row.bullnoseMax !== null ? ", bullnose to " + format(row.bullnoseMax, unit) : "") +
-          ", ball " + format(row.toolRadius, unit);
+        const floorOpts = row.bullnose.length ? row.bullnose.map(function (r) {
+          return format(r, unit).replace(" " + unit, "");
+        }).join(", ") + " " + unit : "-";
+        const floorSuggest = row.suggestedFloor !== null ? format(row.suggestedFloor, unit) : "-";
         const isBest = highlight && highlight.label === row.label;
         return "<tr" + (isBest ? ' class="best"' : "") + ">" +
           "<td>" + row.label + " " + unit + "</td>" +
@@ -380,6 +432,7 @@
           '<td class="num">' + format(row.recRadius, unit) + "</td>" +
           '<td class="num">' + (depth > 0 ? row.ratio.toFixed(1) + " x" : "-") + "</td>" +
           "<td>" + reach + "</td>" +
+          '<td class="num">' + floorSuggest + "</td>" +
           "<td>" + floorOpts + "</td></tr>";
       }).join("");
     }
