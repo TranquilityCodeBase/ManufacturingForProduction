@@ -356,8 +356,9 @@
     const summaryOut = host.querySelector("#" + uid + "-summary");
     let lastUnit = unitSel.value;                // used to convert inputs when units change
 
-    // Send to pad / All / None at the bottom of the card, like the other calculators
-    host.appendChild(window.DFM.resultActions(summaryOut));
+    // Send to pad / All / None right under the result rows, so it is in reach
+    // without scrolling past the recommendations and cutter table below
+    summaryOut.after(window.DFM.resultActions(summaryOut));
 
     function update() {
       const unit = unitSel.value;
