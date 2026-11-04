@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hole &amp; Thread Design Rules | DFM Reference</title>
+  <meta name="description" content="How to design drilled holes, tapped holes and threads for CNC machining: model the pilot hole, not the thread.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="holes_threading" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">Holes &amp; Threads</p>
+          <h1>Hole &amp; Thread Design Rules</h1>
+          <p class="lead">Holes and threads are where quotes most often go wrong. Use standard drill sizes, keep holes shallow, model threaded holes at the pilot (tap drill) diameter, and put the thread on the drawing or in the quote, not in the 3D geometry.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">Pilot, not thread</span><span class="label">Model the tap drill diameter, add a cosmetic thread</span></div>
+          <div class="key-card"><span class="value">&le; 4 x D</span><span class="label">Ideal drilled hole depth (10 x D practical max)</span></div>
+          <div class="key-card"><span class="value">&le; 2-3 x D</span><span class="label">Thread length; more adds cost, not strength</span></div>
+          <div class="key-card"><span class="value">+0.5 x D</span><span class="label">Unthreaded length at the bottom of a blind tapped hole</span></div>
+          <div class="key-card"><span class="value">0.1 mm steps</span><span class="label">Hole diameters to 10 mm, then 0.5 mm steps</span></div>
+          <div class="key-card"><span class="value">#2 / M2</span><span class="label">Smallest practical tapped hole; bigger is safer</span></div>
+        </div>
+
+        <h2 id="dont-model-threads" data-nav="Don't model threads">Don't model threads (model the pilot hole)</h2>
+        <p>Automated quoting systems and CAM programmers both look for a <strong>plain cylindrical hole at the pilot (tap drill) diameter</strong>. The software matches that diameter to a thread size, and the thread is then cut with a thread mill or tap. A helical thread modeled in CAD hides the pilot diameter, breaks feature recognition, and makes the file heavier for no benefit.</p>
+
+        <figure class="diagram">
+          <img src="../images/diagrams/holes_model_pilot_not_thread.svg" alt="Left: a threaded hole modeled with a helical profile, marked avoid. Right: a plain pilot hole with dashed cosmetic thread lines and a 1/4-20 UNC-2B callout, marked do." width="780" height="330" loading="lazy">
+          <figcaption>Model the hole at the tap drill diameter. The thread lives in a cosmetic thread feature and the drawing callout.</figcaption>
+        </figure>
+
+        <div class="do-dont">
+          <div class="do">
+            <h4>Do</h4>
+            <ul>
+              <li>Use your CAD hole tool (Hole Wizard, Hole feature) with <strong>cosmetic threads</strong> on.</li>
+              <li>Make the hole diameter the tap drill / pilot size, about 75% thread. Check it falls in the vendor's pilot range (<a href="thread_tables.html">thread tables</a>).</li>
+              <li>Call out the thread on the drawing: size, pitch, class and depth, for example <code>1/4-20 UNC-2B &darr; .50</code> or <code>M6x1.0-6H &darr; 12</code>.</li>
+              <li>Upload STEP (or native) files. A STEP export carries the pilot hole cleanly.</li>
+              <li>Assign threads in the quote, then re-check them if you change material or process (milling vs turning).</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Don't</h4>
+            <ul>
+              <li>Model helical thread geometry for standard internal threads.</li>
+              <li>Model the hole at the <em>major</em> diameter. The screw will spin freely in it.</li>
+              <li>Upload STL for machined parts. Holes become facets and cannot be recognized.</li>
+              <li>Mass-assign threads without checking. You may thread holes you meant as clearance holes.</li>
+              <li>Model inserts into the part as an assembly. Call them out on the drawing instead.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 id="when-to-model">When modeling a thread <em>is</em> the right call</h3>
+        <p>These are the exceptions, and each one should be a deliberate choice:</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Case</th><th>Why the geometry is needed</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>External thread on a <strong>milled</strong> (not turned) part</td><td>The mill profiles the thread with standard end mills, so the shape must exist in the model.</td><td>Cut in two halves; expect a root radius of about 0.008-0.016 in and plan to chase it with a die. Turning is far better if the part can be turned.</td></tr>
+              <tr><td>Non-standard or special form (Acme, buttress, custom pitch, very large diameter)</td><td>No standard tool or quote option exists; the programmer needs the profile.</td><td>Still add a full drawing callout. Expect manual quoting and longer lead time.</td></tr>
+              <tr><td>Coarse threads on <strong>3D printed</strong> parts</td><td>The printer builds whatever is modeled.</td><td>Only for coarse, larger threads (roughly 1/4-20 / M6 and up). Smaller threads print poorly: tap them or use heat-set inserts. See <a href="3dp_quality_cost.html">3DP tips</a>.</td></tr>
+              <tr><td>Visual or render models</td><td>Appearance only.</td><td>Keep it in a separate configuration so the manufacturing export stays a plain pilot hole.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hole-rules" data-nav="Hole design rules">Hole design rules</h2>
+        <h3>Use standard drill sizes</h3>
+        <p>A hole sized to a stock drill is drilled in one plunge. Any other size is interpolated with an end mill, which is slower. Inch designs can use fractional, number and letter drills; metric designs should use 0.1 mm increments up to 10 mm and 0.5 mm increments above. Reuse the same diameter wherever you can so one tool cuts them all. The <a href="calculators.html#mass-drill">drill finder</a> gives the nearest standard drills for any size.</p>
+
+        <h3>Keep holes shallow</h3>
+        <figure class="diagram">
+          <img src="../images/diagrams/holes_depth_ratio.svg" alt="Four holes of the same diameter at 4, 6, 10 and more than 10 times diameter deep, labeled optimal, end-mill limit, drilled max and special tooling." width="760" height="280" loading="lazy">
+          <figcaption>Depth-to-diameter ratio drives cost. 4 x D is ideal; beyond 10 x D needs special drills.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>4 x D or less</strong> is optimal. For example, a 0.250 in hole 1.0 in deep is easy; 2.5 in deep is achievable but slower.</li>
+          <li><strong>About 6 x D</strong> is the practical limit for holes cut with an end mill. Deeper holes may need machining from both sides.</li>
+          <li><strong>10 x D</strong> is a practical drilled limit (peck drilling). Beyond that, gun drilling or other special processes.</li>
+          <li>Lathe holes: on-axis and axial holes down to about 0.040 in (1 mm) at up to 6 x D; radial holes at least 0.080 in (2 mm). See <a href="cnc_turning.html">CNC Turning</a>.</li>
+        </ul>
+
+        <h3>Other hole rules</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rule</th><th>Guideline</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td>Through vs blind</td><td>Prefer through holes</td><td>Easier to drill, ream, tap and clean chips out of.</td></tr>
+              <tr><td>Blind hole depth</td><td>Add about 25% extra depth, or model the 118&deg; drill point</td><td>Allows for the drill point and chip room. Flat-bottom holes need an end mill pass.</td></tr>
+              <tr><td>Partial holes on an edge</td><td>Keep at least 75% of the hole inside the part</td><td>Drills walk off an edge and break.</td></tr>
+              <tr><td>Entry surface</td><td>Hole axis perpendicular to the surface</td><td>On a curve or slope, add a flat or spot face so the drill starts square.</td></tr>
+              <tr><td>Distance to walls</td><td>At least 0.030 in (0.8 mm) in metal, double in plastic</td><td>Thin webs bulge, break through or deform.</td></tr>
+              <tr><td>Intersecting cavities</td><td>Avoid, or keep the drill axis away from the cavity</td><td>A drill breaking into a void deflects and leaves burrs.</td></tr>
+              <tr><td>Hole axes (3-axis mill)</td><td>Along X, Y or Z of the part</td><td>Off-axis holes need 3+2 or 5-axis machining. See <a href="setups_orientation.html">Setups</a>.</td></tr>
+              <tr><td>Precision holes</td><td>Call out reamed holes only where needed</td><td>Reaming can hold about &plusmn;0.0005 in but adds a tool and inspection.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="counterbores">Socket head cap screw counterbores</h3>
+        <p>Common counterbore sizes for socket head cap screws. Use the standard counterbore so a stock counterbore tool or a single end mill pass makes it. Depth is set so the head sits slightly below the surface.</p>
+        <div data-tab-group>
+          <div class="tabs" role="tablist">
+            <button class="tab-btn" data-tab="cb-inch">Inch</button>
+            <button class="tab-btn" data-tab="cb-metric">Metric</button>
+          </div>
+          <div class="tab-panel" data-tab-panel="cb-inch">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Screw</th><th class="num">Head dia (in)</th><th class="num">Clearance hole (in)</th><th class="num">Counterbore dia (in)</th><th class="num">Counterbore depth (in)</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>#4</strong></td><td class="num">0.183</td><td class="num">0.120</td><td class="num">7/32 (0.219)</td><td class="num">0.125</td></tr>
+                  <tr><td><strong>#6</strong></td><td class="num">0.226</td><td class="num">0.144</td><td class="num">9/32 (0.281)</td><td class="num">0.150</td></tr>
+                  <tr><td><strong>#8</strong></td><td class="num">0.270</td><td class="num">0.170</td><td class="num">5/16 (0.312)</td><td class="num">0.175</td></tr>
+                  <tr><td><strong>#10</strong></td><td class="num">0.312</td><td class="num">0.201</td><td class="num">3/8 (0.375)</td><td class="num">0.200</td></tr>
+                  <tr><td><strong>1/4</strong></td><td class="num">0.375</td><td class="num">0.266</td><td class="num">7/16 (0.438)</td><td class="num">0.260</td></tr>
+                  <tr><td><strong>5/16</strong></td><td class="num">0.469</td><td class="num">0.332</td><td class="num">17/32 (0.531)</td><td class="num">0.325</td></tr>
+                  <tr><td><strong>3/8</strong></td><td class="num">0.562</td><td class="num">0.397</td><td class="num">5/8 (0.625)</td><td class="num">0.385</td></tr>
+                  <tr><td><strong>1/2</strong></td><td class="num">0.750</td><td class="num">0.531</td><td class="num">13/16 (0.812)</td><td class="num">0.510</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-panel" data-tab-panel="cb-metric">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Screw</th><th class="num">Head dia (mm)</th><th class="num">Clearance hole, normal (mm)</th><th class="num">Counterbore dia (mm)</th><th class="num">Counterbore depth (mm)</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>M3</strong></td><td class="num">5.5</td><td class="num">3.4</td><td class="num">6.5</td><td class="num">3.4</td></tr>
+                  <tr><td><strong>M4</strong></td><td class="num">7.0</td><td class="num">4.5</td><td class="num">8.0</td><td class="num">4.4</td></tr>
+                  <tr><td><strong>M5</strong></td><td class="num">8.5</td><td class="num">5.5</td><td class="num">10.0</td><td class="num">5.4</td></tr>
+                  <tr><td><strong>M6</strong></td><td class="num">10.0</td><td class="num">6.6</td><td class="num">11.0</td><td class="num">6.4</td></tr>
+                  <tr><td><strong>M8</strong></td><td class="num">13.0</td><td class="num">9.0</td><td class="num">15.0</td><td class="num">8.6</td></tr>
+                  <tr><td><strong>M10</strong></td><td class="num">16.0</td><td class="num">11.0</td><td class="num">18.0</td><td class="num">10.6</td></tr>
+                  <tr><td><strong>M12</strong></td><td class="num">18.0</td><td class="num">13.5</td><td class="num">20.0</td><td class="num">12.6</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p class="table-note">Typical values based on standard socket head cap screw dimensions (ASME B18.3 / ISO 4762) and common shop practice. Confirm against your fastener supplier and your company standard.</p>
+
+        <h2 id="thread-rules" data-nav="Thread design rules">Thread design rules</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rule</th><th>Guideline</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td>Thread length</td><td>1.5-2 x D in steel, about 2 x D in aluminum; 3 x D maximum</td><td>Most of the load is carried by the first few threads. Deeper threads only add tool reach problems and cost.</td></tr>
+              <tr><td>Blind holes</td><td>Leave at least 0.5 x D unthreaded below the last full thread</td><td>Room for the tap lead or thread mill and for chips. Call out drill relief as allowed on the drawing rather than modeling it.</td></tr>
+              <tr><td>Thread size</td><td>Use the largest size the design allows; avoid below #2 / M2</td><td>Small taps and thread mills break easily.</td></tr>
+              <tr><td>Standard threads only</td><td>UNC by default, UNF for thin walls or fine adjustment, metric coarse by default</td><td>Non-standard pitches need custom tools. UNEF and special classes often move a part to manual, precision quoting.</td></tr>
+              <tr><td>Thread mill reach</td><td>Check the vendor's maximum thread depth (for example 0.65 in for 1/4-20 milled)</td><td>Thread mills are short. Long holes are threaded only from one end. See the <a href="thread_tables.html">thread tables</a>.</td></tr>
+              <tr><td>Hole direction</td><td>Threaded hole axes on the part's X, Y or Z axes (milling), or on / perpendicular to the spin axis (turning)</td><td>Quoting software only recognizes threads on cardinal directions.</td></tr>
+              <tr><td>Lead-in</td><td>Add a small chamfer or countersink at the thread start if the drawing calls it</td><td>Protects the first thread and helps screws start; call it out so it is included.</td></tr>
+              <tr><td>Soft materials</td><td>Use coil or key-locking inserts in aluminum and plastic for repeated assembly</td><td>Steel insert threads resist wear and stripping. See <a href="#inserts">Inserts</a>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="diagram">
+          <img src="../images/diagrams/holes_blind_thread_depth.svg" alt="Section of a blind tapped hole showing thread length of 1.5 to 3 times D, unthreaded length of at least half D, and the drill point." width="700" height="370" loading="lazy">
+          <figcaption>Blind tapped hole proportions.</figcaption>
+        </figure>
+
+        <h3 id="long-holes">Threading holes longer than the tool can reach</h3>
+        <figure class="diagram">
+          <img src="../images/diagrams/holes_thread_both_sides.svg" alt="Three through holes: threaded from one side only, threaded from both sides with overlapping zones marked as cross-thread risk, and threaded from both sides with a gap between zones." width="780" height="300" loading="lazy">
+          <figcaption>Thread from the side the screw starts. If you thread from both sides, keep the two threaded zones apart.</figcaption>
+        </figure>
+        <ul>
+          <li>Thread from the side the screw will be started from, up to the maximum tool reach.</li>
+          <li>If the screw must pass all the way through, plan a secondary tapping operation.</li>
+          <li>Threading from both sides is fine only if the two threaded zones do not meet. Overlapping zones risk cross threading so the screw may not pass through.</li>
+        </ul>
+
+        <h3 id="turned-threads">Threads on turned parts</h3>
+        <p>Lathes thread on-axis (centerline), axial (parallel to the axis, off center) and radial (through the side) holes with live tooling, and make much better <strong>external</strong> threads than a mill because the part spins on center under a single-point tool. Model the plain shaft or pilot hole only; you pick the thread in the quote. At ProtoLabs, turned threads are offered in metals only. Shaft diameters for external threads are in the <a href="thread_tables.html#od-threads">OD thread table</a>.</p>
+
+        <h2 id="inserts">Threaded inserts</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Insert type</th><th>Best for</th><th>Design notes</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Coil (helical, HeliCoil style)</strong></td><td>Aluminum, magnesium, repeated assembly, thread repair</td><td>Hole is cut with an oversize STI thread. Vendor cuts the thread; you install the insert. Pilot sizes in the <a href="thread_tables.html#coil-inserts">coil insert tables</a>.</td></tr>
+              <tr><td><strong>Key-locking (Keensert style)</strong></td><td>High pull-out and torque loads, field-serviceable joints</td><td>Needs a larger hole and a counterbore for the keys. Check the insert maker's hole data.</td></tr>
+              <tr><td><strong>Heat-set / ultrasonic</strong></td><td>Thermoplastics and 3D printed parts</td><td>Model the tapered or straight pilot hole from the insert data sheet; leave material below for melt flow.</td></tr>
+              <tr><td><strong>Press-fit / self-tapping</strong></td><td>Plastics, thin sheet, low loads</td><td>Quick to install; lower pull-out than heat-set.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <span class="callout-title">Calling out inserts</span>
+          <p>Note the insert part number, quantity per part and install direction on the drawing. Do not include the inserts in the CAD model you upload; instant quoting and CAM treat them as part material.</p>
+        </div>
+
+        <h2 id="checklist" data-nav="CAD checklist">CAD and quote checklist for threaded holes</h2>
+        <ol>
+          <li>Hole created with the CAD hole tool at the tap drill / pilot diameter, cosmetic thread on.</li>
+          <li>Pilot diameter checked against the vendor table for your process (milled, turned, coil insert).</li>
+          <li>Thread length within 2-3 x D and within the vendor's maximum thread depth.</li>
+          <li>Blind holes have at least 0.5 x D unthreaded depth below the thread.</li>
+          <li>Thread axis on a cardinal direction of the part.</li>
+          <li>Drawing callout lists size, pitch, class, depth and any inserts.</li>
+          <li>File exported as STEP (not STL).</li>
+          <li>Threads assigned in the quote and re-checked after any material or process change.</li>
+        </ol>
+
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs <em>Design Essentials for CNC Machining</em> and <em>Definitive Guide to CNC Machining</em> (threading chapters), ProtoLabs <em>15 Design Tips to Reduce the Cost of CNC Machining</em>, Xometry <em>CNC Machining Design Guide</em> (holes and threads), and the public ProtoLabs <a href="https://www.protolabs.com/services/cnc-machining/threaded-holes-guidelines/standard-holes/" target="_blank" rel="noopener">threaded hole guidelines</a>.</p>
+        </div>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" width="720" height="280" font-family="Segoe UI, Arial, sans-serif">
+  <title>Down-facing edges: chamfer prints, fillet underside sags</title>
+  <!-- Build plate -->
+  <rect x="10" y="210" width="700" height="10" fill="#8a97a6"/>
+
+  <!-- Left block: 45 degree chamfer on the down-facing edge -->
+  <text x="180" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1d7a4f">45° chamfer - self-supporting</text>
+  <polygon points="60,60 300,60 300,210 110,210 60,160" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <path d="M110,210 L60,160" stroke="#1d7a4f" stroke-width="4"/>
+  <path d="M80,210 A30,30 0 0 1 88.8,188.8" fill="none" stroke="#1f6fb2" stroke-width="2"/>
+  <text x="38" y="204" font-size="13" font-weight="700" fill="#1f6fb2">45°</text>
+  <text x="180" y="248" text-anchor="middle" font-size="13" fill="#1c2733">Every layer is supported by the one below</text>
+
+  <!-- Right block: fillet on the down-facing edge -->
+  <text x="540" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#b3261e">Fillet - near-flat start sags</text>
+  <path d="M420,60 L660,60 L660,210 L470,210 A50,50 0 0 1 420,160 Z" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <path d="M470,210 A50,50 0 0 1 445,203.3" fill="none" stroke="#b3261e" stroke-width="5"/>
+  <line x1="432" y1="232" x2="446" y2="212" stroke="#b3261e" stroke-width="2"/>
+  <text x="540" y="248" text-anchor="middle" font-size="13" fill="#1c2733">Tangent end is almost horizontal: droops or needs support</text>
+  <text x="540" y="266" text-anchor="middle" font-size="12" fill="#4a5868">(fillets are fine on up-facing and vertical edges)</text>
+</svg>

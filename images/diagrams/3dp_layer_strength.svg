@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" font-family="Segoe UI, Arial, sans-serif">
+  <title>FDM print orientation and bending strength of a bar</title>
+  <!-- Build plates -->
+  <rect x="20" y="230" width="320" height="10" fill="#8a97a6"/>
+  <rect x="380" y="230" width="320" height="10" fill="#8a97a6"/>
+
+  <!-- Left: bar printed lying flat, layers run along its length -->
+  <text x="180" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1d7a4f">Printed flat - strong</text>
+  <rect x="60" y="190" width="240" height="40" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <g stroke="#34495e" stroke-width="1" opacity="0.55">
+    <line x1="60" y1="200" x2="300" y2="200"/>
+    <line x1="60" y1="210" x2="300" y2="210"/>
+    <line x1="60" y1="220" x2="300" y2="220"/>
+  </g>
+  <!-- Bending load at the free end -->
+  <line x1="290" y1="120" x2="290" y2="176" stroke="#1f6fb2" stroke-width="3"/>
+  <polygon points="290,188 283,174 297,174" fill="#1f6fb2"/>
+  <text x="280" y="112" text-anchor="end" font-size="13" fill="#1f6fb2">bending load in use</text>
+  <text x="180" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Bending stress runs along the layers</text>
+
+  <!-- Right: same bar printed standing up, layers stack across its length -->
+  <text x="540" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#b3261e">Printed upright - weak</text>
+  <rect x="520" y="50" width="40" height="180" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <g stroke="#34495e" stroke-width="1" opacity="0.55">
+    <line x1="520" y1="62" x2="560" y2="62"/>
+    <line x1="520" y1="74" x2="560" y2="74"/>
+    <line x1="520" y1="86" x2="560" y2="86"/>
+    <line x1="520" y1="98" x2="560" y2="98"/>
+    <line x1="520" y1="110" x2="560" y2="110"/>
+    <line x1="520" y1="122" x2="560" y2="122"/>
+    <line x1="520" y1="134" x2="560" y2="134"/>
+    <line x1="520" y1="146" x2="560" y2="146"/>
+    <line x1="520" y1="158" x2="560" y2="158"/>
+    <line x1="520" y1="170" x2="560" y2="170"/>
+    <line x1="520" y1="182" x2="560" y2="182"/>
+    <line x1="520" y1="194" x2="560" y2="194"/>
+    <line x1="520" y1="206" x2="560" y2="206"/>
+    <line x1="520" y1="218" x2="560" y2="218"/>
+  </g>
+  <!-- Side load at the top, crack between layers near the base -->
+  <line x1="440" y1="64" x2="506" y2="64" stroke="#1f6fb2" stroke-width="3"/>
+  <polygon points="518,64 504,57 504,71" fill="#1f6fb2"/>
+  <text x="436" y="54" font-size="13" fill="#1f6fb2">same load</text>
+  <path d="M518,212 L528,209 L536,214 L546,208 L554,213 L562,210" fill="none" stroke="#b3261e" stroke-width="3"/>
+  <text x="570" y="214" font-size="13" font-weight="700" fill="#b3261e">splits here</text>
+  <text x="540" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Layers pull apart: often 30-60% weaker in Z</text>
+  <text x="360" y="292" text-anchor="middle" font-size="12" fill="#4a5868">Thin lines show printed layers. Orient so the main load does not peel layers apart.</text>
+</svg>

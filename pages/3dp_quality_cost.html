@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3DP Quality, Time &amp; Cost Tips | DFM Reference</title>
+  <meta name="description" content="Practical tips for higher quality 3D printed parts and lower print time and cost: orientation, walls, fits, holes, threads, text and file prep.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="3dp_quality_cost" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">3D Printing</p>
+          <h1>Quality, Time &amp; Cost Tips</h1>
+          <p class="lead">Most print cost comes from material volume, build height (layer count) and post-processing. Most quality problems come from orientation, thin or uneven walls, and fits designed without clearance.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">Z height</span><span class="label">Drives time in SLA, DMLS, FDM</span></div>
+          <div class="key-card"><span class="value">Volume</span><span class="label">Drives cost in SLS / MJF</span></div>
+          <div class="key-card"><span class="value">≥ 0.5 mm</span><span class="label">Print-in-place gap</span></div>
+          <div class="key-card"><span class="value">Inserts</span><span class="label">Use for threads in plastic</span></div>
+          <div class="key-card"><span class="value">Undersize</span><span class="label">Holes print small: drill / ream</span></div>
+        </div>
+
+        <h2 id="cost-drivers" data-nav="Cost drivers">What drives print time and cost</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_orientation_cost.svg" alt="The same bar printed lying flat needs few layers; standing up needs many layers and takes longer" width="720" height="290" loading="lazy">
+          <figcaption>Layer-by-layer processes are priced mostly by how tall the build is. Powder-bed nylon is priced mostly by part volume and packing.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Process</th><th>Main cost drivers</th><th>Biggest savings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>FDM</strong></td><td>Print time (Z height, infill, supports), material</td><td>Lower infill, fewer supports, lay part flat, coarser layers for non-cosmetic parts</td></tr>
+              <tr><td><strong>SLA</strong></td><td>Z height, resin volume, support removal and finishing</td><td>Hollow with drain holes, orient for low Z, avoid supports on cosmetic faces</td></tr>
+              <tr><td><strong>SLS / MJF</strong></td><td>Part volume and bounding box (nesting density), dyeing / finishing</td><td>Hollow thick sections, shrink bounding box, nest multiple parts, standard color</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>Z height, support volume, stress relief, support removal, machining</td><td>Self-supporting angles, small footprint, minimal machined faces</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="walls" data-nav="Walls and features">Wall thickness and minimum features</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Process</th><th>Min wall</th><th>Recommended wall</th><th>Min positive feature (pin, rib)</th><th>Embossed / engraved text</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>FDM</strong></td><td>0.8 mm (0.03 in)</td><td>1.2-2 mm (0.05-0.08 in), multiple of nozzle width</td><td>~2 mm (0.08 in)</td><td>0.6 mm deep / high, 10 pt+ bold</td></tr>
+              <tr><td><strong>SLA</strong></td><td>0.4 mm supported, 0.6 mm unsupported</td><td>1-2 mm (0.04-0.08 in)</td><td>~0.3 mm (0.012 in)</td><td>0.3 mm deep / high, 8 pt+</td></tr>
+              <tr><td><strong>SLS</strong></td><td>0.8 mm PA12, 2 mm filled grades</td><td>1.5-3 mm (0.06-0.12 in)</td><td>~0.8 mm (0.030 in)</td><td>0.5 mm deep / high, 10 pt+</td></tr>
+              <tr><td><strong>MJF</strong></td><td>0.8 mm</td><td>2.5-4 mm (0.10-0.16 in)</td><td>~0.5 mm (0.020 in)</td><td>0.5 mm deep / high, 10 pt+</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>0.4 mm</td><td>1-3 mm (0.04-0.12 in)</td><td>~0.4 mm (0.016 in)</td><td>0.3 mm deep / high</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Tall thin features need more thickness than the minimum. Treat these as floors, not targets.</p>
+
+        <h2 id="quality" data-nav="Quality tips">Design tips for better quality</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_layer_strength.svg" alt="FDM bar printed flat is strong in bending, the same bar printed upright splits between layers" width="720" height="300" loading="lazy">
+          <figcaption>Orient FDM parts so the main load runs along the layers.</figcaption>
+        </figure>
+        <div class="do-dont">
+          <div class="do">
+            <h4>Do</h4>
+            <ul>
+              <li>Keep walls uniform; blend thickness changes gradually.</li>
+              <li>Add fillets at the base of ribs and bosses (they reduce stress and warp).</li>
+              <li>Break up large flat thick slabs with ribs or hollowing to prevent warp.</li>
+              <li>Put critical dimensions in XY, where tolerance is tighter than Z.</li>
+              <li>Use 45° chamfers on down-facing edges (see <a href="3dp_overhangs.html">Overhangs</a>).</li>
+              <li>Call out cosmetic faces and critical holes on the order.</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Don't</h4>
+            <ul>
+              <li>Design sharp internal corners on loaded features.</li>
+              <li>Use very thick solid sections (sink, warp, heat, cost).</li>
+              <li>Depend on layer bonding for the main load in FDM.</li>
+              <li>Expect molded-like accuracy on long parts: tolerance adds about 0.1% of length.</li>
+              <li>Use the minimum wall everywhere "to save weight".</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="fits" data-nav="Fits and clearances">Fits, clearances and assemblies</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_fit_clearance.svg" alt="Pin inside a printed bore with the gap per side labeled, and a table of starting gaps per process" width="720" height="280" loading="lazy">
+          <figcaption>Starting gap per side for parts that must slide or assemble without force.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Process</th><th>Sliding / easy fit (per side)</th><th>Light press fit</th><th>Print-in-place moving parts</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>FDM</strong></td><td>0.2-0.5 mm (0.008-0.020 in)</td><td>0-0.1 mm, then test</td><td>0.5 mm+ (0.020 in)</td></tr>
+              <tr><td><strong>SLA</strong></td><td>0.1-0.2 mm (0.004-0.008 in)</td><td>Not recommended (brittle)</td><td>0.5 mm+</td></tr>
+              <tr><td><strong>SLS / MJF</strong></td><td>0.3-0.5 mm (0.012-0.020 in)</td><td>0-0.1 mm (nylon is forgiving)</td><td>0.5-0.8 mm, plus powder removal path</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>Machine the mating faces</td><td>Machine to size</td><td>Rarely practical</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <span class="callout-title">Print a test coupon</span>
+          <p>For new materials or machines, print a small coupon with holes and pins at several clearances before committing the real part.</p>
+        </div>
+
+        <h2 id="holes-threads" data-nav="Holes and threads">Holes and threads in printed parts</h2>
+        <ul>
+          <li><strong>Holes print undersize</strong> in FDM and SLA (and slightly out of round when horizontal). Model critical holes about 0.1-0.2 mm under and drill or ream to size.</li>
+          <li><strong>Heat-set inserts</strong> (FDM, SLS, MJF) give durable metal threads. Model the insert maker's recommended pilot hole and boss size.</li>
+          <li><strong>Tap small threads</strong> (M5 / #10 and smaller) into a modeled tap-drill hole rather than printing them.</li>
+          <li><strong>Model printed threads</strong> only for coarse, large threads (about M8 / 5/16 in and up), and add clearance to the thread profile.</li>
+          <li><strong>Self-tapping screws</strong> into nylon bosses work well; size the boss OD at about 2-2.5x the screw diameter.</li>
+          <li><strong>Metal (DMLS):</strong> model the tap drill hole and tap after printing, or machine threads in post-processing.</li>
+        </ul>
+
+        <h2 id="process-choice" data-nav="Spend less">Spend less: process and design choices</h2>
+        <div class="card-grid">
+          <div class="card"><h3>Cheapest process that works</h3><p>FDM for fixtures and form checks, SLS / MJF for functional nylon, SLA for looks and detail, DMLS only when metal and complexity both demand it.</p></div>
+          <div class="card"><h3>Consolidate parts</h3><p>Combining an assembly into one printed part removes fasteners, tolerance stacks and assembly labor.</p></div>
+          <div class="card"><h3>Reduce support volume</h3><p>Self-supporting angles, chamfers and good orientation cut material, time and finishing.</p></div>
+          <div class="card"><h3>Hollow and lighten</h3><p>Hollow thick sections (with escape holes) or use infill and lattices where strength allows.</p></div>
+          <div class="card"><h3>Batch and nest</h3><p>Order several parts or variants together; powder-bed builds share the same machine run.</p></div>
+          <div class="card"><h3>Standard finish and color</h3><p>As-built or standard dye is cheapest. Custom color, painting and smoothing add days and cost.</p></div>
+        </div>
+
+        <h2 id="layer-height" data-nav="Layer height">Layer height trade-off</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Choice</th><th>Result</th><th>Use for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Thinner layers</td><td>Smoother curves and slopes, finer detail, longer print, higher cost</td><td>Cosmetic parts, small detailed parts, shallow slopes</td></tr>
+              <tr><td>Thicker layers</td><td>Visible stair-stepping on slopes, faster and cheaper</td><td>Fixtures, internal parts, mostly vertical walls</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="file-prep" data-nav="File prep">File preparation checklist</h2>
+        <ul>
+          <li>Upload STEP when the vendor accepts it (lets them measure true geometry); otherwise STL or 3MF.</li>
+          <li>Export meshes fine enough that round holes stay round (chord tolerance about 0.01 mm / angle 5° or finer), but not so fine the file is huge.</li>
+          <li>Check units (mm vs inch) before upload. A part 25.4x too small or large is a common mistake.</li>
+          <li>Make the mesh watertight with no self-intersections; one body per part.</li>
+          <li>Remove modeled threads you do not want printed; leave tap-drill or insert pilot holes instead.</li>
+          <li>Note critical dimensions, cosmetic faces and inserts on a drawing or in the order notes.</li>
+        </ul>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs: <a href="https://www.protolabs.com/resources/design-tips/3d-printing-tolerances/">Understanding 3D Printing Tolerances</a>, <a href="https://www.protolabs.com/resources/design-tips/7-mistakes-to-avoid-when-designing-3d-printed-parts/">7 Mistakes to Avoid When Designing 3D Printed Parts</a>, <a href="https://www.protolabs.com/en-gb/resources/blog/designing-a-part-for-multi-jet-fusion/">Designing a Part for Multi Jet Fusion</a>, <a href="https://www.protolabs.com/en-gb/resources/design-for-3d-printing-toolkit">Design for 3D Printing Toolkit</a>. Protolabs Network: <a href="https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/">Designing for SLS</a>. FDM clearances, text sizes and layer guidance are general practice and vary by printer.</p>
+        </div>
+
+        <footer class="site-footer">Compiled from ProtoLabs published 3D printing guidance and general additive manufacturing practice. Values vary by machine, material and vendor; confirm against your vendor's current guidelines. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

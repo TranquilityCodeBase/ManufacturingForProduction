@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" font-family="Segoe UI, Arial, sans-serif">
+  <title>Hollow powder-bed part with two escape holes on opposite ends</title>
+  <!-- Outer shell (printed wall) -->
+  <rect x="80" y="60" width="560" height="170" rx="14" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <!-- Hollow cavity full of unfused powder -->
+  <rect x="104" y="84" width="512" height="122" rx="6" fill="#e8dcc4" stroke="#34495e" stroke-width="1.5"/>
+  <g fill="#c9b994">
+    <circle cx="160" cy="120" r="3"/><circle cx="220" cy="160" r="3"/><circle cx="300" cy="110" r="3"/>
+    <circle cx="360" cy="175" r="3"/><circle cx="430" cy="125" r="3"/><circle cx="500" cy="170" r="3"/>
+    <circle cx="560" cy="115" r="3"/><circle cx="260" cy="190" r="3"/><circle cx="470" cy="95" r="3"/>
+  </g>
+
+  <!-- Escape hole 1: left wall near the top -->
+  <rect x="78" y="94" width="28" height="30" fill="#ffffff"/>
+  <!-- Escape hole 2: right wall near the bottom (opposite end) -->
+  <rect x="614" y="166" width="28" height="30" fill="#ffffff"/>
+
+  <!-- Air / media in at hole 1 -->
+  <line x1="20" y1="109" x2="70" y2="109" stroke="#1f6fb2" stroke-width="3"/>
+  <polygon points="80,109 66,102 66,116" fill="#1f6fb2"/>
+  <text x="10" y="136" font-size="13" fill="#1f6fb2">air /</text>
+  <text x="10" y="152" font-size="13" fill="#1f6fb2">media in</text>
+
+  <!-- Powder out at hole 2 -->
+  <line x1="646" y1="181" x2="690" y2="181" stroke="#1f6fb2" stroke-width="3"/>
+  <polygon points="702,181 688,174 688,188" fill="#1f6fb2"/>
+  <text x="716" y="212" text-anchor="end" font-size="13" fill="#1f6fb2">powder out</text>
+
+  <!-- Wall thickness dimension -->
+  <line x1="330" y1="60" x2="330" y2="84" stroke="#1f6fb2" stroke-width="2"/>
+  <text x="338" y="52" font-size="13" fill="#1c2733">wall 2-4 mm when hollowing</text>
+
+  <!-- Labels -->
+  <text x="360" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#1c2733">unfused powder must be removed</text>
+  <text x="360" y="258" text-anchor="middle" font-size="14" fill="#1c2733">Escape holes: 3.5-5 mm minimum (SLS / MJF), 2 or more, on opposite ends</text>
+  <text x="360" y="280" text-anchor="middle" font-size="13" fill="#4a5868">A single hole traps powder: there is no flow path for air to push it out.</text>
+</svg>

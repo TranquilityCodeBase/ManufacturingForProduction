@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quick Rules Cheat Sheet | DFM Reference</title>
+  <meta name="description" content="The most-used CNC machining and 3D printing design rules on one printable page.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="quick_reference" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">Overview</p>
+          <h1>Quick Rules Cheat Sheet</h1>
+          <p class="lead">The numbers you reach for most often, on one page. Each row links to the page with the reasoning, diagrams and full tables. Prints cleanly (the navigation is hidden in print).</p>
+        </header>
+
+        <div class="toolbar">
+          <input type="search" placeholder="Filter all rules, e.g. thread, wall, SLS" aria-label="Filter rules" data-filter-table="qr-cnc,qr-holes,qr-turning,qr-3dp,qr-3dp-process" style="flex:1 1 320px">
+        </div>
+
+        <h2 id="cnc-rules" data-nav="CNC milling">CNC milling</h2>
+        <div class="table-wrap">
+          <table id="qr-cnc">
+            <thead><tr><th>Feature</th><th>Rule of thumb</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>Inside vertical corner radius</td><td>About 1.3 x cutter radius; never exactly the cutter radius; same radius on every corner</td><td><a href="corners_pockets.html">Corners</a></td></tr>
+              <tr><td>Corner radius vs pocket depth</td><td>Radius at least 1/3 of the pocket depth keeps cutters large and fast</td><td><a href="calculators.html#corner-picker">Picker</a></td></tr>
+              <tr><td>Floor fillet</td><td>Smaller than the wall radius; 0 (sharp) or a standard bullnose radius such as 0.015, 0.030 in / 0.5, 1 mm</td><td><a href="corners_pockets.html">Corners</a></td></tr>
+              <tr><td>Sharp inside corner needed</td><td>Use a dog-bone or T-bone corner relief instead of a tiny radius</td><td><a href="corners_pockets.html">Corners</a></td></tr>
+              <tr><td>Pocket depth</td><td>Depth under 4 x pocket width; over 6 x is too deep</td><td><a href="corners_pockets.html">Corners</a></td></tr>
+              <tr><td>Wall thickness</td><td>Metal at least 0.030 in (0.8 mm), plastic at least 0.060 in (1.5 mm); 0.020 in (0.5 mm) absolute minimum feature</td><td><a href="walls_features.html">Walls</a></td></tr>
+              <tr><td>Wall height</td><td>Height to thickness under about 3:1 to 4:1; tall walls max about 2 in (50 mm) of cutter reach</td><td><a href="walls_features.html">Walls</a></td></tr>
+              <tr><td>Small features</td><td>Width-to-height aspect ratio under 4; brace or tie to a wall</td><td><a href="walls_features.html">Walls</a></td></tr>
+              <tr><td>Text</td><td>Engraved (recessed), 20 pt+ sans serif, 0.020 in (0.5 mm) stroke and spacing; laser mark if possible</td><td><a href="walls_features.html">Walls</a></td></tr>
+              <tr><td>Edge breaks</td><td>Chamfers are cheaper than fillets; deburr by hand where you can</td><td><a href="walls_features.html">Walls</a></td></tr>
+              <tr><td>Setups</td><td>Put features on as few faces as possible; hole and face directions along X, Y, Z</td><td><a href="setups_orientation.html">Setups</a></td></tr>
+              <tr><td>Machine type</td><td>3-axis baseline; 3+2 about +25%; continuous 5-axis about +60%; turning about -15%</td><td><a href="cnc_milling.html">Milling</a></td></tr>
+              <tr><td>Blank size</td><td>Leave about 1/16-1/8 in (1.5-3 mm) per side over the finished part for cleanup</td><td><a href="stock_sizes.html">Stock</a></td></tr>
+              <tr><td>Standard tolerance</td><td>&plusmn;0.005 in (&plusmn;0.13 mm) metal; plastics roughly double; tighter only where needed</td><td><a href="tolerances_finishes.html">Tolerances</a></td></tr>
+              <tr><td>Surface finish</td><td>As-machined about 63-125 &micro;in Ra</td><td><a href="tolerances_finishes.html">Finishes</a></td></tr>
+              <tr><td>Hard anodize</td><td>Type III grows up to about 0.003 in on a diameter; plan close fits for it</td><td><a href="tolerances_finishes.html">Finishes</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hole-rules" data-nav="Holes &amp; threads">Holes &amp; threads</h2>
+        <div class="table-wrap">
+          <table id="qr-holes">
+            <thead><tr><th>Feature</th><th>Rule of thumb</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>Threaded holes in CAD</td><td>Model the pilot (tap drill) diameter with a cosmetic thread. Do not model helical threads</td><td><a href="holes_threading.html#dont-model-threads">Rules</a></td></tr>
+              <tr><td>Hole diameters</td><td>Standard drill sizes; metric in 0.1 mm steps to 10 mm, 0.5 mm steps above</td><td><a href="tap_drill_charts.html">Drills</a></td></tr>
+              <tr><td>Hole depth</td><td>4 x D ideal, 10 x D drilled max, about 6 x D for end-milled holes</td><td><a href="holes_threading.html#hole-rules">Rules</a></td></tr>
+              <tr><td>Blind hole</td><td>Add about 25% depth for the drill point; prefer through holes</td><td><a href="holes_threading.html#hole-rules">Rules</a></td></tr>
+              <tr><td>Thread length</td><td>1.5-2 x D typical, 3 x D max</td><td><a href="holes_threading.html#thread-rules">Rules</a></td></tr>
+              <tr><td>Blind tapped hole</td><td>At least 0.5 x D unthreaded below the thread</td><td><a href="holes_threading.html#thread-rules">Rules</a></td></tr>
+              <tr><td>Thread sizes</td><td>Standard UNC / UNF / metric coarse; #2 / M2 smallest; bigger is safer</td><td><a href="thread_tables.html">Tables</a></td></tr>
+              <tr><td>Soft materials</td><td>Coil or key-locking inserts in aluminum and plastic; heat-set inserts in prints</td><td><a href="holes_threading.html#inserts">Inserts</a></td></tr>
+              <tr><td>Holes near edges</td><td>Keep 75% of a partial hole inside the part; at least 0.030 in from walls (metal)</td><td><a href="holes_threading.html#hole-rules">Rules</a></td></tr>
+              <tr><td>File format</td><td>STEP for machining quotes, never STL</td><td><a href="holes_threading.html#checklist">Checklist</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="turning-rules" data-nav="Turning">CNC turning</h2>
+        <div class="table-wrap">
+          <table id="qr-turning">
+            <thead><tr><th>Feature</th><th>Rule of thumb</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>When to turn</td><td>Round parts, long length-to-diameter ratio, grooves, external threads</td><td><a href="cnc_turning.html">Turning</a></td></tr>
+              <tr><td>Axial / on-axis holes</td><td>At least 0.040 in (1 mm) diameter, up to 6 x D deep</td><td><a href="cnc_turning.html">Turning</a></td></tr>
+              <tr><td>Radial holes</td><td>At least 0.080 in (2 mm) diameter</td><td><a href="cnc_turning.html">Turning</a></td></tr>
+              <tr><td>External grooves</td><td>At least 0.047 in (1.2 mm) wide, no more than 0.95 in (24 mm) deep</td><td><a href="cnc_turning.html">Turning</a></td></tr>
+              <tr><td>Sharp points and inside corners</td><td>Cone angle over 30&deg;; inside corners carry the tool nose radius (about 0.016 in)</td><td><a href="cnc_turning.html">Turning</a></td></tr>
+              <tr><td>External threads</td><td>Cut on the lathe; model the plain shaft at the listed OD</td><td><a href="thread_tables.html#od-threads">OD table</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="3dp-rules" data-nav="3D printing">3D printing</h2>
+        <div class="table-wrap">
+          <table id="qr-3dp">
+            <thead><tr><th>Feature</th><th>Rule of thumb</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>Overhangs</td><td>45&deg; from horizontal self-supports in most processes; flatter needs support (not SLS / MJF)</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
+              <tr><td>Bridges (FDM)</td><td>5-10 mm spans are reliable; longer spans sag</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
+              <tr><td>Horizontal holes</td><td>Teardrop or diamond top so the hole prints without support</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
+              <tr><td>Down-facing edges</td><td>45&deg; chamfer prints clean; a fillet on the underside sags</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
+              <tr><td>Escape holes (powder)</td><td>At least two holes, about 3.5-5 mm, at opposite ends of a hollow</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
+              <tr><td>SLA hollow parts</td><td>Drain hole plus vent hole to stop suction and trapped resin</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
+              <tr><td>DMLS channels</td><td>Teardrop or diamond section above about 8 mm (0.30 in) diameter</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
+              <tr><td>Fits / clearance</td><td>FDM 0.2-0.5 mm, SLA 0.1-0.2 mm, SLS / MJF 0.3-0.5 mm per side</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
+              <tr><td>Holes</td><td>Print undersize; drill or ream critical holes afterward</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
+              <tr><td>Threads</td><td>Heat-set inserts or tapped holes; model threads only when coarse and large</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
+              <tr><td>Cost drivers</td><td>Z height (SLA, DMLS), part volume and nesting (SLS, MJF), support volume (FDM, SLA, DMLS)</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="3dp-process-table">Process quick compare</h3>
+        <div class="table-wrap">
+          <table id="qr-3dp-process">
+            <thead><tr><th>Process</th><th>Min wall (typical)</th><th>Supports</th><th>Typical tolerance</th><th>Pick it for</th></tr></thead>
+            <tbody>
+              <tr><td><strong>FDM</strong></td><td>0.8-1.2 mm (2+ extrusion widths)</td><td>Yes, below about 45&deg;</td><td>&plusmn;0.2-0.5 mm, printer dependent</td><td>Fast, cheap fixtures, jigs and concept parts</td></tr>
+              <tr><td><strong>SLA</strong></td><td>0.4 mm supported, 0.6 mm unsupported</td><td>Yes</td><td>&plusmn;0.002 in XY / &plusmn;0.005 in Z + 0.1% (ProtoLabs)</td><td>Fine detail, smooth cosmetic parts, clear parts</td></tr>
+              <tr><td><strong>SLS</strong></td><td>About 0.8-1.0 mm</td><td>No (powder bed)</td><td>&plusmn;0.010 in + 0.1% (ProtoLabs)</td><td>Tough nylon functional parts, snap fits, complex assemblies</td></tr>
+              <tr><td><strong>MJF</strong></td><td>0.8 mm min, 2.5-4 mm ideal</td><td>No (powder bed)</td><td>&plusmn;0.012 in + 0.1% (ProtoLabs)</td><td>Production nylon parts, consistent properties</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>About 0.5-1.0 mm</td><td>Yes, below 45&deg; and overhangs over about 0.5 mm</td><td>&plusmn;0.003 in XY / &plusmn;0.006 in Z + 0.1% (ProtoLabs)</td><td>Metal parts with internal channels, consolidated assemblies</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">See <a href="3dp_processes.html">FDM vs SLA vs SLS vs MJF vs DMLS</a> for the full comparison.</p>
+
+        <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general manufacturing practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

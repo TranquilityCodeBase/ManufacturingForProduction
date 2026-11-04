@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overhangs &amp; Supports | DFM Reference</title>
+  <meta name="description" content="Overhang angles, bridging, horizontal holes, down-facing edges and support rules for FDM, SLA, SLS, MJF and DMLS.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="3dp_overhangs" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">3D Printing</p>
+          <h1>Overhangs &amp; Supports</h1>
+          <p class="lead">Supports cost material, time and cleanup, and they leave marks. Designing surfaces to be self-supporting is the single biggest quality and cost lever for FDM, SLA and DMLS.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">45°</span><span class="label">Self-supporting overhang (from horizontal)</span></div>
+          <div class="key-card"><span class="value">5-10 mm</span><span class="label">Reliable FDM bridge (0.2-0.4 in)</span></div>
+          <div class="key-card"><span class="value">0.5 mm</span><span class="label">DMLS unsupported overhang limit (0.020 in)</span></div>
+          <div class="key-card"><span class="value">0</span><span class="label">Supports needed in SLS / MJF</span></div>
+          <div class="key-card"><span class="value">Chamfer</span><span class="label">Use on down-facing edges, not fillets</span></div>
+        </div>
+
+        <h2 id="angle-rule" data-nav="45° rule">The 45° overhang rule</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_overhang_angles.svg" alt="Three walls leaning at 60, 45 and 30 degrees from the build plate; the 30 degree wall needs support" width="720" height="300" loading="lazy">
+          <figcaption>Measure the angle between the down-facing surface and the build plate. 45° and steeper prints without support on most machines.</figcaption>
+        </figure>
+        <p>Each layer can only extend a little past the one below it. At 45° the step is about one layer height, which almost every process handles. Shallower than that, the edge droops, curls or needs support.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Process</th><th>Self-supporting angle (from horizontal)</th><th>Supports</th><th>Design note</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>FDM</strong></td><td>45° design value; 30-35° possible with good cooling</td><td>Breakaway or soluble</td><td>Support scars on down-facing faces; soluble supports cost more</td></tr>
+              <tr><td><strong>SLA</strong></td><td>30-45° depending on resin and size</td><td>Always some (touch points)</td><td>Orient so touch points land on non-cosmetic faces; watch unsupported "islands"</td></tr>
+              <tr><td><strong>SLS / MJF</strong></td><td>Any angle</td><td>None (powder bed)</td><td>Focus on warp of large flat areas and thick sections instead</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>45° minimum; 0.5 mm (0.020 in) unsupported overhang max</td><td>Required, welded to the part</td><td>Supports are removed by machining or wire EDM, so they add real cost</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="bridging">Bridging</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_bridging.svg" alt="Short bridge between two pillars prints flat; long bridge sags in the middle" width="720" height="270" loading="lazy">
+          <figcaption>FDM can span a short gap between two supports with no support underneath.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>FDM:</strong> 5-10 mm (0.2-0.4 in) bridges are reliable; up to ~20 mm with good cooling and tuning. Beyond that, add support, an arch, or a 45° pitched ceiling.</li>
+          <li><strong>SLA:</strong> a flat ceiling is an overhang, not a bridge, and needs supports. Pitch roofs of hollow sections.</li>
+          <li><strong>DMLS:</strong> do not rely on bridging. Flat ceilings need supports that are hard to remove inside cavities.</li>
+        </ul>
+
+        <h2 id="horizontal-holes" data-nav="Horizontal holes">Horizontal holes and channels</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_teardrop_hole.svg" alt="Round horizontal hole with a sagging ceiling, teardrop hole with a 45 degree pointed top, and a diamond hole" width="720" height="280" loading="lazy">
+          <figcaption>The top of a round hole is a near-flat overhang. A teardrop or diamond top keeps every surface at 45° or steeper.</figcaption>
+        </figure>
+        <ul>
+          <li>FDM: round holes up to about 10 mm (0.4 in) usually self-support; larger ones sag at the top. Use a teardrop and ream round if needed.</li>
+          <li>Holes print slightly undersize in FDM and SLA. Drill or ream critical holes after printing.</li>
+          <li>Metal: use teardrop or diamond profiles for channels larger than about 8 mm (0.30 in).</li>
+          <li>Holes along the build axis (vertical) print the roundest. Orient critical holes vertically when you can.</li>
+        </ul>
+
+        <h2 id="edges" data-nav="Down-facing edges">Down-facing edges: chamfer, don't fillet</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_chamfer_vs_fillet.svg" alt="45 degree chamfer on a bottom edge prints cleanly; a fillet on a bottom edge has a near-horizontal start that sags" width="720" height="280" loading="lazy">
+          <figcaption>A fillet's tangent end is almost horizontal. A 45° chamfer is self-supporting everywhere.</figcaption>
+        </figure>
+        <div class="do-dont">
+          <div class="do">
+            <h4>Do</h4>
+            <ul>
+              <li>Use 45° chamfers on down-facing edges and under ledges.</li>
+              <li>Pitch ceilings and roofs of cavities at 45° or steeper.</li>
+              <li>Add gussets or 45° ramps under shelves and bosses.</li>
+              <li>Orient the part so the fewest, least visible faces need support.</li>
+              <li>Keep fillets for up-facing and vertical edges.</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Don't</h4>
+            <ul>
+              <li>Leave large flat ceilings inside closed cavities (supports cannot be removed).</li>
+              <li>Put supports on sealing faces, bearing bores or cosmetic surfaces.</li>
+              <li>Fillet bottom edges that sit on the build plate.</li>
+              <li>Design thin, unsupported "islands" that start mid-air (SLA, DMLS).</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="orientation">Orientation choices</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Goal</th><th>Orientation tip</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Fewest supports</td><td>Largest flat face on the plate; overhangs pointing up</td></tr>
+              <tr><td>Best cosmetic face</td><td>Cosmetic face up (FDM) or away from supports (SLA)</td></tr>
+              <tr><td>Roundest holes</td><td>Hole axis vertical (along Z)</td></tr>
+              <tr><td>Strength (FDM)</td><td>Keep main bending loads along the layers, not across them</td></tr>
+              <tr><td>Accuracy (SLA, DMLS)</td><td>Critical features in XY; Z tolerance is looser</td></tr>
+              <tr><td>Least warp (DMLS)</td><td>Tilt large flat areas 30-45° off the plate to reduce stress and support area</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout tip">
+          <span class="callout-title">Let the vendor orient, but design for it</span>
+          <p>Service bureaus choose orientation to fit their build. If one face must be smooth or one hole must be round, say so in the order notes or on the drawing.</p>
+        </div>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs: <a href="https://www.protolabs.com/resources/design-tips/7-mistakes-to-avoid-when-designing-3d-printed-parts/">7 Mistakes to Avoid When Designing 3D Printed Parts</a> (DMLS overhang limits). <a href="https://blogs.solidworks.com/products/solidworks/introduction-designing-metal-3d-printing">SOLIDWORKS: Introduction to Designing for Metal 3D Printing</a>. <a href="https://www.etmm-online.com/5-tips-for-additive-manufacturing-designs-a-758535/">ETMM: 5 tips for additive manufacturing designs</a> (45° self-supporting angle). FDM bridging and hole values are general FDM practice and vary by printer.</p>
+        </div>
+
+        <footer class="site-footer">Compiled from ProtoLabs published 3D printing guidance and general additive manufacturing practice. Values vary by machine, material and vendor; confirm against your vendor's current guidelines. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

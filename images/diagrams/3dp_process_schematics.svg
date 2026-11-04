@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300" font-family="Segoe UI, Arial, sans-serif">
+  <title>How FDM, SLA, SLS/MJF and DMLS build parts</title>
+  <!-- Panel frames -->
+  <g fill="none" stroke="#d6dde6" stroke-width="1.5">
+    <rect x="5" y="5" width="190" height="290" rx="8"/>
+    <rect x="205" y="5" width="190" height="290" rx="8"/>
+    <rect x="405" y="5" width="190" height="290" rx="8"/>
+    <rect x="605" y="5" width="190" height="290" rx="8"/>
+  </g>
+
+  <!-- ===== FDM: heated nozzle lays down a bead on a bed ===== -->
+  <text x="100" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1c2733">FDM / FFF</text>
+  <line x1="100" y1="44" x2="100" y2="74" stroke="#7a5c2e" stroke-width="3"/>
+  <polygon points="80,74 120,74 112,104 88,104" fill="#8a97a6" stroke="#34495e" stroke-width="2"/>
+  <polygon points="94,104 106,104 100,116" fill="#34495e"/>
+  <g fill="#cfd8e3" stroke="#34495e" stroke-width="1.5">
+    <rect x="50" y="196" width="100" height="12" rx="6"/>
+    <rect x="50" y="184" width="100" height="12" rx="6"/>
+    <rect x="50" y="172" width="100" height="12" rx="6"/>
+    <rect x="50" y="160" width="60" height="12" rx="6"/>
+  </g>
+  <line x1="100" y1="116" x2="100" y2="160" stroke="#b9772c" stroke-width="3"/>
+  <rect x="25" y="208" width="150" height="10" fill="#8a97a6"/>
+  <text x="100" y="246" text-anchor="middle" font-size="13" fill="#1c2733">Melted filament extruded</text>
+  <text x="100" y="264" text-anchor="middle" font-size="13" fill="#1c2733">bead by bead, layer by layer</text>
+
+  <!-- ===== SLA: laser cures liquid resin in a vat ===== -->
+  <text x="300" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1c2733">SLA</text>
+  <rect x="244" y="48" width="112" height="10" fill="#8a97a6"/>
+  <line x1="300" y1="40" x2="300" y2="48" stroke="#34495e" stroke-width="3"/>
+  <rect x="270" y="58" width="60" height="80" fill="#cfd8e3" stroke="#34495e" stroke-width="1.5"/>
+  <path d="M230,110 L230,190 L370,190 L370,110" fill="none" stroke="#34495e" stroke-width="2"/>
+  <rect x="232" y="120" width="136" height="68" fill="#f6e7b0" opacity="0.85"/>
+  <line x1="300" y1="214" x2="300" y2="140" stroke="#b3261e" stroke-width="2.5"/>
+  <polygon points="288,214 312,214 306,228 294,228" fill="#34495e"/>
+  <text x="318" y="210" font-size="12" fill="#b3261e">UV laser</text>
+  <text x="300" y="246" text-anchor="middle" font-size="13" fill="#1c2733">Laser cures liquid resin;</text>
+  <text x="300" y="264" text-anchor="middle" font-size="13" fill="#1c2733">part hangs from platform</text>
+
+  <!-- ===== SLS / MJF: polymer powder bed fused by laser or fusing agent ===== -->
+  <text x="500" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1c2733">SLS / MJF</text>
+  <line x1="500" y1="44" x2="500" y2="104" stroke="#b3261e" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text x="508" y="62" font-size="12" fill="#b3261e">laser / heat</text>
+  <rect x="430" y="110" width="140" height="96" fill="#e8dcc4" stroke="#34495e" stroke-width="1.5"/>
+  <rect x="470" y="136" width="60" height="50" fill="#cfd8e3" stroke="#34495e" stroke-width="1.5"/>
+  <circle cx="452" cy="104" r="8" fill="#8a97a6" stroke="#34495e" stroke-width="1.5"/>
+  <text x="438" y="90" font-size="12" fill="#1c2733">roller</text>
+  <text x="500" y="246" text-anchor="middle" font-size="13" fill="#1c2733">Powder fused layer by layer;</text>
+  <text x="500" y="264" text-anchor="middle" font-size="13" fill="#1c2733">loose powder is the support</text>
+
+  <!-- ===== DMLS: metal powder bed, part welded to plate with supports ===== -->
+  <text x="700" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1c2733">DMLS / metal PBF</text>
+  <line x1="700" y1="44" x2="700" y2="112" stroke="#b3261e" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text x="708" y="62" font-size="12" fill="#b3261e">laser</text>
+  <rect x="630" y="110" width="140" height="88" fill="#d9d9d9" stroke="#34495e" stroke-width="1.5"/>
+  <polygon points="660,130 740,130 740,150 700,150 700,176 680,176 680,150 660,150" fill="#cfd8e3" stroke="#34495e" stroke-width="1.5"/>
+  <g stroke="#b9772c" stroke-width="2">
+    <line x1="666" y1="152" x2="666" y2="198"/>
+    <line x1="674" y1="152" x2="674" y2="198"/>
+    <line x1="712" y1="152" x2="712" y2="198"/>
+    <line x1="724" y1="152" x2="724" y2="198"/>
+    <line x1="736" y1="152" x2="736" y2="198"/>
+  </g>
+  <rect x="625" y="198" width="150" height="10" fill="#8a97a6"/>
+  <text x="700" y="246" text-anchor="middle" font-size="13" fill="#1c2733">Metal powder welded to a</text>
+  <text x="700" y="264" text-anchor="middle" font-size="13" fill="#1c2733">plate; supports anchor heat</text>
+</svg>

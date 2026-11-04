@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design for Manufacturing Reference | CNC &amp; 3D Printing</title>
+  <meta name="description" content="A quick reference for designing parts for CNC machining and 3D printing: corners, holes, threads, stock sizes, setups, overhangs, internal passages, and calculators.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site_nav.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body data-page="home" data-root="">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">Design for Manufacturing</p>
+          <h1>CNC &amp; 3D Printing Design Reference</h1>
+          <p class="lead">One place to check the rules that decide whether a part is easy, expensive or impossible to make: inside corners, holes and threads, stock sizes, setups, overhangs and internal passages. Built for use while the CAD model is open.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">1.3 x tool R</span><span class="label">Inside corner radius, never equal to the cutter radius</span></div>
+          <div class="key-card"><span class="value">Pilot hole</span><span class="label">Model the tap drill diameter, not the thread</span></div>
+          <div class="key-card"><span class="value">&plusmn;0.005 in</span><span class="label">Typical standard machining tolerance (&plusmn;0.13 mm)</span></div>
+          <div class="key-card"><span class="value">45&deg;</span><span class="label">Self-supporting overhang for most 3D printing</span></div>
+        </div>
+
+        <h2 id="start-here">Start here</h2>
+        <div class="card-grid">
+          <a class="card" href="pages/quick_reference.html"><h3>Quick Rules Cheat Sheet</h3><p>The most-used numbers for CNC and 3D printing on one page.</p></a>
+          <a class="card" href="pages/calculators.html#corner-picker"><h3>Corner Radius Picker</h3><p>Pick a pocket corner and floor radius that matches standard cutters, in inch or metric.</p></a>
+          <a class="card" href="pages/calculators.html"><h3>Calculators &amp; Scratch Pad</h3><p>Metric / inch, mass, part weight from CAD volume, drill finder, plus a notes pad.</p></a>
+        </div>
+
+        <h2 id="cnc">CNC machining</h2>
+        <div class="card-grid">
+          <a class="card" href="pages/cnc_milling.html"><h3>Milling: 3-Axis, 3+2, 5-Axis</h3><p>What each machine type can reach, when it is worth the cost, and how to design for it.</p></a>
+          <a class="card" href="pages/corners_pockets.html"><h3>Inside Corners &amp; Pockets</h3><p>Corner and floor radii, corner reliefs, pocket depth limits.</p></a>
+          <a class="card" href="pages/walls_features.html"><h3>Walls, Features &amp; Text</h3><p>Wall thickness, aspect ratios, slots, undercuts, engraving.</p></a>
+          <a class="card" href="pages/cnc_turning.html"><h3>CNC Turning</h3><p>Lathe capabilities, live tooling, on-axis, axial and radial holes.</p></a>
+          <a class="card" href="pages/setups_orientation.html"><h3>Setups &amp; Part Orientation</h3><p>Design so the part is finished in as few fixtures as possible.</p></a>
+          <a class="card" href="pages/stock_sizes.html"><h3>Stock Sizes &amp; Design Extents</h3><p>Pick overall dimensions that fit common plate and bar stock.</p></a>
+          <a class="card" href="pages/tolerances_finishes.html"><h3>Tolerances &amp; Finishes</h3><p>Standard tolerances, GD&amp;T basics, anodize and plating allowances.</p></a>
+          <a class="card" href="pages/cnc_materials.html"><h3>Machining Materials</h3><p>Metals and plastics, machinability and relative cost.</p></a>
+          <a class="card" href="pages/cost_reduction.html"><h3>Cost Reduction Tips</h3><p>The design changes that cut machining cost the most.</p></a>
+        </div>
+
+        <h2 id="holes">Holes &amp; threads</h2>
+        <div class="card-grid">
+          <a class="card" href="pages/holes_threading.html"><h3>Hole &amp; Thread Design Rules</h3><p>Why you model the pilot hole and not the thread, depth limits, inserts.</p></a>
+          <a class="card" href="pages/thread_tables.html"><h3>Thread Pilot Hole Tables</h3><p>UNC, UNF, metric, NPT, coil and key inserts, turned OD threads.</p></a>
+          <a class="card" href="pages/tap_drill_charts.html"><h3>Tap &amp; Clearance Drill Charts</h3><p>75% / 50% tap drills, close and free fit clearance, drill decimals.</p></a>
+        </div>
+
+        <h2 id="3dp">3D printing</h2>
+        <div class="card-grid">
+          <a class="card" href="pages/3dp_processes.html"><h3>FDM vs SLA vs SLS vs MJF vs DMLS</h3><p>How the processes compare and which one to choose.</p></a>
+          <a class="card" href="pages/3dp_materials.html"><h3>3DP Materials</h3><p>Plastics, resins, nylons and metals by process.</p></a>
+          <a class="card" href="pages/3dp_internal_passages.html"><h3>Internal Passages &amp; Escape Holes</h3><p>Channels, powder and resin removal, hollow parts.</p></a>
+          <a class="card" href="pages/3dp_overhangs.html"><h3>Overhangs &amp; Supports</h3><p>Self-supporting angles, bridging, teardrop holes, chamfers.</p></a>
+          <a class="card" href="pages/3dp_quality_cost.html"><h3>Quality, Time &amp; Cost Tips</h3><p>Orientation, walls, fits, inserts, and how to print cheaper and faster.</p></a>
+        </div>
+
+        <h2 id="about">About this reference</h2>
+        <p>The data is compiled from public vendor design guides (ProtoLabs is the main reference vendor, with Xometry and others for comparison) and general machining and additive manufacturing practice. Vendor-specific limits such as thread pilot ranges are labeled as such. Every page links its sources on the <a href="pages/references.html">Sources &amp; References</a> page.</p>
+        <div class="callout warn">
+          <span class="callout-title">Always confirm</span>
+          <p>Capabilities change and every shop is different. Treat these values as design-time guidance, then confirm with your vendor's current guidelines and the DFM feedback on your quote.</p>
+        </div>
+
+        <footer class="site-footer">Design for Manufacturing Reference. Static HTML, CSS and JavaScript; no tracking, no external services. Notes typed into the scratch pad stay in your own browser.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

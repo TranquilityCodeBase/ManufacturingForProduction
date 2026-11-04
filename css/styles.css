@@ -1,0 +1,772 @@
+/* =====================================================================
+   DFM Reference - main stylesheet
+   One stylesheet for every page. Colors live in CSS variables (tokens)
+   so light and dark themes only have to redefine the tokens.
+   ===================================================================== */
+
+/* ---------- Color and size tokens (light theme default) ---------- */
+:root {
+  --bg: #f5f7fa;              /* page background */
+  --surface: #ffffff;         /* cards, tables, sidebar */
+  --surface-alt: #eef2f7;     /* table stripes, code blocks */
+  --border: #d6dde6;          /* hairlines and table borders */
+  --text: #1c2733;            /* body text */
+  --text-muted: #5a6878;      /* captions, secondary text */
+  --heading: #0f1b2a;         /* headings */
+  --accent: #1f6fb2;          /* links, active nav, primary buttons */
+  --accent-soft: #e3effa;     /* active nav background, badges */
+  --accent-strong: #154f80;   /* link hover */
+  --tip: #1d7a4f;             /* tip callout stripe */
+  --tip-soft: #e5f4ec;        /* tip callout background */
+  --warn: #b0590e;            /* warning callout stripe */
+  --warn-soft: #fcf0e3;       /* warning callout background */
+  --rule: #6a3fb5;            /* "design rule" callout stripe */
+  --rule-soft: #f0eafb;       /* design rule callout background */
+  --bad: #b3261e;             /* error/not recommended text */
+  --good: #1d7a4f;            /* ok/recommended text */
+  --diagram-bg: #ffffff;      /* diagrams are drawn for a light panel */
+  --sidebar-width: 280px;     /* left navigation width */
+  --content-max: 1080px;      /* readable content width */
+  --radius: 8px;              /* card corner radius */
+  --shadow: 0 1px 2px rgba(15, 27, 42, 0.06), 0 2px 8px rgba(15, 27, 42, 0.05);
+  --font-body: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: Consolas, "Cascadia Mono", "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+
+/* ---------- Dark theme tokens: follows the OS unless the user picked light ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151c;
+    --surface: #17202a;
+    --surface-alt: #1e2935;
+    --border: #2c3a49;
+    --text: #d9e1ea;
+    --text-muted: #93a3b5;
+    --heading: #f1f5f9;
+    --accent: #5aa9e6;
+    --accent-soft: #1b3348;
+    --accent-strong: #8cc4f0;
+    --tip: #4cc38a;
+    --tip-soft: #15302a;
+    --warn: #f0a35a;
+    --warn-soft: #3a2a18;
+    --rule: #b29af0;
+    --rule-soft: #2a2140;
+    --bad: #f28b82;
+    --good: #4cc38a;
+    --diagram-bg: #f4f6f9;
+    --shadow: none;
+    color-scheme: dark;
+  }
+}
+
+/* ---------- Dark theme tokens when the user picked dark with the toggle ---------- */
+:root[data-theme="dark"] {
+  --bg: #0f151c;
+  --surface: #17202a;
+  --surface-alt: #1e2935;
+  --border: #2c3a49;
+  --text: #d9e1ea;
+  --text-muted: #93a3b5;
+  --heading: #f1f5f9;
+  --accent: #5aa9e6;
+  --accent-soft: #1b3348;
+  --accent-strong: #8cc4f0;
+  --tip: #4cc38a;
+  --tip-soft: #15302a;
+  --warn: #f0a35a;
+  --warn-soft: #3a2a18;
+  --rule: #b29af0;
+  --rule-soft: #2a2140;
+  --bad: #f28b82;
+  --good: #4cc38a;
+  --diagram-bg: #f4f6f9;
+  --shadow: none;
+  color-scheme: dark;
+}
+
+/* ---------- Base element styles ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;     /* padding never grows an element's width */
+}
+
+html {
+  scroll-padding-top: 72px;   /* anchor jumps land below the sticky top bar */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4 {
+  color: var(--heading);
+  line-height: 1.25;
+  margin: 1.6em 0 0.5em;
+}
+
+h1 { font-size: 2rem; margin-top: 0; }
+h2 { font-size: 1.45rem; padding-top: 0.4em; border-top: 1px solid var(--border); }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1rem; }
+
+p, ul, ol { margin: 0 0 1em; }
+li { margin-bottom: 0.3em; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-strong); text-decoration: underline; }
+
+code, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--surface-alt);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+img, svg { max-width: 100%; height: auto; }
+
+/* ---------- Page layout: fixed left sidebar + scrolling content ---------- */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;                   /* stays in place while content scrolls */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;                  /* long nav lists scroll on their own */
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrap {
+  flex: 1;
+  margin-left: var(--sidebar-width); /* leave room for the fixed sidebar */
+  min-width: 0;                      /* lets wide tables scroll instead of stretching the page */
+}
+
+/* Top bar holds the menu button (phones), breadcrumb and theme toggle */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  padding: 0 24px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar .crumb {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.content {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 32px 32px 80px;
+}
+
+/* ---------- Sidebar contents ---------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.brand:hover { text-decoration: none; color: var(--accent); }
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;                  /* never squeezed by the long title next to it */
+  width: 42px;
+  height: 34px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+}
+
+.brand small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.nav-filter {
+  margin: 14px 16px 6px;
+  padding: 8px 10px;
+  width: calc(100% - 32px);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.nav-group { padding: 8px 0; }
+
+.nav-group-title {
+  margin: 10px 20px 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.nav-link {
+  display: block;
+  padding: 6px 20px 6px 24px;
+  border-left: 3px solid transparent;
+  color: var(--text);
+  font-size: 0.93rem;
+}
+
+.nav-link:hover {
+  background: var(--surface-alt);
+  text-decoration: none;
+  color: var(--heading);
+}
+
+.nav-link.active {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* Section links of the current page, nested under its nav entry */
+.nav-sub { margin: 2px 0 6px; }
+
+.nav-sub a {
+  display: block;
+  padding: 3px 20px 3px 40px;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.nav-sub a:hover { color: var(--accent); text-decoration: none; }
+.nav-sub a.current { color: var(--accent-strong); font-weight: 600; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn.primary:hover { background: var(--accent-strong); color: #fff; }
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.05rem;
+}
+
+.menu-btn { display: none; }   /* only shown on narrow screens */
+
+/* ---------- Page header ---------- */
+.page-header { margin-bottom: 28px; }
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 70ch;
+}
+
+/* ---------- "Key numbers" summary cards ---------- */
+.key-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 20px 0 28px;
+}
+
+.key-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+
+.key-card .value {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.key-card .label {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Generic cards (home page tiles etc.) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin: 18px 0 28px;
+}
+
+.card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+a.card:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.card p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
+
+/* ---------- Callouts: tip / warning / design rule / source ---------- */
+.callout {
+  margin: 18px 0;
+  padding: 12px 16px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--accent-soft);
+}
+
+.callout > :last-child { margin-bottom: 0; }
+
+.callout .callout-title {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.callout.tip { border-color: var(--tip); background: var(--tip-soft); }
+.callout.warn { border-color: var(--warn); background: var(--warn-soft); }
+.callout.rule { border-color: var(--rule); background: var(--rule-soft); }
+
+.callout.source {
+  border-color: var(--border);
+  background: var(--surface-alt);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Tables ---------- */
+.table-wrap {
+  overflow-x: auto;              /* wide tables scroll sideways on phones */
+  margin: 14px 0 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th, td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  position: sticky;              /* header row stays visible in long tables */
+  top: 0;
+  background: var(--surface-alt);
+  color: var(--heading);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-alt) 45%, transparent); }
+tbody tr:hover td { background: var(--accent-soft); }
+tbody tr:last-child td { border-bottom: none; }
+
+td.num, th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.table-note {
+  margin: -12px 0 22px;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Tabs (UNC / UNF / Metric etc.) ---------- */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 16px 0 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab-btn {
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.tab-btn:hover { color: var(--accent); }
+
+.tab-btn[aria-selected="true"] {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--heading);
+  font-weight: 600;
+  margin-bottom: -1px;           /* covers the bottom border so the tab looks attached */
+}
+
+.tab-panel[hidden] { display: none; }
+
+/* ---------- Toolbar above a table (filter box etc.) ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 0;
+}
+
+/* ---------- Form controls ---------- */
+input[type="text"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+label { font-size: 0.9rem; color: var(--text-muted); }
+
+/* ---------- Diagrams / figures ---------- */
+figure.diagram {
+  margin: 20px 0 26px;
+  padding: 16px;
+  background: var(--diagram-bg);   /* diagrams always sit on a light panel */
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+figure.diagram img,
+figure.diagram svg {
+  display: block;
+  margin: 0 auto;
+  max-height: 420px;
+}
+
+figure.diagram figcaption {
+  margin-top: 10px;
+  font-size: 0.86rem;
+  color: #4a5868;                  /* fixed color because the panel is always light */
+}
+
+/* Two figures (or a figure and text) side by side on wide screens */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ---------- Do / Don't lists ---------- */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+
+.do-dont > div {
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.do-dont h4 { margin: 0 0 8px; }
+.do-dont .do h4 { color: var(--good); }
+.do-dont .dont h4 { color: var(--bad); }
+.do-dont ul { margin: 0; padding-left: 1.2em; }
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge.good { background: var(--tip-soft); color: var(--good); }
+.badge.warn { background: var(--warn-soft); color: var(--warn); }
+.badge.bad { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); }
+
+/* ---------- Calculator page ---------- */
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+  margin: 18px 0 28px;
+}
+
+.calc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+
+.calc h3 { margin: 0 0 10px; }
+
+.calc-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calc-row input { flex: 1 1 120px; min-width: 0; }
+.calc-row select { flex: 0 1 auto; }
+
+.calc-out {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--surface-alt);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.calc-out .big {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+/* Field groups inside the corner radius picker */
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field input, .field select { width: 100%; }
+
+.verdict {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+}
+
+.verdict.good { border-color: var(--good); background: var(--tip-soft); }
+.verdict.warn { border-color: var(--warn); background: var(--warn-soft); }
+.verdict.bad { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 12%, transparent); }
+.verdict strong { color: var(--heading); }
+
+tr.best td { background: var(--tip-soft) !important; font-weight: 600; }
+
+/* Scratch pad */
+.scratch {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scratch textarea {
+  width: 100%;
+  min-height: 320px;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.save-state { font-size: 0.82rem; color: var(--text-muted); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Print: hide navigation, show content only ---------- */
+@media print {
+  .sidebar, .topbar { display: none; }
+  .content-wrap { margin-left: 0; }
+  .content { max-width: none; padding: 0; }
+  a { color: inherit; }
+}
+
+/* ---------- Tablet and phone layout ---------- */
+@media (max-width: 960px) {
+  .sidebar {
+    transform: translateX(-100%);   /* hide off-screen until the menu button opens it */
+    transition: transform 0.2s ease;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  }
+
+  body.nav-open .sidebar { transform: none; }
+
+  .content-wrap { margin-left: 0; }
+  .menu-btn { display: inline-grid; }
+  .topbar { padding: 0 16px; }
+  .content { padding: 24px 16px 64px; }
+  .two-col, .do-dont { grid-template-columns: 1fr; }
+
+  /* Dim the page behind the open menu */
+  .nav-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 25;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.6rem; }
+  .calc-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Calculator page layout: tools on the left, sticky scratch pad on the right ---------- */
+.calc-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.calc-layout .pad-panel {
+  position: sticky;                /* pad stays visible while scrolling the calculators */
+  top: 72px;
+}
+
+.calc-layout .pad-panel textarea { min-height: 55vh; }
+
+@media (max-width: 1200px) {
+  .calc-layout { grid-template-columns: minmax(0, 1fr); }
+  .calc-layout .pad-panel { position: static; }
+  .calc-layout .pad-panel textarea { min-height: 260px; }
+}
+
+/* Wider content area for tool pages */
+.content.wide { max-width: 1440px; }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3D Printing Materials | DFM Reference</title>
+  <meta name="description" content="Common 3D printing materials by process (FDM, SLA, SLS, MJF, DMLS) with qualitative property ratings and when to pick each one.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="3dp_materials" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">3D Printing</p>
+          <h1>3D Printing Materials</h1>
+          <p class="lead">Material choice is tied to process. Start from what the part must survive (load, heat, sunlight, chemicals), then pick the cheapest process and material that meets it.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">PA12</span><span class="label">Default functional nylon (SLS / MJF)</span></div>
+          <div class="key-card"><span class="value">PA11</span><span class="label">More ductile: hinges, snap fits</span></div>
+          <div class="key-card"><span class="value">ASA</span><span class="label">FDM choice for outdoor / UV</span></div>
+          <div class="key-card"><span class="value">AlSi10Mg</span><span class="label">Lightest common DMLS metal</span></div>
+          <div class="key-card"><span class="value">Resins</span><span class="label">Great detail, watch UV, heat and creep</span></div>
+        </div>
+
+        <h2 id="quick-pick" data-nav="Quick pick">Quick pick by requirement</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Requirement</th><th>Good first choices</th><th>Avoid</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>General functional prototype</td><td>SLS / MJF PA12, FDM PETG</td><td>Standard SLA resin (brittle)</td></tr>
+              <tr><td>Impact, snap fits, living hinges</td><td>PA11 (SLS / MJF), FDM nylon, tough SLA resin</td><td>PLA, standard resin, glass-filled grades</td></tr>
+              <tr><td>Stiffness</td><td>Glass-filled PA12, carbon-fiber nylon (FDM), ceramic-filled resin</td><td>TPU, unfilled PP-like resin</td></tr>
+              <tr><td>Heat (above ~80 °C / 176 °F)</td><td>FDM PC or ULTEM, high-temp SLA resin, PA12 GF, any DMLS metal</td><td>PLA, standard resin, PETG</td></tr>
+              <tr><td>Outdoor / UV exposure</td><td>FDM ASA, dyed or painted nylon</td><td>Unpainted SLA resins, PLA</td></tr>
+              <tr><td>Chemical / fuel exposure</td><td>PA11 / PA12, ULTEM, stainless or Inconel</td><td>ABS, standard resins</td></tr>
+              <tr><td>Clear / see-through</td><td>Clear SLA resin (polished and coated)</td><td>Powder bed and FDM processes</td></tr>
+              <tr><td>Rubber-like</td><td>TPU (SLS / MJF / FDM), elastomeric SLA resin, PolyJet / DLS elastomers</td><td>Rigid grades</td></tr>
+              <tr><td>Strong, lightweight metal</td><td>Ti-6Al-4V, AlSi10Mg</td><td>Steel grades if weight matters</td></tr>
+              <tr><td>Corrosion-resistant metal</td><td>316L, 17-4 PH, Inconel 625</td><td>Maraging steel without coating</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="by-process" data-nav="Materials by process">Materials by process</h2>
+        <p>Ratings are relative within plastics or within metals: <span class="badge good">Good</span> <span class="badge warn">Fair</span> <span class="badge bad">Poor</span>. Check the vendor data sheet before you rely on a property.</p>
+        <div data-tab-group>
+          <div class="tabs" role="tablist">
+            <button class="tab-btn" data-tab="fdm">FDM</button>
+            <button class="tab-btn" data-tab="sla">SLA resins</button>
+            <button class="tab-btn" data-tab="sls">SLS</button>
+            <button class="tab-btn" data-tab="mjf">MJF</button>
+            <button class="tab-btn" data-tab="dmls">DMLS metals</button>
+          </div>
+
+          <div class="tab-panel" data-tab-panel="fdm">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Material</th><th>Pick it when</th><th>Heat</th><th>UV</th><th>Toughness</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>PLA</strong></td><td>Concept models, quick fit checks</td><td><span class="badge bad">Poor</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge warn">Fair</span></td><td>Easy to print, softens near 55-60 °C (hot car)</td></tr>
+                  <tr><td><strong>PETG</strong></td><td>Everyday functional parts, fixtures</td><td><span class="badge warn">Fair</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td>Tough, good layer bonding, slight stringing</td></tr>
+                  <tr><td><strong>ABS</strong></td><td>Parts to vapor-smooth or glue, molded-ABS stand-in</td><td><span class="badge warn">Fair</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge good">Good</span></td><td>Warps on large flat parts; needs enclosure</td></tr>
+                  <tr><td><strong>ASA</strong></td><td>Outdoor parts, enclosures in sunlight</td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>UV-stable ABS alternative</td></tr>
+                  <tr><td><strong>Nylon / CF nylon</strong></td><td>Wear parts, gears, stiff brackets (CF)</td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td>Absorbs moisture; carbon fiber adds stiffness, lowers Z strength</td></tr>
+                  <tr><td><strong>PC</strong></td><td>Heat and impact together</td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td>High print temperature, warps</td></tr>
+                  <tr><td><strong>TPU</strong></td><td>Gaskets, bumpers, grips</td><td><span class="badge warn">Fair</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td>Flexible; slow to print, avoid fine detail</td></tr>
+                  <tr><td><strong>ULTEM 9085 / 1010</strong></td><td>Aerospace interiors, high heat, flame rated</td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge warn">Fair</span></td><td>Industrial FDM only; expensive; 9085 is FST rated</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-tab-panel="sla">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Resin family</th><th>Pick it when</th><th>Heat</th><th>UV</th><th>Toughness</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Standard</strong></td><td>Show models, fine detail</td><td><span class="badge bad">Poor</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge bad">Poor</span></td><td>Brittle; cheapest resin</td></tr>
+                  <tr><td><strong>ABS-like / tough</strong></td><td>Fit checks, light snap fits, enclosures</td><td><span class="badge warn">Fair</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge warn">Fair</span></td><td>Best general-purpose SLA choice</td></tr>
+                  <tr><td><strong>PC-like</strong></td><td>Stiffer, more heat than ABS-like</td><td><span class="badge warn">Fair</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge warn">Fair</span></td><td>Often clear-capable</td></tr>
+                  <tr><td><strong>PP-like</strong></td><td>Living hinge prototypes, snap-fit lids</td><td><span class="badge bad">Poor</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge good">Good</span></td><td>Flexible, lower stiffness</td></tr>
+                  <tr><td><strong>Clear</strong></td><td>Light pipes, lenses, flow visualization</td><td><span class="badge warn">Fair</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge warn">Fair</span></td><td>Needs sanding / clear coat; yellows in sunlight</td></tr>
+                  <tr><td><strong>High-temp</strong></td><td>Hot air or fluid flow tests, mold inserts</td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge bad">Poor</span></td><td>Brittle; check HDT at load</td></tr>
+                  <tr><td><strong>Elastomeric</strong></td><td>Soft-touch prototypes, seals for testing</td><td><span class="badge bad">Poor</span></td><td><span class="badge bad">Poor</span></td><td><span class="badge good">Good</span></td><td>Tears at thin sections</td></tr>
+                  <tr><td><strong>Ceramic-filled</strong></td><td>Very stiff, very flat, high detail</td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge bad">Poor</span></td><td>Very brittle; fixtures, wind tunnel models</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout warn">
+              <span class="callout-title">Resin parts age</span>
+              <p>Most SLA resins keep curing in sunlight, get more brittle and slowly creep under load. Use them for prototypes and test parts, not long-life loaded parts, unless the resin is rated for it.</p>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-tab-panel="sls">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Material</th><th>Pick it when</th><th>Heat</th><th>Chemical</th><th>Toughness</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>PA12</strong></td><td>Default functional nylon part</td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>White, dyeable; low moisture uptake for a nylon</td></tr>
+                  <tr><td><strong>PA11</strong></td><td>Hinges, clips, impact parts</td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Bio-based, more elongation than PA12</td></tr>
+                  <tr><td><strong>Glass-filled PA</strong></td><td>Stiff housings, heat near motors</td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td>Stiffer and more heat; less ductile; 2 mm min walls</td></tr>
+                  <tr><td><strong>TPU</strong></td><td>Flexible ducts, grips, bumpers</td><td><span class="badge warn">Fair</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td>Rubber-like; thicker walls for durability</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-tab-panel="mjf">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Material</th><th>Pick it when</th><th>Heat</th><th>Chemical</th><th>Toughness</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>PA12</strong></td><td>Production nylon parts in volume</td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Gray as printed, usually dyed black</td></tr>
+                  <tr><td><strong>PA12 glass-filled</strong></td><td>Stiff, dimensionally stable parts</td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td>Lower warp on flat parts</td></tr>
+                  <tr><td><strong>PA11</strong></td><td>Ductile clips and hinges</td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Better impact than PA12</td></tr>
+                  <tr><td><strong>TPU</strong></td><td>Flexible production parts</td><td><span class="badge warn">Fair</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td>Lattices for cushioning</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-panel" data-tab-panel="dmls">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Metal</th><th>Pick it when</th><th>Strength</th><th>Corrosion</th><th>Heat</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Aluminum AlSi10Mg</strong></td><td>Light housings, heat exchangers, brackets</td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td>Casting-like alloy, good thermal conductivity</td></tr>
+                  <tr><td><strong>Stainless 316L</strong></td><td>Corrosion resistance, fluid parts</td><td><span class="badge warn">Fair</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Ductile, not hardenable</td></tr>
+                  <tr><td><strong>Stainless 17-4 PH</strong></td><td>Strong and hard stainless parts</td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Heat treatable to high hardness</td></tr>
+                  <tr><td><strong>Titanium Ti-6Al-4V</strong></td><td>Best strength-to-weight, medical</td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Biocompatible grades available; costly</td></tr>
+                  <tr><td><strong>Inconel 718 / 625</strong></td><td>High temperature, combustion, exhaust</td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Very hard to machine conventionally, so printing pays off</td></tr>
+                  <tr><td><strong>Cobalt chrome</strong></td><td>Wear surfaces, dental and medical</td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td><span class="badge good">Good</span></td><td>Very hard and wear resistant</td></tr>
+                  <tr><td><strong>Copper / maraging steel</strong></td><td>Copper for heat and current; maraging steel for tooling inserts</td><td><span class="badge warn">Fair</span> / <span class="badge good">Good</span></td><td><span class="badge warn">Fair</span></td><td><span class="badge warn">Fair</span></td><td>Availability varies by vendor</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout">
+              <span class="callout-title">Plan for post-processing</span>
+              <p>DMLS parts are stress relieved, cut from the plate, and support-stripped. Leave machining stock (about 0.25-0.5 mm / 0.010-0.020 in) on sealing faces, bores and threads, and call those faces out on the drawing.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="environment" data-nav="Environment notes">Temperature, UV and chemical notes</h2>
+        <ul>
+          <li><strong>Heat:</strong> compare the material's heat deflection temperature (HDT) at your load, not its melting point. A part under load softens well below its melt.</li>
+          <li><strong>UV:</strong> resins and PLA yellow and embrittle in sunlight. Paint, dye or choose ASA / nylon for outdoor use.</li>
+          <li><strong>Moisture:</strong> nylons absorb water and change size and stiffness slightly. PA12 absorbs less than PA6 or FDM nylon.</li>
+          <li><strong>Chemicals:</strong> nylons handle oils, fuels and most solvents well. ABS and many resins are attacked by solvents.</li>
+          <li><strong>Food / medical:</strong> needs a certified material, process and post-processing chain. Printed porosity can trap contamination.</li>
+        </ul>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs 3D printing material pages and <a href="https://www.protolabs.com/en-gb/resources/design-for-3d-printing-toolkit">Design for 3D Printing Toolkit</a>; <a href="https://www.protolabs.com/en-gb/resources/blog/designing-a-part-for-multi-jet-fusion/">Designing a Part for Multi Jet Fusion</a>; general material data sheets. Ratings are qualitative comparisons, not specification values.</p>
+        </div>
+
+        <footer class="site-footer">Compiled from ProtoLabs published 3D printing guidance and general additive manufacturing practice. Values vary by machine, material and vendor; confirm against your vendor's current guidelines. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" width="720" height="290" font-family="Segoe UI, Arial, sans-serif">
+  <title>Internal channel bends: sharp corner versus sweeping radius</title>
+
+  <!-- Left: sharp 90 degree corner -->
+  <text x="180" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#b3261e">Sharp corner - avoid</text>
+  <rect x="40" y="50" width="280" height="190" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <path d="M40,100 L230,100 L230,240" fill="none" stroke="#ffffff" stroke-width="30" stroke-linejoin="miter"/>
+  <path d="M40,100 L230,100 L230,240" fill="none" stroke="#1f6fb2" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <!-- Packed powder in the corner -->
+  <polygon points="215,85 245,85 245,115" fill="#e8dcc4" stroke="#b3261e" stroke-width="2"/>
+  <text x="180" y="168" text-anchor="end" font-size="13" fill="#1c2733">powder / resin packs</text>
+  <text x="180" y="186" text-anchor="end" font-size="13" fill="#1c2733">in the dead corner</text>
+  <text x="180" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Hard to clean, high flow loss</text>
+
+  <!-- Right: large bend radius -->
+  <text x="540" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1d7a4f">Sweeping bend - good</text>
+  <rect x="400" y="50" width="280" height="190" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <path d="M400,100 L520,100 A70,70 0 0 1 590,170 L590,240" fill="none" stroke="#ffffff" stroke-width="30"/>
+  <path d="M400,100 L520,100 A70,70 0 0 1 590,170 L590,240" fill="none" stroke="#1f6fb2" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <!-- Bend radius dimension -->
+  <line x1="520" y1="170" x2="569.5" y2="120.5" stroke="#1f6fb2" stroke-width="2"/>
+  <circle cx="520" cy="170" r="3" fill="#1f6fb2"/>
+  <text x="420" y="200" font-size="13" font-weight="700" fill="#1f6fb2">bend radius</text>
+  <text x="420" y="218" font-size="13" font-weight="700" fill="#1f6fb2">≥ 2 × channel dia</text>
+  <text x="540" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Media and powder flow straight through</text>
+</svg>

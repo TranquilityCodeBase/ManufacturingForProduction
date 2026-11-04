@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Internal Passages &amp; Escape Holes | DFM Reference</title>
+  <meta name="description" content="Design rules for internal channels, hollow parts, powder escape holes and resin drain holes in 3D printed parts.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="3dp_internal_passages" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">3D Printing</p>
+          <h1>Internal Passages &amp; Escape Holes</h1>
+          <p class="lead">Internal channels are where additive beats machining, but every passage has to be cleaned out after the build. Design the channel and its exit path together.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">2+ holes</span><span class="label">Escape holes, on opposite ends</span></div>
+          <div class="key-card"><span class="value">3.5-5 mm</span><span class="label">Min escape hole, SLS / MJF</span></div>
+          <div class="key-card"><span class="value">0.8 mm</span><span class="label">Min channel gap, SLS / MJF (0.030 in)</span></div>
+          <div class="key-card"><span class="value">8 mm</span><span class="label">Max round channel in DMLS (0.30 in)</span></div>
+          <div class="key-card"><span class="value">R ≥ 2D</span><span class="label">Bend radius for clean-out</span></div>
+        </div>
+
+        <h2 id="minimums" data-nav="Minimum sizes">Minimum channel and hole sizes by process</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Process</th><th>Min internal channel (short run)</th><th>Long or curved channel</th><th>Escape / drain holes</th><th>What fills the channel</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>FDM</strong></td><td>~2 mm (0.08 in)</td><td>3 mm+; use teardrop top on horizontal runs</td><td>None needed (no trapped media)</td><td>Support material if overhangs need it</td></tr>
+              <tr><td><strong>SLA</strong></td><td>~1 mm; under 0.64 mm (0.025 in) can seal shut</td><td>3 mm+ so resin drains</td><td>Drain + vent, about 2.5-4 mm (0.10-0.16 in)</td><td>Liquid resin and supports</td></tr>
+              <tr><td><strong>SLS</strong></td><td>~2 mm; gaps 0.8 mm (0.030 in) min</td><td>5 mm+ for reliable powder removal</td><td>3.5 mm min, 5 mm+ preferred, 2 or more</td><td>Packed unsintered powder</td></tr>
+              <tr><td><strong>MJF</strong></td><td>~2 mm; gaps 0.8 mm min</td><td>5 mm+</td><td>5 mm+ preferred, 2 or more</td><td>Packed unfused powder</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>~1 mm hole minimum</td><td>3-8 mm; teardrop over 8 mm</td><td>2-5 mm; 4 mm min if only one, 2 mm if several</td><td>Metal powder (sinters lightly if trapped hot)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Values combine ProtoLabs guidance and common vendor ranges; where sources differ, the larger (safer) value is shown as the design target.</p>
+
+        <h2 id="escape-holes" data-nav="Escape holes">Powder escape holes (SLS, MJF, DMLS)</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_escape_holes.svg" alt="Hollow part full of powder with one escape hole at the top left and a second at the bottom right, arrows showing air in and powder out" width="720" height="300" loading="lazy">
+          <figcaption>Two holes give a flow path: air or blast media in one end, powder out the other.</figcaption>
+        </figure>
+        <ul>
+          <li>Every enclosed cavity needs at least <strong>two</strong> holes, placed at opposite ends or corners of the cavity.</li>
+          <li>Size them at <strong>3.5-5 mm (0.14-0.20 in)</strong> or larger for nylon; bigger holes clean faster and cheaper.</li>
+          <li>Put holes where they can be plugged, threaded or hidden later (a cosmetic face is a bad place).</li>
+          <li>Thick solid sections in MJF (over ~4 mm) are usually hollowed to <strong>2-4 mm walls</strong> to avoid sink and heat problems. Hollowing creates a cavity, so it needs escape holes too.</li>
+          <li>DMLS: any trapped powder adds weight and can come loose in service. Specify a clean-out and inspection step.</li>
+        </ul>
+
+        <h2 id="resin-drains" data-nav="SLA drain and vent">Resin drain and vent holes (SLA)</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_drain_vent.svg" alt="Sealed hollow SLA part traps resin; part with a drain hole at the low point and a vent at the high point drains properly" width="720" height="300" loading="lazy">
+          <figcaption>Drain at the lowest point in the print orientation, vent at the opposite high point.</figcaption>
+        </figure>
+        <ul>
+          <li>Hollow SLA parts save resin and cost, but a sealed cavity traps liquid resin that later cures, expands or leaks.</li>
+          <li>Use a drain hole plus a vent hole, about <strong>2.5-4 mm</strong> each. One hole alone drains poorly because air cannot get in.</li>
+          <li>Closed cup shapes facing the vat create suction on bottom-up printers. Vent them or orient the opening toward the vat floor.</li>
+        </ul>
+
+        <h2 id="channel-shape" data-nav="Channel shape">Channel shape and bends</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_teardrop_channel.svg" alt="Small round channel prints fine, large round channel ceiling distorts, teardrop channel prints clean" width="720" height="290" loading="lazy">
+          <figcaption>DMLS: round channels over about 8 mm (0.30 in) distort on the down-facing ceiling. A teardrop or diamond top is self-supporting.</figcaption>
+        </figure>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_channel_bends.svg" alt="Channel with a sharp 90 degree corner traps powder; channel with a sweeping bend flows through" width="720" height="290" loading="lazy">
+          <figcaption>Sweeping bends clean out and flow better than sharp corners.</figcaption>
+        </figure>
+        <div class="do-dont">
+          <div class="do">
+            <h4>Do</h4>
+            <ul>
+              <li>Use bend radii of at least 2x the channel diameter.</li>
+              <li>Keep long passages at 3-5 mm or larger so they can be cleaned.</li>
+              <li>Give every passage two open ends; route it to an outside face.</li>
+              <li>Use teardrop or diamond profiles for horizontal channels in metal and FDM.</li>
+              <li>Keep 1-2 mm minimum wall between neighboring channels (more for pressure).</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Don't</h4>
+            <ul>
+              <li>Design dead-end branches: powder and resin pack into them.</li>
+              <li>Use sharp internal corners or sudden diameter steps.</li>
+              <li>Make long, small-diameter channels you cannot inspect.</li>
+              <li>Expect smooth bores: inside surfaces stay as-printed (rough) and cannot be polished.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="post-machining" data-nav="Finish and inspect">Critical bores, finish and inspection</h2>
+        <ul>
+          <li><strong>Critical bores and ports:</strong> print undersize and drill, ream or machine to final size. Leave about 0.25-0.5 mm (0.010-0.020 in) stock per side.</li>
+          <li><strong>Threads at ports:</strong> tap after printing (metal) or use inserts (plastic). Model the tap drill hole, not the thread.</li>
+          <li><strong>Inside roughness:</strong> as-built channels are rough (worse on down-facing surfaces). Abrasive flow machining exists for metal but adds cost.</li>
+          <li><strong>Inspection:</strong> blow-through or flow test each passage, weigh parts to catch trapped powder, use a borescope or CT scan for critical parts.</li>
+        </ul>
+        <div class="callout tip">
+          <span class="callout-title">Machining comparison</span>
+          <p>A machined internal passage needs straight drilled holes that intersect, plus plugs. If your channel can be made that way, compare cost. If it curves, branches or follows a surface (conformal cooling), printing is often the only practical option.</p>
+        </div>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs: <a href="https://www.protolabs.com/resources/design-tips/7-mistakes-to-avoid-when-designing-3d-printed-parts/">7 Mistakes to Avoid When Designing 3D Printed Parts</a>, <a href="https://www.protolabs.com/en-gb/resources/blog/designing-a-part-for-multi-jet-fusion/">Designing a Part for Multi Jet Fusion</a>. <a href="https://blogs.solidworks.com/products/solidworks/introduction-designing-metal-3d-printing">SOLIDWORKS: Introduction to Designing for Metal 3D Printing</a> (DMLS channel size, quoting ProtoLabs). <a href="https://www.etmm-online.com/5-tips-for-additive-manufacturing-designs-a-758535/">ETMM: 5 tips for additive manufacturing designs</a> (DMLS escape holes). <a href="https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/">Protolabs Network: Designing for SLS</a> (escape hole size).</p>
+        </div>
+
+        <footer class="site-footer">Compiled from ProtoLabs published 3D printing guidance and general additive manufacturing practice. Values vary by machine, material and vendor; confirm against your vendor's current guidelines. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

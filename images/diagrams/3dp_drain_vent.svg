@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" font-family="Segoe UI, Arial, sans-serif">
+  <title>SLA hollow parts: closed cavity versus drain and vent holes</title>
+
+  <!-- Left: sealed hollow part -->
+  <text x="180" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#b3261e">Sealed hollow - avoid</text>
+  <rect x="60" y="60" width="240" height="160" rx="10" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <rect x="84" y="84" width="192" height="112" rx="4" fill="#f6e7b0" stroke="#34495e" stroke-width="1.5"/>
+  <text x="180" y="136" text-anchor="middle" font-size="14" font-weight="700" fill="#1c2733">trapped liquid resin</text>
+  <text x="180" y="156" text-anchor="middle" font-size="13" fill="#1c2733">cures later, cracks the part</text>
+  <text x="180" y="246" text-anchor="middle" font-size="13" fill="#1c2733">Closed cups also create suction on</text>
+  <text x="180" y="264" text-anchor="middle" font-size="13" fill="#1c2733">bottom-up printers (layer peel failures)</text>
+
+  <!-- Right: drain at low point, vent at high point -->
+  <text x="540" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1d7a4f">Drain + vent - good</text>
+  <rect x="420" y="60" width="240" height="160" rx="10" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <rect x="444" y="84" width="192" height="112" rx="4" fill="#ffffff" stroke="#34495e" stroke-width="1.5"/>
+  <!-- Vent hole in the top wall at the far end -->
+  <rect x="610" y="58" width="22" height="28" fill="#ffffff"/>
+  <!-- Drain hole in the bottom wall at the near end -->
+  <rect x="454" y="194" width="22" height="28" fill="#ffffff"/>
+  <!-- Arrows -->
+  <line x1="621" y1="38" x2="621" y2="48" stroke="#1f6fb2" stroke-width="3"/>
+  <polygon points="621,58 614,44 628,44" fill="#1f6fb2"/>
+  <text x="634" y="50" font-size="13" fill="#1f6fb2">vent</text>
+  <line x1="465" y1="226" x2="465" y2="250" stroke="#1f6fb2" stroke-width="3"/>
+  <polygon points="465,262 458,248 472,248" fill="#1f6fb2"/>
+  <text x="480" y="258" font-size="13" fill="#1f6fb2">drain</text>
+  <text x="540" y="134" text-anchor="middle" font-size="13" fill="#1c2733">holes about</text>
+  <text x="540" y="152" text-anchor="middle" font-size="13" fill="#1c2733">2.5-4 mm (0.10-0.16 in)</text>
+  <text x="540" y="284" text-anchor="middle" font-size="13" fill="#4a5868">Drain at the lowest point, vent at the opposite high point.</text>
+</svg>

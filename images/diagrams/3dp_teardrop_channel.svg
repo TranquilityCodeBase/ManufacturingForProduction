@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" width="720" height="290" font-family="Segoe UI, Arial, sans-serif">
+  <title>Metal printed internal channel cross-sections</title>
+  <!-- Build direction arrow -->
+  <line x1="20" y1="200" x2="20" y2="70" stroke="#1f6fb2" stroke-width="2"/>
+  <polygon points="20,60 14,74 26,74" fill="#1f6fb2"/>
+  <text x="4" y="220" font-size="12" fill="#1f6fb2">build</text>
+
+  <!-- Block 1: small round channel, fine -->
+  <rect x="50" y="50" width="160" height="160" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <circle cx="130" cy="130" r="22" fill="#ffffff" stroke="#34495e" stroke-width="2"/>
+  <text x="130" y="236" text-anchor="middle" font-size="15" font-weight="700" fill="#1d7a4f">Round, under 8 mm</text>
+  <text x="130" y="256" text-anchor="middle" font-size="13" fill="#1c2733">self-supports, prints round</text>
+
+  <!-- Block 2: large round channel, ceiling droops -->
+  <rect x="280" y="50" width="160" height="160" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <path d="M315,135 A45,45 0 0 0 405,135 Q400,104 360,102 Q320,104 315,135 Z" fill="#ffffff" stroke="#34495e" stroke-width="2"/>
+  <path d="M315,135 A45,45 0 0 1 405,135" fill="none" stroke="#b3261e" stroke-width="2" stroke-dasharray="5 4"/>
+  <path d="M330,110 Q360,100 390,110" fill="none" stroke="#b3261e" stroke-width="3"/>
+  <text x="360" y="236" text-anchor="middle" font-size="15" font-weight="700" fill="#b3261e">Round, over 8 mm</text>
+  <text x="360" y="256" text-anchor="middle" font-size="13" fill="#1c2733">down-facing ceiling distorts</text>
+
+  <!-- Block 3: large teardrop channel, good -->
+  <rect x="510" y="50" width="160" height="160" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <path d="M558.2,103.2 L590,71.4 L621.8,103.2 A45,45 0 1 1 558.2,103.2 Z" fill="#ffffff" stroke="#34495e" stroke-width="2"/>
+  <path d="M558.2,103.2 L590,71.4 L621.8,103.2" fill="none" stroke="#1d7a4f" stroke-width="3"/>
+  <text x="590" y="236" text-anchor="middle" font-size="15" font-weight="700" fill="#1d7a4f">Teardrop / diamond</text>
+  <text x="590" y="256" text-anchor="middle" font-size="13" fill="#1c2733">large channels print clean</text>
+
+  <text x="360" y="282" text-anchor="middle" font-size="12" fill="#4a5868">Dashed line = intended round profile. 8 mm = 0.30 in.</text>
+</svg>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FDM vs SLA vs SLS vs MJF vs DMLS | DFM Reference</title>
+  <meta name="description" content="Side-by-side comparison of the common 3D printing processes, with tolerances, minimum walls, supports and a quick process selection guide.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body data-page="3dp_processes" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">3D Printing</p>
+          <h1>FDM vs SLA vs SLS vs MJF vs DMLS</h1>
+          <p class="lead">Pick the process first, then design to its rules. This page compares the five processes you will quote most often, with ProtoLabs published values as the reference vendor.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">SLA</span><span class="label">Smoothest surface, finest detail</span></div>
+          <div class="key-card"><span class="value">SLS / MJF</span><span class="label">Tough nylon, no supports needed</span></div>
+          <div class="key-card"><span class="value">DMLS</span><span class="label">Metal parts, supports required</span></div>
+          <div class="key-card"><span class="value">FDM</span><span class="label">Cheapest, weakest across layers</span></div>
+          <div class="key-card"><span class="value">+0.1%</span><span class="label">Tolerance grows with part size</span></div>
+        </div>
+
+        <h2 id="how-they-work">How each process works</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_process_schematics.svg" alt="Schematics of FDM extrusion, SLA laser curing resin, SLS/MJF powder bed fusion and DMLS metal powder bed with supports" width="800" height="300" loading="lazy">
+          <figcaption>Powder-bed processes (SLS, MJF) are self-supporting. Resin (SLA), extrusion (FDM) and metal (DMLS) need supports under overhangs.</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Process</th><th>How it builds</th><th>Typical materials</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>FDM / FFF</strong><br>Fused deposition</td><td>A heated nozzle extrudes a thermoplastic bead, one layer at a time. Bond between layers is the weak point.</td><td>PLA, PETG, ABS, ASA, nylon, PC, TPU, ULTEM</td></tr>
+              <tr><td><strong>SLA</strong><br>Stereolithography</td><td>A UV laser cures liquid photopolymer resin. Very fine layers and laser spot give the best detail and finish.</td><td>Standard, ABS-like, PC-like, PP-like, clear, high-temp, elastomeric resins</td></tr>
+              <tr><td><strong>SLS</strong><br>Selective laser sintering</td><td>A laser sinters nylon powder. Unsintered powder holds the part, so no supports.</td><td>PA12, PA11, glass-filled PA, TPU</td></tr>
+              <tr><td><strong>MJF</strong><br>Multi Jet Fusion</td><td>Inkjet heads print fusing agent on a powder bed, then heat fuses each layer. Faster and more uniform than SLS.</td><td>PA12, PA12 glass-filled, PA11, TPU</td></tr>
+              <tr><td><strong>DMLS</strong><br>Direct metal laser sintering</td><td>A laser welds fine metal powder. Parts are anchored to a build plate with supports, then cut off and stress relieved.</td><td>AlSi10Mg, 316L, 17-4 PH, Ti-6Al-4V, Inconel 718/625, cobalt chrome</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <span class="callout-title">Also worth knowing</span>
+          <p><strong>PolyJet</strong> jets and UV-cures droplets of resin, so it can mix rigid and rubber-like materials (and color) in one part. Good for overmold look-alike prototypes. <strong>Carbon DLS</strong> is a continuous resin process with production-grade urethanes and elastomers. Both are offered by ProtoLabs and other service bureaus.</p>
+        </div>
+
+        <h2 id="comparison" data-nav="Comparison table">Process comparison table</h2>
+        <p>Use these as design starting values. A feature drawn at the minimum is not guaranteed to form or survive cleanup, so add margin where you can.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Property</th><th>FDM</th><th>SLA</th><th>SLS</th><th>MJF</th><th>DMLS</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Layer height</strong></td><td>0.1-0.3 mm</td><td>0.025-0.1 mm</td><td>~0.1 mm</td><td>~0.08 mm</td><td>0.02-0.06 mm</td></tr>
+              <tr><td><strong>Typical tolerance</strong></td><td>±0.2-0.5 mm<br>(±0.008-0.020 in), printer dependent</td><td>±0.05 mm XY, ±0.13 mm Z<br>(±0.002 / ±0.005 in)<br>+0.1% of size</td><td>±0.25 mm<br>(±0.010 in)<br>+0.1% of size</td><td>±0.30 mm<br>(±0.012 in)<br>+0.1% of size</td><td>±0.076 mm XY, ±0.15 mm Z<br>(±0.003 / ±0.006 in)<br>+0.1% of size</td></tr>
+              <tr><td><strong>Min wall</strong></td><td>0.8 mm min, 1.2 mm+ preferred</td><td>0.4 mm supported, 0.6 mm unsupported, 1 mm preferred</td><td>0.8 mm (PA12), 2 mm filled</td><td>0.8 mm min, 2.5-4 mm ideal</td><td>0.4-1.0 mm, 1 mm preferred</td></tr>
+              <tr><td><strong>Min hole / gap</strong></td><td>~2 mm hole, 0.5 mm gap</td><td>~0.64 mm (0.025 in); smaller can seal shut</td><td>0.8 mm (0.030 in) gap, 1.5 mm hole</td><td>0.8 mm gap, 1.5 mm hole</td><td>~1 mm hole</td></tr>
+              <tr><td><strong>Supports</strong></td><td><span class="badge warn">Yes</span> under 45°</td><td><span class="badge warn">Yes</span> always some</td><td><span class="badge good">No</span> powder bed</td><td><span class="badge good">No</span> powder bed</td><td><span class="badge bad">Yes</span> cut off by machining / EDM</td></tr>
+              <tr><td><strong>Surface as-built</strong></td><td>Visible layer lines</td><td>Smoothest, near-molded</td><td>Matte, slightly grainy</td><td>Grainy, usually dyed gray/black</td><td>Rough, usually blasted or machined</td></tr>
+              <tr><td><strong>Strength / isotropy</strong></td><td>Anisotropic, weak in Z</td><td>Near isotropic, can be brittle, creeps and ages in UV</td><td>Tough, fairly isotropic</td><td>Tough, most isotropic polymer option</td><td>Near-wrought metal properties after heat treat</td></tr>
+              <tr><td><strong>Cost / speed</strong></td><td>Lowest cost, slow per part</td><td>Low-moderate, fast for small parts</td><td>Moderate, economical in batches</td><td>Moderate, fastest for nylon batches</td><td>Highest, slow, plus post-processing</td></tr>
+              <tr><td><strong>Best for</strong></td><td>Concept models, fixtures, large simple parts</td><td>Show models, fine detail, smooth fit-check parts, casting masters</td><td>Functional prototypes, snap fits, complex ducts</td><td>Functional and low-volume production nylon parts</td><td>Complex metal parts, conformal cooling, part consolidation</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">SLA, SLS, MJF and DMLS tolerances are ProtoLabs published values (base value plus 0.1% of nominal, i.e. +0.001 in/in). FDM is a general industry range. Tolerances also depend on geometry, orientation and material.</p>
+
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_layer_strength.svg" alt="FDM bar printed flat is strong in bending, the same bar printed upright splits between layers" width="720" height="300" loading="lazy">
+          <figcaption>Anisotropy matters most for FDM: layer bonds are the weak direction. SLS, MJF and SLA are much closer to isotropic.</figcaption>
+        </figure>
+
+        <h2 id="selection-guide" data-nav="Selection guide">Process selection guide</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>If you need...</th><th>Choose</th><th>Why</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Cheap, fast form check or shop fixture</td><td>FDM</td><td>Lowest cost; strength is fine if you orient for load</td></tr>
+              <tr><td>Smooth cosmetic surface or tiny detail</td><td>SLA</td><td>Finest layers and best finish; paints well</td></tr>
+              <tr><td>Clear or translucent part (light pipe, flow viewing)</td><td>SLA clear resin</td><td>Only common process that can be polished near-clear</td></tr>
+              <tr><td>Snap fits, living hinges, impact loads</td><td>SLS or MJF (PA11 for most ductility)</td><td>Real thermoplastic nylon, tough and fatigue resistant</td></tr>
+              <tr><td>Internal channels, ducts, lattices, no support access</td><td>SLS or MJF</td><td>Powder supports everything; only need powder escape holes</td></tr>
+              <tr><td>50-1,000+ nylon parts without tooling</td><td>MJF</td><td>Dense nesting and fast builds lower unit cost</td></tr>
+              <tr><td>Rubber-like part</td><td>SLS/MJF TPU, SLA elastomer, or Carbon DLS</td><td>Choose by hardness and durability needed</td></tr>
+              <tr><td>Metal part too complex to machine</td><td>DMLS</td><td>Internal passages, organic shapes, consolidated assemblies</td></tr>
+              <tr><td>Metal part that CAN be machined</td><td>CNC machining</td><td>Usually cheaper, faster and more accurate than DMLS</td></tr>
+              <tr><td>High temperature plastic</td><td>FDM ULTEM, SLA high-temp resin, or machined PEEK/PEI</td><td>Check heat deflection temperature for your load</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="3dp-vs-cnc" data-nav="3DP vs CNC">3D printing vs CNC machining for plastic parts</h2>
+        <div class="do-dont">
+          <div class="do">
+            <h4>Machining wins when...</h4>
+            <ul>
+              <li>You need a specific engineering plastic (acetal, PEEK, PC, UHMW...). Machining offers far more grades than printing.</li>
+              <li>Accuracy and long-term dimensional stability matter. Machined parts beat SLA, which can creep and change over time.</li>
+              <li>The part is headed to injection molding. Same material family, and machinable geometry usually translates to a mold more easily.</li>
+              <li>Surface finish must be good on functional faces. SLS is rougher than machined or SLA surfaces.</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>Printing wins when...</h4>
+            <ul>
+              <li>Geometry cannot be reached by a cutter: internal channels, hollow shells, lattices, a whiffle-ball-like part.</li>
+              <li>Most of the block would be cut away (rings, frames, thin shells). Printing only adds the material needed.</li>
+              <li>You want several iterations in days and the material properties are "close enough".</li>
+              <li>Part consolidation removes fasteners and assembly steps.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout tip">
+          <span class="callout-title">Rule of thumb</span>
+          <p>If a 3-axis mill can make it in one or two setups, quote machining too. If the design only works because of internal features, print it and machine the critical faces afterward.</p>
+        </div>
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs: <a href="https://www.protolabs.com/resources/design-tips/3d-printing-tolerances/">Understanding 3D Printing Tolerances</a>, <a href="https://www.protolabs.com/resources/design-tips/7-mistakes-to-avoid-when-designing-3d-printed-parts/">7 Mistakes to Avoid When Designing 3D Printed Parts</a>, <a href="https://www.protolabs.com/en-gb/resources/blog/designing-a-part-for-multi-jet-fusion/">Designing a Part for Multi Jet Fusion</a>, ProtoLabs <em>Design Essentials for CNC Machining</em> (3D printing vs machining chapter). Protolabs Network (Hubs): <a href="https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/">How to design parts for SLS</a>.</p>
+        </div>
+
+        <footer class="site-footer">Compiled from ProtoLabs published 3D printing guidance and general additive manufacturing practice. Values vary by machine, material and vendor; confirm against your vendor's current guidelines. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

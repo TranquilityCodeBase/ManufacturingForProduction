@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" width="720" height="290" font-family="Segoe UI, Arial, sans-serif">
+  <title>Build height drives layer count and print time</title>
+  <!-- Build plates -->
+  <rect x="20" y="230" width="320" height="10" fill="#8a97a6"/>
+  <rect x="380" y="230" width="320" height="10" fill="#8a97a6"/>
+
+  <!-- Left: part lying flat -->
+  <text x="180" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1d7a4f">Lying flat</text>
+  <rect x="50" y="190" width="260" height="40" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <line x1="320" y1="190" x2="320" y2="230" stroke="#1f6fb2" stroke-width="2"/>
+  <line x1="314" y1="190" x2="326" y2="190" stroke="#1f6fb2" stroke-width="2"/>
+  <text x="180" y="160" text-anchor="middle" font-size="14" fill="#1c2733">low Z = few layers</text>
+  <text x="180" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Fastest for SLA / DMLS / FDM</text>
+
+  <!-- Right: part standing up -->
+  <text x="540" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#b3261e">Standing up</text>
+  <rect x="520" y="50" width="40" height="180" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+  <line x1="590" y1="50" x2="590" y2="230" stroke="#1f6fb2" stroke-width="2"/>
+  <line x1="584" y1="50" x2="596" y2="50" stroke="#1f6fb2" stroke-width="2"/>
+  <text x="600" y="140" font-size="14" fill="#1c2733">high Z =</text>
+  <text x="600" y="158" font-size="14" fill="#1c2733">many layers</text>
+  <text x="540" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Slower, but best round holes along Z</text>
+  <text x="360" y="286" text-anchor="middle" font-size="12" fill="#4a5868">SLS / MJF price on packed volume instead, so orientation matters less there.</text>
+</svg>

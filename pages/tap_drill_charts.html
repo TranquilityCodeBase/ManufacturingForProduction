@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tap &amp; Clearance Drill Charts | DFM Reference</title>
+  <meta name="description" content="Inch and metric tap drill sizes for 75% and 50% thread, close and free fit clearance drills, and number and letter drill decimal equivalents.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/data/tap_drill_data.js" defer></script>
+  <script src="../js/reference_tables.js" defer></script>
+</head>
+<body data-page="tap_drill_charts" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">Holes &amp; Threads</p>
+          <h1>Tap &amp; Clearance Drill Charts</h1>
+          <p class="lead">Standard shop tap drills and clearance holes for Unified inch and ISO metric screws. Use these when holes are tapped conventionally or for clearance holes in mating parts.</p>
+        </header>
+
+        <div class="key-grid">
+          <div class="key-card"><span class="value">75% thread</span><span class="label">Aluminum, brass, plastics</span></div>
+          <div class="key-card"><span class="value">50-60% thread</span><span class="label">Steel, stainless, iron (easier tapping, little strength loss)</span></div>
+          <div class="key-card"><span class="value">Close fit</span><span class="label">Accurate location, dowel-like screw fit</span></div>
+          <div class="key-card"><span class="value">Free fit</span><span class="label">General assembly, allows positional tolerance</span></div>
+        </div>
+
+        <div class="callout tip">
+          <span class="callout-title">Which column do I use?</span>
+          <p><strong>Tap drill</strong> = the diameter you model for a threaded hole (with a cosmetic thread). 75% thread is the common default; tougher materials tap more reliably near 50-60% with only a small loss of strip strength. <strong>Clearance drill</strong> = the hole in the part the screw passes through. Free fit is the safe default; close fit only when the screw also locates the parts. Automated CNC services may want a slightly different pilot: check the <a href="thread_tables.html">thread pilot hole tables</a>.</p>
+        </div>
+
+        <h2 id="inch">Unified inch threads (UNC / UNF / UNEF)</h2>
+        <div data-tap-inch></div>
+        <p class="table-note">Dimensions in inches. Clearance drills depend on screw size only, so they repeat for each pitch.</p>
+
+        <h2 id="metric">ISO metric threads</h2>
+        <div data-tap-metric></div>
+        <p class="table-note">Dimensions in millimetres with the closest inch drill. Coarse pitch is the default; fine pitches are for thin walls, adjustment screws and vibration resistance.</p>
+
+        <h2 id="drill-sizes" data-nav="Number &amp; letter drills">Number and letter drill decimal equivalents</h2>
+        <p>The <a href="calculators.html#mass-drill">drill finder</a> on the calculators page also searches fractional and metric drills.</p>
+        <div data-drill-sizes></div>
+
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>Standard tap and clearance drill tables as published in common shop references (for example the LittleMachineShop.com tap and clearance drill chart and Machinery's Handbook practice). Metric clearance sizes follow common close / normal fit practice.</p>
+        </div>
+
+        <footer class="site-footer">General machining reference values. Confirm against your shop standard for critical applications. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

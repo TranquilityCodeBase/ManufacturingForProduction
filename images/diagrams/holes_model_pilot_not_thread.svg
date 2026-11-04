@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="330" viewBox="0 0 780 330" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Model the pilot hole, not the thread">
+<title>Model the pilot hole, not the thread</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker></defs>
+<rect width="780" height="330" fill="#ffffff"/>
+<text x="195" y="30" font-size="16" fill="#b3261e" text-anchor="middle" font-weight="bold">Avoid: helical thread modeled in CAD</text>
+<rect x="75" y="60" width="240" height="190" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+<polygon points="169.0,60.0 159.0,67.0 169.0,74.0 159.0,81.0 169.0,88.0 159.0,95.0 169.0,102.0 159.0,109.0 169.0,116.0 159.0,123.0 169.0,130.0 159.0,137.0 169.0,144.0 159.0,151.0 169.0,158.0 159.0,165.0 169.0,172.0 159.0,179.0 169.0,186.0 159.0,193.0 169.0,200.0 195.0,215.6 221.0,200.0 231.0,193.0 221.0,186.0 231.0,179.0 221.0,172.0 231.0,165.0 221.0,158.0 231.0,151.0 221.0,144.0 231.0,137.0 221.0,130.0 231.0,123.0 221.0,116.0 231.0,109.0 221.0,102.0 231.0,95.0 221.0,88.0 231.0,81.0 221.0,74.0 231.0,67.0 221.0,60.0" fill="#ffffff" stroke="#34495e" stroke-width="1.5"/>
+<text x="195" y="280" font-size="13" fill="#1c2733" text-anchor="middle" font-weight="normal">Quoting software cannot see a pilot hole;</text>
+<text x="195" y="298" font-size="13" fill="#1c2733" text-anchor="middle" font-weight="normal">STL exports and helical faces confuse CAM.</text>
+<text x="585" y="30" font-size="16" fill="#1d7a4f" text-anchor="middle" font-weight="bold">Do: pilot hole + cosmetic thread</text>
+<rect x="465" y="60" width="240" height="190" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+<polygon points="559,60 611,60 611,200 585,216 559,200" fill="#ffffff" stroke="#34495e" stroke-width="1.5"/>
+<line x1="549" y1="60" x2="549" y2="170" stroke="#1f6fb2" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="621" y1="60" x2="621" y2="170" stroke="#1f6fb2" stroke-width="1.5" stroke-dasharray="6 4"/>
+<line x1="611" y1="110" x2="700" y2="110" stroke="#1f6fb2" stroke-width="1.5" marker-start="url(#arrow)"/>
+<rect x="640" y="78" width="132" height="44" rx="4" fill="#ffffff" stroke="#1f6fb2"/>
+<text x="706" y="96" font-size="13" fill="#1f6fb2" text-anchor="middle" font-weight="bold">1/4-20 UNC-2B</text>
+<text x="706" y="114" font-size="13" fill="#1f6fb2" text-anchor="middle" font-weight="normal">thread depth .50</text>
+<text x="585" y="280" font-size="13" fill="#1c2733" text-anchor="middle" font-weight="normal">Hole = tap drill / pilot diameter (minor).</text>
+<text x="585" y="298" font-size="13" fill="#1c2733" text-anchor="middle" font-weight="normal">Thread is a callout, dashed line = major dia.</text>
+</svg>

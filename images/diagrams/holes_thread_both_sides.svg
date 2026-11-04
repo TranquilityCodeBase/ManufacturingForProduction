@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="300" viewBox="0 0 780 300" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Threading a hole longer than the tool reach">
+<title>Threading a hole longer than the tool reach</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker></defs>
+<rect width="780" height="300" fill="#ffffff"/>
+<text x="130" y="30" font-size="14" fill="#1d7a4f" text-anchor="middle" font-weight="bold">1. Thread from the screw entry side</text>
+<rect x="70" y="50" width="120" height="200" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+<rect x="114" y="50" width="32" height="200" fill="#ffffff" stroke="#34495e" stroke-width="1"/>
+<rect x="108" y="50" width="44" height="100" fill="#1f6fb2" fill-opacity="0.22" stroke="#1f6fb2" stroke-width="1"/>
+<text x="130" y="275" font-size="12" fill="#1c2733" text-anchor="middle" font-weight="normal">max reach</text>
+<text x="385" y="30" font-size="14" fill="#b3261e" text-anchor="middle" font-weight="bold">2. Both sides, threads overlap</text>
+<rect x="325" y="50" width="120" height="200" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+<rect x="369" y="50" width="32" height="200" fill="#ffffff" stroke="#34495e" stroke-width="1"/>
+<rect x="363" y="50" width="44" height="120" fill="#1f6fb2" fill-opacity="0.22" stroke="#1f6fb2" stroke-width="1"/>
+<rect x="363" y="130" width="44" height="120" fill="#1f6fb2" fill-opacity="0.22" stroke="#1f6fb2" stroke-width="1"/>
+<rect x="363" y="130" width="44" height="40" fill="#b3261e" fill-opacity="0.35"/>
+<text x="455" y="155" font-size="12" fill="#b3261e" text-anchor="start" font-weight="normal">risk of</text>
+<text x="455" y="170" font-size="12" fill="#b3261e" text-anchor="start" font-weight="normal">cross-thread</text>
+<text x="385" y="275" font-size="12" fill="#1c2733" text-anchor="middle" font-weight="normal">max reach from each side</text>
+<text x="640" y="30" font-size="14" fill="#1d7a4f" text-anchor="middle" font-weight="bold">3. Both sides, threads do not meet</text>
+<rect x="580" y="50" width="120" height="200" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+<rect x="624" y="50" width="32" height="200" fill="#ffffff" stroke="#34495e" stroke-width="1"/>
+<rect x="618" y="50" width="44" height="85" fill="#1f6fb2" fill-opacity="0.22" stroke="#1f6fb2" stroke-width="1"/>
+<rect x="618" y="165" width="44" height="85" fill="#1f6fb2" fill-opacity="0.22" stroke="#1f6fb2" stroke-width="1"/>
+<text x="640" y="275" font-size="12" fill="#1c2733" text-anchor="middle" font-weight="normal">max reach from each side</text>
+</svg>

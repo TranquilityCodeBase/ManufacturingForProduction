@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thread Pilot Hole Tables | DFM Reference</title>
+  <meta name="description" content="Modeled pilot hole diameters and maximum thread depths for UNC, UNF, metric, NPT, coil insert, key insert and turned OD threads.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/data/thread_data.js" defer></script>
+  <script src="../js/reference_tables.js" defer></script>
+</head>
+<body data-page="thread_tables" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">Holes &amp; Threads</p>
+          <h1>Thread Pilot Hole Tables</h1>
+          <p class="lead">The hole diameter to model for each thread when the part is quoted by an automated CNC service such as ProtoLabs. The software reads the plain hole diameter and offers the matching threads; it never needs modeled thread geometry.</p>
+        </header>
+
+        <div class="callout rule">
+          <span class="callout-title">How to use these tables</span>
+          <p>1. Model a plain hole at the <strong>Modeled pilot dia</strong> (any value between Min and Max works). 2. Keep the thread length at or below <strong>Max thread depth</strong>, measured from the top of the surrounding features. 3. Assign the thread in the quote (or call it out on the drawing). Obstructions, lead-in chamfers or fixturing can reduce the depth actually available.</p>
+        </div>
+
+        <div class="callout warn">
+          <span class="callout-title">Vendor specific</span>
+          <p>These ranges are tuned to one vendor's thread mills. If your shop taps holes with standard taps, use the <a href="tap_drill_charts.html">tap drill charts</a>. Vendor tables change, so re-check the linked source page before release.</p>
+        </div>
+
+        <h2 id="standard-holes" data-nav="Standard threaded holes">Standard threaded holes (milled)</h2>
+        <p>Right-hand internal threads cut with a thread mill. UNC and UNF from #2 to 1/2 in, metric from M2 to M12 (M1.6 in soft metals only). Hole axes must line up with one of the part's cardinal machining directions.</p>
+        <div data-thread-group="standard"></div>
+
+        <h2 id="coil-inserts">Coil insert threaded holes</h2>
+        <p>Holes cut with the oversize STI thread for HeliCoil-style coil inserts. The thread listed is the screw size the installed insert accepts. The vendor cuts the thread; you supply and install the insert.</p>
+        <div data-thread-group="coil"></div>
+
+        <h2 id="key-inserts">Key insert threaded holes</h2>
+        <p>Holes for key-locking inserts. The thread listed is the fitting thread cut in the part for the insert's outside thread; match it to the insert maker's data sheet. Key-locking inserts also need a counterbore for the keys.</p>
+        <div data-thread-group="key"></div>
+
+        <h2 id="npt-threads" data-nav="Special: NPT pipe threads">Special threads: NPT pipe threads</h2>
+        <p>Tapered pipe threads for fluid and air fittings. Model a straight pilot hole at the listed diameter with at least the listed pilot depth.</p>
+        <div data-npt-table></div>
+
+        <h2 id="od-threads" data-nav="OD threads (turned)">External (OD) threads on turned parts</h2>
+        <p>External threads are cut on the lathe. Model the plain shaft at the listed diameter, with no thread geometry, and choose the thread in the quote. Maximum threaded length is about twice the nominal diameter.</p>
+        <div data-thread-group="od"></div>
+
+        <div class="callout source">
+          <span class="callout-title">Sources</span>
+          <p>ProtoLabs threaded hole guidelines: <a href="https://www.protolabs.com/services/cnc-machining/threaded-holes-guidelines/standard-holes/" target="_blank" rel="noopener">standard holes</a>, <a href="https://www.protolabs.com/services/cnc-machining/threaded-holes-guidelines/coil-inserts/" target="_blank" rel="noopener">coil inserts</a>, <a href="https://www.protolabs.com/services/cnc-machining/threaded-holes-guidelines/key-inserts/" target="_blank" rel="noopener">key inserts</a>, <a href="https://www.protolabs.com/services/cnc-machining/threaded-holes-guidelines/od-threads/" target="_blank" rel="noopener">OD threads</a>. Design rules are on <a href="holes_threading.html">Hole &amp; Thread Design Rules</a>.</p>
+        </div>
+
+        <footer class="site-footer">Data transcribed from vendor thread guidelines. Values are guidelines; confirm against the vendor's current tables and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="370" viewBox="0 0 700 370" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Blind tapped hole proportions">
+<title>Blind tapped hole proportions</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f6fb2"/></marker></defs>
+<rect width="700" height="370" fill="#ffffff"/>
+<rect x="80" y="50" width="300" height="270" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
+<polygon points="209.0,50.0 203.0,56.0 209.0,62.0 203.0,68.0 209.0,74.0 203.0,80.0 209.0,86.0 203.0,92.0 209.0,98.0 203.0,104.0 209.0,110.0 203.0,116.0 209.0,122.0 203.0,128.0 209.0,134.0 203.0,140.0 209.0,146.0 203.0,152.0 209.0,158.0 203.0,164.0 209.0,170.0 203.0,176.0 257.0,176.0 251.0,170.0 257.0,164.0 251.0,158.0 257.0,152.0 251.0,146.0 257.0,140.0 251.0,134.0 257.0,128.0 251.0,122.0 257.0,116.0 251.0,110.0 257.0,104.0 251.0,98.0 257.0,92.0 251.0,86.0 257.0,80.0 251.0,74.0 257.0,68.0 251.0,62.0 257.0,56.0 251.0,50.0" fill="#ffffff" stroke="none"/>
+<polygon points="209,176 251,176 251,236 230,249 209,236" fill="#ffffff" stroke="none"/>
+<polyline points="209.0,50.0 203.0,56.0 209.0,62.0 203.0,68.0 209.0,74.0 203.0,80.0 209.0,86.0 203.0,92.0 209.0,98.0 203.0,104.0 209.0,110.0 203.0,116.0 209.0,122.0 203.0,128.0 209.0,134.0 203.0,140.0 209.0,146.0 203.0,152.0 209.0,158.0 203.0,164.0 209.0,170.0 203.0,176.0 257.0,176.0 251.0,170.0 257.0,164.0 251.0,158.0 257.0,152.0 251.0,146.0 257.0,140.0 251.0,134.0 257.0,128.0 251.0,122.0 257.0,116.0 251.0,110.0 257.0,104.0 251.0,98.0 257.0,92.0 251.0,86.0 257.0,80.0 251.0,74.0 257.0,68.0 251.0,62.0 257.0,56.0 251.0,50.0" fill="none" stroke="#34495e" stroke-width="1.2"/>
+<polyline points="209,176 209,236 230,249 251,236 251,176" fill="none" stroke="#34495e" stroke-width="1.5"/>
+<line x1="420" y1="50" x2="420" y2="176" stroke="#1f6fb2" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line x1="262" y1="50" x2="428" y2="50" stroke="#1f6fb2" stroke-width="0.8" stroke-dasharray="3 3"/>
+<line x1="262" y1="176" x2="428" y2="176" stroke="#1f6fb2" stroke-width="0.8" stroke-dasharray="3 3"/>
+<text x="434" y="111.0" font-size="14" fill="#1f6fb2" text-anchor="start" font-weight="bold">Thread length</text>
+<text x="434" y="129.0" font-size="13" fill="#1c2733" text-anchor="start" font-weight="normal">1.5-2 x D typical, 3 x D max</text>
+<line x1="420" y1="176" x2="420" y2="236" stroke="#1f6fb2" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line x1="262" y1="176" x2="428" y2="176" stroke="#1f6fb2" stroke-width="0.8" stroke-dasharray="3 3"/>
+<line x1="262" y1="236" x2="428" y2="236" stroke="#1f6fb2" stroke-width="0.8" stroke-dasharray="3 3"/>
+<text x="434" y="204.0" font-size="14" fill="#1f6fb2" text-anchor="start" font-weight="bold">Unthreaded</text>
+<text x="434" y="222.0" font-size="13" fill="#1c2733" text-anchor="start" font-weight="normal">at least 0.5 x D</text>
+<line x1="420" y1="236" x2="420" y2="249" stroke="#1f6fb2" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<line x1="262" y1="236" x2="428" y2="236" stroke="#1f6fb2" stroke-width="0.8" stroke-dasharray="3 3"/>
+<line x1="262" y1="249" x2="428" y2="249" stroke="#1f6fb2" stroke-width="0.8" stroke-dasharray="3 3"/>
+<text x="434" y="240.5" font-size="14" fill="#1f6fb2" text-anchor="start" font-weight="bold"></text>
+<text x="434" y="258.5" font-size="13" fill="#1c2733" text-anchor="start" font-weight="normal"></text>
+<text x="434" y="262" font-size="13" fill="#1c2733" text-anchor="start" font-weight="normal">Drill point (118°) - not threaded</text>
+<line x1="203" y1="36" x2="257" y2="36" stroke="#1f6fb2" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="230" y="28" font-size="14" fill="#1f6fb2" text-anchor="middle" font-weight="bold">D</text>
+<text x="350" y="342" font-size="13" fill="#1c2733" text-anchor="middle" font-weight="normal">Engagement past about 1.5 x D adds little strength in steel.</text>
+<text x="350" y="358" font-size="13" fill="#1c2733" text-anchor="middle" font-weight="normal">Use about 2 x D in aluminum; use inserts in plastic.</text>
+</svg>
