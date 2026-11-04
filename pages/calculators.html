@@ -6,8 +6,22 @@
   <title>Calculators &amp; Scratch Pad | DFM Reference</title>
   <meta name="description" content="Inside corner radius picker, unit conversions, part mass and drill finder, with a scratch pad for notes while working in CAD.">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f15" media="(prefers-color-scheme: dark)">
+  <!-- Link previews when the page is shared (Teams, Slack, email) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DFM Reference">
+  <meta property="og:title" content="Calculators &amp; Scratch Pad | DFM Reference">
+  <meta property="og:description" content="Inside corner radius picker, unit conversions, part mass and drill finder, with a scratch pad for notes while working in CAD.">
+  <meta property="og:url" content="https://tranquilitycodebase.github.io/ManufacturingForProduction/pages/calculators.html">
+  <meta property="og:image" content="https://tranquilitycodebase.github.io/ManufacturingForProduction/images/og_image.png">
+  <meta name="twitter:card" content="summary_large_image">
   <script src="../js/site_nav.js" defer></script>
   <script src="../js/main.js" defer></script>
+  <script src="../js/scratch_pad.js" defer></script>
+  <script src="../js/data/search_index.js" defer></script>
+  <script src="../js/site_search.js" defer></script>
   <script src="../js/data/cutter_data.js" defer></script>
   <script src="../js/data/tap_drill_data.js" defer></script>
   <script src="../js/calculators.js" defer></script>
@@ -51,16 +65,16 @@
           <!-- Scratch pad -->
           <aside class="pad-panel">
             <h2 id="scratch-pad" style="margin-top:0">Scratch pad</h2>
-            <div class="scratch calc">
+            <div class="scratch calc" data-pad-root>
               <label for="scratch-text">Notes for the part you are working on</label>
-              <textarea id="scratch-text" spellcheck="true" placeholder="Part number, critical dimensions, cutter choices, questions for the shop..."></textarea>
+              <textarea id="scratch-text" data-pad-text spellcheck="true" placeholder="Part number, critical dimensions, cutter choices, questions for the shop..."></textarea>
               <div class="calc-row">
-                <button type="button" class="btn" id="scratch-stamp">Time stamp</button>
-                <button type="button" class="btn" id="scratch-copy">Copy</button>
-                <button type="button" class="btn" id="scratch-download">Download .txt</button>
-                <button type="button" class="btn" id="scratch-clear">Clear</button>
+                <button type="button" class="btn" data-pad-action="stamp">Time stamp</button>
+                <button type="button" class="btn" data-pad-action="copy">Copy</button>
+                <button type="button" class="btn" data-pad-action="download">Download .txt</button>
+                <button type="button" class="btn" data-pad-action="clear">Clear</button>
               </div>
-              <span class="save-state" id="scratch-state">Notes are saved in this browser only. Nothing is sent anywhere.</span>
+              <span class="save-state" data-pad-state>Notes are saved in this browser only. Nothing is sent anywhere.</span>
             </div>
           </aside>
         </div>

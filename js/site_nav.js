@@ -58,6 +58,7 @@ window.DFM_NAV = [
     group: "Tools",
     items: [
       { id: "calculators", title: "Calculators & Scratch Pad", href: "pages/calculators.html" },
+      { id: "glossary", title: "Glossary", href: "pages/glossary.html" },
       { id: "references", title: "Sources & References", href: "pages/references.html" }
     ]
   }

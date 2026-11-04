@@ -1,6 +1,7 @@
 /* =====================================================================
    Calculators page: unit converters, part mass, fraction / drill finder
-   and the scratch pad. Needs js/data/tap_drill_data.js for drill sizes.
+   cards. Needs js/data/tap_drill_data.js for drill sizes. The scratch pad
+   itself lives in js/scratch_pad.js (shared by every page).
    Results are shown as "Label = value" rows (window.DFM.renderResults in
    main.js). Each row has a checkbox; "Send to pad" appends only the
    checked rows to the scratch pad, one per line.
@@ -415,100 +416,8 @@
     update();
   }
 
-  // ---------- Scratch pad ----------
-  const padKey = "dfm-scratch-pad";
-  let padArea = null;
-  let padState = null;
-  let saveTimer = null;
-
-  function savePad() {
-    // Save shortly after typing stops
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(function () {
-      window.DFM.writeSetting(padKey, padArea.value);
-      padState.textContent = "Saved in this browser " + new Date().toLocaleTimeString();
-    }, 400);
-  }
-
-  function appendToPad(text) {
-    if (!padArea) {
-      return;
-    }
-    // Each send is one block of lines; a blank line separates it from the previous block
-    let prefix = "";
-    if (padArea.value.trim() !== "") {
-      prefix = padArea.value.endsWith("\n\n") ? "" : (padArea.value.endsWith("\n") ? "\n" : "\n\n");
-    }
-    padArea.value += prefix + text + "\n";
-    padArea.scrollTop = padArea.scrollHeight;    // keep the newest line visible
-    savePad();
-  }
-
-  function initScratchPad() {
-    padArea = document.getElementById("scratch-text");
-    padState = document.getElementById("scratch-state");
-    if (!padArea) {
-      return;
-    }
-
-    // Restore the last saved notes
-    const saved = window.DFM.readSetting(padKey);
-    if (saved) {
-      padArea.value = saved;
-      padState.textContent = "Restored notes saved in this browser";
-    }
-    padArea.addEventListener("input", savePad);
-
-    // Insert a time stamp line
-    document.getElementById("scratch-stamp").addEventListener("click", function () {
-      appendToPad("--- " + new Date().toLocaleString() + " ---");
-    });
-
-    // Copy the whole pad to the clipboard
-    document.getElementById("scratch-copy").addEventListener("click", function () {
-      padArea.select();
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(padArea.value).then(function () {
-          padState.textContent = "Copied to clipboard";
-        }, function () {
-          padState.textContent = "Select the text and press Ctrl+C to copy";
-        });
-      } else {
-        padState.textContent = "Select the text and press Ctrl+C to copy";
-      }
-    });
-
-    // Download the pad as a text file
-    document.getElementById("scratch-download").addEventListener("click", function () {
-      const blob = new Blob([padArea.value.replace(/\r?\n/g, "\r\n")], { type: "text/plain" });   // CRLF for Windows editors
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "dfm_notes_" + new Date().toISOString().slice(0, 10) + ".txt";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(function () {
-        URL.revokeObjectURL(link.href);
-      }, 1000);
-    });
-
-    // Clear after confirmation
-    document.getElementById("scratch-clear").addEventListener("click", function () {
-      if (padArea.value && !window.confirm("Clear the scratch pad? This cannot be undone.")) {
-        return;
-      }
-      padArea.value = "";
-      savePad();
-    });
-  }
-
-  // Let other tools on the page (corner radius picker) add lines to the pad
-  window.DFM_PAD = { append: appendToPad };
-
   // ---------- Start up ----------
   document.addEventListener("DOMContentLoaded", function () {
-    initScratchPad();
-
     // Unit converter cards
     const grid = document.getElementById("converter-grid");
     if (grid) {
