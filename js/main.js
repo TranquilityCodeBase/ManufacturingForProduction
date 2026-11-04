@@ -476,12 +476,114 @@
     });
   }
 
+  // ---------- Selectable result list (calculators) ----------
+  // Shows calculator results as "Label = value" rows. When a scratch pad is on
+  // the page each row gets a checkbox; only checked rows are sent to the pad.
+  // Unchecked rows are remembered per calculator (by item key) in localStorage.
+  const pickKey = "dfm-result-picks";
+
+  function readPicks() {
+    try {
+      return JSON.parse(readSetting(pickKey) || "{}") || {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function escapeText(text) {
+    return String(text).replace(/[&<>"]/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[ch];
+    });
+  }
+
+  // items: [{ key, label, value, big }] ; returns nothing, renders into container
+  function renderResults(container, calcId, items) {
+    const selectable = Boolean(window.DFM_PAD);   // checkboxes only when a pad exists
+    const unchecked = readPicks()[calcId] || [];
+    container.classList.add("result-list");
+    container.dataset.calcId = calcId;
+    container.innerHTML = items.map(function (item) {
+      const isOn = unchecked.indexOf(item.key) === -1;
+      const text = '<span class="result-label">' + escapeText(item.label) + '</span><span class="result-eq">=</span>' +
+        '<span class="result-value">' + escapeText(item.value) + "</span>";
+      if (!selectable) {
+        return '<div class="result-row' + (item.big ? " main" : "") + '">' + text + "</div>";
+      }
+      return '<label class="result-row' + (item.big ? " main" : "") + '">' +
+        '<input type="checkbox" data-key="' + escapeText(item.key) + '"' + (isOn ? " checked" : "") +
+        ' aria-label="Include ' + escapeText(item.label) + ' when sending to the pad">' + text + "</label>";
+    }).join("");
+    container._items = items;                    // kept for building the pad text
+
+    // Remember which rows the user turned off
+    container.querySelectorAll("input[type=checkbox]").forEach(function (box) {
+      box.addEventListener("change", function () {
+        const picks = readPicks();
+        const off = (picks[calcId] || []).filter(function (key) {
+          return key !== box.dataset.key;
+        });
+        if (!box.checked) {
+          off.push(box.dataset.key);
+        }
+        picks[calcId] = off;
+        writeSetting(pickKey, JSON.stringify(picks));
+      });
+    });
+  }
+
+  // Text for the pad: one "Label = value" line per checked row
+  function resultText(container) {
+    const items = container._items || [];
+    return items.filter(function (item) {
+      const box = container.querySelector('input[data-key="' + item.key.replace(/"/g, '\\"') + '"]');
+      return !box || box.checked;
+    }).map(function (item) {
+      return item.label + " = " + item.value;
+    }).join("\n");
+  }
+
+  // Set every checkbox in a result list on or off (All / None buttons)
+  function setAllResults(container, on) {
+    container.querySelectorAll("input[type=checkbox]").forEach(function (box) {
+      if (box.checked !== on) {
+        box.checked = on;
+        box.dispatchEvent(new Event("change"));
+      }
+    });
+  }
+
+  // Standard footer for a calculator card: Send to pad + All / None
+  function resultActions(container) {
+    const row = document.createElement("div");
+    row.className = "calc-row calc-actions";
+    if (!window.DFM_PAD) {
+      return row;                                // no pad on this page: no buttons
+    }
+    row.innerHTML = '<button type="button" class="btn primary">Send to pad</button>' +
+      '<button type="button" class="btn link-btn" data-all="1">All</button>' +
+      '<button type="button" class="btn link-btn" data-all="0">None</button>';
+    row.querySelector(".primary").addEventListener("click", function () {
+      const text = resultText(container);
+      if (text) {
+        window.DFM_PAD.append(text);
+      }
+    });
+    row.querySelectorAll("[data-all]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setAllResults(container, btn.dataset.all === "1");
+      });
+    });
+    return row;
+  }
+
   // Expose helpers so page scripts that render content later can reuse them
   window.DFM = {
     initTabs: initTabs,
     initTableFilters: initTableFilters,
     readSetting: readSetting,
-    writeSetting: writeSetting
+    writeSetting: writeSetting,
+    renderResults: renderResults,
+    resultActions: resultActions
   };
 
   // ---------- Start up ----------

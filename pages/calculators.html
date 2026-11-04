@@ -22,15 +22,15 @@
         <header class="page-header">
           <p class="eyebrow">Tools</p>
           <h1>Calculators &amp; Scratch Pad</h1>
-          <p class="lead">Quick checks to run while a CAD model is open. Every result has a <em>Send to pad</em> button so you can collect numbers and notes in the scratch pad as you go.</p>
+          <p class="lead">Quick checks to run while a CAD model is open. Tick the results you want and press <em>Send to pad</em> to collect them in the scratch pad as <code>Label = value</code> lines while you work.</p>
         </header>
 
         <div class="calc-layout">
           <div>
             <!-- Corner / pocket radius picker (rendered by js/corner_radius_tool.js) -->
-            <h2 id="corner-picker" data-nav="Corner radius picker">Inside corner &amp; pocket radius picker</h2>
+            <h2 id="corner-picker" data-nav="Corner radius picker">Corners &amp; pockets</h2>
             <p>New designs often call out a corner radius that exactly matches a cutter, such as R0.125 for a 1/4 in end mill. The tool then has to stop and pivot in the corner, so the shop finishes it with a smaller, slower cutter. Draw the corner a little larger than the cutter radius (about 1.3 x) and give the floor a standard bullnose fillet smaller than the wall radius (the picker suggests one; sharp floors are not accepted in hard metals). See <a href="corners_pockets.html">Inside Corners &amp; Pockets</a> for the reasoning and diagrams.</p>
-            <div data-corner-tool data-hide-title></div>
+            <div data-corner-tool></div>
 
             <!-- Unit converters (rendered by js/calculators.js) -->
             <h2 id="conversions" data-nav="Unit conversions">Unit conversions (metric / inch)</h2>

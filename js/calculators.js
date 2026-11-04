@@ -1,90 +1,101 @@
 /* =====================================================================
    Calculators page: unit converters, part mass, fraction / drill finder
    and the scratch pad. Needs js/data/tap_drill_data.js for drill sizes.
-   Every result box has a "Send to pad" button that appends the result
-   to the scratch pad so notes can be built while working in CAD.
+   Results are shown as "Label = value" rows (window.DFM.renderResults in
+   main.js). Each row has a checkbox; "Send to pad" appends only the
+   checked rows to the scratch pad, one per line.
    ===================================================================== */
 
 (function () {
   "use strict";
 
   // ---------- Unit definitions: factor converts the unit to the base unit ----------
+  // short = text used in results and pad lines, label = text in the unit list
   const converters = [
     {
       id: "length",
       title: "Length",
-      base: "mm",
       defaultUnit: "in",
       units: [
-        { id: "in", label: "inch (in)", factor: 25.4 },
-        { id: "ft", label: "foot (ft)", factor: 304.8 },
-        { id: "thou", label: "thou / mil (0.001 in)", factor: 0.0254 },
-        { id: "mm", label: "millimetre (mm)", factor: 1 },
-        { id: "cm", label: "centimetre (cm)", factor: 10 },
-        { id: "m", label: "metre (m)", factor: 1000 },
-        { id: "um", label: "micron (µm)", factor: 0.001 }
+        { id: "in", short: "in", label: "inch (in)", factor: 25.4 },
+        { id: "ft", short: "ft", label: "foot (ft)", factor: 304.8 },
+        { id: "thou", short: "thou", label: "thou / mil (0.001 in)", factor: 0.0254 },
+        { id: "mm", short: "mm", label: "millimetre (mm)", factor: 1 },
+        { id: "cm", short: "cm", label: "centimetre (cm)", factor: 10 },
+        { id: "m", short: "m", label: "metre (m)", factor: 1000 },
+        { id: "um", short: "µm", label: "micron (µm)", factor: 0.001 }
+      ]
+    },
+    {
+      id: "speed",
+      title: "Speed / feed rate",
+      defaultUnit: "mms",
+      units: [
+        { id: "mms", short: "mm/s", label: "mm per second (mm/s)", factor: 1 },
+        { id: "mmmin", short: "mm/min", label: "mm per minute (mm/min)", factor: 1 / 60 },
+        { id: "mmin", short: "m/min", label: "metres per minute (m/min, SMM)", factor: 1000 / 60 },
+        { id: "ms", short: "m/s", label: "metres per second (m/s)", factor: 1000 },
+        { id: "ips", short: "in/s", label: "inches per second (in/s)", factor: 25.4 },
+        { id: "ipm", short: "IPM", label: "inches per minute (IPM)", factor: 25.4 / 60 },
+        { id: "sfm", short: "ft/min", label: "feet per minute (ft/min, SFM)", factor: 304.8 / 60 },
+        { id: "fps", short: "ft/s", label: "feet per second (ft/s)", factor: 304.8 }
       ]
     },
     {
       id: "mass",
       title: "Mass / weight",
-      base: "g",
       defaultUnit: "lb",
       units: [
-        { id: "lb", label: "pound (lb)", factor: 453.59237 },
-        { id: "oz", label: "ounce (oz)", factor: 28.349523125 },
-        { id: "g", label: "gram (g)", factor: 1 },
-        { id: "kg", label: "kilogram (kg)", factor: 1000 }
+        { id: "lb", short: "lb", label: "pound (lb)", factor: 453.59237 },
+        { id: "oz", short: "oz", label: "ounce (oz)", factor: 28.349523125 },
+        { id: "g", short: "g", label: "gram (g)", factor: 1 },
+        { id: "kg", short: "kg", label: "kilogram (kg)", factor: 1000 }
       ]
     },
     {
       id: "force",
       title: "Force",
-      base: "N",
       defaultUnit: "lbf",
       units: [
-        { id: "lbf", label: "pound-force (lbf)", factor: 4.4482216 },
-        { id: "N", label: "newton (N)", factor: 1 },
-        { id: "kN", label: "kilonewton (kN)", factor: 1000 },
-        { id: "kgf", label: "kilogram-force (kgf)", factor: 9.80665 }
+        { id: "lbf", short: "lbf", label: "pound-force (lbf)", factor: 4.4482216 },
+        { id: "N", short: "N", label: "newton (N)", factor: 1 },
+        { id: "kN", short: "kN", label: "kilonewton (kN)", factor: 1000 },
+        { id: "kgf", short: "kgf", label: "kilogram-force (kgf)", factor: 9.80665 }
       ]
     },
     {
       id: "torque",
       title: "Torque",
-      base: "Nm",
       defaultUnit: "inlb",
       units: [
-        { id: "inlb", label: "inch-pound (in·lbf)", factor: 0.112984829 },
-        { id: "ftlb", label: "foot-pound (ft·lbf)", factor: 1.355817948 },
-        { id: "Nm", label: "newton-metre (N·m)", factor: 1 },
-        { id: "Ncm", label: "newton-centimetre (N·cm)", factor: 0.01 }
+        { id: "inlb", short: "in·lbf", label: "inch-pound (in·lbf)", factor: 0.112984829 },
+        { id: "ftlb", short: "ft·lbf", label: "foot-pound (ft·lbf)", factor: 1.355817948 },
+        { id: "Nm", short: "N·m", label: "newton-metre (N·m)", factor: 1 },
+        { id: "Ncm", short: "N·cm", label: "newton-centimetre (N·cm)", factor: 0.01 }
       ]
     },
     {
       id: "pressure",
       title: "Pressure / stress",
-      base: "kPa",
       defaultUnit: "psi",
       units: [
-        { id: "psi", label: "psi", factor: 6.894757 },
-        { id: "ksi", label: "ksi", factor: 6894.757 },
-        { id: "kPa", label: "kilopascal (kPa)", factor: 1 },
-        { id: "MPa", label: "megapascal (MPa = N/mm²)", factor: 1000 },
-        { id: "bar", label: "bar", factor: 100 }
+        { id: "psi", short: "psi", label: "psi", factor: 6.894757 },
+        { id: "ksi", short: "ksi", label: "ksi", factor: 6894.757 },
+        { id: "kPa", short: "kPa", label: "kilopascal (kPa)", factor: 1 },
+        { id: "MPa", short: "MPa", label: "megapascal (MPa = N/mm²)", factor: 1000 },
+        { id: "bar", short: "bar", label: "bar", factor: 100 }
       ]
     },
     {
       id: "volume",
       title: "Volume",
-      base: "cm3",
       defaultUnit: "in3",
       units: [
-        { id: "in3", label: "cubic inch (in³)", factor: 16.387064 },
-        { id: "cm3", label: "cubic centimetre (cm³ = mL)", factor: 1 },
-        { id: "mm3", label: "cubic millimetre (mm³)", factor: 0.001 },
-        { id: "L", label: "litre (L)", factor: 1000 },
-        { id: "galUS", label: "US gallon", factor: 3785.411784 }
+        { id: "in3", short: "in³", label: "cubic inch (in³)", factor: 16.387064 },
+        { id: "cm3", short: "cm³", label: "cubic centimetre (cm³ = mL)", factor: 1 },
+        { id: "mm3", short: "mm³", label: "cubic millimetre (mm³)", factor: 0.001 },
+        { id: "L", short: "L", label: "litre (L)", factor: 1000 },
+        { id: "galUS", short: "US gal", label: "US gallon", factor: 3785.411784 }
       ]
     }
   ];
@@ -131,25 +142,20 @@
     return parseFloat(value.toPrecision(6)).toString();
   }
 
-  function escapeHtml(text) {
-    return String(text).replace(/[&<>"]/g, function (ch) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[ch];
-    });
+  // Builds a calculator card: title, input row(s), result list, and the pad buttons.
+  // inputsHtml = markup for the inputs; returns the result list element.
+  function buildCard(host, title, inputsHtml, note) {
+    host.innerHTML = "<h3>" + title + "</h3>" +
+      (note ? '<p class="table-note" style="margin:0 0 10px">' + note + "</p>" : "") +
+      inputsHtml + '<div class="calc-out"></div>';
+    const out = host.querySelector(".calc-out");
+    host.appendChild(window.DFM.resultActions(out));
+    return out;
   }
 
-  // Each result box gets a button that appends its text to the scratch pad
-  function padButton(getText) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "btn";
-    btn.textContent = "Send to pad";
-    btn.addEventListener("click", function () {
-      const text = getText();
-      if (text) {
-        appendToPad(text);
-      }
-    });
-    return btn;
+  // Shows a message instead of results (bad input)
+  function showMessage(out, calcId, text) {
+    window.DFM.renderResults(out, calcId, [{ key: "msg", label: "Input", value: text }]);
   }
 
   // ---------- Generic converter card ----------
@@ -158,17 +164,11 @@
       return '<option value="' + u.id + '"' + (u.id === def.defaultUnit ? " selected" : "") + ">" + u.label + "</option>";
     }).join("");
 
-    host.innerHTML =
-      "<h3>" + def.title + "</h3>" +
+    const out = buildCard(host, def.title,
       '<div class="calc-row"><input type="number" step="any" value="1" aria-label="' + def.title + ' value">' +
-      '<select aria-label="' + def.title + ' unit">' + options + "</select></div>" +
-      '<div class="calc-out"></div>' +
-      '<div class="calc-row" style="margin:8px 0 0"></div>';
-
+      '<select aria-label="' + def.title + ' unit">' + options + "</select></div>");
     const input = host.querySelector("input");
     const select = host.querySelector("select");
-    const out = host.querySelector(".calc-out");
-    let lastText = "";
 
     function update() {
       const value = parseFloat(input.value);
@@ -176,50 +176,37 @@
         return u.id === select.value;
       });
       if (!isFinite(value)) {
-        out.textContent = "Enter a number";
-        lastText = "";
+        showMessage(out, def.id, "enter a number");
         return;
       }
       const baseValue = value * from.factor;                    // convert to base unit first
-      const lines = def.units.filter(function (u) {
-        return u.id !== from.id;
-      }).map(function (u) {
-        return niceNumber(baseValue / u.factor) + "  " + u.label;  // then from base to each target
+      // First row is the entered value, then one row per other unit
+      const items = [{ key: "input", label: def.title, value: niceNumber(value) + " " + from.short, big: true }];
+      def.units.forEach(function (u) {
+        if (u.id !== from.id) {
+          items.push({ key: u.id, label: u.short, value: niceNumber(baseValue / u.factor) });
+        }
       });
-      out.innerHTML = '<span class="big">' + escapeHtml(niceNumber(value) + " " + from.label) + "</span>\n= " +
-        lines.map(escapeHtml).join("\n= ");
-      lastText = def.title + ": " + niceNumber(value) + " " + from.id + " = " + def.units.filter(function (u) {
-        return u.id !== from.id;
-      }).map(function (u) {
-        return niceNumber(baseValue / u.factor) + " " + u.id;
-      }).join(", ");
+      window.DFM.renderResults(out, def.id, items);
     }
 
     input.addEventListener("input", update);
     select.addEventListener("change", update);
-    host.querySelector(".calc-row:last-child").appendChild(padButton(function () {
-      return lastText;
-    }));
     update();
   }
 
   // ---------- Temperature (offset units, so it is its own card) ----------
   function renderTemperature(host) {
-    host.innerHTML =
-      "<h3>Temperature</h3>" +
+    const out = buildCard(host, "Temperature",
       '<div class="calc-row"><input type="number" step="any" value="70" aria-label="Temperature">' +
-      '<select aria-label="Temperature unit"><option value="F">°F</option><option value="C">°C</option><option value="K">K</option></select></div>' +
-      '<div class="calc-out"></div><div class="calc-row" style="margin:8px 0 0"></div>';
-
+      '<select aria-label="Temperature unit"><option value="F">°F</option><option value="C">°C</option><option value="K">K</option></select></div>');
     const input = host.querySelector("input");
     const select = host.querySelector("select");
-    const out = host.querySelector(".calc-out");
-    let lastText = "";
 
     function update() {
       const value = parseFloat(input.value);
       if (!isFinite(value)) {
-        out.textContent = "Enter a number";
+        showMessage(out, "temperature", "enter a number");
         return;
       }
       // Convert everything through Celsius
@@ -229,18 +216,20 @@
       } else if (select.value === "K") {
         celsius = value - 273.15;
       }
-      const fahrenheit = celsius * 9 / 5 + 32;
-      const kelvin = celsius + 273.15;
-      out.innerHTML = '<span class="big">' + niceNumber(value) + " " + (select.value === "K" ? "K" : "°" + select.value) + "</span>\n= " +
-        niceNumber(celsius) + " °C\n= " + niceNumber(fahrenheit) + " °F\n= " + niceNumber(kelvin) + " K";
-      lastText = "Temperature: " + niceNumber(celsius) + " °C = " + niceNumber(fahrenheit) + " °F";
+      const all = [
+        { key: "C", label: "°C", value: niceNumber(celsius) },
+        { key: "F", label: "°F", value: niceNumber(celsius * 9 / 5 + 32) },
+        { key: "K", label: "K", value: niceNumber(celsius + 273.15) }
+      ];
+      const items = [{ key: "input", label: "Temperature", value: niceNumber(value) + " " + (select.value === "K" ? "K" : "°" + select.value), big: true }]
+        .concat(all.filter(function (item) {
+          return item.key !== select.value;
+        }));
+      window.DFM.renderResults(out, "temperature", items);
     }
 
     input.addEventListener("input", update);
     select.addEventListener("change", update);
-    host.querySelector(".calc-row:last-child").appendChild(padButton(function () {
-      return lastText;
-    }));
     update();
   }
 
@@ -256,15 +245,13 @@
       return '<optgroup label="' + g + '">' + groups[g].join("") + "</optgroup>";
     }).join("") + '<option value="custom">Custom density...</option>';
 
-    host.innerHTML =
-      "<h3>Part mass from CAD volume</h3>" +
-      '<p class="table-note" style="margin:0 0 10px">Copy the volume from your CAD mass properties, pick a material, get the weight.</p>' +
+    const out = buildCard(host, "Part mass from CAD volume",
       '<div class="calc-row"><input type="number" step="any" value="1" aria-label="Volume">' +
-      '<select aria-label="Volume unit"><option value="16.387064">in³</option><option value="1">cm³</option><option value="0.001">mm³</option></select></div>' +
+      '<select aria-label="Volume unit"><option value="in3">in³</option><option value="cm3">cm³</option><option value="mm3">mm³</option></select></div>' +
       '<div class="calc-row"><select aria-label="Material" style="flex:1 1 100%">' + matOptions + "</select></div>" +
       '<div class="calc-row custom-density" hidden><input type="number" step="any" value="1.00" aria-label="Custom density"><span>g/cm³</span></div>' +
-      '<div class="calc-row"><label>Quantity <input type="number" min="1" step="1" value="1" style="width:90px" aria-label="Quantity"></label></div>' +
-      '<div class="calc-out"></div><div class="calc-row" style="margin:8px 0 0"></div>';
+      '<div class="calc-row"><label>Quantity <input type="number" min="1" step="1" value="1" style="width:90px" aria-label="Quantity"></label></div>',
+      "Copy the volume from your CAD mass properties, pick a material, get the weight.");
 
     const inputs = host.querySelectorAll("input");
     const volumeIn = inputs[0];
@@ -274,8 +261,8 @@
     const volUnit = selects[0];
     const matSel = selects[1];
     const customRow = host.querySelector(".custom-density");
-    const out = host.querySelector(".calc-out");
-    let lastText = "";
+    const volumeToCm3 = { in3: 16.387064, cm3: 1, mm3: 0.001 };   // unit -> cm³ factor
+    const volumeLabel = { in3: "in³", cm3: "cm³", mm3: "mm³" };
 
     function update() {
       const volume = parseFloat(volumeIn.value);
@@ -283,18 +270,27 @@
       const isCustom = matSel.value === "custom";
       customRow.hidden = !isCustom;
       const density = isCustom ? parseFloat(customIn.value) : densities[parseInt(matSel.value, 10)].value;
-      const matName = isCustom ? "custom " + density + " g/cm³" : densities[parseInt(matSel.value, 10)].name;
+      const matName = isCustom ? "Custom" : densities[parseInt(matSel.value, 10)].name;
       if (!isFinite(volume) || !isFinite(density)) {
-        out.textContent = "Enter volume and density";
+        showMessage(out, "mass-part", "enter volume and density");
         return;
       }
-      const cm3 = volume * parseFloat(volUnit.value);   // volume in cm³
-      const grams = cm3 * density * qty;                 // mass = volume x density
-      out.innerHTML = '<span class="big">' + niceNumber(grams) + " g</span>\n= " + niceNumber(grams / 1000) + " kg\n= " +
-        niceNumber(grams / 453.59237) + " lb\n= " + niceNumber(grams / 28.349523125) + " oz" +
-        (qty > 1 ? "\n(" + qty + " parts, " + niceNumber(grams / qty) + " g each)" : "");
-      lastText = "Mass: " + niceNumber(cm3) + " cm³ of " + matName + (qty > 1 ? " x" + qty : "") + " = " +
-        niceNumber(grams) + " g / " + niceNumber(grams / 453.59237) + " lb";
+      const cm3 = volume * volumeToCm3[volUnit.value];    // volume in cm³
+      const grams = cm3 * density * qty;                   // mass = volume x density
+      const items = [
+        { key: "volume", label: "Volume", value: niceNumber(volume) + " " + volumeLabel[volUnit.value] },
+        { key: "material", label: "Material", value: matName },
+        { key: "density", label: "Density", value: niceNumber(density) + " g/cm³" },
+        { key: "qty", label: "Quantity", value: String(qty) },
+        { key: "g", label: "Mass (g)", value: niceNumber(grams), big: true },
+        { key: "kg", label: "Mass (kg)", value: niceNumber(grams / 1000) },
+        { key: "lb", label: "Mass (lb)", value: niceNumber(grams / 453.59237) },
+        { key: "oz", label: "Mass (oz)", value: niceNumber(grams / 28.349523125) }
+      ];
+      if (qty > 1) {
+        items.push({ key: "each", label: "Mass each (g)", value: niceNumber(grams / qty) });
+      }
+      window.DFM.renderResults(out, "mass-part", items);
     }
 
     [volumeIn, customIn, qtyIn].forEach(function (el) {
@@ -303,9 +299,6 @@
     [volUnit, matSel].forEach(function (el) {
       el.addEventListener("change", update);
     });
-    host.querySelector(".calc-row:last-child").appendChild(padButton(function () {
-      return lastText;
-    }));
     update();
   }
 
@@ -377,58 +370,48 @@
 
   function renderDrillFinder(host) {
     const drills = buildDrillList();
-
-    host.innerHTML =
-      "<h3>Fraction, decimal &amp; nearest drill</h3>" +
-      '<p class="table-note" style="margin:0 0 10px">Type 0.201, 13/64, 1-3/16 or a metric size. Shows the nearest fractions and the closest standard drills.</p>' +
+    const out = buildCard(host, "Fraction, decimal &amp; nearest drill",
       '<div class="calc-row"><input type="text" value="0.201" aria-label="Size">' +
-      '<select aria-label="Unit"><option value="in">in</option><option value="mm">mm</option></select></div>' +
-      '<div class="calc-out"></div><div class="calc-row" style="margin:8px 0 0"></div>';
-
+      '<select aria-label="Unit"><option value="in">in</option><option value="mm">mm</option></select></div>',
+      "Type 0.201, 13/64, 1-3/16 or a metric size. Shows the nearest fractions and the closest standard drills.");
     const input = host.querySelector("input");
     const select = host.querySelector("select");
-    const out = host.querySelector(".calc-out");
-    let lastText = "";
 
     function update() {
       const inches = parseLength(input.value, select.value);
       if (inches === null || inches <= 0) {
-        out.textContent = "Enter a size";
-        lastText = "";
+        showMessage(out, "drill-finder", "enter a size");
         return;
       }
-      const mm = inches * 25.4;
-      const f64 = nearestFraction(inches, 64);
-      const f32 = nearestFraction(inches, 32);
-      const f16 = nearestFraction(inches, 16);
-
-      // Three closest drills of any type
-      const nearest = drills.map(function (d) {
-        return { d: d, diff: d.inches - inches };
-      }).sort(function (a, b) {
-        return Math.abs(a.diff) - Math.abs(b.diff);
-      }).slice(0, 4);
-
       const sign = function (v) {
         return (v >= 0 ? "+" : "") + v.toFixed(4);
       };
+      const items = [
+        { key: "in", label: "Size (in)", value: inches.toFixed(4), big: true },
+        { key: "mm", label: "Size (mm)", value: (inches * 25.4).toFixed(3) }
+      ];
+      [64, 32, 16].forEach(function (den) {
+        const f = nearestFraction(inches, den);
+        items.push({ key: "f" + den, label: "Nearest 1/" + den, value: f.text + " in (" + sign(f.value - inches) + ")" });
+      });
 
-      out.innerHTML = '<span class="big">' + inches.toFixed(4) + " in = " + mm.toFixed(3) + " mm</span>\n" +
-        "Nearest 1/64: " + f64.text + " in (" + sign(f64.value - inches) + ")\n" +
-        "Nearest 1/32: " + f32.text + " in (" + sign(f32.value - inches) + ")\n" +
-        "Nearest 1/16: " + f16.text + " in (" + sign(f16.value - inches) + ")\n" +
-        "Closest drills:\n" + nearest.map(function (n) {
-          return "  " + n.d.name + "  " + n.d.inches.toFixed(4) + " in / " + (n.d.inches * 25.4).toFixed(2) + " mm  (" + sign(n.diff) + " in)";
-        }).join("\n");
-      lastText = "Size " + inches.toFixed(4) + " in (" + mm.toFixed(3) + " mm) ~ " + f64.text + " in; closest drill " +
-        nearest[0].d.name + " (" + nearest[0].d.inches.toFixed(4) + " in)";
+      // Four closest drills of any type
+      drills.map(function (d) {
+        return { d: d, diff: d.inches - inches };
+      }).sort(function (a, b) {
+        return Math.abs(a.diff) - Math.abs(b.diff);
+      }).slice(0, 4).forEach(function (n, i) {
+        items.push({
+          key: "drill" + i,
+          label: "Drill " + (i + 1),
+          value: n.d.name + "  " + n.d.inches.toFixed(4) + " in / " + (n.d.inches * 25.4).toFixed(2) + " mm (" + sign(n.diff) + ")"
+        });
+      });
+      window.DFM.renderResults(out, "drill-finder", items);
     }
 
     input.addEventListener("input", update);
     select.addEventListener("change", update);
-    host.querySelector(".calc-row:last-child").appendChild(padButton(function () {
-      return lastText;
-    }));
     update();
   }
 
@@ -451,7 +434,11 @@
     if (!padArea) {
       return;
     }
-    const prefix = padArea.value && !padArea.value.endsWith("\n") ? "\n" : "";
+    // Each send is one block of lines; a blank line separates it from the previous block
+    let prefix = "";
+    if (padArea.value.trim() !== "") {
+      prefix = padArea.value.endsWith("\n\n") ? "" : (padArea.value.endsWith("\n") ? "\n" : "\n\n");
+    }
     padArea.value += prefix + text + "\n";
     padArea.scrollTop = padArea.scrollHeight;    // keep the newest line visible
     savePad();
@@ -493,7 +480,7 @@
 
     // Download the pad as a text file
     document.getElementById("scratch-download").addEventListener("click", function () {
-      const blob = new Blob([padArea.value], { type: "text/plain" });
+      const blob = new Blob([padArea.value.replace(/\r?\n/g, "\r\n")], { type: "text/plain" });   // CRLF for Windows editors
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = "dfm_notes_" + new Date().toISOString().slice(0, 10) + ".txt";

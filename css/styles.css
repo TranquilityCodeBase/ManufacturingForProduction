@@ -11,6 +11,7 @@
   --surface-alt: #eef2f7;     /* table stripes, code blocks */
   --border: #d6dde6;          /* hairlines and table borders */
   --card-border: #d6dde6;     /* outline of cards, tables, panels */
+  --on-accent: #ffffff;       /* text on accent-filled buttons */
   --table-head: #eef2f7;      /* table header row background */
   --text: #1c2733;            /* body text */
   --text-muted: #5a6878;      /* captions, secondary text */
@@ -44,6 +45,7 @@
     --surface-alt: #1c2b3d;
     --border: #2a3d53;
     --card-border: rgba(64, 160, 255, 0.55);
+    --on-accent: #06121f;
     --table-head: #20344d;
     --text: #dbe3ec;
     --text-muted: #9aabbf;
@@ -72,6 +74,7 @@
   --surface-alt: #1c2b3d;
   --border: #2a3d53;
   --card-border: rgba(64, 160, 255, 0.55);
+  --on-accent: #06121f;
   --table-head: #20344d;
   --text: #dbe3ec;
   --text-muted: #9aabbf;
@@ -347,10 +350,11 @@ img, svg { max-width: 100%; height: auto; }
 .btn.primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
+  font-weight: 600;
 }
 
-.btn.primary:hover { background: var(--accent-strong); color: #fff; }
+.btn.primary:hover { background: var(--accent-strong); color: var(--on-accent); }
 
 .icon-btn {
   display: inline-grid;
@@ -981,4 +985,68 @@ tr.best td { background: var(--tip-soft) !important; font-weight: 600; }
   border-left-color: var(--accent);
   color: var(--accent-strong);
   font-weight: 600;
+}
+
+/* ---------- Calculator result rows: "Label = value", optional checkbox ---------- */
+.calc-out.result-list {
+  padding: 6px 4px;
+  white-space: normal;               /* rows handle their own wrapping */
+  font-family: var(--font-body);     /* labels in the body font, values in mono below */
+}
+
+.result-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+label.result-row { cursor: pointer; }
+label.result-row:hover { background: var(--accent-soft); }
+
+.result-row input[type="checkbox"] {
+  flex: 0 0 auto;
+  margin: 0;
+  accent-color: var(--accent);
+  transform: translateY(2px);
+}
+
+.result-label {
+  flex: 0 0 9.5em;                   /* labels line up in one column */
+  color: var(--text-muted);
+}
+
+.result-eq { color: var(--text-muted); }
+
+.result-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--heading);
+  font-family: var(--font-mono);
+}
+
+/* Highlighted main result (entered value or key answer) */
+.result-row.main .result-label { color: var(--heading); font-weight: 600; }
+.result-row.main .result-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Unchecked rows are dimmed so it is clear they will not be sent */
+label.result-row:has(input:not(:checked)) .result-label,
+label.result-row:has(input:not(:checked)) .result-value {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+/* Send to pad + All / None row at the bottom of each card */
+.calc-actions { margin: 10px 0 0; }
+
+.btn.link-btn {
+  padding: 4px 10px;
+  font-size: 0.82rem;
 }

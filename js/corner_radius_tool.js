@@ -124,7 +124,7 @@
       messages.push("<strong>" + format(radius, unit) + " is smaller than the smallest standard cutter can leave.</strong> " +
         "Use a corner relief (dog-bone) if a sharp mating part must fit, or increase the radius to at least " +
         format(rows[0].minRadius, unit) + ".");
-      return { level: level, messages: messages, finishing: null };
+      return { level: level, messages: messages, finishing: null, exactMatch: null };
     }
 
     if (exactMatch) {
@@ -172,7 +172,7 @@
       }
     }
 
-    return { level: level, messages: messages, finishing: finishing };
+    return { level: level, messages: messages, finishing: finishing, exactMatch: exactMatch || null };
   }
 
   // ---------- Recommendation when no radius was drawn yet ----------
@@ -315,7 +315,7 @@
 
     host.classList.add("calc");
     host.innerHTML =
-      (host.hasAttribute("data-hide-title") ? "" : '<h3>Inside corner &amp; pocket radius picker</h3>') +
+      '<h3>Inside corner &amp; pocket radius picker</h3>' +
       '<p class="table-note" style="margin:0 0 12px">Enter the pocket depth. Optionally enter the corner radius you drew to check it, ' +
       'the largest radius your design can tolerate, and a floor fillet. A floor radius is suggested from standard bullnose cutters unless you enter one.</p>' +
       '<div class="field-grid">' +
@@ -332,9 +332,9 @@
       '  <div class="field"><label for="' + uid + '-floor">Floor fillet radius (blank = suggest one)</label>' +
       '    <input id="' + uid + '-floor" type="number" step="any" min="0" placeholder="e.g. 0.030"></div>' +
       '</div>' +
+      '<div class="calc-out" id="' + uid + '-summary"></div>' +
       '<div id="' + uid + '-verdict"></div>' +
       '<div id="' + uid + '-floor-out"></div>' +
-      '<div class="calc-row" id="' + uid + '-pad" hidden><button type="button" class="btn">Send result to pad</button></div>' +
       '<div class="table-wrap"><table id="' + uid + '-table"><thead><tr>' +
       '<th>Cutter dia</th><th class="num">Tool radius</th><th class="num">Min corner R</th><th class="num">Recommended R</th>' +
       '<th class="num">Depth / dia</th><th>Reach</th><th class="num">Suggested floor R</th><th>Standard bullnose radii</th></tr></thead><tbody></tbody></table></div>' +
@@ -353,19 +353,11 @@
     const floorOut = host.querySelector("#" + uid + "-floor-out");
     const tbody = host.querySelector("#" + uid + "-table tbody");
 
+    const summaryOut = host.querySelector("#" + uid + "-summary");
     let lastUnit = unitSel.value;                // used to convert inputs when units change
-    let lastSummary = "";                        // plain-text result for the scratch pad
 
-    // Show the "Send to pad" button only when a scratch pad exists on the page
-    const padRow = host.querySelector("#" + uid + "-pad");
-    if (window.DFM_PAD) {
-      padRow.hidden = false;
-      padRow.querySelector("button").addEventListener("click", function () {
-        if (lastSummary) {
-          window.DFM_PAD.append(lastSummary);
-        }
-      });
-    }
+    // Send to pad / All / None at the bottom of the card, like the other calculators
+    host.appendChild(window.DFM.resultActions(summaryOut));
 
     function update() {
       const unit = unitSel.value;
@@ -398,11 +390,45 @@
       const wallRadius = radius !== null && radius > 0 ? radius : (highlight ? highlight.recRadius : null);
       const floorResult = floorAdvice(rows, set, floorRadius, wallRadius, highlight, material);
 
-      // Plain-text summary (tags stripped) for the scratch pad
-      lastSummary = result ? "Corner check (" + unit + ", depth " + depth + "): " +
-        result.messages.concat(floorResult ? ["Floor: " + floorResult.text] : []).map(function (m) {
-          return m.replace(/<[^>]+>/g, "");
-        }).join(" ") : "";
+      // "Label = value" summary rows (these are what can be sent to the pad)
+      const items = [
+        { key: "units", label: "Units", value: unit === "in" ? "inch" : "mm" },
+        { key: "material", label: "Material", value: matSel.options[matSel.selectedIndex].text }
+      ];
+      if (depth > 0) {
+        items.push({ key: "depth", label: "Pocket depth", value: format(depth, unit) });
+      }
+      if (radius !== null && radius > 0) {
+        const status = !result.finishing ? "too small for standard cutters" :
+          (result.exactMatch ? "equals " + result.exactMatch.label + " " + unit + " cutter radius" : "OK");
+        const target = result.exactMatch || result.finishing;
+        items.push({ key: "drawn", label: "Corner R drawn", value: format(radius, unit) });
+        items.push({ key: "status", label: "Corner check", value: status });
+        if (target) {
+          items.push({ key: "rec", label: "Recommended corner R", value: format(target.recRadius, unit), big: true });
+          items.push({ key: "min", label: "Min corner R", value: format(target.minRadius, unit) });
+        }
+        if (result.finishing) {
+          items.push({ key: "cutter", label: "Finishing cutter", value: result.finishing.label + " " + unit });
+        }
+      } else if (highlight) {
+        items.push({ key: "rec", label: "Recommended corner R", value: format(highlight.recRadius, unit), big: true });
+        items.push({ key: "min", label: "Min corner R", value: format(highlight.minRadius, unit) });
+        items.push({ key: "cutter", label: "Cutter", value: highlight.label + " " + unit });
+      }
+      if (highlight && depth > 0) {
+        items.push({ key: "reach", label: "Reach", value: highlight.ratio.toFixed(1) + " x dia, " + highlight.band.label.toLowerCase() });
+      }
+      if (floorRadius === null && highlight && highlight.suggestedFloor !== null) {
+        items.push({ key: "floor", label: "Floor R (suggested)", value: format(highlight.suggestedFloor, unit) });
+      } else if (floorRadius !== null) {
+        items.push({ key: "floor", label: "Floor R", value: format(floorRadius, unit) });
+        if (floorResult) {
+          const floorWords = { good: "OK", ok: "OK, adds a tool", warn: "check", bad: "not accepted" };
+          items.push({ key: "floorcheck", label: "Floor check", value: floorWords[floorResult.level] || floorResult.level });
+        }
+      }
+      window.DFM.renderResults(summaryOut, "corner-picker", items);
 
       if (result) {
         verdictOut.innerHTML = '<div class="verdict ' + result.level + '">' + result.messages.map(function (m) {
