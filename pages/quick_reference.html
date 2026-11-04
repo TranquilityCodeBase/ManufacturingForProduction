@@ -59,7 +59,7 @@
               <tr><td>Machine type</td><td>3-axis baseline; 3+2 about +25%; continuous 5-axis about +60%; turning about -15%</td><td><a href="cnc_milling.html">Milling</a></td></tr>
               <tr><td>Blank size</td><td>Leave about 1/16-1/8 in (1.5-3 mm) per side over the finished part for cleanup</td><td><a href="stock_sizes.html">Stock</a></td></tr>
               <tr><td>Standard tolerance</td><td>&plusmn;0.005 in (&plusmn;0.13 mm) metal; plastics roughly double; tighter only where needed</td><td><a href="tolerances_finishes.html">Tolerances</a></td></tr>
-              <tr><td>Surface finish</td><td>As-machined about 63-125 &micro;in Ra</td><td><a href="tolerances_finishes.html">Finishes</a></td></tr>
+              <tr><td>Surface finish</td><td>As-machined about 63-125 &micro;in <abbr title="Roughness average">Ra</abbr></td><td><a href="tolerances_finishes.html">Finishes</a></td></tr>
               <tr><td>Hard anodize</td><td>Type III grows up to about 0.003 in on a diameter; plan close fits for it</td><td><a href="tolerances_finishes.html">Finishes</a></td></tr>
             </tbody>
           </table>
@@ -76,7 +76,7 @@
               <tr><td>Blind hole</td><td>Add about 25% depth for the drill point; prefer through holes</td><td><a href="holes_threading.html#hole-rules">Rules</a></td></tr>
               <tr><td>Thread length</td><td>1.5-2 x D typical, 3 x D max</td><td><a href="holes_threading.html#thread-rules">Rules</a></td></tr>
               <tr><td>Blind tapped hole</td><td>At least 0.5 x D unthreaded below the thread</td><td><a href="holes_threading.html#thread-rules">Rules</a></td></tr>
-              <tr><td>Thread sizes</td><td>Standard UNC / UNF / metric coarse; #2 / M2 smallest; bigger is safer</td><td><a href="thread_tables.html">Tables</a></td></tr>
+              <tr><td>Thread sizes</td><td>Standard <abbr title="Unified National Coarse thread series">UNC</abbr> / <abbr title="Unified National Fine thread series">UNF</abbr> / metric coarse; #2 / M2 smallest; bigger is safer</td><td><a href="thread_tables.html">Tables</a></td></tr>
               <tr><td>Soft materials</td><td>Coil or key-locking inserts in aluminum and plastic; heat-set inserts in prints</td><td><a href="holes_threading.html#inserts">Inserts</a></td></tr>
               <tr><td>Holes near edges</td><td>Keep 75% of a partial hole inside the part; at least 0.030 in from walls (metal)</td><td><a href="holes_threading.html#hole-rules">Rules</a></td></tr>
               <tr><td>File format</td><td>STEP for machining quotes, never STL</td><td><a href="holes_threading.html#checklist">Checklist</a></td></tr>
@@ -104,13 +104,13 @@
           <table id="qr-3dp">
             <thead><tr><th>Feature</th><th>Rule of thumb</th><th>Details</th></tr></thead>
             <tbody>
-              <tr><td>Overhangs</td><td>45&deg; from horizontal self-supports in most processes; flatter needs support (not SLS / MJF)</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
-              <tr><td>Bridges (FDM)</td><td>5-10 mm spans are reliable; longer spans sag</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
+              <tr><td>Overhangs</td><td>45&deg; from horizontal self-supports in most processes; flatter needs support (not <abbr title="Selective Laser Sintering (nylon powder bed)">SLS</abbr> / <abbr title="Multi Jet Fusion (HP nylon powder bed)">MJF</abbr>)</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
+              <tr><td>Bridges (<abbr title="Fused Deposition Modeling (filament extrusion)">FDM</abbr>)</td><td>5-10 mm spans are reliable; longer spans sag</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
               <tr><td>Horizontal holes</td><td>Teardrop or diamond top so the hole prints without support</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
               <tr><td>Down-facing edges</td><td>45&deg; chamfer prints clean; a fillet on the underside sags</td><td><a href="3dp_overhangs.html">Overhangs</a></td></tr>
               <tr><td>Escape holes (powder)</td><td>At least two holes, about 3.5-5 mm, at opposite ends of a hollow</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
-              <tr><td>SLA hollow parts</td><td>Drain hole plus vent hole to stop suction and trapped resin</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
-              <tr><td>DMLS channels</td><td>Teardrop or diamond section above about 8 mm (0.30 in) diameter</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
+              <tr><td><abbr title="Stereolithography (laser-cured resin)">SLA</abbr> hollow parts</td><td>Drain hole plus vent hole to stop suction and trapped resin</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
+              <tr><td><abbr title="Direct Metal Laser Sintering (metal powder bed)">DMLS</abbr> channels</td><td>Teardrop or diamond section above about 8 mm (0.30 in) diameter</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
               <tr><td>Fits / clearance</td><td>FDM 0.2-0.5 mm, SLA 0.1-0.2 mm, SLS / MJF 0.3-0.5 mm per side</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
               <tr><td>Holes</td><td>Print undersize; drill or ream critical holes afterward</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
               <tr><td>Threads</td><td>Heat-set inserts or tapped holes below 1/4-20 / M6; model printed threads only at 1/4-20 / M6 and larger (coarse)</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>

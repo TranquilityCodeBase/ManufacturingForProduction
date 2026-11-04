@@ -55,9 +55,14 @@
           <figcaption>Model the hole at the tap drill diameter. The thread lives in a cosmetic thread feature and the drawing callout.</figcaption>
         </figure>
 
+        <figure class="diagram">
+          <img src="../images/diagrams/holes_thread_anatomy.svg" alt="Internal thread in section labelled with major diameter, minor diameter equal to the tap drill hole, pitch equal to 1 over TPI and thread depth; magnified profiles compare 75 percent thread from a smaller tap drill with 50 to 60 percent thread from a larger tap drill" width="900" height="405" loading="lazy">
+          <figcaption>Thread anatomy. The tap drill sets the minor diameter and therefore how much of the thread form is engaged: about 75% in aluminum and plastics, 50-60% in steel and stainless.</figcaption>
+        </figure>
+
         <div class="do-dont">
           <div class="do">
-            <h4>Do</h4>
+            <h3>Do</h3>
             <ul>
               <li>Use your CAD hole tool (Hole Wizard, Hole feature) with <strong>cosmetic threads</strong> on.</li>
               <li>Make the hole diameter the tap drill / pilot size, about 75% thread. Check it falls in the vendor's pilot range (<a href="thread_tables.html">thread tables</a>).</li>
@@ -67,7 +72,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h4>Don't</h4>
+            <h3>Don't</h3>
             <ul>
               <li>Model helical thread geometry for standard internal threads.</li>
               <li>Model the hole at the <em>major</em> diameter. The screw will spin freely in it.</li>
@@ -176,7 +181,7 @@
               <tr><td>Thread length</td><td>1.5-2 x D in steel, about 2 x D in aluminum; 3 x D maximum</td><td>Most of the load is carried by the first few threads. Deeper threads only add tool reach problems and cost.</td></tr>
               <tr><td>Blind holes</td><td>Leave at least 0.5 x D unthreaded below the last full thread</td><td>Room for the tap lead or thread mill and for chips. Call out drill relief as allowed on the drawing rather than modeling it.</td></tr>
               <tr><td>Thread size</td><td>Use the largest size the design allows; avoid below #2 / M2</td><td>Small taps and thread mills break easily.</td></tr>
-              <tr><td>Standard threads only</td><td>UNC by default, UNF for thin walls or fine adjustment, metric coarse by default</td><td>Non-standard pitches need custom tools. UNEF and special classes often move a part to manual, precision quoting.</td></tr>
+              <tr><td>Standard threads only</td><td><abbr title="Unified National Coarse thread series">UNC</abbr> by default, <abbr title="Unified National Fine thread series">UNF</abbr> for thin walls or fine adjustment, metric coarse by default</td><td>Non-standard pitches need custom tools. <abbr title="Unified National Extra Fine thread series">UNEF</abbr> and special classes often move a part to manual, precision quoting.</td></tr>
               <tr><td>Thread mill reach</td><td>Check the vendor's maximum thread depth (for example 0.65 in for 1/4-20 milled)</td><td>Thread mills are short. Long holes are threaded only from one end. See the <a href="thread_tables.html">thread tables</a>.</td></tr>
               <tr><td>Hole direction</td><td>Threaded hole axes on the part's X, Y or Z axes (milling), or on / perpendicular to the spin axis (turning)</td><td>Quoting software only recognizes threads on cardinal directions.</td></tr>
               <tr><td>Lead-in</td><td>Add a small chamfer or countersink at the thread start if the drawing calls it</td><td>Protects the first thread and helps screws start; call it out so it is included.</td></tr>
@@ -205,11 +210,15 @@
         <p>Lathes thread on-axis (centerline), axial (parallel to the axis, off center) and radial (through the side) holes with live tooling, and make much better <strong>external</strong> threads than a mill because the part spins on center under a single-point tool. Model the plain shaft or pilot hole only; you pick the thread in the quote. At ProtoLabs, turned threads are offered in metals only. Shaft diameters for external threads are in the <a href="thread_tables.html#od-threads">OD thread table</a>.</p>
 
         <h2 id="inserts">Threaded inserts</h2>
+        <figure class="diagram">
+          <img src="../images/diagrams/holes_insert_types.svg" alt="Sections of a coil insert in an STI tapped hole, a key-locking insert with keys and a counterbore, and a heat-set insert pressed into a plastic boss, each labelled with the hole to model" width="900" height="340" loading="lazy">
+          <figcaption>Each insert type needs a different hole: an STI tap drill for coil inserts, a larger tapped hole plus counterbore for key-locking inserts, and the data-sheet pilot for heat-set inserts.</figcaption>
+        </figure>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Insert type</th><th>Best for</th><th>Design notes</th></tr></thead>
             <tbody>
-              <tr><td><strong>Coil (helical, HeliCoil style)</strong></td><td>Aluminum, magnesium, repeated assembly, thread repair</td><td>Hole is cut with an oversize STI thread. Vendor cuts the thread; you install the insert. Pilot sizes in the <a href="thread_tables.html#coil-inserts">coil insert tables</a>.</td></tr>
+              <tr><td><strong>Coil (helical, HeliCoil style)</strong></td><td>Aluminum, magnesium, repeated assembly, thread repair</td><td>Hole is cut with an oversize <abbr title="Screw Thread Insert (oversize thread for coil inserts)">STI</abbr> thread. Vendor cuts the thread; you install the insert. Pilot sizes in the <a href="thread_tables.html#coil-inserts">coil insert tables</a>.</td></tr>
               <tr><td><strong>Key-locking (Keensert style)</strong></td><td>High pull-out and torque loads, field-serviceable joints</td><td>Needs a larger hole and a counterbore for the keys. Check the insert maker's hole data.</td></tr>
               <tr><td><strong>Heat-set / ultrasonic</strong></td><td>Thermoplastics and 3D printed parts</td><td>Model the tapered or straight pilot hole from the insert data sheet; leave material below for melt flow.</td></tr>
               <tr><td><strong>Press-fit / self-tapping</strong></td><td>Plastics, thin sheet, low loads</td><td>Quick to install; lower pull-out than heat-set.</td></tr>

@@ -44,9 +44,9 @@
 <line x1="270" y1="194" x2="270" y2="230" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
 <text x="150" y="176" text-anchor="middle">low Z = fewest layers</text>
 <text x="150" y="264" text-anchor="middle" class="good">Fastest in FDM</text>
-<text x="150" y="284" text-anchor="middle" class="s">large flat DMLS / SLA areas need heavy support</text>
-<polygon points="357.8,210.6 521.6,95.9 542.2,125.4 378.4,240.1" class="part"/>
-<g stroke="#b9772c" stroke-width="2"><line x1="378" y1="240" x2="378" y2="230"/><line x1="392" y1="232" x2="392" y2="230"/></g>
+<text x="150" y="284" text-anchor="middle" class="s">flat DMLS / SLA areas need supports</text>
+<polygon points="357.8,192.6 521.6,77.9 542.2,107.4 378.4,222.1" class="part"/>
+<g stroke="#b9772c" stroke-width="2"><line x1="392" y1="213" x2="392" y2="230"/><line x1="428" y1="188" x2="428" y2="230"/><line x1="464" y1="162" x2="464" y2="230"/></g>
 <path d="M520 230 A60 60 0 0 0 512 196" fill="none" stroke="#1f6fb2" stroke-width="2"/>
 <text x="536" y="214" text-anchor="start" class="lbl">30-45&#176;</text>
 <text x="450" y="264" text-anchor="middle" class="lbl">Common for big flat DMLS / SLA areas</text>

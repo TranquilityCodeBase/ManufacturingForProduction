@@ -10,6 +10,6 @@
 </g>
 <path d="M285 110 l-10 -14 M318 104 l8 -16 M338 112 l14 -8" stroke="#b9772c" stroke-width="3" stroke-linecap="round"/>
 <path d="M250 160 Q250 175 265 175" fill="none" stroke="#1f6fb2" stroke-width="3"/>
-<line x1="256" y1="170" x2="214" y2="200" stroke="#1f6fb2" stroke-width="2"/>
-<text x="206" y="212" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" fill="#1f6fb2" text-anchor="end">1.3 x R</text>
+<line x1="256" y1="170" x2="214" y2="214" stroke="#1f6fb2" stroke-width="2"/>
+<text x="208" y="234" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700" fill="#1f6fb2" text-anchor="end">1.3 x R</text>
 </svg>

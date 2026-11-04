@@ -38,25 +38,24 @@
         <div class="glance">
           <div class="glance-title">At a glance</div>
           <ul class="glance-list">
-            <li><a href="#substitutions"><span class="value">~4x</span><span class="label">Aluminum cuts faster than carbon steel</span></a></li>
-            <li><a href="#metals"><span class="value">~0.5x</span><span class="label">Stainless vs carbon steel cutting speed</span></a></li>
+            <li><a href="#cost-drivers"><span class="value">~4x</span><span class="label">Aluminum cuts faster than carbon steel</span></a></li>
+            <li><a href="#cost-drivers"><span class="value">~0.5x</span><span class="label">Stainless vs carbon steel cutting speed</span></a></li>
             <li><a href="#metals"><span class="value">6061-T6</span><span class="label">Default general-purpose metal</span></a></li>
             <li><a href="#plastics"><span class="value">POM / Delrin</span><span class="label">Default general-purpose plastic</span></a></li>
           </ul>
         </div>
 
         <h2 id="cost-drivers">Machinability and stock price</h2>
-        <div class="two-col">
-          <figure class="diagram">
-            <img src="../images/diagrams/materials_machining_speed.svg" alt="Bar chart of relative machining speed: aluminum about 4 times, carbon steel 1 times, stainless about half" width="760" height="200" loading="lazy">
-            <figcaption>Relative material removal rate.</figcaption>
-          </figure>
-          <figure class="diagram">
-            <img src="../images/diagrams/materials_relative_cost.svg" alt="Example bulk prices: aluminum 6061 25, 7075 80, stainless 304 90, brass C360 148, stainless 303 150, ABS 17, POM 27, nylon 6 30, PEEK 300 dollars" width="820" height="420" loading="lazy">
-            <figcaption>Example bulk material price for the same blank (relative ranking only).</figcaption>
-          </figure>
-        </div>
+        <figure class="diagram">
+          <img src="../images/diagrams/materials_machining_speed.svg" alt="Approximate relative machining speed: plastics very fast, brass about 4 to 5 times, aluminum about 4 times, carbon steel 1 times, stainless about half, titanium about a third" width="900" height="298" loading="lazy">
+          <figcaption>Approximate relative material removal rate compared with carbon steel.</figcaption>
+        </figure>
+        <figure class="diagram">
+          <img src="../images/diagrams/materials_relative_cost.svg" alt="Example bulk prices: aluminum 6061 25, 7075 80, stainless 304 90, brass C360 148, stainless 303 150, ABS 17, POM 27, nylon 6 30, PEEK 300 dollars" width="900" height="410" loading="lazy">
+          <figcaption>Example bulk material price for the same blank (relative ranking only).</figcaption>
+        </figure>
         <ul>
+          <li><strong>Cutting speed:</strong> as a baseline, aluminum machines about 4x faster than carbon steel, and stainless steel about 0.5x (half) the speed of carbon steel.</li>
           <li><strong>Machine time usually outweighs material cost</strong> on prototypes. On production runs, free-machining grades (303 stainless, C360 brass, 12L14 steel) often win even at a higher stock price because cycle times are much shorter.</li>
           <li><strong>Plastics are easy to cut</strong> and polyethylene can be about one third the cost of 6061, but plastics hold tolerance less well and can warp after machining.</li>
           <li><strong>Exotics</strong> (titanium, Inconel, PEEK, PEI) cost more as stock and to machine. Use them only where heat, strength-to-weight or chemistry demands it.</li>
@@ -75,7 +74,7 @@
               <tr><td>Copper C101 / C110</td><td><span class="badge warn">Fair (gummy)</span></td><td>Highest electrical and thermal conductivity, expensive</td><td>Bus bars, heat spreaders, electrodes</td></tr>
               <tr><td>Steel 1018 (low carbon)</td><td><span class="badge good">Good</span></td><td>Low cost, weldable, case hardenable</td><td>Shafts, pins, fixtures, general structural</td></tr>
               <tr><td>Steel 4140 (alloy)</td><td><span class="badge">Good</span></td><td>High strength and toughness, through hardenable</td><td>Gears, axles, tooling, high-load shafts</td></tr>
-              <tr><td>Stainless 303</td><td><span class="badge good">Good (free machining)</span></td><td>Corrosion resistant; sulfur added for chip breaking; not weldable</td><td>Fasteners, fittings, production turned parts</td></tr>
+              <tr><td>Stainless 303</td><td><span class="badge good">Good (free machining)</span></td><td>Corrosion resistant; sulfur added for chip breaking; poor weldability (prone to hot cracking), welding not recommended</td><td>Fasteners, fittings, production turned parts</td></tr>
               <tr><td>Stainless 304 / 304L</td><td><span class="badge warn">Fair</span></td><td>General corrosion resistance, weldable, work hardens</td><td>Food, medical, enclosures</td></tr>
               <tr><td>Stainless 316 / 316L</td><td><span class="badge warn">Fair</span></td><td>Better chemical and marine resistance than 304</td><td>Marine, chemical, medical</td></tr>
               <tr><td>Stainless 17-4 PH</td><td><span class="badge bad">Difficult</span></td><td>High strength, heat treatable, good corrosion resistance</td><td>Aerospace, valves, high-strength parts</td></tr>
@@ -119,7 +118,7 @@
               <tr><td>17-4 PH stainless</td><td>304 or 316L</td><td>High strength is not critical</td></tr>
               <tr><td>Copper</td><td>Aluminum (6061 or 6101)</td><td>Good conductivity is enough; much easier to machine and cheaper</td></tr>
               <tr><td>4140 for hardness</td><td>1018, case hardened</td><td>Only a hard surface is needed</td></tr>
-              <tr><td>304 stainless, turned in volume</td><td>303 stainless</td><td>No welding; much faster machining</td></tr>
+              <tr><td>304 stainless, turned in volume</td><td>303 stainless</td><td>Use when the part will not be welded (303 welds poorly); much faster machining</td></tr>
               <tr><td>Steel for small fittings</td><td>C360 brass</td><td>Moderate loads; free machining, no plating needed</td></tr>
               <tr><td>7075 aluminum</td><td>6061 aluminum</td><td>Strength margin allows it; cheaper stock, weldable</td></tr>
               <tr><td>Titanium</td><td>7075 aluminum or stainless</td><td>Weight or temperature is not the driver</td></tr>

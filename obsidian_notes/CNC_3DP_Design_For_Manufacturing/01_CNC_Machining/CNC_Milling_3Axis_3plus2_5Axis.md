@@ -46,7 +46,7 @@ Which milling style a part needs, what it costs, and how to design for each.
 ## End Mill Types
 | Type | Used for | Design impact |
 |---|---|---|
-| Flat end mill | Bulk removal, vertical walls, flat floors | Leaves sharp floor edge; corner R = tool radius |
+| Flat end mill | Bulk removal, vertical walls | Leaves a sharp floor edge, rejected in hard metals and often in soft metals, so pockets are finished with a bullnose. Draw inside corners about 1.3 x tool R. See [[CNC_Inside_Corners_And_Pocket_Radii]] |
 | Bullnose | Same as flat, stronger edge, used in hard metals | Leaves small floor fillet = tool corner radius |
 | Ball end mill | Fillets, chamfers, sloped / 3D surfaces | Slow surfacing passes; scallops on slopes |
 

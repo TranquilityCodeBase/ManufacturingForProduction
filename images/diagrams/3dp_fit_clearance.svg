@@ -50,5 +50,6 @@
 <text x="560" y="178" text-anchor="start">0.3-0.5 mm</text>
 <text x="400" y="202" text-anchor="start">Print-in-place</text>
 <text x="560" y="202" text-anchor="start">&#8805; 0.5 mm</text>
-<text x="400" y="230" text-anchor="start" class="s">Per side. Diameter difference is twice this. Print a test coupon to tune.</text>
+<text x="400" y="228" text-anchor="start" class="s">Per side: the diameter difference is twice this.</text>
+<text x="400" y="246" text-anchor="start" class="s">Print a test coupon in your material to tune.</text>
 </svg>

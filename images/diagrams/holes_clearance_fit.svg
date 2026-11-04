@@ -37,7 +37,7 @@
 <line x1="450" y1="15" x2="450" y2="335" class="sep"/>
 <g transform="translate(0,0)">
 <text x="225" y="30" text-anchor="middle" class="h">Close fit</text>
-<path d="M60 90 H199 V150 H60 Z" class="part"/><path d="M251 90 H390 V150 H251 Z" class="part"/>
+<path d="M60 90 H201 V150 H60 Z" class="part"/><path d="M249 90 H390 V150 H249 Z" class="part"/>
 <path d="M60 150 H203 V240 H60 Z" class="part2"/><path d="M247 150 H390 V240 H247 Z" class="part2"/>
 <path d="M203 158 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 158 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
 <path d="M203 171 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 171 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
@@ -48,28 +48,28 @@
 <rect x="185" y="60" width="80" height="30" rx="4" fill="#9aa7b4" stroke="#5d6b79" stroke-width="2"/>
 <rect x="205" y="90" width="40" height="140" fill="#b7c3d0" stroke="#34495e" stroke-width="1.5"/>
 <line x1="225" y1="44" x2="225" y2="252" stroke="#1f6fb2" stroke-width="1" stroke-dasharray="8 3 2 3"/>
-<line x1="245" y1="120" x2="251" y2="120" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
-<line x1="251" y1="120" x2="311" y2="120" class="lead"/><text x="315" y="124" text-anchor="start" class="lbl">float</text>
+<line x1="245" y1="120" x2="249" y2="120" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="249" y1="120" x2="309" y2="120" class="lead"/><text x="313" y="124" text-anchor="start" class="lbl">float</text>
 <text x="225" y="280" text-anchor="middle" class="lbl">Little float: both hole patterns must</text>
 <text x="225" y="300" text-anchor="middle">line up within a few thousandths</text>
 </g>
 <g transform="translate(450,0)">
 <text x="225" y="30" text-anchor="middle" class="h">Free fit</text>
-<path d="M60 90 H191 V150 H60 Z" class="part"/><path d="M259 90 H390 V150 H259 Z" class="part"/>
-<path d="M60 150 H209 V240 H60 Z" class="part2"/><path d="M253 150 H390 V240 H253 Z" class="part2"/>
-<path d="M209 158 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 158 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
-<path d="M209 171 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 171 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
-<path d="M209 184 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 184 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
-<path d="M209 197 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 197 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
-<path d="M209 210 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 210 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
-<path d="M209 223 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 223 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
-<rect x="191" y="60" width="80" height="30" rx="4" fill="#9aa7b4" stroke="#5d6b79" stroke-width="2"/>
-<rect x="211" y="90" width="40" height="140" fill="#b7c3d0" stroke="#34495e" stroke-width="1.5"/>
+<path d="M60 90 H183 V150 H60 Z" class="part"/><path d="M267 90 H390 V150 H267 Z" class="part"/>
+<path d="M60 150 H211 V240 H60 Z" class="part2"/><path d="M255 150 H390 V240 H255 Z" class="part2"/>
+<path d="M211 158 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M255 158 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M211 171 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M255 171 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M211 184 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M255 184 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M211 197 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M255 197 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M211 210 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M255 210 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M211 223 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M255 223 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<rect x="193" y="60" width="80" height="30" rx="4" fill="#9aa7b4" stroke="#5d6b79" stroke-width="2"/>
+<rect x="213" y="90" width="40" height="140" fill="#b7c3d0" stroke="#34495e" stroke-width="1.5"/>
 <line x1="225" y1="44" x2="225" y2="252" stroke="#1f6fb2" stroke-width="1" stroke-dasharray="8 3 2 3"/>
-<line x1="231" y1="44" x2="231" y2="252" stroke="#b0590e" stroke-width="1" stroke-dasharray="8 3 2 3"/>
-<text x="239" y="50" text-anchor="start" class="warn" style="font-size:12px">tapped hole is off position</text>
-<line x1="251" y1="120" x2="259" y2="120" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
-<line x1="259" y1="120" x2="319" y2="120" class="lead"/><text x="323" y="124" text-anchor="start" class="lbl">float</text>
+<line x1="233" y1="44" x2="233" y2="252" stroke="#b0590e" stroke-width="1" stroke-dasharray="8 3 2 3"/>
+<text x="241" y="50" text-anchor="start" class="warn" style="font-size:12px">tapped hole is off position</text>
+<line x1="253" y1="120" x2="267" y2="120" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="267" y1="120" x2="327" y2="120" class="lead"/><text x="331" y="124" text-anchor="start" class="lbl">float</text>
 <text x="225" y="280" text-anchor="middle" class="good">Float absorbs hole position error</text>
 <text x="225" y="300" text-anchor="middle">between the two parts (the default)</text>
 </g>

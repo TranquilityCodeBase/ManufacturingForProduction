@@ -46,9 +46,14 @@
           </ul>
         </div>
 
+        <figure class="diagram">
+          <img src="../images/diagrams/3dp_process_flowchart.svg" alt="Decision flowchart: metal parts go to CNC if a mill can reach every feature, otherwise DMLS; clear or finest-detail plastic parts go to SLA; tough, snap-fit or complex parts go to SLS or MJF; cheap fixtures and concept models go to FDM" width="960" height="410" loading="lazy">
+          <figcaption>Quick process picker. The <a href="#selection-guide">selection guide</a> and <a href="#comparison">comparison table</a> below cover the details.</figcaption>
+        </figure>
+
         <h2 id="how-they-work">How each process works</h2>
         <figure class="diagram">
-          <img src="../images/diagrams/3dp_process_schematics.svg" alt="Schematics of FDM extrusion, SLA laser curing resin, SLS/MJF powder bed fusion and DMLS metal powder bed with supports" width="800" height="300" loading="lazy">
+          <img src="../images/diagrams/3dp_process_schematics.svg" alt="Schematics of FDM extrusion, industrial top-down SLA with the laser above the vat and a lowering platform, SLS/MJF powder bed fusion and DMLS metal powder bed with supports" width="880" height="300" loading="lazy">
           <figcaption>Powder-bed processes (SLS, MJF) are self-supporting. Resin (SLA), extrusion (FDM) and metal (DMLS) need supports under overhangs.</figcaption>
         </figure>
         <div class="table-wrap">
@@ -57,11 +62,11 @@
               <tr><th>Process</th><th>How it builds</th><th>Typical materials</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>FDM / FFF</strong><br>Fused deposition</td><td>A heated nozzle extrudes a thermoplastic bead, one layer at a time. Bond between layers is the weak point.</td><td>PLA, PETG, ABS, ASA, nylon, PC, TPU, ULTEM</td></tr>
-              <tr><td><strong>SLA</strong><br>Stereolithography</td><td>A UV laser cures liquid photopolymer resin. Very fine layers and laser spot give the best detail and finish.</td><td>Standard, ABS-like, PC-like, PP-like, clear, high-temp, elastomeric resins</td></tr>
-              <tr><td><strong>SLS</strong><br>Selective laser sintering</td><td>A laser sinters nylon powder. Unsintered powder holds the part, so no supports.</td><td>PA12, PA11, glass-filled PA, TPU</td></tr>
-              <tr><td><strong>MJF</strong><br>Multi Jet Fusion</td><td>Inkjet heads print fusing agent on a powder bed, then heat fuses each layer. Faster and more uniform than SLS.</td><td>PA12, PA12 glass-filled, PA11, TPU</td></tr>
-              <tr><td><strong>DMLS</strong><br>Direct metal laser sintering</td><td>A laser welds fine metal powder. Parts are anchored to a build plate with supports, then cut off and stress relieved.</td><td>AlSi10Mg, 316L, 17-4 PH, Ti-6Al-4V, Inconel 718/625, cobalt chrome</td></tr>
+              <tr><td><strong><abbr title="Fused Deposition Modeling (filament extrusion)">FDM</abbr> / FFF</strong><br>Fused deposition</td><td>A heated nozzle extrudes a thermoplastic bead, one layer at a time. Bond between layers is the weak point.</td><td>PLA, PETG, ABS, ASA, nylon, PC, TPU, ULTEM</td></tr>
+              <tr><td><strong><abbr title="Stereolithography (laser-cured resin)">SLA</abbr></strong><br>Stereolithography</td><td>A UV laser cures liquid photopolymer resin. Very fine layers and laser spot give the best detail and finish.</td><td>Standard, ABS-like, PC-like, PP-like, clear, high-temp, elastomeric resins</td></tr>
+              <tr><td><strong><abbr title="Selective Laser Sintering (nylon powder bed)">SLS</abbr></strong><br>Selective laser sintering</td><td>A laser sinters nylon powder. Unsintered powder holds the part, so no supports.</td><td>PA12, PA11, glass-filled PA, TPU</td></tr>
+              <tr><td><strong><abbr title="Multi Jet Fusion (HP nylon powder bed)">MJF</abbr></strong><br>Multi Jet Fusion</td><td>Inkjet heads print fusing agent on a powder bed, then heat fuses each layer. Faster and more uniform than SLS.</td><td>PA12, PA12 glass-filled, PA11, TPU</td></tr>
+              <tr><td><strong><abbr title="Direct Metal Laser Sintering (metal powder bed)">DMLS</abbr></strong><br>Direct metal laser sintering</td><td>A laser welds fine metal powder. Parts are anchored to a build plate with supports, then cut off and stress relieved.</td><td>AlSi10Mg, 316L, 17-4 PH, Ti-6Al-4V, Inconel 718/625, cobalt chrome</td></tr>
             </tbody>
           </table>
         </div>
@@ -121,7 +126,7 @@
         <h2 id="3dp-vs-cnc" data-nav="3DP vs CNC">3D printing vs CNC machining for plastic parts</h2>
         <div class="do-dont">
           <div class="do">
-            <h4>Machining wins when...</h4>
+            <h3>Machining wins when...</h3>
             <ul>
               <li>You need a specific engineering plastic (acetal, PEEK, PC, UHMW...). Machining offers far more grades than printing.</li>
               <li>Accuracy and long-term dimensional stability matter. Machined parts beat SLA, which can creep and change over time.</li>
@@ -130,7 +135,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h4>Printing wins when...</h4>
+            <h3>Printing wins when...</h3>
             <ul>
               <li>Geometry cannot be reached by a cutter: internal channels, hollow shells, lattices, a whiffle-ball-like part.</li>
               <li>Most of the block would be cut away (rings, frames, thin shells). Printing only adds the material needed.</li>

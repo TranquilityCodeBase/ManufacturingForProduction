@@ -38,7 +38,7 @@ Illustrative relative bulk prices for the same block; real prices move. The rank
 | Copper 101/110 | Electrical / thermal | Gummy, expensive; aluminum is nearly as conductive and easier |
 | Steel 1018 | Low cost structural, case-hardenable | Rusts; plate or coat |
 | Steel 4140 | Hardness, wear, shafts | Can be heat treated |
-| Stainless 303 | Machined fittings, volume parts | Free machining, slightly lower corrosion resistance |
+| Stainless 303 | Machined fittings, volume parts | Free machining, slightly lower corrosion resistance, poor weldability (welding not recommended) |
 | Stainless 304 / 316L | Corrosion resistance, food / marine | Work hardens; slower |
 | Stainless 17-4 PH | High strength + corrosion | Hard to cut; use 304/316L if strength not needed |
 | Titanium Ti-6Al-4V | Strength-to-weight, medical, aerospace | Slow, expensive |

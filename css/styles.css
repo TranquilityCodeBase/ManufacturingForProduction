@@ -1423,3 +1423,13 @@ summary:focus-visible,
   h2, h3 { break-after: avoid; }
   main a { text-decoration: none; }
 }
+
+/* ---------- Glossary, thread lookup, table helpers ---------- */
+.nowrap { white-space: nowrap; }
+.glossary dt { margin-top: 12px; font-weight: 700; color: var(--heading); }
+.glossary dd { margin: 2px 0 0; max-width: 80ch; }
+.az-row { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 8px; font-weight: 600; }
+.lookup-card { margin-top: 14px; }
+.lookup-card h3 { margin: 0 0 6px; }
+.toggle-dia { display: inline-flex; align-items: center; gap: 6px; }
+abbr[title] { text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; }

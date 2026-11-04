@@ -214,10 +214,10 @@
           empty.hidden = true;
           return;
         }
-        // Size column: exact or "starts with" match on the normalized size
+        // Size column: exact match, or the size without its pitch ("1/4" finds 1/4-20 and 1/4-28)
         const bySize = rows.filter(function (row) {
           const size = normalizeSize(row.cells[0].textContent);
-          return size === term || size.indexOf(term + "-") === 0 || (term.length > 1 && size.indexOf(term) === 0);
+          return size === term || size.indexOf(term + "-") === 0;
         });
         const shown = bySize.length ? bySize : rows.filter(function (row) {
           return normalizeSize(row.textContent).indexOf(term) !== -1;
@@ -413,6 +413,16 @@
     }
 
     input.addEventListener("input", show);
+
+    // Site search links arrive as thread_tables.html?q=1/4-20#thread-lookup: prefill the box
+    try {
+      const fromSearch = new URLSearchParams(window.location.search).get("q");
+      if (fromSearch) {
+        input.value = fromSearch;
+      }
+    } catch (error) {
+      // Old browser without URLSearchParams: just start empty
+    }
     show();
 
     // Tap drill data may arrive a moment later (loaded on demand): refresh then

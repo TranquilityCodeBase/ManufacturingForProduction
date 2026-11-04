@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossary | DFM Reference</title>
+  <meta name="description" content="Short definitions of the machining, threading and 3D printing terms and abbreviations used on this site.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0f15" media="(prefers-color-scheme: dark)">
+  <!-- Link previews when the page is shared (Teams, Slack, email) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DFM Reference">
+  <meta property="og:title" content="Glossary | DFM Reference">
+  <meta property="og:description" content="Short definitions of the machining, threading and 3D printing terms and abbreviations used on this site.">
+  <meta property="og:url" content="https://tranquilitycodebase.github.io/ManufacturingForProduction/pages/glossary.html">
+  <meta property="og:image" content="https://tranquilitycodebase.github.io/ManufacturingForProduction/images/og_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="../js/site_nav.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/scratch_pad.js" defer></script>
+  <script src="../js/data/search_index.js" defer></script>
+  <script src="../js/site_search.js" defer></script>
+</head>
+<body data-page="glossary" data-root="../">
+  <div class="layout">
+    <nav id="sidebar" class="sidebar" aria-label="Site navigation"></nav>
+    <div class="content-wrap">
+      <header id="topbar" class="topbar"></header>
+      <main class="content" id="main">
+        <header class="page-header">
+          <p class="eyebrow">Tools</p>
+          <h1>Glossary</h1>
+          <p class="lead">Short definitions of the terms and abbreviations used on this site, each with a link to the page where it matters.</p>
+        </header>
+
+        <!-- A to Z jump row -->
+        <nav class="az-row" aria-label="Glossary letters">
+          <a href="#letter-0-9">0-9</a> <a href="#letter-a">A</a> <a href="#letter-b">B</a> <a href="#letter-c">C</a> <a href="#letter-d">D</a> <a href="#letter-e">E</a> <a href="#letter-f">F</a> <a href="#letter-g">G</a> <a href="#letter-h">H</a> <a href="#letter-i">I</a> <a href="#letter-k">K</a> <a href="#letter-m">M</a> <a href="#letter-n">N</a> <a href="#letter-o">O</a> <a href="#letter-p">P</a> <a href="#letter-r">R</a> <a href="#letter-s">S</a> <a href="#letter-t">T</a> <a href="#letter-u">U</a>
+        </nav>
+
+        <h2 id="terms" data-nav="A to Z">Terms A to Z</h2>
+        <h3 id="letter-0-9">0-9</h3>
+        <dl class="glossary">
+          <dt id="term-2b-3b">2B / 3B (thread class, inch)</dt>
+          <dd>Tolerance class for internal Unified threads. 2B is the normal commercial fit; 3B is tighter. External threads use 2A / 3A. <a href="holes_threading.html#dont-model-threads">Thread callouts</a></dd>
+          <dt id="term-6h-6g">6H / 6g (thread class, metric)</dt>
+          <dd>ISO metric tolerance classes. 6H is the standard internal (nut) class, 6g the standard external (bolt) class. <a href="holes_threading.html#dont-model-threads">Thread callouts</a></dd>
+        </dl>
+        <h3 id="letter-a">A</h3>
+        <dl class="glossary">
+          <dt id="term-anisotropy">Anisotropy</dt>
+          <dd>Properties that change with direction. Printed parts, FDM most of all, are weaker across the layers (Z) than along them. <a href="3dp_quality_cost.html#quality">3DP quality tips</a></dd>
+          <dt id="term-anodize">Anodize, Type II / Type III</dt>
+          <dd>Electrochemical oxide layer on aluminum (MIL-A-8625). Type II is decorative and dyeable, up to about 0.001 in thick. Type III (hardcoat) is thicker and harder and grows up to about 0.003 in on a diameter. <a href="tolerances_finishes.html">Tolerances & finishes</a></dd>
+        </dl>
+        <h3 id="letter-b">B</h3>
+        <dl class="glossary">
+          <dt id="term-ball-end-mill">Ball end mill</dt>
+          <dd>Cutter with a fully rounded tip (radius = half the diameter). Used for 3D surfaces and large fillets; slow because it needs many small passes. <a href="cnc_milling.html#cutters">End mill types</a></dd>
+          <dt id="term-bridging">Bridging</dt>
+          <dd>A printed span between two supports with nothing underneath. FDM bridges of about 5-10 mm are reliable; longer spans sag. <a href="3dp_overhangs.html#bridging">Overhangs & bridging</a></dd>
+          <dt id="term-bullnose">Bullnose end mill</dt>
+          <dd>Flat end mill with a small radius on its corners. The corner radius becomes the pocket floor fillet, so walls and floor are cut in one pass. Standard for hard metals. <a href="corners_pockets.html#floor-fillets">Floor fillets</a></dd>
+        </dl>
+        <h3 id="letter-c">C</h3>
+        <dl class="glossary">
+          <dt id="term-chem-film">Chem film (chromate conversion)</dt>
+          <dd>Thin conversion coating on aluminum (MIL-DTL-5541). Corrosion protection and paint base with almost no dimensional change; stays electrically conductive. <a href="tolerances_finishes.html">Finishes</a></dd>
+          <dt id="term-chip-load">Chip load</dt>
+          <dd>Thickness of material each cutting edge removes per revolution (in or mm per tooth). Feed rate = chip load x flutes x RPM. <a href="calculators.html#conversions">Speed / feed conversions</a></dd>
+          <dt id="term-coil-insert">Coil insert (HeliCoil style)</dt>
+          <dd>Diamond-section steel wire coil installed in an oversize STI-tapped hole to give strong, wear-resistant threads in soft materials. <a href="holes_threading.html#inserts">Threaded inserts</a></dd>
+          <dt id="term-corner-vs-floor">Corner radius vs floor fillet</dt>
+          <dd>Corner radius: the vertical inside corner between two pocket walls, set by the cutter diameter. Floor fillet: the radius where a wall meets the pocket floor, set by the cutter's corner radius. <a href="corners_pockets.html">Corners & pockets</a></dd>
+          <dt id="term-cosmetic-thread">Cosmetic thread</dt>
+          <dd>CAD feature that marks a hole as threaded (dashed major diameter plus callout) without modeling the helix. The geometry stays a plain pilot hole. <a href="holes_threading.html#dont-model-threads">Don't model threads</a></dd>
+          <dt id="term-counterbore">Counterbore</dt>
+          <dd>Flat-bottomed, larger-diameter recess at the top of a hole so a socket head cap screw sits flush or below the surface. <a href="holes_threading.html#counterbores">Counterbore sizes</a></dd>
+          <dt id="term-countersink">Countersink</dt>
+          <dd>Conical recess for a flat-head screw: 82° for inch screws, 90° for metric. <a href="holes_threading.html">Hole rules</a></dd>
+        </dl>
+        <h3 id="letter-d">D</h3>
+        <dl class="glossary">
+          <dt id="term-datum">Datum</dt>
+          <dd>Reference feature (face, axis, hole) that dimensions and tolerances are measured from. One clear datum scheme keeps tolerance stacks short. <a href="setups_orientation.html">Setups & orientation</a></dd>
+          <dt id="term-dmls">DMLS (direct metal laser sintering)</dt>
+          <dd>Metal powder bed fusion: a laser fuses fine metal powder layer by layer. Parts are built on supports and stress relieved. <a href="3dp_processes.html">3DP processes</a></dd>
+          <dt id="term-dog-bone">Dog-bone / T-bone relief</dt>
+          <dd>Small circular cut into an inside corner so a square-cornered mating part seats fully. Cheaper than a tiny corner radius. <a href="corners_pockets.html">Corner reliefs</a></dd>
+        </dl>
+        <h3 id="letter-e">E</h3>
+        <dl class="glossary">
+          <dt id="term-escape-hole">Escape hole</dt>
+          <dd>Opening that lets trapped powder (SLS, MJF, DMLS) or resin (SLA) out of a hollow or internal passage. Use at least two, at opposite ends. <a href="3dp_internal_passages.html#escape-holes">Escape holes</a></dd>
+        </dl>
+        <h3 id="letter-f">F</h3>
+        <dl class="glossary">
+          <dt id="term-fdm">FDM (fused deposition modeling)</dt>
+          <dd>3D printing by extruding melted plastic filament through a nozzle. Cheap and fast; weakest across layers. <a href="3dp_processes.html">3DP processes</a></dd>
+          <dt id="term-flat-end-mill">Flat end mill</dt>
+          <dd>Cutter with a square tip. Fastest for bulk removal and vertical walls, but leaves a sharp floor edge that many rapid services reject in metals. <a href="cnc_milling.html#cutters">End mill types</a></dd>
+        </dl>
+        <h3 id="letter-g">G</h3>
+        <dl class="glossary">
+          <dt id="term-gdt">GD&amp;T (geometric dimensioning and tolerancing)</dt>
+          <dd>Symbol language (ASME Y14.5, ISO 1101) for form, orientation, location and runout tolerances relative to datums. <a href="tolerances_finishes.html">Tolerances</a></dd>
+        </dl>
+        <h3 id="letter-h">H</h3>
+        <dl class="glossary">
+          <dt id="term-hdt">HDT (heat deflection temperature)</dt>
+          <dd>Temperature at which a plastic bar deflects a set amount under a set load. A quick guide to how hot a printed or molded part can run. <a href="3dp_materials.html">3DP materials</a></dd>
+          <dt id="term-heat-set">Heat-set insert</dt>
+          <dd>Knurled brass insert pressed into a plastic hole with a hot tip; the plastic melts and flows into the knurls. Best threads for printed parts. <a href="holes_threading.html#inserts">Threaded inserts</a></dd>
+        </dl>
+        <h3 id="letter-i">I</h3>
+        <dl class="glossary">
+          <dt id="term-ipm">IPM (inches per minute)</dt>
+          <dd>Feed rate unit for machine axes. mm/min in metric. <a href="calculators.html#conversions">Speed conversions</a></dd>
+        </dl>
+        <h3 id="letter-k">K</h3>
+        <dl class="glossary">
+          <dt id="term-key-insert">Key-locking insert</dt>
+          <dd>Solid threaded insert with keys driven into the parent material to lock it. High pull-out and torque strength; needs a larger hole and counterbore. <a href="holes_threading.html#inserts">Threaded inserts</a></dd>
+        </dl>
+        <h3 id="letter-m">M</h3>
+        <dl class="glossary">
+          <dt id="term-major-minor">Major / minor diameter</dt>
+          <dd>Major: the largest diameter of a thread (the nominal size). Minor: the smallest (thread roots of a bolt, crests of a nut). The tap drill is close to the minor diameter. <a href="tap_drill_charts.html#inch">Tap drill charts</a></dd>
+          <dt id="term-mjf">MJF (Multi Jet Fusion)</dt>
+          <dd>HP powder bed process: an inkjet prints fusing agent on nylon powder and infrared lamps fuse it. Consistent production nylon parts. <a href="3dp_processes.html">3DP processes</a></dd>
+          <dt id="term-mmc-lmc">MMC / LMC</dt>
+          <dd>Maximum / least material condition: the size limit with the most / least material (smallest hole / largest hole). Position tolerances at MMC gain bonus tolerance as the feature departs from MMC. <a href="tolerances_finishes.html">GD&amp;T basics</a></dd>
+        </dl>
+        <h3 id="letter-n">N</h3>
+        <dl class="glossary">
+          <dt id="term-npt">NPT (National Pipe Taper)</dt>
+          <dd>Tapered US pipe thread that seals by wedging (with sealant). Model a straight pilot hole; the taper is cut by the tool. <a href="thread_tables.html#npt-threads">NPT table</a></dd>
+        </dl>
+        <h3 id="letter-o">O</h3>
+        <dl class="glossary">
+          <dt id="term-overhang">Overhang</dt>
+          <dd>Printed surface facing down with nothing below it. About 45° from horizontal self-supports in most processes; flatter needs supports (not in SLS / MJF). <a href="3dp_overhangs.html#angle-rule">Overhang rule</a></dd>
+        </dl>
+        <h3 id="letter-p">P</h3>
+        <dl class="glossary">
+          <dt id="term-passivation">Passivation</dt>
+          <dd>Acid treatment of stainless steel that removes free iron and thickens the protective oxide (ASTM A967). No dimensional change. <a href="tolerances_finishes.html">Finishes</a></dd>
+          <dt id="term-pbf">PBF (powder bed fusion)</dt>
+          <dd>Family of 3D printing processes that fuse a powder bed layer by layer: SLS and MJF (plastics), DMLS / SLM (metals). <a href="3dp_processes.html">3DP processes</a></dd>
+          <dt id="term-percent-thread">Percent thread</dt>
+          <dd>How much of the full thread depth the tap cuts, set by the tap drill size. 75% is the common default; 50-60% in tough metals taps easier with little strength loss. <a href="calculators.html#threads-holes">Percent thread calculator</a></dd>
+          <dt id="term-pilot-hole">Pilot hole</dt>
+          <dd>The plain hole you model for a threaded feature, at the tap drill or vendor pilot diameter. Quoting software reads its diameter to offer threads. <a href="thread_tables.html">Thread pilot tables</a></dd>
+          <dt id="term-pitch">Pitch</dt>
+          <dd>Distance between adjacent threads. Metric threads are named by pitch (M6 x 1.0); inch threads by threads per inch (1 / pitch). <a href="tap_drill_charts.html#metric">Metric tap drills</a></dd>
+        </dl>
+        <h3 id="letter-r">R</h3>
+        <dl class="glossary">
+          <dt id="term-ra">Ra (roughness average)</dt>
+          <dd>Average surface roughness, in microinches (µin) or micrometres (µm). 125 µin Ra (3.2 µm) is the typical as-machined finish; 63 µin (1.6 µm) is smoother. <a href="tolerances_finishes.html#roughness">Surface roughness</a></dd>
+          <dt id="term-runout">Runout</dt>
+          <dd>GD&amp;T control of how much a diameter or face wobbles when the part spins on a datum axis. Replaces concentricity, which ASME Y14.5-2018 removed. <a href="tolerances_finishes.html">GD&amp;T basics</a></dd>
+        </dl>
+        <h3 id="letter-s">S</h3>
+        <dl class="glossary">
+          <dt id="term-setup">Setup</dt>
+          <dd>One clamping of the part in the machine. Every re-clamp adds fixturing time and a chance for misalignment between features. <a href="setups_orientation.html">Setups & orientation</a></dd>
+          <dt id="term-sfm">SFM (surface feet per minute)</dt>
+          <dd>Cutting speed at the tool edge. RPM = SFM x 3.82 / diameter (in). <a href="calculators.html#conversions">Speed conversions</a></dd>
+          <dt id="term-sla">SLA (stereolithography)</dt>
+          <dd>3D printing by curing liquid photopolymer resin with a laser, layer by layer. Finest detail and smoothest surface. <a href="3dp_processes.html">3DP processes</a></dd>
+          <dt id="term-sls">SLS (selective laser sintering)</dt>
+          <dd>Powder bed fusion of nylon with a laser. No supports needed; tough functional parts. <a href="3dp_processes.html">3DP processes</a></dd>
+          <dt id="term-smm">SMM (surface metres per minute)</dt>
+          <dd>Metric cutting speed at the tool edge. RPM = SMM x 1000 / (pi x diameter in mm). <a href="calculators.html#conversions">Speed conversions</a></dd>
+          <dt id="term-stepover">Stepover</dt>
+          <dd>Sideways distance between adjacent cutter passes. Small stepovers give smoother 3D surfaces but take longer. <a href="cnc_milling.html#cutters">End mill types</a></dd>
+          <dt id="term-sti">STI (screw thread insert) thread</dt>
+          <dd>The oversize thread tapped for a coil insert; the installed insert then gives the nominal thread size. <a href="thread_tables.html#coil-inserts">Coil insert tables</a></dd>
+        </dl>
+        <h3 id="letter-t">T</h3>
+        <dl class="glossary">
+          <dt id="term-tap-drill">Tap drill</dt>
+          <dd>Drill sized to leave the right amount of material for a tap or thread mill to form the thread (sets the percent thread). <a href="tap_drill_charts.html">Tap drill charts</a></dd>
+          <dt id="term-teardrop">Teardrop hole</dt>
+          <dd>Horizontal printed hole with a pointed (45°) top so it prints without support and does not sag. <a href="3dp_overhangs.html#horizontal-holes">Horizontal holes</a></dd>
+          <dt id="term-tpi">TPI (threads per inch)</dt>
+          <dd>Number of threads in one inch of length for Unified threads: 1/4-20 has 20 TPI. <a href="tap_drill_charts.html#inch">Inch tap drills</a></dd>
+          <dt id="term-true-position">True position</dt>
+          <dd>GD&amp;T location tolerance: a cylindrical zone around the exact (basic) location where the feature axis must lie. <a href="tolerances_finishes.html">GD&amp;T basics</a></dd>
+        </dl>
+        <h3 id="letter-u">U</h3>
+        <dl class="glossary">
+          <dt id="term-unc">UNC (Unified National Coarse)</dt>
+          <dd>Default coarse inch thread series, e.g. 1/4-20. Easiest to tap, most forgiving. <a href="tap_drill_charts.html#inch">Inch tap drills</a></dd>
+          <dt id="term-unef">UNEF (Unified National Extra Fine)</dt>
+          <dd>Extra fine inch series (e.g. 1/4-32) for thin walls and fine adjustment. Often needs non-standard tools. <a href="tap_drill_charts.html#inch">Inch tap drills</a></dd>
+          <dt id="term-unf">UNF (Unified National Fine)</dt>
+          <dd>Fine inch thread series, e.g. 1/4-28. Better for thin walls, adjustment and vibration. <a href="tap_drill_charts.html#inch">Inch tap drills</a></dd>
+        </dl>
+
+        <footer class="site-footer">Definitions are short working descriptions for design use, not standard text. See <a href="references.html">Sources &amp; References</a>.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -64,5 +64,5 @@
 <rect x="240" y="343" width="570" height="22" fill="#1f6fb2"/>
 <text x="818.0" y="359" text-anchor="start" style="font-size:15px;font-weight:600">$300</text>
 <line x1="240" y1="40" x2="240" y2="374" stroke="#34495e" stroke-width="1.5"/>
-<text x="240" y="396" text-anchor="start" class="s">Example bulk price for the same blank size. Use for ranking only; actual prices vary by supplier, size and date.</text>
+<text x="240" y="396" text-anchor="start" class="s">Example bulk price for the same blank size. Ranking only; prices vary by supplier and date.</text>
 </svg>

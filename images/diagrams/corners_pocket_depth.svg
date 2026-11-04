@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 330" width="820" height="330" role="img" aria-label="Pocket section with bullnose floor fillets showing depth, width and tool diameter rules of thumb">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 350" width="820" height="350" role="img" aria-label="Pocket section with bullnose floor fillets showing depth, width and tool diameter rules of thumb">
 <title>Pocket section with bullnose floor fillets showing depth, width and tool diameter rules of thumb</title>
 <style>
   text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
@@ -45,8 +45,8 @@
 <line x1="440" y1="110" x2="470" y2="110" class="dim"/><line x1="440" y1="280" x2="470" y2="280" class="dim"/>
 <line x1="460" y1="112" x2="460" y2="278" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
 <text x="472" y="200" text-anchor="start" class="lbl">depth</text>
-<line x1="295" y1="276" x2="340" y2="296" class="lead"/>
-<text x="346" y="300" text-anchor="start" class="s">bullnose floor fillet</text>
+<line x1="296" y1="277" x2="320" y2="324" class="lead"/>
+<text x="326" y="338" text-anchor="start" class="s">bullnose floor fillet</text>
 <text x="560" y="130" text-anchor="start" class="h">Rules of thumb</text>
 <text x="560" y="158" text-anchor="start">depth &lt; 4 x W (pocket)</text>
 <text x="560" y="182" text-anchor="start">depth &#8804; 3 x D in aluminum,</text>

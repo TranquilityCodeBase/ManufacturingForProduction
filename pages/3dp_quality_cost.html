@@ -48,8 +48,8 @@
 
         <h2 id="cost-drivers" data-nav="Cost drivers">What drives print time and cost</h2>
         <figure class="diagram">
-          <img src="../images/diagrams/3dp_orientation_cost.svg" alt="The same bar printed lying flat needs few layers; standing up needs many layers and takes longer" width="720" height="290" loading="lazy">
-          <figcaption>Layer-by-layer processes are priced mostly by how tall the build is. Powder-bed nylon is priced mostly by part volume and packing.</figcaption>
+          <img src="../images/diagrams/3dp_orientation_cost.svg" alt="The same bar printed lying flat, tilted 30 to 45 degrees on supports, and standing up: flat needs the fewest layers, standing up the most" width="900" height="320" loading="lazy">
+          <figcaption>Layer-by-layer processes are priced mostly by how tall the build is, but large flat areas in DMLS and SLA are usually tilted to cut supports and peel forces. Powder-bed nylon is priced mostly by part volume and packing.</figcaption>
         </figure>
         <div class="table-wrap">
           <table>
@@ -57,10 +57,10 @@
               <tr><th>Process</th><th>Main cost drivers</th><th>Biggest savings</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>FDM</strong></td><td>Print time (Z height, infill, supports), material</td><td>Lower infill, fewer supports, lay part flat, coarser layers for non-cosmetic parts</td></tr>
-              <tr><td><strong>SLA</strong></td><td>Z height, resin volume, support removal and finishing</td><td>Hollow with drain holes, orient for low Z, avoid supports on cosmetic faces</td></tr>
-              <tr><td><strong>SLS / MJF</strong></td><td>Part volume and bounding box (nesting density), dyeing / finishing</td><td>Hollow thick sections, shrink bounding box, nest multiple parts, standard color</td></tr>
-              <tr><td><strong>DMLS</strong></td><td>Z height, support volume, stress relief, support removal, machining</td><td>Self-supporting angles, small footprint, minimal machined faces</td></tr>
+              <tr><td><strong><abbr title="Fused Deposition Modeling (filament extrusion)">FDM</abbr></strong></td><td>Print time (Z height, infill, supports), material</td><td>Lower infill, fewer supports, lay part flat, coarser layers for non-cosmetic parts</td></tr>
+              <tr><td><strong><abbr title="Stereolithography (laser-cured resin)">SLA</abbr></strong></td><td>Z height, resin volume, support removal and finishing</td><td>Hollow with drain holes, orient for low Z, avoid supports on cosmetic faces</td></tr>
+              <tr><td><strong><abbr title="Selective Laser Sintering (nylon powder bed)">SLS</abbr> / <abbr title="Multi Jet Fusion (HP nylon powder bed)">MJF</abbr></strong></td><td>Part volume and bounding box (nesting density), dyeing / finishing</td><td>Hollow thick sections, shrink bounding box, nest multiple parts, standard color</td></tr>
+              <tr><td><strong><abbr title="Direct Metal Laser Sintering (metal powder bed)">DMLS</abbr></strong></td><td>Z height, support volume, stress relief, support removal, machining</td><td>Self-supporting angles, small footprint, minimal machined faces</td></tr>
             </tbody>
           </table>
         </div>
@@ -89,7 +89,7 @@
         </figure>
         <div class="do-dont">
           <div class="do">
-            <h4>Do</h4>
+            <h3>Do</h3>
             <ul>
               <li>Keep walls uniform; blend thickness changes gradually.</li>
               <li>Add fillets at the base of ribs and bosses (they reduce stress and warp).</li>
@@ -100,7 +100,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h4>Don't</h4>
+            <h3>Don't</h3>
             <ul>
               <li>Design sharp internal corners on loaded features.</li>
               <li>Use very thick solid sections (sink, warp, heat, cost).</li>
@@ -113,7 +113,7 @@
 
         <h2 id="fits" data-nav="Fits and clearances">Fits, clearances and assemblies</h2>
         <figure class="diagram">
-          <img src="../images/diagrams/3dp_fit_clearance.svg" alt="Pin inside a printed bore with the gap per side labeled, and a table of starting gaps per process" width="720" height="280" loading="lazy">
+          <img src="../images/diagrams/3dp_fit_clearance.svg" alt="Pin inside a printed bore with the gap per side labeled, and a table of starting gaps per process" width="760" height="280" loading="lazy">
           <figcaption>Starting gap per side for parts that must slide or assemble without force.</figcaption>
         </figure>
         <div class="table-wrap">

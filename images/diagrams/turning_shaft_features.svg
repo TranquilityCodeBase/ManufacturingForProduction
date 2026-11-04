@@ -54,15 +54,15 @@
 <text x="290" y="310" text-anchor="middle" class="s">min 0.047 in wide, max 0.95 in deep</text>
 <line x1="410" y1="106" x2="440" y2="70" class="lead"/>
 <text x="450" y="62" text-anchor="middle" class="lbl">Radial cross hole</text>
-<line x1="476" y1="228" x2="540" y2="275" class="lead"/>
-<text x="560" y="292" text-anchor="middle" class="lbl">Shoulder chamfer</text>
-<text x="560" y="310" text-anchor="middle" class="s">clears the tool nose radius</text>
+<line x1="476" y1="228" x2="530" y2="275" class="lead"/>
+<text x="545" y="292" text-anchor="middle" class="lbl">Shoulder chamfer</text>
+<text x="545" y="310" text-anchor="middle" class="s">clears the tool nose radius</text>
 <line x1="700" y1="138" x2="700" y2="100" class="lead"/>
 <text x="700" y="74" text-anchor="middle" class="s">model the plain diameter</text>
 <text x="700" y="92" text-anchor="middle" class="lbl">OD thread</text>
-<line x1="650" y1="190" x2="730" y2="276" class="lead"/>
-<text x="745" y="292" text-anchor="middle" class="lbl">Thread relief groove</text>
-<text x="745" y="310" text-anchor="middle" class="s">lets the threading tool run out</text>
+<line x1="650" y1="190" x2="745" y2="276" class="lead"/>
+<text x="765" y="292" text-anchor="middle" class="lbl">Thread relief groove</text>
+<text x="765" y="310" text-anchor="middle" class="s">lets the threading tool run out</text>
 <line x1="772" y1="185" x2="820" y2="225" class="lead"/>
 <text x="835" y="244" text-anchor="middle" class="lbl">End chamfer</text>
 </svg>

@@ -32,7 +32,7 @@
         <header class="page-header">
           <p class="eyebrow">3D Printing</p>
           <h1>Overhangs &amp; Supports</h1>
-          <p class="lead">Supports cost material, time and cleanup, and they leave marks. Designing surfaces to be self-supporting is the single biggest quality and cost lever for FDM, SLA and DMLS.</p>
+          <p class="lead">Supports cost material, time and cleanup, and they leave marks. Designing surfaces to be self-supporting is the single biggest quality and cost lever for <abbr title="Fused Deposition Modeling (filament extrusion)">FDM</abbr>, <abbr title="Stereolithography (laser-cured resin)">SLA</abbr> and <abbr title="Direct Metal Laser Sintering (metal powder bed)">DMLS</abbr>.</p>
         </header>
 
         <div class="glance">
@@ -60,7 +60,7 @@
             <tbody>
               <tr><td><strong>FDM</strong></td><td>45° design value; 30-35° possible with good cooling</td><td>Breakaway or soluble</td><td>Support scars on down-facing faces; soluble supports cost more</td></tr>
               <tr><td><strong>SLA</strong></td><td>30-45° depending on resin and size</td><td>Always some (touch points)</td><td>Orient so touch points land on non-cosmetic faces; watch unsupported "islands"</td></tr>
-              <tr><td><strong>SLS / MJF</strong></td><td>Any angle</td><td>None (powder bed)</td><td>Focus on warp of large flat areas and thick sections instead</td></tr>
+              <tr><td><strong><abbr title="Selective Laser Sintering (nylon powder bed)">SLS</abbr> / <abbr title="Multi Jet Fusion (HP nylon powder bed)">MJF</abbr></strong></td><td>Any angle</td><td>None (powder bed)</td><td>Focus on warp of large flat areas and thick sections instead</td></tr>
               <tr><td><strong>DMLS</strong></td><td>45° minimum; 0.5 mm (0.020 in) unsupported overhang max (some sources allow up to 0.8 mm; design to 0.5 mm)</td><td>Required, welded to the part</td><td>Supports are removed by machining or wire EDM, so they add real cost</td></tr>
             </tbody>
           </table>
@@ -96,7 +96,7 @@
         </figure>
         <div class="do-dont">
           <div class="do">
-            <h4>Do</h4>
+            <h3>Do</h3>
             <ul>
               <li>Use 45° chamfers on down-facing edges and under ledges.</li>
               <li>Pitch ceilings and roofs of cavities at 45° or steeper.</li>
@@ -106,7 +106,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h4>Don't</h4>
+            <h3>Don't</h3>
             <ul>
               <li>Leave large flat ceilings inside closed cavities (supports cannot be removed).</li>
               <li>Put supports on sealing faces, bearing bores or cosmetic surfaces.</li>
