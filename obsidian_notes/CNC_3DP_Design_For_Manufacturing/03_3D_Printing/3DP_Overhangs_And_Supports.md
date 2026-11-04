@@ -18,7 +18,7 @@ Keep down-facing surfaces self-supporting to cut support material, cleanup and c
 - Replace down-facing **fillets with 45° chamfers**; the start of a fillet underside is nearly horizontal and sags.
 - Horizontal holes: **teardrop or diamond top**; FDM round holes under ~10 mm usually self-support.
 - **SLS / MJF need no supports** (powder bed carries the part), but thick sections still warp.
-- **DMLS**: overhangs beyond about **0.5 mm (0.020 in)** or flatter than 45° need supports, which must be cut / machined / wire-EDM'd off. Supports also anchor the part against heat distortion.
+- **DMLS**: overhangs beyond about **0.5 mm (0.020 in)** (some sources allow up to 0.8 mm; design to 0.5 mm) or flatter than 45° need supports, which must be cut / machined / wire-EDM'd off. Supports also anchor the part against heat distortion.
 
 ## Overhang Limits by Process
 

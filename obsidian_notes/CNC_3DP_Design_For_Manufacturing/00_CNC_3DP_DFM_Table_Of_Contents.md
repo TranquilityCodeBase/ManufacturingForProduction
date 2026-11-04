@@ -24,7 +24,7 @@ One-stop quick reference for machining and 3D printing rules while designing.
 | Powder / resin escape holes | 2+ holes, opposite ends, ~3.5-5 mm (SLS/MJF) |
 
 ## CNC Machining
-- [[CNC_General_Rules_And_Tolerances|General Rules & Tolerances]] - default tolerances, ISO 2768 table, surface finish, GD&T basics
+- [[CNC_General_Rules_And_Tolerances|General Rules & Tolerances]] - default tolerances, general tolerance table, surface finish, GD&T basics
 - [[CNC_Inside_Corners_And_Pocket_Radii|Inside Corners & Pocket Radii]] - corner/floor radius rules and standard cutter picker table
 - [[CNC_Walls_Features_And_Text|Walls, Features & Text]] - wall thickness, slots, undercuts, edge breaks, engraving
 - [[CNC_Milling_3Axis_3plus2_5Axis|Milling: 3-Axis, 3+2, 5-Axis]] - when to use each, relative cost, envelopes

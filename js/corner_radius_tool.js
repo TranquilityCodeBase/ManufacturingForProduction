@@ -14,7 +14,9 @@
        exactly equals a standard cutter radius forces the tool to stop
        and pivot in the corner (chatter, marks), so shops drop to the
        next smaller cutter, which is slower.
-     - Recommended corner radius = 1.3 x cutter radius (rounded up).
+     - Recommended corner radius = 1.3 x cutter radius (rounded up). If the
+       rounded value lands on another standard cutter's radius it is bumped
+       up one step, so the picker never recommends a radius it warns about.
      - Pocket depth / cutter diameter decides if a standard length
        cutter can reach (bands in cutter_data.js).
      - Floor radius should be smaller than the wall radius and match a
@@ -48,10 +50,42 @@
     return Math.abs(a - b) <= tol;
   }
 
+  function parseNumberText(text) {
+    // Accepts 0.75, .75, 3/16, 1-3/16 or 1 3/16; returns null for anything else
+    const clean = String(text).trim().replace(/"/g, "");
+    if (!clean) {
+      return null;
+    }
+    const mixed = clean.match(/^(\d+)[\s-]+(\d+)\/(\d+)$/);   // 1-3/16 or 1 3/16
+    const frac = clean.match(/^(\d+)\/(\d+)$/);               // 3/16
+    let value = null;
+    if (mixed) {
+      value = parseInt(mixed[1], 10) + parseInt(mixed[2], 10) / parseInt(mixed[3], 10);
+    } else if (frac) {
+      value = parseInt(frac[1], 10) / parseInt(frac[2], 10);
+    } else if (/^\d*\.?\d+$/.test(clean) || /^\d+\.$/.test(clean)) {
+      value = parseFloat(clean);
+    }
+    return value !== null && isFinite(value) && value >= 0 ? value : null;
+  }
+
   function readNumber(input) {
     // Empty or invalid input returns null so it can be treated as "not given"
-    const value = parseFloat(input.value);
-    return isFinite(value) && value >= 0 ? value : null;
+    return parseNumberText(input.value);
+  }
+
+  // ---------- Keep recommended radii off other cutters' radii ----------
+  function clearOfToolRadii(value, set) {
+    // Bump up one rounding step while the value equals any standard tool radius
+    let result = value;
+    let guard = 0;
+    while (guard < 50 && set.diameters.some(function (cutter) {
+      return nearlyEqual(cutter.value / 2, result, set.unit);
+    })) {
+      result = roundUp(result + set.roundStep, set.roundStep);
+      guard += 1;
+    }
+    return result;
   }
 
   // ---------- Reach band lookup ----------
@@ -70,8 +104,10 @@
   function buildRows(set, depth, material) {
     return set.diameters.map(function (cutter) {
       const toolRadius = cutter.value / 2;
-      const minRadius = toolRadius + set.clearance;                          // just enough to keep cutting through the corner
-      const recRadius = roundUp(toolRadius * window.DFM_CUTTERS.recommendFactor, set.roundStep); // comfortable sweep
+      // Just enough to keep cutting through the corner, and a comfortable 1.3 x sweep;
+      // both are moved off any other standard cutter's radius
+      const minRadius = clearOfToolRadii(toolRadius + set.clearance, set);
+      const recRadius = clearOfToolRadii(roundUp(toolRadius * window.DFM_CUTTERS.recommendFactor, set.roundStep), set);
       const ratio = depth > 0 ? depth / cutter.value : 0;                   // pocket depth in cutter diameters
       const band = reachBand(ratio, material);
 
@@ -309,6 +345,23 @@
     return { level: level, text: messages.join(" ") };
   }
 
+  // ---------- One labeled text input (fractions allowed); the label shows the unit ----------
+  function numberField(id, label, hint) {
+    return '  <div class="field"><label for="' + id + '"><span data-label="' + label + '" data-hint="' + hint + '">' + label + "</span></label>" +
+      '    <input id="' + id + '" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></div>';
+  }
+
+  // ---------- Remembered inputs (shared by every page that shows the picker) ----------
+  const inputsKey = "dfm-corner-picker-inputs";
+
+  function readSaved() {
+    try {
+      return JSON.parse(window.DFM.readSetting(inputsKey) || "null");
+    } catch (error) {
+      return null;
+    }
+  }
+
   // ---------- Render one tool instance ----------
   function renderTool(host) {
     const uid = "ct" + Math.random().toString(36).slice(2, 8);   // unique ids per instance
@@ -323,24 +376,22 @@
       '    <select id="' + uid + '-unit"><option value="in">Inch</option><option value="mm">Metric (mm)</option></select></div>' +
       '  <div class="field"><label for="' + uid + '-mat">Material</label>' +
       '    <select id="' + uid + '-mat"><option value="soft">Soft metal (aluminum, brass, copper)</option><option value="hard">Hard metal (steel, stainless, titanium)</option><option value="plastic">Plastic</option></select></div>' +
-      '  <div class="field"><label for="' + uid + '-depth">Pocket / wall depth</label>' +
-      '    <input id="' + uid + '-depth" type="number" step="any" min="0" placeholder="e.g. 0.75"></div>' +
-      '  <div class="field"><label for="' + uid + '-radius">Corner radius you drew (optional)</label>' +
-      '    <input id="' + uid + '-radius" type="number" step="any" min="0" placeholder="e.g. 0.125"></div>' +
-      '  <div class="field"><label for="' + uid + '-max">Largest corner radius allowed (optional)</label>' +
-      '    <input id="' + uid + '-max" type="number" step="any" min="0" placeholder="leave blank if any"></div>' +
-      '  <div class="field"><label for="' + uid + '-floor">Floor fillet radius (blank = suggest one)</label>' +
-      '    <input id="' + uid + '-floor" type="number" step="any" min="0" placeholder="e.g. 0.030"></div>' +
+      numberField(uid + "-depth", "Pocket / wall depth", "") +
+      numberField(uid + "-radius", "Corner radius you drew", "optional") +
+      numberField(uid + "-max", "Largest corner radius allowed", "optional") +
+      numberField(uid + "-floor", "Floor fillet radius", "blank = suggest one") +
       '</div>' +
       '<div class="calc-out" id="' + uid + '-summary"></div>' +
       '<div id="' + uid + '-verdict"></div>' +
       '<div id="' + uid + '-floor-out"></div>' +
+      '<details class="cutter-details"><summary>All standard cutters (table)</summary>' +
       '<div class="table-wrap"><table id="' + uid + '-table"><thead><tr>' +
       '<th>Cutter dia</th><th class="num">Tool radius</th><th class="num">Min corner R</th><th class="num">Recommended R</th>' +
       '<th class="num">Depth / dia</th><th>Reach</th><th class="num">Suggested floor R</th><th>Standard bullnose radii</th></tr></thead><tbody></tbody></table></div>' +
-      '<p class="table-note">Min corner R = tool radius + ' + '0.005 in / 0.1 mm clearance. Recommended R = 1.3 x tool radius, rounded up. ' +
+      '<p class="table-note">Min corner R = tool radius + ' + '0.005 in / 0.1 mm clearance. Recommended R = 1.3 x tool radius, rounded up, ' +
+      'and moved up a step if it would equal another standard cutter\'s radius. ' +
       'Reach bands are general guidance for standard-length cutters; long-reach tools exist but cost time. ' +
-      'Bullnose radii are typical catalog sizes; check your shop or vendor tool list.</p>';
+      'Bullnose radii are typical catalog sizes; check your shop or vendor tool list.</p></details>';
 
     // Element references
     const unitSel = host.querySelector("#" + uid + "-unit");
@@ -354,11 +405,40 @@
     const tbody = host.querySelector("#" + uid + "-table tbody");
 
     const summaryOut = host.querySelector("#" + uid + "-summary");
-    let lastUnit = unitSel.value;                // used to convert inputs when units change
 
     // Send to pad / All / None right under the result rows, so it is in reach
     // without scrolling past the recommendations and cutter table below
-    summaryOut.after(window.DFM.resultActions(summaryOut));
+    const actionsRow = window.DFM.resultActions(summaryOut);
+    summaryOut.after(actionsRow);
+
+    // Restore the last inputs used on any page
+    const saved = readSaved();
+    if (saved) {
+      unitSel.value = saved.unit === "mm" ? "mm" : "in";
+      if (["soft", "hard", "plastic"].indexOf(saved.material) !== -1) {
+        matSel.value = saved.material;
+      }
+      depthIn.value = saved.depth || "";
+      radiusIn.value = saved.radius || "";
+      maxIn.value = saved.max || "";
+      floorIn.value = saved.floor || "";
+    }
+    let lastUnit = unitSel.value;                // used to convert inputs when units change
+
+    function saveInputs() {
+      window.DFM.writeSetting(inputsKey, JSON.stringify({
+        unit: unitSel.value, material: matSel.value, depth: depthIn.value,
+        radius: radiusIn.value, max: maxIn.value, floor: floorIn.value
+      }));
+    }
+
+    function updateLabels(unit) {
+      // "Pocket / wall depth (in)", "Corner radius you drew (in, optional)" ...
+      host.querySelectorAll("[data-label]").forEach(function (span) {
+        const hint = span.dataset.hint;
+        span.textContent = span.dataset.label + " (" + unit + (hint ? ", " + hint : "") + ")";
+      });
+    }
 
     function update() {
       const unit = unitSel.value;
@@ -369,10 +449,13 @@
       const maxRadius = readNumber(maxIn);
       const floorRadius = readNumber(floorIn);
 
-      // Placeholders follow the unit
-      depthIn.placeholder = unit === "in" ? "e.g. 0.75" : "e.g. 20";
-      radiusIn.placeholder = unit === "in" ? "e.g. 0.125" : "e.g. 3";
+      // Labels and placeholders follow the unit
+      updateLabels(unit);
+      depthIn.placeholder = unit === "in" ? "e.g. 0.75 or 3/4" : "e.g. 20";
+      radiusIn.placeholder = unit === "in" ? "e.g. 0.125 or 1/8" : "e.g. 3";
+      maxIn.placeholder = "leave blank if any";
       floorIn.placeholder = unit === "in" ? "e.g. 0.030" : "e.g. 0.5";
+      saveInputs();
 
       const rows = buildRows(set, depth, material);
 
@@ -430,6 +513,11 @@
         }
       }
       window.DFM.renderResults(summaryOut, "corner-picker", items);
+
+      // Nothing to report yet: hide the summary rows and pad buttons, show only the prompt
+      const hasInput = depth > 0 || (radius !== null && radius > 0);
+      summaryOut.hidden = !hasInput;
+      actionsRow.style.display = hasInput ? "" : "none";   // .calc-row sets display, so [hidden] alone is not enough
 
       if (result) {
         verdictOut.innerHTML = '<div class="verdict ' + result.level + '">' + result.messages.map(function (m) {

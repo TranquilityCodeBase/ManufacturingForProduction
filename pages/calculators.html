@@ -48,6 +48,13 @@
 
             <!-- Unit converters (rendered by js/calculators.js) -->
             <h2 id="conversions" data-nav="Unit conversions">Unit conversions (metric / inch)</h2>
+            <div class="calc-row">
+              <label for="decimals-mode">Decimals</label>
+              <select id="decimals-mode">
+                <option value="auto">Auto (up to 6 significant digits)</option>
+                <option value="fixed">Fixed (inch / pound units 4 places, metric 3 places)</option>
+              </select>
+            </div>
             <div class="calc-grid" id="converter-grid"></div>
 
             <!-- Part mass and drill finder -->
@@ -59,6 +66,15 @@
             <div class="callout tip">
               <span class="callout-title">Tip</span>
               <p>Drill sizes: fractional, number and letter drills, plus metric drills in 0.1 mm steps to 10 mm and 0.5 mm steps above. Designing hole diameters to those increments lets the shop use a stock drill instead of interpolating with an end mill. For threaded holes, use the <a href="thread_tables.html">thread pilot hole tables</a> or <a href="tap_drill_charts.html">tap drill charts</a> instead.</p>
+            </div>
+
+            <!-- Thread engagement, countersinks and drill points -->
+            <h2 id="threads-holes" data-nav="Threads &amp; holes">Threads &amp; holes</h2>
+            <p>Check the percent thread a drill gives before you change a tap drill, and size countersinks, chamfers and blind hole depths. See <a href="holes_threading.html">Hole &amp; Thread Design Rules</a> for the design rules behind these numbers.</p>
+            <div class="calc-grid">
+              <div class="calc" id="calc-percent-thread"></div>
+              <div class="calc" id="calc-countersink"></div>
+              <div class="calc" id="calc-drill-point"></div>
             </div>
           </div>
 

@@ -16,7 +16,7 @@ The design choices that move CNC price the most, in one checklist.
 
 ## Geometry
 1. **Radius internal vertical corners**: R >= 1/3 of cavity depth, same radius on every corner; small standard bullnose floor radius (0.5-1 mm); sharp floors are rejected in hard metals and often in soft metals. See [[CNC_Inside_Corners_And_Pocket_Radii]].
-2. **Limit cavity depth** to about 4x the largest XY dimension of the cavity.
+2. **Limit cavity depth** to under 4 x the pocket width (over 6 x is too deep). The original tip measures against the largest XY dimension; for narrow slots the width rule is the safe one.
 3. **Thicken thin walls**: metal > 0.8 mm (0.030 in), plastics thicker still.
 4. **Avoid small high-aspect features**: width : height < 1 : 4, brace or tie to a wall.
 5. **Relieve corners** (dog-bones) instead of chasing sharp corners with tiny tools or EDM.

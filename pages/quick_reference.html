@@ -49,6 +49,7 @@
               <tr><td>Floor fillet</td><td>Standard bullnose radius of the wall cutter (e.g. 0.030 in on a 1/4 in cutter, 0.5 mm on 6 mm), smaller than the wall radius. Sharp floors: not accepted in hard metals, often rejected in soft metals</td><td><a href="corners_pockets.html">Corners</a></td></tr>
               <tr><td>Sharp inside corner needed</td><td>Use a dog-bone or T-bone corner relief instead of a tiny radius</td><td><a href="corners_pockets.html">Corners</a></td></tr>
               <tr><td>Pocket depth</td><td>Depth under 4 x pocket width; over 6 x is too deep</td><td><a href="corners_pockets.html">Corners</a></td></tr>
+              <tr><td>Pocket depth vs cutter</td><td>Soft metals: up to 3 x cutter dia standard, 3-4 x slower, 4-6 x long reach. Hard metals: 2 x / 3 x / 5 x</td><td><a href="corners_pockets.html#pocket-depth">Corners</a></td></tr>
               <tr><td>Wall thickness</td><td>Metal at least 0.030 in (0.8 mm), plastic at least 0.060 in (1.5 mm); 0.020 in (0.5 mm) absolute minimum feature</td><td><a href="walls_features.html">Walls</a></td></tr>
               <tr><td>Wall height</td><td>Height to thickness under about 3:1 to 4:1; tall walls max about 2 in (50 mm) of cutter reach</td><td><a href="walls_features.html">Walls</a></td></tr>
               <tr><td>Small features</td><td>Width-to-height aspect ratio under 4; brace or tie to a wall</td><td><a href="walls_features.html">Walls</a></td></tr>
@@ -112,7 +113,7 @@
               <tr><td>DMLS channels</td><td>Teardrop or diamond section above about 8 mm (0.30 in) diameter</td><td><a href="3dp_internal_passages.html">Passages</a></td></tr>
               <tr><td>Fits / clearance</td><td>FDM 0.2-0.5 mm, SLA 0.1-0.2 mm, SLS / MJF 0.3-0.5 mm per side</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
               <tr><td>Holes</td><td>Print undersize; drill or ream critical holes afterward</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
-              <tr><td>Threads</td><td>Heat-set inserts or tapped holes; model threads only when coarse and large</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
+              <tr><td>Threads</td><td>Heat-set inserts or tapped holes below 1/4-20 / M6; model printed threads only at 1/4-20 / M6 and larger (coarse)</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
               <tr><td>Cost drivers</td><td>Z height (SLA, DMLS), part volume and nesting (SLS, MJF), support volume (FDM, SLA, DMLS)</td><td><a href="3dp_quality_cost.html">Tips</a></td></tr>
             </tbody>
           </table>
@@ -127,7 +128,7 @@
               <tr><td><strong>SLA</strong></td><td>0.4 mm supported, 0.6 mm unsupported</td><td>Yes</td><td>&plusmn;0.002 in XY / &plusmn;0.005 in Z + 0.1% (ProtoLabs)</td><td>Fine detail, smooth cosmetic parts, clear parts</td></tr>
               <tr><td><strong>SLS</strong></td><td>About 0.8-1.0 mm</td><td>No (powder bed)</td><td>&plusmn;0.010 in + 0.1% (ProtoLabs)</td><td>Tough nylon functional parts, snap fits, complex assemblies</td></tr>
               <tr><td><strong>MJF</strong></td><td>0.8 mm min, 2.5-4 mm ideal</td><td>No (powder bed)</td><td>&plusmn;0.012 in + 0.1% (ProtoLabs)</td><td>Production nylon parts, consistent properties</td></tr>
-              <tr><td><strong>DMLS</strong></td><td>About 0.5-1.0 mm</td><td>Yes, below 45&deg; and overhangs over about 0.5 mm</td><td>&plusmn;0.003 in XY / &plusmn;0.006 in Z + 0.1% (ProtoLabs)</td><td>Metal parts with internal channels, consolidated assemblies</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>0.5 mm min (0.020 in), 1 mm preferred</td><td>Yes, below 45&deg; and overhangs over about 0.5 mm</td><td>&plusmn;0.003 in XY / &plusmn;0.006 in Z + 0.1% (ProtoLabs)</td><td>Metal parts with internal channels, consolidated assemblies</td></tr>
             </tbody>
           </table>
         </div>

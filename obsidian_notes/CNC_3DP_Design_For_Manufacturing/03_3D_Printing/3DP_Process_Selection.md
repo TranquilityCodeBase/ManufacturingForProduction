@@ -24,7 +24,7 @@ FDM vs SLA vs SLS vs MJF vs DMLS at a glance, and when to machine instead.
 | How | Extruded thermoplastic filament | UV laser cures liquid resin | Laser sinters nylon powder | Fusing agent + heat on nylon powder | Laser melts metal powder |
 | Typical layer | 0.1-0.3 mm | 0.025-0.1 mm | 0.1-0.12 mm | 0.08 mm | 0.02-0.06 mm |
 | Typical tolerance | ±0.2-0.5 mm (printer dependent) | ±0.002 in XY / ±0.005 in Z + 0.1% | ±0.010 in + 0.1% | ±0.012 in + 0.1% | ±0.003 in XY / ±0.006 in Z + 0.1% |
-| Min wall | ~0.8-1.2 mm | 0.4 mm supported / 0.6 mm unsupported | ~0.8 mm (PA12) | 0.8 mm (2.5-4 mm ideal) | ~0.4-1.0 mm |
+| Min wall | ~0.8-1.2 mm | 0.4 mm supported / 0.6 mm unsupported | ~0.8 mm (PA12) | 0.8 mm (2.5-4 mm ideal) | 0.5 mm min (0.020 in), 1 mm preferred |
 | Supports | Yes, over ~45° | Yes | No (powder) | No (powder) | Yes, plus anchoring for heat |
 | Surface | Visible layers | Smoothest | Grainy matte | Grainy matte, gray/black | Rough, needs machining for fits |
 | Strength | Weak across layers | Brittle to tough (resin) | Good, near isotropic | Good, near isotropic | Near wrought metal |

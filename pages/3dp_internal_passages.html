@@ -41,7 +41,7 @@
             <li><a href="#escape-holes"><span class="value">2+ holes</span><span class="label">Escape holes, on opposite ends</span></a></li>
             <li><a href="#escape-holes"><span class="value">3.5-5 mm</span><span class="label">Min escape hole, SLS / MJF</span></a></li>
             <li><a href="#minimums"><span class="value">0.8 mm</span><span class="label">Min channel gap, SLS / MJF (0.030 in)</span></a></li>
-            <li><a href="#minimums"><span class="value">8 mm</span><span class="label">Max round channel in DMLS (0.30 in)</span></a></li>
+            <li><a href="#minimums"><span class="value">Over 8 mm</span><span class="label">DMLS round channels above 8 mm (0.30 in) need a teardrop or diamond top</span></a></li>
             <li><a href="#channel-shape"><span class="value">R ≥ 2D</span><span class="label">Bend radius for clean-out</span></a></li>
           </ul>
         </div>
@@ -103,7 +103,7 @@
               <li>Use bend radii of at least 2x the channel diameter.</li>
               <li>Keep long passages at 3-5 mm or larger so they can be cleaned.</li>
               <li>Give every passage two open ends; route it to an outside face.</li>
-              <li>Use teardrop or diamond profiles for horizontal channels in metal and FDM.</li>
+              <li>Use teardrop or diamond profiles for horizontal channels in metal and FDM (see <a href="3dp_overhangs.html#horizontal-holes">horizontal holes</a>).</li>
               <li>Keep 1-2 mm minimum wall between neighboring channels (more for pressure).</li>
             </ul>
           </div>
@@ -120,15 +120,16 @@
 
         <h2 id="post-machining" data-nav="Finish and inspect">Critical bores, finish and inspection</h2>
         <ul>
-          <li><strong>Critical bores and ports:</strong> print undersize and drill, ream or machine to final size. Leave about 0.25-0.5 mm (0.010-0.020 in) stock per side.</li>
-          <li><strong>Threads at ports:</strong> tap after printing (metal) or use inserts (plastic). Model the tap drill hole, not the thread.</li>
+          <li><strong>Critical bores and ports:</strong> print undersize and drill, ream or machine to final size. Leave about 0.25-0.5 mm (0.010-0.020 in) stock per side; the <a href="calculators.html#mass-drill">drill finder</a> gives the nearest standard drill.</li>
+          <li><strong>Threads at ports:</strong> tap after printing (metal) or use inserts (plastic). Model the tap drill hole, not the thread: <a href="tap_drill_charts.html">tap drill charts</a>, <a href="thread_tables.html#npt-threads">NPT pipe threads</a>, <a href="holes_threading.html#inserts">insert types</a>.</li>
           <li><strong>Inside roughness:</strong> as-built channels are rough (worse on down-facing surfaces). Abrasive flow machining exists for metal but adds cost.</li>
           <li><strong>Inspection:</strong> blow-through or flow test each passage, weigh parts to catch trapped powder, use a borescope or CT scan for critical parts.</li>
         </ul>
         <div class="callout tip">
           <span class="callout-title">Machining comparison</span>
-          <p>A machined internal passage needs straight drilled holes that intersect, plus plugs. If your channel can be made that way, compare cost. If it curves, branches or follows a surface (conformal cooling), printing is often the only practical option.</p>
+          <p>A machined internal passage needs straight drilled holes that intersect, plus plugs (see <a href="holes_threading.html#hole-rules">hole depth rules</a>). If your channel can be made that way, compare cost. If it curves, branches or follows a surface (conformal cooling), printing is often the only practical option.</p>
         </div>
+        <p class="table-note">Related: <a href="3dp_processes.html">process comparison</a> &middot; <a href="3dp_overhangs.html">overhangs and supports</a> &middot; <a href="3dp_quality_cost.html">quality, time and cost tips</a> &middot; <a href="3dp_materials.html">materials</a></p>
         <div class="callout source">
           <span class="callout-title">Sources</span>
           <p>ProtoLabs: <a href="https://www.protolabs.com/resources/design-tips/7-mistakes-to-avoid-when-designing-3d-printed-parts/">7 Mistakes to Avoid When Designing 3D Printed Parts</a>, <a href="https://www.protolabs.com/en-gb/resources/blog/designing-a-part-for-multi-jet-fusion/">Designing a Part for Multi Jet Fusion</a>. <a href="https://blogs.solidworks.com/products/solidworks/introduction-designing-metal-3d-printing">SOLIDWORKS: Introduction to Designing for Metal 3D Printing</a> (DMLS channel size, quoting ProtoLabs). <a href="https://www.etmm-online.com/5-tips-for-additive-manufacturing-designs-a-758535/">ETMM: 5 tips for additive manufacturing designs</a> (DMLS escape holes). <a href="https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/">Protolabs Network: Designing for SLS</a> (escape hole size).</p>

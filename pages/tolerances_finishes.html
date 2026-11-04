@@ -54,22 +54,23 @@
           <li>Tighter tolerances raise scrap, inspection and cycle time. A tight callout can more than double the part price.</li>
         </ul>
 
-        <h3 id="iso2768">General tolerances by part length (ISO 2768 style, metals)</h3>
+        <h3 id="general-tolerances">Xometry general tolerances by part length (metals)</h3>
+        <p>This is Xometry's published default for parts without a tolerance callout. Their guide says it follows ISO 2768, but the real ISO 2768 classes (f / m / c / v and H / K / L) vary by size range in millimetres, so call out the actual ISO 2768 class on the drawing if you need it.</p>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Part length</th><th class="num">Orientation and form (flatness, straightness, perpendicularity...)</th><th class="num">Angularity</th></tr>
+              <tr><th>Part length</th><th class="num">Orientation and form tolerance zone (flatness, straightness, perpendicularity...)</th><th class="num">Angularity</th></tr>
             </thead>
             <tbody>
-              <tr><td>0 to 12 in</td><td class="num">&plusmn;0.005 in</td><td class="num">&plusmn;0.5&deg;</td></tr>
-              <tr><td>12 to 24 in</td><td class="num">&plusmn;0.010 in</td><td class="num">&plusmn;0.5&deg;</td></tr>
-              <tr><td>24 to 36 in</td><td class="num">&plusmn;0.016 in (1/64)</td><td class="num">&plusmn;1.0&deg;</td></tr>
-              <tr><td>36 to 60 in</td><td class="num">&plusmn;0.031 in (1/32)</td><td class="num">&plusmn;1.0&deg;</td></tr>
-              <tr><td>Over 60 in</td><td class="num">&plusmn;0.063 in (1/16)</td><td class="num">&plusmn;1.0&deg;</td></tr>
+              <tr><td>0 to 12 in (0-305 mm)</td><td class="num">0.005 in (0.13 mm)</td><td class="num">&plusmn;0.5&deg;</td></tr>
+              <tr><td>12 to 24 in (305-610 mm)</td><td class="num">0.010 in (0.25 mm)</td><td class="num">&plusmn;0.5&deg;</td></tr>
+              <tr><td>24 to 36 in (610-914 mm)</td><td class="num">0.016 in (0.41 mm)</td><td class="num">&plusmn;1.0&deg;</td></tr>
+              <tr><td>36 to 60 in (914-1524 mm)</td><td class="num">0.031 in (0.79 mm)</td><td class="num">&plusmn;1.0&deg;</td></tr>
+              <tr><td>Over 60 in (1524 mm)</td><td class="num">0.063 in (1.6 mm)</td><td class="num">&plusmn;1.0&deg;</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="table-note">Features of size and location default to &plusmn;0.005 in at this network shop. Plastic and composite parts typically get about double.</p>
+        <p class="table-note">Form and orientation values are total zone widths (a surface within 0.005 in flatness lies between two parallel planes 0.005 in apart), not &plusmn; values; Xometry's guide writes them as &plusmn;. Features of size and location default to &plusmn;0.005 in (&plusmn;0.13 mm). Plastic and composite parts typically get about double.</p>
 
         <h2 id="writing">Writing tolerances</h2>
         <figure class="diagram">
@@ -94,7 +95,7 @@
               <tr><td>True position</td><td>Location of a hole or feature from datums, often with MMC/LMC bonus</td><td>Bolt patterns, dowel holes</td></tr>
               <tr><td>Flatness</td><td>Surface must lie between two parallel planes</td><td>Sealing faces, thin plates that may warp</td></tr>
               <tr><td>Cylindricity</td><td>Roundness and straightness together</td><td>Bearing bores, shafts</td></tr>
-              <tr><td>Concentricity / runout</td><td>Axis of one diameter relative to another</td><td>Shoulders, counterbores, turned steps</td></tr>
+              <tr><td>Runout (circular / total)</td><td>Wobble of one diameter or face as the part spins on a datum axis</td><td>Shoulders, counterbores, turned steps. Concentricity was removed in ASME Y14.5-2018; use runout or position instead</td></tr>
               <tr><td>Perpendicularity</td><td>Squareness of a face or axis to a datum</td><td>Mounting faces, shoulders on shafts</td></tr>
               <tr><td>Parallelism, profile, angularity, straightness</td><td>See ASME Y14.5</td><td>As required by function</td></tr>
             </tbody>
@@ -112,9 +113,9 @@
               <tr><th>Surface</th><th class="num">Typical as-machined</th><th>Notes</th></tr>
             </thead>
             <tbody>
-              <tr><td>Flat and perpendicular milled faces</td><td class="num">63 &micro;in Ra (1.6 &micro;m)</td><td>Quick-turn standard</td></tr>
+              <tr><td>Flat and perpendicular milled faces</td><td class="num">63 &micro;in Ra (1.6 &micro;m)</td><td>Achievable on flat faces; call it out if you need it</td></tr>
               <tr><td>Curved / 3D surfaces</td><td class="num">125 &micro;in Ra (3.2 &micro;m) or better</td><td>Scallops from ball end mill passes</td></tr>
-              <tr><td>General as-machined spec</td><td class="num">125 &micro;in Ra</td><td>Tool marks may show a swirl pattern</td></tr>
+              <tr><td><strong>General as-machined spec (headline)</strong></td><td class="num"><strong>125 &micro;in Ra (3.2 &micro;m)</strong></td><td>The default to assume when nothing is called out; tool marks may show a swirl pattern</td></tr>
               <tr><td>Turned diameters</td><td class="num">Usually smoother than milled</td><td>Single-point turning on center</td></tr>
             </tbody>
           </table>
@@ -155,7 +156,7 @@
         </ul>
         <div class="callout source">
           <span class="callout-title">Sources</span>
-          <p>ProtoLabs Definitive Guide to CNC Machining (tolerances, GD&amp;T, roughness, finishes) &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (ISO 2768 general tolerances, standard finish) &middot; <a href="https://www.protolabs.com/services/cnc-machining/precision-machining/">ProtoLabs precision machining</a>.</p>
+          <p>ProtoLabs Definitive Guide to CNC Machining (tolerances, GD&amp;T, roughness, finishes) &middot; <a href="https://www.xometry.com/">Xometry</a> CNC Machining Design Guide (general tolerances, standard finish) &middot; <a href="https://www.protolabs.com/services/cnc-machining/precision-machining/">ProtoLabs precision machining</a>.</p>
         </div>
 
         <footer class="site-footer">Compiled from vendor design guides (ProtoLabs, Xometry) and general machining practice. Values are guidelines; confirm against your vendor's current rules and the DFM feedback on your quote. See <a href="references.html">Sources &amp; References</a>.</footer>

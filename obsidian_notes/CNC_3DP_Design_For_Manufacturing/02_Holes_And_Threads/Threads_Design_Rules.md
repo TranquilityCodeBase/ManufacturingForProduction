@@ -32,7 +32,7 @@ How to model, size and specify threads so they get made right the first time.
 |---|---|
 | External thread milled on a mill (no lathe) | The thread is cut with ball / flat end mills from the modeled shape; expect root radii and plan to chase with a die |
 | Large or non-standard coarse threads (custom lead screws, jar-style threads) | No standard tap / thread mill to call out |
-| 3D printed threads, coarse and large (roughly M8 / 5/16 and up) | The printer only makes what is in the model. Small printed threads are poor; use inserts or tap |
+| 3D printed threads, coarse, 1/4-20 / M6 and larger | The printer only makes what is in the model. Small printed threads are poor; use inserts or tap |
 | Rendering / marketing models | Visual only; keep a production version without |
 
 External threads on turned parts: model the plain diameter, assign the thread in the quote. See [[Threads_ProtoLabs_Special_NPT_And_OD]].

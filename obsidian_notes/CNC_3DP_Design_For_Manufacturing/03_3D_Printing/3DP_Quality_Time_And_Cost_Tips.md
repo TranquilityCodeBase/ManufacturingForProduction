@@ -16,7 +16,7 @@ Design and orientation choices that make prints better, faster and cheaper.
 - **Cost drivers**: FDM / SLA = material volume + support volume + time; SLS / MJF = bounding box volume (nesting); DMLS = height, supports, post-machining.
 - Keep walls **uniform**; avoid big thick slabs (warp, sink, cost). Hollow or shell thick parts.
 - Holes print **undersize**: print small and **drill / ream** to size if critical.
-- Use **heat-set inserts** for threads in plastic prints; tap holes for occasional use; model threads only if coarse and large.
+- Use **heat-set inserts** for threads in plastic prints; tap holes for occasional use. Model printed threads only for coarse threads at **1/4-20 / M6 and larger**; below that, tap or insert.
 - Combine parts (part consolidation) when it removes fasteners and assembly, but keep features printable.
 
 ## Minimum Walls and Features (conservative design values)
@@ -27,18 +27,18 @@ Design and orientation choices that make prints better, faster and cheaper.
 | SLA | 0.6 mm unsupported / 0.4 mm supported | 0.3 mm | 0.5-1 mm | 0.3-0.5 mm deep |
 | SLS | 0.8-1.0 mm (PA12) | 0.8 mm | 1.5 mm | 0.5-1 mm deep |
 | MJF | 0.8 mm (2.5-4 mm ideal) | 0.5-0.8 mm | 1.5 mm | 0.5-1 mm deep |
-| DMLS | 0.4-1.0 mm | 0.5 mm | 1 mm | 0.3-0.5 mm deep |
+| DMLS | 0.5 mm min (1 mm preferred) | 0.5 mm | 1 mm | 0.3-0.5 mm deep |
 
 Thinner may print but won't survive handling or post-processing. Taller features need more thickness.
 
-## Fits and Clearances (per side)
+## Fits and Clearances
 
-| Process | Sliding / loose fit | Press / snug fit | Print-in-place moving parts |
-|---|---:|---:|---:|
-| FDM | 0.3-0.5 mm | 0.1-0.2 mm | >= 0.5 mm |
-| SLA | 0.1-0.2 mm | 0.05-0.1 mm | >= 0.3 mm |
-| SLS / MJF | 0.3-0.5 mm | 0.1-0.2 mm | >= 0.5 mm, with powder escape |
-| DMLS | 0.2-0.3 mm | machine after print | not recommended |
+| Process | Sliding / easy fit, per side | Same fit, on diameter | Light press fit | Print-in-place moving parts (per side) |
+|---|---:|---:|---:|---:|
+| FDM | 0.2-0.5 mm (0.008-0.020 in) | 0.4-1.0 mm | 0-0.1 mm, then test | >= 0.5 mm |
+| SLA | 0.1-0.2 mm (0.004-0.008 in) | 0.2-0.4 mm | not recommended (brittle) | >= 0.5 mm |
+| SLS / MJF | 0.3-0.5 mm (0.012-0.020 in) | 0.6-1.0 mm | 0-0.1 mm (nylon is forgiving) | 0.5-0.8 mm, plus powder escape |
+| DMLS | machine mating faces | machine to size | machine to size | rarely practical |
 
 Print a fit-test coupon on the actual machine/material when fits matter.
 

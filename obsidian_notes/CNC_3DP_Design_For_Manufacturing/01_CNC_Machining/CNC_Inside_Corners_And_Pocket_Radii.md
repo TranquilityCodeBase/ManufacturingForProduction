@@ -32,29 +32,31 @@ When corner R equals tool R, the cutter is buried on two walls at once and must 
 |---|---:|---:|---:|---:|---:|
 | 1/16 in | 0.031 | 0.037 | **0.045** | 0.188 | 0.125 |
 | 1/8 in | 0.063 | 0.068 | **0.085** | 0.375 | 0.250 |
-| 3/16 in | 0.094 | 0.099 | **0.125** | 0.563 | 0.375 |
+| 3/16 in | 0.094 | 0.099 | **0.130** * | 0.563 | 0.375 |
 | 1/4 in | 0.125 | 0.130 | **0.165** | 0.750 | 0.500 |
 | 3/8 in | 0.188 | 0.193 | **0.245** | 1.125 | 0.750 |
 | 1/2 in | 0.250 | 0.255 | **0.325** | 1.500 | 1.000 |
 | 2 mm | 1.0 | 1.1 | **1.3** | 6 | 4 |
-| 3 mm | 1.5 | 1.6 | **2.0** | 9 | 6 |
+| 3 mm | 1.5 | 1.6 | **2.1** * | 9 | 6 |
 | 4 mm | 2.0 | 2.1 | **2.6** | 12 | 8 |
 | 6 mm | 3.0 | 3.1 | **3.9** | 18 | 12 |
 | 8 mm | 4.0 | 4.1 | **5.2** | 24 | 16 |
 | 10 mm | 5.0 | 5.1 | **6.5** | 30 | 20 |
 | 12 mm | 6.0 | 6.1 | **7.8** | 36 | 24 |
 
-Inch values in inches, metric in mm. Soft = aluminum, brass, plastics. Hard = steel, stainless, titanium. Up to ~4x D (soft) / 3x D (hard) is still standard tooling with a slower finish pass; beyond ~6x D needs long-reach tools and costs more.
+Inch values in inches, metric in mm. Soft = aluminum, brass, plastics. Hard = steel, stainless, titanium. \* Bumped one step because 1.3 x lands exactly on the next standard cutter radius (0.125 in = 1/4 in cutter, 2.0 mm = 4 mm cutter).
+
+Reach bands (pocket depth / cutter diameter D), same as the website picker: soft metals and plastics up to 3 x D standard and fast, 3-4 x D slower finish pass, 4-6 x D long-reach tool; hard metals 2 x D, 3 x D and 5 x D for the same bands.
 
 > [!tip] Interactive version
 > The website calculator does this for any depth and radius, inch or metric: `pages/calculators.html#corner-picker`.
 
 ## Picking a Radius From Pocket Depth
-1. Pocket depth **d**. Target corner R >= d / 3 (cost tip).
+1. Pocket depth. Target corner R >= depth / 3 (cost tip).
 2. Find the largest cutter whose recommended R fits your design and whose comfortable depth >= d.
 3. If the design cannot accept that radius, use corner reliefs instead of a smaller tool.
 
-Example: 0.75 in deep aluminum pocket -> d/3 = 0.25 in -> 3/8 in cutter (R 0.245 in, 1.125 in comfortable depth). A 1/4 in cutter also reaches (R 0.165) but runs slower.
+Example: 0.75 in deep aluminum pocket -> depth / 3 = 0.25 in -> 3/8 in cutter (R 0.245 in, 1.125 in comfortable depth). A 1/4 in cutter also reaches (R 0.165) but runs slower.
 
 ## Floor Fillets
 - A floor-to-wall fillet is cut by the **corner radius of the tool** (bullnose) or a ball end mill. Ball-milled floor fillets are slow 3D surfacing.
@@ -95,7 +97,7 @@ Typical catalog sizes; confirm against your vendor's tool list. The website pick
 
 ## Pocket Depth and Small Tools
 - Depth < 4 x width ideal; 6 x width is the practical limit. Wider at the top (stepped pocket) helps tool access.
-- Once depth passes ~2 x cutter diameter, feed rates drop and cycle time climbs.
+- Reach bands by depth / cutter diameter: soft metals 3 x D standard, 3-4 x D slower, 4-6 x D long reach; hard metals 2 x / 3 x / 5 x D.
 - Smallest practical corner radii (~0.015 in) only reach a short depth; deep and sharp do not go together.
 - Removing material only to save weight? Question whether the pocket is needed at all.
 

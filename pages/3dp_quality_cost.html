@@ -76,7 +76,7 @@
               <tr><td><strong>SLA</strong></td><td>0.4 mm supported, 0.6 mm unsupported</td><td>1-2 mm (0.04-0.08 in)</td><td>~0.3 mm (0.012 in)</td><td>0.3 mm deep / high, 8 pt+</td></tr>
               <tr><td><strong>SLS</strong></td><td>0.8 mm PA12, 2 mm filled grades</td><td>1.5-3 mm (0.06-0.12 in)</td><td>~0.8 mm (0.030 in)</td><td>0.5 mm deep / high, 10 pt+</td></tr>
               <tr><td><strong>MJF</strong></td><td>0.8 mm</td><td>2.5-4 mm (0.10-0.16 in)</td><td>~0.5 mm (0.020 in)</td><td>0.5 mm deep / high, 10 pt+</td></tr>
-              <tr><td><strong>DMLS</strong></td><td>0.4 mm</td><td>1-3 mm (0.04-0.12 in)</td><td>~0.4 mm (0.016 in)</td><td>0.3 mm deep / high</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>0.5 mm (0.020 in)</td><td>1-3 mm (0.04-0.12 in)</td><td>~0.4 mm (0.016 in)</td><td>0.3 mm deep / high</td></tr>
             </tbody>
           </table>
         </div>
@@ -119,13 +119,13 @@
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Process</th><th>Sliding / easy fit (per side)</th><th>Light press fit</th><th>Print-in-place moving parts</th></tr>
+              <tr><th>Process</th><th>Sliding / easy fit, per side</th><th>Same fit, on diameter</th><th>Light press fit</th><th>Print-in-place moving parts (gap per side)</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>FDM</strong></td><td>0.2-0.5 mm (0.008-0.020 in)</td><td>0-0.1 mm, then test</td><td>0.5 mm+ (0.020 in)</td></tr>
-              <tr><td><strong>SLA</strong></td><td>0.1-0.2 mm (0.004-0.008 in)</td><td>Not recommended (brittle)</td><td>0.5 mm+</td></tr>
-              <tr><td><strong>SLS / MJF</strong></td><td>0.3-0.5 mm (0.012-0.020 in)</td><td>0-0.1 mm (nylon is forgiving)</td><td>0.5-0.8 mm, plus powder removal path</td></tr>
-              <tr><td><strong>DMLS</strong></td><td>Machine the mating faces</td><td>Machine to size</td><td>Rarely practical</td></tr>
+              <tr><td><strong>FDM</strong></td><td>0.2-0.5 mm (0.008-0.020 in)</td><td>0.4-1.0 mm (0.016-0.040 in)</td><td>0-0.1 mm, then test</td><td>0.5 mm+ (0.020 in)</td></tr>
+              <tr><td><strong>SLA</strong></td><td>0.1-0.2 mm (0.004-0.008 in)</td><td>0.2-0.4 mm (0.008-0.016 in)</td><td>Not recommended (brittle)</td><td>0.5 mm+</td></tr>
+              <tr><td><strong>SLS / MJF</strong></td><td>0.3-0.5 mm (0.012-0.020 in)</td><td>0.6-1.0 mm (0.024-0.040 in)</td><td>0-0.1 mm (nylon is forgiving)</td><td>0.5-0.8 mm, plus powder removal path</td></tr>
+              <tr><td><strong>DMLS</strong></td><td>Machine the mating faces</td><td>Machine to size</td><td>Machine to size</td><td>Rarely practical</td></tr>
             </tbody>
           </table>
         </div>
@@ -136,10 +136,10 @@
 
         <h2 id="holes-threads" data-nav="Holes and threads">Holes and threads in printed parts</h2>
         <ul>
-          <li><strong>Holes print undersize</strong> in FDM and SLA (and slightly out of round when horizontal). Model critical holes about 0.1-0.2 mm under and drill or ream to size.</li>
-          <li><strong>Heat-set inserts</strong> (FDM, SLS, MJF) give durable metal threads. Model the insert maker's recommended pilot hole and boss size.</li>
-          <li><strong>Tap small threads</strong> (M5 / #10 and smaller) into a modeled tap-drill hole rather than printing them.</li>
-          <li><strong>Model printed threads</strong> only for coarse, large threads (about M8 / 5/16 in and up), and add clearance to the thread profile.</li>
+          <li><strong>Holes print undersize</strong> in FDM and SLA (and slightly out of round when horizontal). Model critical holes about 0.1-0.2 mm under and drill or ream to size; the <a href="calculators.html#mass-drill">drill finder</a> gives the nearest standard drill. Horizontal holes print best with a <a href="3dp_overhangs.html#horizontal-holes">teardrop top</a>.</li>
+          <li><strong>Heat-set inserts</strong> (FDM, SLS, MJF) give durable metal threads. Model the insert maker's recommended pilot hole and boss size. See <a href="holes_threading.html#inserts">insert types</a>.</li>
+          <li><strong>Below 1/4-20 / M6, do not print threads.</strong> Tap them into a modeled tap-drill hole (<a href="tap_drill_charts.html">tap drill charts</a>) or use heat-set inserts.</li>
+          <li><strong>Model printed threads</strong> only for coarse threads at 1/4-20 / M6 and larger, and add clearance to the thread profile.</li>
           <li><strong>Self-tapping screws</strong> into nylon bosses work well; size the boss OD at about 2-2.5x the screw diameter.</li>
           <li><strong>Metal (DMLS):</strong> model the tap drill hole and tap after printing, or machine threads in post-processing.</li>
         </ul>
@@ -176,6 +176,7 @@
           <li>Remove modeled threads you do not want printed; leave tap-drill or insert pilot holes instead.</li>
           <li>Note critical dimensions, cosmetic faces and inserts on a drawing or in the order notes.</li>
         </ul>
+        <p class="table-note">Related: <a href="3dp_processes.html">process comparison</a> &middot; <a href="3dp_materials.html">materials</a> &middot; <a href="3dp_internal_passages.html">internal passages</a> &middot; <a href="3dp_overhangs.html">overhangs and supports</a> &middot; <a href="holes_threading.html">hole and thread rules</a></p>
         <div class="callout source">
           <span class="callout-title">Sources</span>
           <p>ProtoLabs: <a href="https://www.protolabs.com/resources/design-tips/3d-printing-tolerances/">Understanding 3D Printing Tolerances</a>, <a href="https://www.protolabs.com/resources/design-tips/7-mistakes-to-avoid-when-designing-3d-printed-parts/">7 Mistakes to Avoid When Designing 3D Printed Parts</a>, <a href="https://www.protolabs.com/en-gb/resources/blog/designing-a-part-for-multi-jet-fusion/">Designing a Part for Multi Jet Fusion</a>, <a href="https://www.protolabs.com/en-gb/resources/design-for-3d-printing-toolkit">Design for 3D Printing Toolkit</a>. Protolabs Network: <a href="https://www.hubs.com/knowledge-base/how-design-parts-sls-3d-printing/">Designing for SLS</a>. FDM clearances, text sizes and layer guidance are general practice and vary by printer.</p>
