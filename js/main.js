@@ -56,6 +56,91 @@
 
   applyTheme(readSetting(themeKey));             // apply the saved choice as early as possible
 
+  // ---------- Page history for the "Back to" link ----------
+  // Stored per browser tab in sessionStorage:
+  //   current  = the page open now, with its scroll position (saved when leaving)
+  //   previous = the page before it (target of the "Back to" link)
+  //   restore  = id of the page the Back link is going to, so its scroll position is restored
+  const historyKey = "dfm-page-history";
+
+  function readHistory() {
+    try {
+      return JSON.parse(window.sessionStorage.getItem(historyKey) || "{}") || {};
+    } catch (error) {
+      return {};                                 // storage blocked or unreadable
+    }
+  }
+
+  function writeHistory(state) {
+    try {
+      window.sessionStorage.setItem(historyKey, JSON.stringify(state));
+    } catch (error) {
+      // Ignore: the Back link simply will not appear
+    }
+  }
+
+  function findPage(pageId) {
+    // Look up a page's title and root-relative href from the nav definition
+    if (window.DFM_HOME && pageId === window.DFM_HOME.id) {
+      return window.DFM_HOME;
+    }
+    let found = null;
+    (window.DFM_NAV || []).forEach(function (group) {
+      if (group.page && group.page.id === pageId) {
+        found = group.page;
+      }
+      group.items.forEach(function (item) {
+        if (item.id === pageId) {
+          found = item;
+        }
+      });
+    });
+    return found;
+  }
+
+  let pageHistory = {};                          // state for this page view
+  let restoreScrollTo = null;                    // scroll position to restore after load (Back link)
+
+  function updateHistory(pageId) {
+    const state = readHistory();
+    const page = findPage(pageId);
+    if (!page) {
+      return;
+    }
+
+    // Arrived with the Back link: remember where that page was scrolled to
+    if (state.restore === pageId && state.previous && state.previous.id === pageId) {
+      restoreScrollTo = state.previous.scroll || 0;
+    }
+
+    // A new page pushes the old current page into "previous"; a reload keeps it
+    if (state.current && state.current.id !== pageId) {
+      state.previous = state.current;
+    }
+    state.current = { id: pageId, href: page.href, title: page.title, scroll: 0 };
+    delete state.restore;
+    writeHistory(state);
+    pageHistory = state;
+
+    // Save this page's scroll position when leaving it
+    window.addEventListener("pagehide", function () {
+      const latest = readHistory();
+      if (latest.current && latest.current.id === pageId) {
+        latest.current.scroll = window.scrollY;
+        writeHistory(latest);
+      }
+    });
+  }
+
+  function restoreScroll() {
+    // Run after images and rendered tables have their final size
+    if (restoreScrollTo !== null) {
+      window.requestAnimationFrame(function () {
+        window.scrollTo(0, restoreScrollTo);
+      });
+    }
+  }
+
   // ---------- Sidebar ----------
   const navStateKey = "dfm-nav-groups";          // localStorage key for open / closed groups
 
@@ -69,6 +154,22 @@
     let html = '<a class="brand" href="' + rootPrefix + 'index.html">' +
       '<span class="brand-mark">DFM</span>' +
       '<span>Design for Manufacturing<small>CNC &amp; 3D printing reference</small></span></a>';
+
+    // Fixed links: Home (always visible) and Back to the last page visited in this tab
+    const home = window.DFM_HOME;
+    const homeIcon = '<svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">' +
+      '<path d="M2 7.5L8 2.5l6 5M3.8 6.2V13.5h3V10h2.4v3.5h3V6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+    const backIcon = '<svg class="nav-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">' +
+      '<path d="M6 3.5L2.5 7 6 10.5M3 7h6.5a4 4 0 0 1 0 8H8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+    const previous = pageHistory.previous;
+    html += '<div class="nav-fixed">' +
+      '<a class="nav-home' + (pageId === home.id ? " active" : "") + '" href="' + rootPrefix + home.href + '"' +
+      (pageId === home.id ? ' aria-current="page"' : "") + ">" + homeIcon + "<span>" + home.title + "</span></a>";
+    if (previous && previous.id !== pageId) {
+      html += '<a class="nav-back" href="' + rootPrefix + previous.href + '" title="Return to the last page you viewed, at the same scroll position">' +
+        backIcon + '<span><small>Back to</small>' + previous.title + "</span></a>";
+    }
+    html += "</div>";
 
     // Filter box to quickly find a page
     html += '<input class="nav-filter" type="search" placeholder="Filter pages..." aria-label="Filter pages">';
@@ -87,7 +188,7 @@
 
     // One collapsible block per nav group; the group label is the toggle
     window.DFM_NAV.forEach(function (group, index) {
-      const holdsPage = group.items.some(function (item) {
+      const holdsPage = (group.page && group.page.id === pageId) || group.items.some(function (item) {
         return item.id === pageId;
       });
       // Default: open the group that holds this page (all groups on the home page);
@@ -116,6 +217,16 @@
 
     html += '<div class="sidebar-footer">Reference data only. Always confirm against your vendor\'s current guidelines and quote DFM feedback.</div>';
     sidebar.innerHTML = html;
+
+    // Back link: flag the target so it reopens at the same scroll position
+    const backLink = sidebar.querySelector(".nav-back");
+    if (backLink && previous) {
+      backLink.addEventListener("click", function () {
+        const state = readHistory();
+        state.restore = previous.id;
+        writeHistory(state);
+      });
+    }
 
     // Save the open / closed state of every group
     function saveGroups() {
@@ -170,6 +281,46 @@
     });
   }
 
+  // ---------- Highlight the sidebar link of the section in view ----------
+  function spyOnLinks(links) {
+    if (!("IntersectionObserver" in window) || links.length === 0) {
+      return;
+    }
+    const targets = [];
+    links.forEach(function (link) {
+      const id = link.getAttribute("href").split("#")[1];
+      const target = id ? document.getElementById(id) : null;
+      if (target) {
+        targets.push(target);
+      }
+    });
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          links.forEach(function (link) {
+            link.classList.toggle("current", link.getAttribute("href").split("#")[1] === entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: "-80px 0px -70% 0px" });
+    targets.forEach(function (target) {
+      observer.observe(target);
+    });
+  }
+
+  // Quick Rules style groups: items that jump to sections of the page being viewed
+  function spyOnSamePageGroups(pageId) {
+    (window.DFM_NAV || []).forEach(function (group, index) {
+      if (group.page && group.page.id === pageId) {
+        const links = document.querySelectorAll("#nav-group-" + index + " .nav-link");
+        links.forEach(function (link) {
+          link.classList.add("anchor-link");
+        });
+        spyOnLinks(Array.prototype.slice.call(links));
+      }
+    });
+  }
+
   // ---------- Current page section links ----------
   function buildSectionLinks() {
     const holder = document.getElementById("nav-sub");
@@ -200,22 +351,7 @@
     });
 
     // Highlight the section currently in view
-    if (!("IntersectionObserver" in window)) {
-      return;
-    }
-    const links = holder.querySelectorAll("a");
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          links.forEach(function (link) {
-            link.classList.toggle("current", link.getAttribute("href") === "#" + entry.target.id);
-          });
-        }
-      });
-    }, { rootMargin: "-80px 0px -70% 0px" });
-    headings.forEach(function (heading) {
-      observer.observe(heading);
-    });
+    spyOnLinks(Array.prototype.slice.call(holder.querySelectorAll("a")));
   }
 
   // ---------- Top bar ----------
@@ -228,6 +364,9 @@
     // Find the group and title of this page for the breadcrumb
     let crumb = "Home";
     (window.DFM_NAV || []).forEach(function (group) {
+      if (group.page && group.page.id === pageId) {
+        crumb = group.page.title;
+      }
       group.items.forEach(function (item) {
         if (item.id === pageId && pageId !== "home") {
           crumb = group.group + "  /  " + item.title;
@@ -350,9 +489,11 @@
     const pageId = document.body.dataset.page || "home";   // which nav entry is active
     const rootPrefix = document.body.dataset.root || "";   // "../" for pages in /pages
 
+    updateHistory(pageId);
     buildSidebar(rootPrefix, pageId);
     buildTopbar(pageId);
     buildSectionLinks();
+    spyOnSamePageGroups(pageId);
     initTabs();
     initTableFilters();
 
@@ -362,6 +503,13 @@
         setNavOpen(false);
       });
     });
+
+    // Back link arrivals return to the saved scroll position once everything has loaded
+    if (document.readyState === "complete") {
+      restoreScroll();
+    } else {
+      window.addEventListener("load", restoreScroll);
+    }
 
     // Escape key closes the phone menu
     document.addEventListener("keydown", function (event) {

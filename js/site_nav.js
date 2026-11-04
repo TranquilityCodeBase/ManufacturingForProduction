@@ -6,12 +6,20 @@
    each page needs (pages in /pages use "../").
    ===================================================================== */
 
+// Home is not part of this list: main.js always shows it as a fixed link
+// at the top of the sidebar, followed by a "Back to" link for the last page visited.
+window.DFM_HOME = { id: "home", title: "Home", href: "index.html" };
+
 window.DFM_NAV = [
   {
-    group: "Overview",
+    // Section of one page: the items jump to sections of the cheat sheet
+    group: "Quick Rules",
+    page: { id: "quick_reference", title: "Quick Rules Cheat Sheet", href: "pages/quick_reference.html" },
     items: [
-      { id: "home", title: "Home", href: "index.html" },
-      { id: "quick_reference", title: "Quick Rules Cheat Sheet", href: "pages/quick_reference.html" }
+      { id: "qr_cnc", title: "CNC Milling Rules", href: "pages/quick_reference.html#cnc-rules" },
+      { id: "qr_holes", title: "Holes & Threads Rules", href: "pages/quick_reference.html#hole-rules" },
+      { id: "qr_turning", title: "CNC Turning Rules", href: "pages/quick_reference.html#turning-rules" },
+      { id: "qr_3dp", title: "3D Printing Rules", href: "pages/quick_reference.html#3dp-rules" }
     ]
   },
   {

@@ -930,3 +930,55 @@ tr.best td { background: var(--tip-soft) !important; font-weight: 600; }
   color: var(--accent);
   text-decoration: none;
 }
+
+/* ---------- Fixed sidebar links: Home and Back to the last page ---------- */
+.nav-fixed {
+  padding: 10px 0 4px;
+}
+
+.nav-home,
+.nav-back {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 20px;
+  border-left: 3px solid transparent;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.nav-home { font-weight: 600; }
+
+.nav-home:hover,
+.nav-back:hover {
+  background: var(--surface-alt);
+  color: var(--heading);
+  text-decoration: none;
+}
+
+.nav-home.active {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.nav-icon { flex: 0 0 auto; color: var(--accent); }
+
+/* Back link shows a small caption above the page title */
+.nav-back { align-items: flex-start; font-size: 0.88rem; }
+.nav-back .nav-icon { margin-top: 3px; }
+.nav-back small {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Quick Rules items jump within the cheat sheet; highlight the one in view */
+.nav-link.anchor-link.current {
+  border-left-color: var(--accent);
+  color: var(--accent-strong);
+  font-weight: 600;
+}

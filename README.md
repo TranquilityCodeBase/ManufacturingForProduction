@@ -19,7 +19,8 @@ Scratch pad notes are saved in the viewer's own browser (localStorage) and are n
 index.html              Home page
 pages/                  All other pages (one HTML file per topic)
 css/styles.css          Single stylesheet; colors are CSS variables with light and dark themes
-js/site_nav.js          Left navigation definition (add a page here to add it to the menu)
+js/site_nav.js          Left navigation definition (add a page here to add it to the menu;
+                        Home and the "Back to" last-page link are added automatically)
 js/main.js              Shared behavior: sidebar, section links, theme toggle, tabs, table filters
 js/reference_tables.js  Renders thread and tap drill tables from the data files
 js/corner_radius_tool.js  Inside corner / pocket radius picker
