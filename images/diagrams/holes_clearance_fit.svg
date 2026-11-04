@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320" role="img" aria-label="Close fit clearance hole with little radial float compared with a free fit clearance hole whose float absorbs position error between two parts">
+<title>Close fit clearance hole with little radial float compared with a free fit clearance hole whose float absorbs position error between two parts</title>
+<style>
+  text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+  .h { font-size: 16px; font-weight: 700; }
+  .s { font-size: 13px; fill: #4a5868; }
+  .lbl { fill: #1f6fb2; font-weight: 600; }
+  .good { fill: #1d7a4f; font-weight: 600; }
+  .warn { fill: #b0590e; font-weight: 600; }
+  .bad { fill: #b3261e; font-weight: 600; }
+  .muted { fill: #6b7a8c; font-size: 13px; letter-spacing: 2px; }
+  .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  .part2 { fill: #9fb4c9; stroke: #34495e; stroke-width: 2; }
+  .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  .flute { stroke: #b9772c; stroke-width: 1.5; }
+  .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+  .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .lead { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .sep { stroke: #d6dde6; stroke-width: 2; }
+  .air { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+</style>
+<defs>
+  <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1d7a4f"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#b3261e"/>
+  </marker>
+</defs>
+
+<line x1="450" y1="15" x2="450" y2="335" class="sep"/>
+<g transform="translate(0,0)">
+<text x="225" y="30" text-anchor="middle" class="h">Close fit</text>
+<path d="M60 90 H199 V150 H60 Z" class="part"/><path d="M251 90 H390 V150 H251 Z" class="part"/>
+<path d="M60 150 H203 V240 H60 Z" class="part2"/><path d="M247 150 H390 V240 H247 Z" class="part2"/>
+<path d="M203 158 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 158 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M203 171 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 171 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M203 184 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 184 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M203 197 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 197 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M203 210 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 210 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M203 223 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M247 223 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<rect x="185" y="60" width="80" height="30" rx="4" fill="#9aa7b4" stroke="#5d6b79" stroke-width="2"/>
+<rect x="205" y="90" width="40" height="140" fill="#b7c3d0" stroke="#34495e" stroke-width="1.5"/>
+<line x1="225" y1="44" x2="225" y2="252" stroke="#1f6fb2" stroke-width="1" stroke-dasharray="8 3 2 3"/>
+<line x1="245" y1="120" x2="251" y2="120" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="251" y1="120" x2="311" y2="120" class="lead"/><text x="315" y="124" text-anchor="start" class="lbl">float</text>
+<text x="225" y="280" text-anchor="middle" class="lbl">Little float: both hole patterns must</text>
+<text x="225" y="300" text-anchor="middle">line up within a few thousandths</text>
+</g>
+<g transform="translate(450,0)">
+<text x="225" y="30" text-anchor="middle" class="h">Free fit</text>
+<path d="M60 90 H191 V150 H60 Z" class="part"/><path d="M259 90 H390 V150 H259 Z" class="part"/>
+<path d="M60 150 H209 V240 H60 Z" class="part2"/><path d="M253 150 H390 V240 H253 Z" class="part2"/>
+<path d="M209 158 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 158 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M209 171 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 171 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M209 184 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 184 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M209 197 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 197 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M209 210 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 210 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<path d="M209 223 l-5 6 l5 6" fill="none" stroke="#34495e" stroke-width="1"/><path d="M253 223 l5 6 l-5 6" fill="none" stroke="#34495e" stroke-width="1"/>
+<rect x="191" y="60" width="80" height="30" rx="4" fill="#9aa7b4" stroke="#5d6b79" stroke-width="2"/>
+<rect x="211" y="90" width="40" height="140" fill="#b7c3d0" stroke="#34495e" stroke-width="1.5"/>
+<line x1="225" y1="44" x2="225" y2="252" stroke="#1f6fb2" stroke-width="1" stroke-dasharray="8 3 2 3"/>
+<line x1="231" y1="44" x2="231" y2="252" stroke="#b0590e" stroke-width="1" stroke-dasharray="8 3 2 3"/>
+<text x="239" y="50" text-anchor="start" class="warn" style="font-size:12px">tapped hole is off position</text>
+<line x1="251" y1="120" x2="259" y2="120" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="259" y1="120" x2="319" y2="120" class="lead"/><text x="323" y="124" text-anchor="start" class="lbl">float</text>
+<text x="225" y="280" text-anchor="middle" class="good">Float absorbs hole position error</text>
+<text x="225" y="300" text-anchor="middle">between the two parts (the default)</text>
+</g>
+</svg>

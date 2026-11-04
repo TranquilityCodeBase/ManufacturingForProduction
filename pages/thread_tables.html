@@ -37,14 +37,17 @@
           <p class="lead">The hole diameter to model for each thread when the part is quoted by an automated CNC service such as ProtoLabs. The software reads the plain hole diameter and offers the matching threads; it never needs modeled thread geometry.</p>
         </header>
 
+        <h2 id="find-thread" data-nav="Find a thread">Find a thread</h2>
+        <div class="calc" id="thread-lookup" data-thread-lookup></div>
+
         <div class="callout rule">
           <span class="callout-title">How to use these tables</span>
-          <p>1. Model a plain hole at the <strong>Modeled pilot dia</strong> (any value between Min and Max works). 2. Keep the thread length at or below <strong>Max thread depth</strong>, measured from the top of the surrounding features. 3. Assign the thread in the quote (or call it out on the drawing). Obstructions, lead-in chamfers or fixturing can reduce the depth actually available.</p>
+          <p>1. Model a plain hole at the <strong>Pilot</strong> diameter (any value between Min and Max works). 2. Keep the thread length at or below <strong>Max depth</strong>, measured from the top of the surrounding features. 3. Assign the thread in the quote (or call it out on the drawing). Obstructions, lead-in chamfers or fixturing can reduce the depth actually available.</p>
         </div>
 
         <div class="callout warn">
           <span class="callout-title">Vendor specific</span>
-          <p>These ranges are tuned to one vendor's thread mills. If your shop taps holes with standard taps, use the <a href="tap_drill_charts.html">tap drill charts</a>. Vendor tables change, so re-check the linked source page before release.</p>
+          <p>These ranges are tuned to one vendor's thread mills. If your shop taps holes with standard taps, use the <a href="tap_drill_charts.html">tap drill charts</a>. To check a drill you already have, use the <a href="calculators.html#threads-holes">percent thread calculator</a> or the <a href="calculators.html#mass-drill">drill finder</a>. Vendor tables change, so re-check the linked source page before release.</p>
         </div>
 
         <h2 id="standard-holes" data-nav="Standard threaded holes">Standard threaded holes (milled)</h2>

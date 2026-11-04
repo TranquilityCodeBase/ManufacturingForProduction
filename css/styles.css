@@ -96,6 +96,9 @@
 }
 
 /* ---------- Base element styles ---------- */
+/* The hidden attribute always wins, even on elements styled display:flex or grid */
+[hidden] { display: none !important; }
+
 *,
 *::before,
 *::after {

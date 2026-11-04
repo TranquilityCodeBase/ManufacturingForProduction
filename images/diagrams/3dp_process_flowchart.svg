@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" width="960" height="410" role="img" aria-label="Decision flowchart: metal parts go to CNC if a mill can reach every feature, otherwise DMLS; clear or finest detail plastic parts go to SLA; tough or complex parts go to SLS or MJF; cheap fixtures and concept models go to FDM">
+<title>Decision flowchart: metal parts go to CNC if a mill can reach every feature, otherwise DMLS; clear or finest detail plastic parts go to SLA; tough or complex parts go to SLS or MJF; cheap fixtures and concept models go to FDM</title>
+<style>
+  text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+  .h { font-size: 16px; font-weight: 700; }
+  .s { font-size: 13px; fill: #4a5868; }
+  .lbl { fill: #1f6fb2; font-weight: 600; }
+  .good { fill: #1d7a4f; font-weight: 600; }
+  .warn { fill: #b0590e; font-weight: 600; }
+  .bad { fill: #b3261e; font-weight: 600; }
+  .muted { fill: #6b7a8c; font-size: 13px; letter-spacing: 2px; }
+  .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  .part2 { fill: #9fb4c9; stroke: #34495e; stroke-width: 2; }
+  .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  .flute { stroke: #b9772c; stroke-width: 1.5; }
+  .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+  .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .lead { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .sep { stroke: #d6dde6; stroke-width: 2; }
+  .air { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+</style>
+<defs>
+  <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1d7a4f"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#b3261e"/>
+  </marker>
+</defs>
+
+<rect x="20.0" y="38.0" width="200" height="64" rx="10" fill="#e3effa" stroke="#1f6fb2" stroke-width="2"/>
+<text x="120" y="75" text-anchor="middle" style="font-weight:700">Metal part?</text>
+<line x1="220" y1="70" x2="258" y2="70" class="lead" marker-end="url(#a)"/>
+<text x="240.0" y="62" text-anchor="middle" class="lbl" style="font-size:13px">No</text>
+<rect x="260.0" y="38.0" width="200" height="64" rx="10" fill="#e3effa" stroke="#1f6fb2" stroke-width="2"/>
+<text x="360" y="66" text-anchor="middle" style="font-weight:700">Clear, finest detail</text>
+<text x="360" y="84" text-anchor="middle" style="font-weight:700">or smoothest surface?</text>
+<line x1="460" y1="70" x2="498" y2="70" class="lead" marker-end="url(#a)"/>
+<text x="480.0" y="62" text-anchor="middle" class="lbl" style="font-size:13px">No</text>
+<rect x="500.0" y="38.0" width="200" height="64" rx="10" fill="#e3effa" stroke="#1f6fb2" stroke-width="2"/>
+<text x="600" y="66" text-anchor="middle" style="font-weight:700">Tough, snap fits, no</text>
+<text x="600" y="84" text-anchor="middle" style="font-weight:700">supports or complex?</text>
+<line x1="700" y1="70" x2="738" y2="70" class="lead" marker-end="url(#a)"/>
+<text x="720.0" y="62" text-anchor="middle" class="lbl" style="font-size:13px">No</text>
+<rect x="740.0" y="38.0" width="200" height="64" rx="10" fill="#e3effa" stroke="#1f6fb2" stroke-width="2"/>
+<text x="840" y="66" text-anchor="middle" style="font-weight:700">Cheap fixture, jig</text>
+<text x="840" y="84" text-anchor="middle" style="font-weight:700">or concept model?</text>
+<line x1="120" y1="102" x2="120" y2="166" class="lead" marker-end="url(#a)"/>
+<text x="138" y="140" text-anchor="middle" class="lbl" style="font-size:13px">Yes</text>
+<rect x="15.0" y="168.0" width="210" height="64" rx="10" fill="#e3effa" stroke="#1f6fb2" stroke-width="2"/>
+<text x="120" y="196" text-anchor="middle" style="font-weight:700">Can a mill reach</text>
+<text x="120" y="214" text-anchor="middle" style="font-weight:700">every feature?</text>
+<line x1="80" y1="232" x2="60" y2="306" class="lead" marker-end="url(#a)"/>
+<text x="48" y="272" text-anchor="middle" class="lbl" style="font-size:13px">Yes</text>
+<line x1="160" y1="232" x2="180" y2="306" class="lead" marker-end="url(#a)"/>
+<text x="194" y="272" text-anchor="middle" class="lbl" style="font-size:13px">No</text>
+<rect x="5.0" y="310.0" width="110" height="60" rx="10" fill="#e5f4ec" stroke="#1d7a4f" stroke-width="2"/>
+<text x="60" y="336" text-anchor="middle" style="font-weight:700">CNC</text>
+<text x="60" y="354" text-anchor="middle" style="font-weight:700">machine it</text>
+<rect x="127.0" y="310.0" width="110" height="60" rx="10" fill="#e5f4ec" stroke="#1d7a4f" stroke-width="2"/>
+<text x="182" y="345" text-anchor="middle" style="font-weight:700">DMLS</text>
+<line x1="360" y1="102" x2="360" y2="306" class="lead" marker-end="url(#a)"/>
+<text x="378" y="200" text-anchor="middle" class="lbl" style="font-size:13px">Yes</text>
+<rect x="270.0" y="310.0" width="180" height="60" rx="10" fill="#e5f4ec" stroke="#1d7a4f" stroke-width="2"/>
+<text x="360" y="345" text-anchor="middle" style="font-weight:700">SLA</text>
+<line x1="600" y1="102" x2="600" y2="306" class="lead" marker-end="url(#a)"/>
+<text x="618" y="200" text-anchor="middle" class="lbl" style="font-size:13px">Yes</text>
+<rect x="510.0" y="310.0" width="180" height="60" rx="10" fill="#e5f4ec" stroke="#1d7a4f" stroke-width="2"/>
+<text x="600" y="336" text-anchor="middle" style="font-weight:700">SLS / MJF</text>
+<text x="600" y="354" text-anchor="middle" style="font-weight:700">MJF for production</text>
+<line x1="840" y1="102" x2="840" y2="306" class="lead" marker-end="url(#a)"/>
+<text x="858" y="200" text-anchor="middle" class="lbl" style="font-size:13px">Yes</text>
+<rect x="750.0" y="310.0" width="180" height="60" rx="10" fill="#e5f4ec" stroke="#1d7a4f" stroke-width="2"/>
+<text x="840" y="345" text-anchor="middle" style="font-weight:700">FDM</text>
+<text x="840" y="134" text-anchor="middle" class="s">No: quote SLS / MJF and FDM</text>
+<text x="480" y="400" text-anchor="middle" class="s">Start at the top left. Still unsure? Quote two processes; the cheapest one that meets function wins.</text>
+</svg>

@@ -523,7 +523,8 @@
         items.push({
           key: "drill" + i,
           label: rank[i],
-          value: n.d.name + "  " + n.d.inches.toFixed(4) + " in / " + (n.d.inches * 25.4).toFixed(2) + " mm (" + signed(n.diff, 4) + ")"
+          // Metric drills already carry their mm size in the name, so show inches beside them
+          value: n.d.name + " = " + n.d.inches.toFixed(4) + " in (" + signed(n.diff, 4) + ")"
         });
       });
       window.DFM.renderResults(out, "drill-finder", items);
@@ -695,13 +696,14 @@
       '<div class="field-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">' +
       '<div class="field"><label for="' + idp + '-unit">Units</label><select data-f="unit" id="' + idp + '-unit"><option value="in">Inch</option><option value="mm">mm</option></select></div>' +
       '<div class="field"><label for="' + idp + '-angle">Included angle</label><select data-f="angle" id="' + idp + '-angle">' +
-      '<option value="82">82° (inch flat head)</option><option value="90">90° (metric flat head, 45° chamfer)</option>' +
-      '<option value="100">100° (aerospace)</option><option value="120">120°</option><option value="60">60° (center drill)</option></select></div>' +
+      '<option value="82">82°</option><option value="90">90°</option>' +
+      '<option value="100">100°</option><option value="120">120°</option><option value="60">60°</option></select></div>' +
       '<div class="field"><label for="' + idp + '-hole"><span data-u="Hole diameter">Hole diameter</span></label><input data-f="hole" id="' + idp + '-hole" type="text" inputmode="decimal" value="0.201"></div>' +
-      '<div class="field"><label for="' + idp + '-mode">Solve for</label><select data-f="mode" id="' + idp + '-mode"><option value="depth">Depth (from top diameter)</option><option value="top">Top diameter (from depth)</option></select></div>' +
+      '<div class="field"><label for="' + idp + '-mode">Solve for</label><select data-f="mode" id="' + idp + '-mode"><option value="depth">Depth</option><option value="top">Top diameter</option></select></div>' +
       '<div class="field" style="grid-column:1 / -1"><label for="' + idp + '-value"><span data-u="Top diameter">Top diameter</span></label><input data-f="value" id="' + idp + '-value" type="text" inputmode="decimal" value="0.5"></div>' +
       "</div>",
-      "Fractions allowed. A 45° x C chamfer on a hole is a 90° countersink C deep (top diameter = hole + 2C).");
+      "82° = inch flat heads, 90° = metric flat heads, 100° = aerospace, 60° = center drills. " +
+      "A 45° x C chamfer is a 90° countersink C deep (top diameter = hole + 2C). Fractions allowed.");
     const f = {};
     host.querySelectorAll("[data-f]").forEach(function (el) {
       f[el.dataset.f] = el;
@@ -771,12 +773,13 @@
     const out = buildCard(host, "Drill point depth",
       '<div class="field-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">' +
       '<div class="field"><label for="' + idp + '-unit">Units</label><select data-f="unit" id="' + idp + '-unit"><option value="in">Inch</option><option value="mm">mm</option></select></div>' +
-      '<div class="field"><label for="' + idp + '-angle">Point angle</label><select data-f="angle" id="' + idp + '-angle"><option value="118">118° (general purpose)</option>' +
-      '<option value="135">135° (split point, steel)</option><option value="140">140° (carbide)</option></select></div>' +
+      '<div class="field"><label for="' + idp + '-angle">Point angle</label><select data-f="angle" id="' + idp + '-angle"><option value="118">118°</option>' +
+      '<option value="135">135°</option><option value="140">140°</option></select></div>' +
       '<div class="field"><label for="' + idp + '-dia"><span data-u="Drill diameter">Drill diameter</span></label><input data-f="dia" id="' + idp + '-dia" type="text" inputmode="decimal" value="0.201"></div>' +
       '<div class="field"><label for="' + idp + '-depth"><span data-u="Full-diameter depth">Full-diameter depth</span></label><input data-f="depth" id="' + idp + '-depth" type="text" inputmode="decimal" value="0.5" placeholder="optional"></div>' +
       "</div>",
-      "Blind holes: the drawing depth is usually to full diameter; the drill tip goes deeper by the point length.");
+      "118° = general purpose HSS, 135° = split point for steel, 140° = carbide. " +
+      "Blind hole depth on a drawing is usually to full diameter; the drill tip goes deeper by the point length.");
     const f = {};
     host.querySelectorAll("[data-f]").forEach(function (el) {
       f[el.dataset.f] = el;

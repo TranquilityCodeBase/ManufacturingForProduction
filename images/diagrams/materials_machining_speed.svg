@@ -1,22 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200" role="img" aria-label="Relative machining speed: aluminum about 4 times carbon steel, stainless about half of carbon steel">
-  <style>
-    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
-    .v { font-weight: 600; }
-    .s { font-size: 13px; fill: #4a5868; }
-    .bar { fill: #1d7a4f; }
-    .base { fill: #7b8896; }
-    .slow { fill: #b0590e; }
-  </style>
-  <!-- scale: 1x = 100 px, origin x=200 -->
-  <line x1="200" y1="15" x2="200" y2="150" stroke="#34495e" stroke-width="1.5"/>
-  <text x="185" y="44" text-anchor="end">Aluminum</text>
-  <rect x="200" y="28" width="400" height="24" class="bar"/>
-  <text x="608" y="45" class="v">about 4x</text>
-  <text x="185" y="89" text-anchor="end">Carbon steel</text>
-  <rect x="200" y="73" width="100" height="24" class="base"/>
-  <text x="308" y="90" class="v">1x (baseline)</text>
-  <text x="185" y="134" text-anchor="end">Stainless steel</text>
-  <rect x="200" y="118" width="50" height="24" class="slow"/>
-  <text x="258" y="135" class="v">about 0.5x</text>
-  <text x="200" y="180" class="s">Material removal rate. Faster cutting means less machine time and a lower price.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 298" width="900" height="298" role="img" aria-label="Approximate relative machining speed: plastics and brass fastest, aluminum about 4 times carbon steel, stainless about half, titanium about a third">
+<title>Approximate relative machining speed: plastics and brass fastest, aluminum about 4 times carbon steel, stainless about half, titanium about a third</title>
+<style>
+  text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+  .h { font-size: 16px; font-weight: 700; }
+  .s { font-size: 13px; fill: #4a5868; }
+  .lbl { fill: #1f6fb2; font-weight: 600; }
+  .good { fill: #1d7a4f; font-weight: 600; }
+  .warn { fill: #b0590e; font-weight: 600; }
+  .bad { fill: #b3261e; font-weight: 600; }
+  .muted { fill: #6b7a8c; font-size: 13px; letter-spacing: 2px; }
+  .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  .part2 { fill: #9fb4c9; stroke: #34495e; stroke-width: 2; }
+  .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  .flute { stroke: #b9772c; stroke-width: 1.5; }
+  .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+  .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .lead { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .sep { stroke: #d6dde6; stroke-width: 2; }
+  .air { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+</style>
+<defs>
+  <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1d7a4f"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#b3261e"/>
+  </marker>
+</defs>
+
+<text x="230" y="51" text-anchor="end" style="font-size:15px">Plastics (acetal, ABS)</text>
+<rect x="240" y="34" width="500" height="24" fill="#1d7a4f"/>
+<text x="750.0" y="51" text-anchor="start" style="font-size:15px;font-weight:600">very fast, heat limited</text>
+<text x="230" y="89" text-anchor="end" style="font-size:15px">Brass C360</text>
+<rect x="240" y="72" width="450" height="24" fill="#1d7a4f"/>
+<text x="700.0" y="89" text-anchor="start" style="font-size:15px;font-weight:600">about 4-5x</text>
+<text x="230" y="127" text-anchor="end" style="font-size:15px">Aluminum 6061</text>
+<rect x="240" y="110" width="400" height="24" fill="#1d7a4f"/>
+<text x="650.0" y="127" text-anchor="start" style="font-size:15px;font-weight:600">about 4x</text>
+<text x="230" y="165" text-anchor="end" style="font-size:15px">Carbon steel 1018</text>
+<rect x="240" y="148" width="100" height="24" fill="#7d8896"/>
+<text x="350.0" y="165" text-anchor="start" style="font-size:15px;font-weight:600">1x (baseline)</text>
+<text x="230" y="203" text-anchor="end" style="font-size:15px">Stainless 304</text>
+<rect x="240" y="186" width="50" height="24" fill="#b0590e"/>
+<text x="300.0" y="203" text-anchor="start" style="font-size:15px;font-weight:600">about 0.5x</text>
+<text x="230" y="241" text-anchor="end" style="font-size:15px">Titanium Ti-6Al-4V</text>
+<rect x="240" y="224" width="35" height="24" fill="#b3261e"/>
+<text x="285.0" y="241" text-anchor="start" style="font-size:15px;font-weight:600">about 0.3-0.4x</text>
+<line x1="240" y1="24" x2="240" y2="258" stroke="#34495e" stroke-width="1.5"/>
+<text x="240" y="284" text-anchor="start" class="s">Approximate material removal rate compared with carbon steel. Varies with grade, tooling and machine.</text>
 </svg>

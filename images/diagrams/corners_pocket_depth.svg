@@ -1,38 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-label="Pocket section view showing depth, width and tool stick-out rules">
-  <style>
-    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
-    .dimt { fill: #1f6fb2; font-weight: 600; }
-    .h { font-size: 16px; font-weight: 700; }
-    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
-    .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
-    .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
-    .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
-  </style>
-  <defs>
-    <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
-    </marker>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 330" width="820" height="330" role="img" aria-label="Pocket section with bullnose floor fillets showing depth, width and tool diameter rules of thumb">
+<title>Pocket section with bullnose floor fillets showing depth, width and tool diameter rules of thumb</title>
+<style>
+  text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+  .h { font-size: 16px; font-weight: 700; }
+  .s { font-size: 13px; fill: #4a5868; }
+  .lbl { fill: #1f6fb2; font-weight: 600; }
+  .good { fill: #1d7a4f; font-weight: 600; }
+  .warn { fill: #b0590e; font-weight: 600; }
+  .bad { fill: #b3261e; font-weight: 600; }
+  .muted { fill: #6b7a8c; font-size: 13px; letter-spacing: 2px; }
+  .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  .part2 { fill: #9fb4c9; stroke: #34495e; stroke-width: 2; }
+  .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  .flute { stroke: #b9772c; stroke-width: 1.5; }
+  .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+  .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .lead { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .sep { stroke: #d6dde6; stroke-width: 2; }
+  .air { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+</style>
+<defs>
+  <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1d7a4f"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#b3261e"/>
+  </marker>
+</defs>
 
-  <!-- block with pocket -->
-  <path d="M40 110 H160 V280 H300 V110 H420 V310 H40 Z" class="part"/>
-  <!-- tool in pocket -->
-  <rect x="190" y="20" width="80" height="40" class="holder"/>
-  <rect x="212" y="60" width="36" height="220" class="tool"/>
-
-  <!-- depth dimension -->
-  <line x1="440" y1="110" x2="470" y2="110" class="dim"/>
-  <line x1="440" y1="280" x2="470" y2="280" class="dim"/>
-  <line x1="460" y1="112" x2="460" y2="278" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
-  <text x="472" y="200" class="dimt">D (depth)</text>
-  <!-- width dimension -->
-  <line x1="160" y1="96" x2="300" y2="96" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
-  <text x="310" y="92" class="dimt">W (width)</text>
-
-  <text x="560" y="140" class="h">Rules of thumb</text>
-  <text x="560" y="166">D &lt; 4 x W (cavity)</text>
-  <text x="560" y="190">D &lt; 3 x tool dia (ideal)</text>
-  <text x="560" y="214">Corner R &gt;= D / 3</text>
-  <text x="560" y="238">Max feature depth</text>
-  <text x="560" y="258">about 2 in (51 mm)</text>
+<path d="M40 110 H160 V270 A10 10 0 0 0 170 280 H290 A10 10 0 0 0 300 270 V110 H420 V310 H40 Z" class="part"/>
+<rect x="190" y="20" width="80" height="38" class="holder"/>
+<path d="M212 58 V272 A8 8 0 0 0 220 280 H240 A8 8 0 0 0 248 272 V58 Z" class="tool"/>
+<line x1="212" y1="150" x2="248" y2="136" class="flute"/><line x1="212" y1="180" x2="248" y2="166" class="flute"/>
+<line x1="212" y1="74" x2="248" y2="74" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<text x="256" y="79" text-anchor="start" class="lbl">D (tool)</text>
+<line x1="160" y1="98" x2="300" y2="98" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<text x="310" y="103" text-anchor="start" class="lbl">W (width)</text>
+<line x1="440" y1="110" x2="470" y2="110" class="dim"/><line x1="440" y1="280" x2="470" y2="280" class="dim"/>
+<line x1="460" y1="112" x2="460" y2="278" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<text x="472" y="200" text-anchor="start" class="lbl">depth</text>
+<line x1="295" y1="276" x2="340" y2="296" class="lead"/>
+<text x="346" y="300" text-anchor="start" class="s">bullnose floor fillet</text>
+<text x="560" y="130" text-anchor="start" class="h">Rules of thumb</text>
+<text x="560" y="158" text-anchor="start">depth &lt; 4 x W (pocket)</text>
+<text x="560" y="182" text-anchor="start">depth &#8804; 3 x D in aluminum,</text>
+<text x="560" y="206" text-anchor="start">2 x D in steel (standard tools)</text>
+<text x="560" y="230" text-anchor="start">Corner R &#8805; depth / 3</text>
+<text x="560" y="254" text-anchor="start">Max feature depth about 2 in (51 mm)</text>
 </svg>

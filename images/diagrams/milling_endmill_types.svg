@@ -1,41 +1,72 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="Flat, bullnose and ball end mill profiles and their uses">
-  <style>
-    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
-    .h { font-size: 16px; font-weight: 700; }
-    .s { font-size: 13px; fill: #4a5868; }
-    .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
-    .flute { stroke: #b9772c; stroke-width: 1.5; }
-    .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320" role="img" aria-label="Flat, bullnose and ball end mills in a pocket corner and the floor edge each one leaves">
+<title>Flat, bullnose and ball end mills in a pocket corner and the floor edge each one leaves</title>
+<style>
+  text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+  .h { font-size: 16px; font-weight: 700; }
+  .s { font-size: 13px; fill: #4a5868; }
+  .lbl { fill: #1f6fb2; font-weight: 600; }
+  .good { fill: #1d7a4f; font-weight: 600; }
+  .warn { fill: #b0590e; font-weight: 600; }
+  .bad { fill: #b3261e; font-weight: 600; }
+  .muted { fill: #6b7a8c; font-size: 13px; letter-spacing: 2px; }
+  .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  .part2 { fill: #9fb4c9; stroke: #34495e; stroke-width: 2; }
+  .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  .flute { stroke: #b9772c; stroke-width: 1.5; }
+  .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+  .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .lead { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .sep { stroke: #d6dde6; stroke-width: 2; }
+  .air { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+</style>
+<defs>
+  <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1d7a4f"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#b3261e"/>
+  </marker>
+</defs>
 
-  <!-- Flat end mill -->
-  <g transform="translate(150,0)">
-    <path d="M-25 30 V170 H25 V30 Z" class="tool"/>
-    <line x1="-25" y1="120" x2="25" y2="100" class="flute"/>
-    <line x1="-25" y1="145" x2="25" y2="125" class="flute"/>
-    <line x1="-25" y1="168" x2="25" y2="150" class="flute"/>
-    <text x="0" y="238" text-anchor="middle" class="h">Flat end mill</text>
-    <text x="0" y="258" text-anchor="middle">Roughing, flat floors, walls</text>
-    <text x="0" y="278" text-anchor="middle" class="s">Leaves a sharp floor-to-wall edge</text>
-  </g>
-
-  <!-- Bullnose end mill -->
-  <g transform="translate(450,0)">
-    <path d="M-25 30 V158 A12 12 0 0 0 -13 170 H13 A12 12 0 0 0 25 158 V30 Z" class="tool"/>
-    <line x1="-25" y1="120" x2="25" y2="100" class="flute"/>
-    <line x1="-25" y1="145" x2="25" y2="125" class="flute"/>
-    <text x="0" y="238" text-anchor="middle" class="h">Bullnose (corner radius)</text>
-    <text x="0" y="258" text-anchor="middle">Hard metals, filleted floors</text>
-    <text x="0" y="278" text-anchor="middle" class="s">Floor fillet = tool corner radius</text>
-  </g>
-
-  <!-- Ball end mill -->
-  <g transform="translate(750,0)">
-    <path d="M-25 30 V145 A25 25 0 0 0 25 145 V30 Z" class="tool"/>
-    <line x1="-25" y1="110" x2="25" y2="90" class="flute"/>
-    <line x1="-25" y1="135" x2="25" y2="115" class="flute"/>
-    <text x="0" y="238" text-anchor="middle" class="h">Ball end mill</text>
-    <text x="0" y="258" text-anchor="middle">3D contours, fillets, edge breaks</text>
-    <text x="0" y="278" text-anchor="middle" class="s">Finishing only: many slow passes</text>
-  </g>
+<line x1="300" y1="15" x2="300" y2="305" class="sep"/>
+<line x1="600" y1="15" x2="600" y2="305" class="sep"/>
+<g transform="translate(0,0)">
+<text x="150" y="32" text-anchor="middle" class="h">Flat end mill</text>
+<path d="M30 200 H200 V90 H270 V240 H30 Z" class="part"/>
+<text x="85" y="150" text-anchor="middle" class="muted">POCKET</text>
+<path d="M140 50 V200 H200 V50 Z" class="tool"/>
+<line x1="140" y1="110" x2="200" y2="88" class="flute"/><line x1="140" y1="140" x2="200" y2="118" class="flute"/>
+<circle cx="200" cy="200" r="9" fill="none" stroke="#b3261e" stroke-width="2.5"/>
+<text x="150" y="268" text-anchor="middle" class="bad">Sharp floor edge</text>
+<text x="150" y="288" text-anchor="middle">Not accepted in hard metals,</text>
+<text x="150" y="306" text-anchor="middle" class="s">often rejected in soft metals</text>
+</g>
+<g transform="translate(300,0)">
+<text x="150" y="32" text-anchor="middle" class="h">Bullnose (corner radius)</text>
+<path d="M30 200 H188 A12 12 0 0 0 200 188 V90 H270 V240 H30 Z" class="part"/>
+<text x="85" y="150" text-anchor="middle" class="muted">POCKET</text>
+<path d="M140 50 V188 A12 12 0 0 0 152 200 H188 A12 12 0 0 0 200 188 V50 Z" class="tool"/>
+<line x1="140" y1="110" x2="200" y2="88" class="flute"/><line x1="140" y1="140" x2="200" y2="118" class="flute"/>
+<path d="M188 203 A15 15 0 0 0 203 188" fill="none" stroke="#1d7a4f" stroke-width="3"/>
+<text x="150" y="268" text-anchor="middle" class="good">Standard floor fillet (preferred)</text>
+<text x="150" y="288" text-anchor="middle">Floor fillet = tool corner radius</text>
+<text x="150" y="306" text-anchor="middle" class="s">Walls and floor in one pass</text>
+</g>
+<g transform="translate(600,0)">
+<text x="150" y="32" text-anchor="middle" class="h">Ball end mill</text>
+<path d="M30 200 H170 A30 30 0 0 0 200 170 V90 H270 V240 H30 Z" class="part"/>
+<text x="85" y="150" text-anchor="middle" class="muted">POCKET</text>
+<path d="M140 50 V170 A30 30 0 0 0 200 170 V50 Z" class="tool"/>
+<line x1="140" y1="110" x2="200" y2="88" class="flute"/><line x1="140" y1="140" x2="200" y2="118" class="flute"/>
+<path d="M170 203 A33 33 0 0 0 203 170" fill="none" stroke="#b0590e" stroke-width="3"/>
+<text x="150" y="268" text-anchor="middle" class="warn">Full-radius fillets, 3D surfaces</text>
+<text x="150" y="288" text-anchor="middle">Fillet = tool radius</text>
+<text x="150" y="306" text-anchor="middle" class="s">Slow finishing passes only</text>
+</g>
 </svg>

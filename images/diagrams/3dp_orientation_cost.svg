@@ -1,24 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 290" width="720" height="290" font-family="Segoe UI, Arial, sans-serif">
-  <title>Build height drives layer count and print time</title>
-  <!-- Build plates -->
-  <rect x="20" y="230" width="320" height="10" fill="#8a97a6"/>
-  <rect x="380" y="230" width="320" height="10" fill="#8a97a6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="900" height="320" role="img" aria-label="The same bar printed flat, tilted 30 to 45 degrees, and standing up: build height, supports and print time">
+<title>The same bar printed flat, tilted 30 to 45 degrees, and standing up: build height, supports and print time</title>
+<style>
+  text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+  .h { font-size: 16px; font-weight: 700; }
+  .s { font-size: 13px; fill: #4a5868; }
+  .lbl { fill: #1f6fb2; font-weight: 600; }
+  .good { fill: #1d7a4f; font-weight: 600; }
+  .warn { fill: #b0590e; font-weight: 600; }
+  .bad { fill: #b3261e; font-weight: 600; }
+  .muted { fill: #6b7a8c; font-size: 13px; letter-spacing: 2px; }
+  .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  .part2 { fill: #9fb4c9; stroke: #34495e; stroke-width: 2; }
+  .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  .flute { stroke: #b9772c; stroke-width: 1.5; }
+  .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+  .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .lead { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .sep { stroke: #d6dde6; stroke-width: 2; }
+  .air { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+</style>
+<defs>
+  <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1d7a4f"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#b3261e"/>
+  </marker>
+</defs>
 
-  <!-- Left: part lying flat -->
-  <text x="180" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#1d7a4f">Lying flat</text>
-  <rect x="50" y="190" width="260" height="40" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
-  <line x1="320" y1="190" x2="320" y2="230" stroke="#1f6fb2" stroke-width="2"/>
-  <line x1="314" y1="190" x2="326" y2="190" stroke="#1f6fb2" stroke-width="2"/>
-  <text x="180" y="160" text-anchor="middle" font-size="14" fill="#1c2733">low Z = few layers</text>
-  <text x="180" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Fastest for SLA / DMLS / FDM</text>
-
-  <!-- Right: part standing up -->
-  <text x="540" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#b3261e">Standing up</text>
-  <rect x="520" y="50" width="40" height="180" fill="#cfd8e3" stroke="#34495e" stroke-width="2"/>
-  <line x1="590" y1="50" x2="590" y2="230" stroke="#1f6fb2" stroke-width="2"/>
-  <line x1="584" y1="50" x2="596" y2="50" stroke="#1f6fb2" stroke-width="2"/>
-  <text x="600" y="140" font-size="14" fill="#1c2733">high Z =</text>
-  <text x="600" y="158" font-size="14" fill="#1c2733">many layers</text>
-  <text x="540" y="266" text-anchor="middle" font-size="13" fill="#1c2733">Slower, but best round holes along Z</text>
-  <text x="360" y="286" text-anchor="middle" font-size="12" fill="#4a5868">SLS / MJF price on packed volume instead, so orientation matters less there.</text>
+<rect x="20" y="230" width="260" height="10" fill="#8a97a6"/>
+<text x="150" y="30" text-anchor="middle" class="h" style="fill:#1d7a4f">Lying flat</text>
+<rect x="320" y="230" width="260" height="10" fill="#8a97a6"/>
+<text x="450" y="30" text-anchor="middle" class="h" style="fill:#1f6fb2">Tilted 30-45&#176;</text>
+<rect x="620" y="230" width="260" height="10" fill="#8a97a6"/>
+<text x="750" y="30" text-anchor="middle" class="h" style="fill:#b3261e">Standing up</text>
+<rect x="40" y="194" width="220" height="36" class="part"/>
+<line x1="270" y1="194" x2="270" y2="230" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<text x="150" y="176" text-anchor="middle">low Z = fewest layers</text>
+<text x="150" y="264" text-anchor="middle" class="good">Fastest in FDM</text>
+<text x="150" y="284" text-anchor="middle" class="s">large flat DMLS / SLA areas need heavy support</text>
+<polygon points="357.8,210.6 521.6,95.9 542.2,125.4 378.4,240.1" class="part"/>
+<g stroke="#b9772c" stroke-width="2"><line x1="378" y1="240" x2="378" y2="230"/><line x1="392" y1="232" x2="392" y2="230"/></g>
+<path d="M520 230 A60 60 0 0 0 512 196" fill="none" stroke="#1f6fb2" stroke-width="2"/>
+<text x="536" y="214" text-anchor="start" class="lbl">30-45&#176;</text>
+<text x="450" y="264" text-anchor="middle" class="lbl">Common for big flat DMLS / SLA areas</text>
+<text x="450" y="284" text-anchor="middle" class="s">fewer supports, lower peel forces</text>
+<rect x="730" y="54" width="36" height="176" class="part"/>
+<line x1="790" y1="54" x2="790" y2="230" class="dim" marker-start="url(#d)" marker-end="url(#d)"/>
+<text x="800" y="136" text-anchor="start">high Z =</text>
+<text x="800" y="154" text-anchor="start">most layers</text>
+<text x="750" y="264" text-anchor="middle" class="bad">Slowest</text>
+<text x="750" y="284" text-anchor="middle" class="s">best round holes along Z</text>
+<text x="450" y="312" text-anchor="middle" class="s">SLS and MJF are priced on packed volume, so orientation matters less there.</text>
 </svg>

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340" role="img" aria-label="Sections of a coil insert in an STI tapped hole, a key-locking insert with keys and counterbore, and a heat-set insert pressed into a plastic boss, with the hole to model for each">
+<title>Sections of a coil insert in an STI tapped hole, a key-locking insert with keys and counterbore, and a heat-set insert pressed into a plastic boss, with the hole to model for each</title>
+<style>
+  text { font-family: "Segoe UI", Arial, sans-serif; fill: #1c2733; font-size: 14px; }
+  .h { font-size: 16px; font-weight: 700; }
+  .s { font-size: 13px; fill: #4a5868; }
+  .lbl { fill: #1f6fb2; font-weight: 600; }
+  .good { fill: #1d7a4f; font-weight: 600; }
+  .warn { fill: #b0590e; font-weight: 600; }
+  .bad { fill: #b3261e; font-weight: 600; }
+  .muted { fill: #6b7a8c; font-size: 13px; letter-spacing: 2px; }
+  .part { fill: #cfd8e3; stroke: #34495e; stroke-width: 2; }
+  .part2 { fill: #9fb4c9; stroke: #34495e; stroke-width: 2; }
+  .tool { fill: #f3b562; stroke: #b9772c; stroke-width: 2; }
+  .flute { stroke: #b9772c; stroke-width: 1.5; }
+  .holder { fill: #9aa7b4; stroke: #5d6b79; stroke-width: 2; }
+  .dim { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .lead { stroke: #1f6fb2; stroke-width: 1.5; fill: none; }
+  .sep { stroke: #d6dde6; stroke-width: 2; }
+  .air { fill: #ffffff; stroke: #34495e; stroke-width: 1.5; }
+</style>
+<defs>
+  <marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1f6fb2"/>
+  </marker>
+  <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#1d7a4f"/>
+  </marker>
+  <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0 1 L10 5 L0 9 z" fill="#b3261e"/>
+  </marker>
+</defs>
+
+<line x1="300" y1="15" x2="300" y2="345" class="sep"/>
+<line x1="600" y1="15" x2="600" y2="345" class="sep"/>
+<text x="150" y="30" text-anchor="middle" class="h">Coil (helical) insert</text>
+<rect x="50" y="60" width="200" height="180" class="part"/>
+<rect x="112" y="60" width="76" height="180" fill="#ffffff" stroke="#34495e" stroke-width="1.5"/>
+<polygon points="112,65 120,72 112,79 104,72" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,65 180,72 188,79 196,72" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,83 120,90 112,97 104,90" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,83 180,90 188,97 196,90" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,101 120,108 112,115 104,108" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,101 180,108 188,115 196,108" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,119 120,126 112,133 104,126" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,119 180,126 188,133 196,126" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,137 120,144 112,151 104,144" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,137 180,144 188,151 196,144" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,155 120,162 112,169 104,162" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,155 180,162 188,169 196,162" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,173 120,180 112,187 104,180" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,173 180,180 188,187 196,180" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,191 120,198 112,205 104,198" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,191 180,198 188,205 196,198" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="112,209 120,216 112,223 104,216" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<polygon points="188,209 180,216 188,223 196,216" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<line x1="120" y1="60" x2="120" y2="240" stroke="#1f6fb2" stroke-width="1" stroke-dasharray="4 3"/><line x1="180" y1="60" x2="180" y2="240" stroke="#1f6fb2" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="150" y="268" text-anchor="middle" class="lbl">Model: STI tap drill</text>
+<text x="150" y="288" text-anchor="middle">(larger than the standard pilot)</text>
+<text x="150" y="306" text-anchor="middle" class="s">Wire coil gives a steel thread</text>
+<text x="150" y="324" text-anchor="middle" class="s">for the original screw size</text>
+<g transform="translate(300,0)">
+<text x="150" y="30" text-anchor="middle" class="h">Key-locking insert</text>
+<path d="M50 60 H98 V76 H202 V60 H250 V240 H50 Z" class="part"/>
+<rect x="98" y="60" width="104" height="16" fill="#ffffff" stroke="none"/>
+<path d="M104 64 H196 V230 H104 Z" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<rect x="126" y="64" width="48" height="166" fill="#ffffff" stroke="#b9772c" stroke-width="1.5"/>
+<rect x="106" y="64" width="8" height="40" fill="#8a97a6" stroke="#34495e" stroke-width="1.5"/><rect x="186" y="64" width="8" height="40" fill="#8a97a6" stroke="#34495e" stroke-width="1.5"/>
+<line x1="110" y1="104" x2="70" y2="140" class="lead"/><text x="70" y="156" text-anchor="middle" class="lbl">keys</text>
+<line x1="200" y1="70" x2="232" y2="46" class="lead"/><text x="240" y="44" text-anchor="middle" class="lbl">counterbore</text>
+<text x="150" y="268" text-anchor="middle" class="lbl">Model: larger tapped hole</text>
+<text x="150" y="288" text-anchor="middle">+ counterbore for the keys</text>
+<text x="150" y="306" text-anchor="middle" class="s">Highest pull-out and torque;</text>
+<text x="150" y="324" text-anchor="middle" class="s">hole size from the insert data sheet</text>
+</g>
+<g transform="translate(600,0)">
+<text x="150" y="30" text-anchor="middle" class="h">Heat-set insert</text>
+<path d="M40 240 V200 H100 V80 H200 V200 H260 V240 Z" class="part"/>
+<path d="M126 80 V196 L134 204 H166 L174 196 V80 Z" fill="#ffffff" stroke="#34495e" stroke-width="1.5"/>
+<path d="M122 66 H178 V150 H122 Z" fill="#f3b562" stroke="#b9772c" stroke-width="1.5"/>
+<line x1="122" y1="76" x2="134" y2="86" stroke="#b9772c" stroke-width="1.5"/><line x1="178" y1="76" x2="166" y2="86" stroke="#b9772c" stroke-width="1.5"/>
+<line x1="122" y1="91" x2="134" y2="101" stroke="#b9772c" stroke-width="1.5"/><line x1="178" y1="91" x2="166" y2="101" stroke="#b9772c" stroke-width="1.5"/>
+<line x1="122" y1="106" x2="134" y2="116" stroke="#b9772c" stroke-width="1.5"/><line x1="178" y1="106" x2="166" y2="116" stroke="#b9772c" stroke-width="1.5"/>
+<line x1="122" y1="121" x2="134" y2="131" stroke="#b9772c" stroke-width="1.5"/><line x1="178" y1="121" x2="166" y2="131" stroke="#b9772c" stroke-width="1.5"/>
+<line x1="122" y1="136" x2="134" y2="146" stroke="#b9772c" stroke-width="1.5"/><line x1="178" y1="136" x2="166" y2="146" stroke="#b9772c" stroke-width="1.5"/>
+<rect x="136" y="66" width="28" height="84" fill="#ffffff" stroke="#b9772c" stroke-width="1"/>
+<line x1="150" y1="40" x2="150" y2="62" class="lead" marker-end="url(#a)"/><text x="196" y="50" text-anchor="start" class="lbl">press in hot</text>
+<path d="M118 118 q-10 6 -2 14" fill="none" stroke="#b0590e" stroke-width="2" marker-end="url(#a)"/>
+<text x="96" y="120" text-anchor="end" class="warn">melt</text>
+<text x="96" y="136" text-anchor="end" class="warn">flows</text>
+<line x1="150" y1="176" x2="218" y2="176" class="lead"/><text x="222" y="180" text-anchor="start" class="s">room below</text>
+<text x="150" y="268" text-anchor="middle" class="lbl">Model: pilot from data sheet</text>
+<text x="150" y="288" text-anchor="middle">(tapered or straight)</text>
+<text x="150" y="306" text-anchor="middle" class="s">For thermoplastics and prints;</text>
+<text x="150" y="324" text-anchor="middle" class="s">boss OD about 2 x insert OD</text>
+</g>
+</svg>
