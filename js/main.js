@@ -2,10 +2,13 @@
    Shared page behavior for every page:
      - builds the left sidebar from window.DFM_NAV (js/site_nav.js)
      - lists the current page's sections (h2 with an id) under its nav entry
-     - builds the top bar (menu button, breadcrumb, theme toggle)
+     - builds the top bar (menu button, clickable breadcrumb, search slot,
+       Pad button, theme toggle)
      - light/dark theme toggle (remembered in localStorage when allowed)
-     - tab groups (UNC / UNF / Metric ...)
-     - table filter boxes
+     - previous / next page links, back-to-top button, skip link
+     - keyboard shortcuts: / search, b back, p pad, t theme
+     - tab groups (UNC / UNF / Metric ...), table filters, table helpers
+     - click-to-enlarge for diagrams
    Pages only need:
      <body data-page="page_id" data-root="../">
      <nav id="sidebar" class="sidebar"></nav>
@@ -143,6 +146,7 @@
 
   // ---------- Sidebar ----------
   const navStateKey = "dfm-nav-groups";          // localStorage key for open / closed groups
+  let openNavGroup = function () {};             // set by buildSidebar; used by the breadcrumb
 
   function buildSidebar(rootPrefix, pageId) {
     const sidebar = document.getElementById("sidebar");
@@ -171,8 +175,10 @@
     }
     html += "</div>";
 
-    // Filter box to quickly find a page
-    html += '<input class="nav-filter" type="search" placeholder="Filter pages..." aria-label="Filter pages">';
+    // Collapse / expand every group at once (page search lives in the top bar)
+    html += '<div class="nav-tools"><span>Sections</span>' +
+      '<button type="button" class="nav-tool-btn" data-nav-all="0">Collapse all</button>' +
+      '<button type="button" class="nav-tool-btn" data-nav-all="1">Expand all</button></div>';
 
     // Chevron icon used on collapsible rows (rotates when open)
     const chevron = '<svg class="chevron" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">' +
@@ -215,7 +221,8 @@
       html += "</div></div>";
     });
 
-    html += '<div class="sidebar-footer">Reference data only. Always confirm against your vendor\'s current guidelines and quote DFM feedback.</div>';
+    html += '<div class="sidebar-footer">Shortcuts: <kbd>/</kbd> search, <kbd>b</kbd> back, <kbd>p</kbd> pad, <kbd>t</kbd> theme.<br>' +
+      'Reference data only. Always confirm against your vendor\'s current guidelines and quote DFM feedback.</div>';
     sidebar.innerHTML = html;
 
     // Back link: flag the target so it reopens at the same scroll position
@@ -237,16 +244,42 @@
       writeSetting(navStateKey, JSON.stringify(state));
     }
 
+    // Open or close one group and keep its button state in step
+    function setGroupOpen(groupEl, open) {
+      groupEl.classList.toggle("open", open);
+      groupEl.querySelector(".nav-group-title").setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
     // Group label click: expand or collapse that group
     sidebar.querySelectorAll(".nav-group-title").forEach(function (button) {
       button.addEventListener("click", function () {
         const groupEl = button.parentElement;
-        const open = !groupEl.classList.contains("open");
-        groupEl.classList.toggle("open", open);
-        button.setAttribute("aria-expanded", open ? "true" : "false");
+        setGroupOpen(groupEl, !groupEl.classList.contains("open"));
         saveGroups();
       });
     });
+
+    // Collapse all / Expand all (the current page's group stays open on Collapse all)
+    sidebar.querySelectorAll("[data-nav-all]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        const open = button.dataset.navAll === "1";
+        sidebar.querySelectorAll(".nav-group").forEach(function (groupEl) {
+          const holdsActive = Boolean(groupEl.querySelector(".nav-link.active"));
+          setGroupOpen(groupEl, open || holdsActive);
+        });
+        saveGroups();
+      });
+    });
+
+    // Let the breadcrumb open a group by name
+    openNavGroup = function (name) {
+      const groupEl = sidebar.querySelector('.nav-group[data-group="' + name + '"]');
+      if (groupEl) {
+        setGroupOpen(groupEl, true);
+        saveGroups();
+        groupEl.scrollIntoView({ block: "nearest" });
+      }
+    };
 
     // Clicking the current page's own link shows / hides its section list instead of reloading
     const activeLink = sidebar.querySelector(".nav-link.active");
@@ -262,23 +295,11 @@
       });
     }
 
-    // Hook up the page filter: matching pages show, their groups open while filtering
-    const filter = sidebar.querySelector(".nav-filter");
-    filter.addEventListener("input", function () {
-      const term = filter.value.trim().toLowerCase();
-      sidebar.classList.toggle("filtering", term !== "");
-      sidebar.querySelectorAll(".nav-group").forEach(function (groupEl) {
-        let visibleCount = 0;
-        groupEl.querySelectorAll(".nav-link").forEach(function (link) {
-          const match = link.textContent.toLowerCase().indexOf(term) !== -1;
-          link.style.display = match ? "" : "none";
-          if (match) {
-            visibleCount += 1;
-          }
-        });
-        groupEl.style.display = visibleCount > 0 ? "" : "none";   // hide empty groups
-      });
-    });
+    // Keep the current page's link in view inside a long sidebar
+    const current = sidebar.querySelector(".nav-link.active, .nav-home.active");
+    if (current && current.offsetTop > sidebar.clientHeight - 120) {
+      sidebar.scrollTop = current.offsetTop - sidebar.clientHeight / 3;
+    }
   }
 
   // ---------- Highlight the sidebar link of the section in view ----------
@@ -355,21 +376,28 @@
   }
 
   // ---------- Top bar ----------
+  const sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+  const padIcon = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M8.5 8h7M8.5 12h7M8.5 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+
   function buildTopbar(pageId) {
     const topbar = document.getElementById("topbar");
     if (!topbar) {
       return;
     }
 
-    // Find the group and title of this page for the breadcrumb
-    let crumb = "Home";
+    // Breadcrumb: the group name is a button that opens that group in the sidebar
+    let crumb = '<span class="crumb-page">Home</span>';
     (window.DFM_NAV || []).forEach(function (group) {
+      const crumbGroup = '<button type="button" class="crumb-group" data-group="' + group.group + '">' + group.group + "</button>";
       if (group.page && group.page.id === pageId) {
-        crumb = group.page.title;
+        crumb = crumbGroup;
       }
       group.items.forEach(function (item) {
         if (item.id === pageId && pageId !== "home") {
-          crumb = group.group + "  /  " + item.title;
+          crumb = crumbGroup + '<span class="crumb-sep" aria-hidden="true">/</span><span class="crumb-page">' + item.title + "</span>";
         }
       });
     });
@@ -377,22 +405,61 @@
     topbar.innerHTML =
       '<button class="icon-btn menu-btn" type="button" aria-label="Open navigation" aria-expanded="false">&#9776;</button>' +
       '<div class="crumb">' + crumb + "</div>" +
-      '<button class="icon-btn theme-btn" type="button" aria-label="Toggle light or dark theme" title="Toggle theme">' +
-      '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>' +
-      '<path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>';
+      '<div class="topbar-search" id="topbar-search"></div>' +                 // filled by js/site_search.js
+      '<button class="icon-btn pad-btn" type="button" aria-label="Open scratch pad" title="Scratch pad (p)">' + padIcon +
+      '<span class="pad-count" hidden></span></button>' +
+      '<button class="icon-btn theme-btn" type="button" aria-label="Dark theme" title="Toggle theme (t)"></button>';
+
+    // Breadcrumb group: open it in the sidebar (and open the phone menu)
+    const crumbBtn = topbar.querySelector(".crumb-group");
+    if (crumbBtn) {
+      crumbBtn.addEventListener("click", function () {
+        openNavGroup(crumbBtn.dataset.group);
+        if (window.matchMedia("(max-width: 960px)").matches) {
+          setNavOpen(true);
+        }
+      });
+    }
 
     // Theme toggle flips between light and dark and remembers the choice
-    topbar.querySelector(".theme-btn").addEventListener("click", function () {
-      const next = currentTheme() === "dark" ? "light" : "dark";
-      applyTheme(next);
-      writeSetting(themeKey, next);
+    const themeBtn = topbar.querySelector(".theme-btn");
+    function showThemeState() {
+      const dark = currentTheme() === "dark";
+      themeBtn.innerHTML = dark ? sunIcon : moonIcon;          // icon shows what a click switches to
+      themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+    }
+    themeBtn.addEventListener("click", function () {
+      toggleTheme();
+      showThemeState();
     });
+    showThemeState();
+
+    // Pad button: open the scratch pad drawer; badge shows how many lines it holds
+    const padBtn = topbar.querySelector(".pad-btn");
+    const padCount = topbar.querySelector(".pad-count");
+    if (window.DFM_PAD) {
+      padBtn.addEventListener("click", function () {
+        window.DFM_PAD.toggle();
+      });
+      window.DFM_PAD.onChange(function (count) {
+        padCount.hidden = count === 0;
+        padCount.textContent = count > 99 ? "99+" : String(count);
+      });
+    } else {
+      padBtn.hidden = true;
+    }
 
     // Menu button opens the sidebar on narrow screens
     const menuBtn = topbar.querySelector(".menu-btn");
     menuBtn.addEventListener("click", function () {
       setNavOpen(!document.body.classList.contains("nav-open"));
     });
+  }
+
+  function toggleTheme() {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    applyTheme(next);
+    writeSetting(themeKey, next);
   }
 
   function setNavOpen(open) {
@@ -439,6 +506,10 @@
       }
 
       buttons.forEach(function (btn) {
+        const panel = group.querySelector(':scope > .tab-panel[data-tab-panel="' + btn.dataset.tab + '"]');
+        if (panel) {
+          panel.dataset.tabLabel = btn.textContent;   // printed above each panel (all tabs print)
+        }
         btn.setAttribute("role", "tab");
         btn.type = "button";
         btn.addEventListener("click", function () {
@@ -453,7 +524,59 @@
   }
 
   // ---------- Table filter boxes ----------
-  // Markup: <input type="search" data-filter-table="tableId">
+  // Markup: <input type="search" data-filter-table="tableId[,tableId]">
+  // A size-like term (10-32, #4, 1/4, M6) matches the first (size) column first;
+  // words, or sizes with no hit, search whole rows. "10-32", "#10-32" and
+  // "10x32" all match "#10-32".
+  function normalizeTerm(text) {
+    return String(text).toLowerCase()
+      .replace(/\s+/g, "")                         // ignore spaces
+      .replace(/[x×]/g, "-")                       // 10x32, M6x1 -> 10-32, m6-1
+      .replace(/^#/, "")                           // #10-32 -> 10-32
+      .replace(/-1\.0$|-1$/, "-1.0");               // M6x1 -> m6-1.0
+  }
+
+  function filterTable(table, term) {
+    const rows = Array.prototype.slice.call(table.querySelectorAll("tbody tr:not(.no-match)"));
+    const norm = normalizeTerm(term);
+    let shown = 0;
+
+    // Pass 1 (only when the term looks like a size: 10-32, #4, 1/4, M6): size column starts with it
+    const looksLikeSize = /^(m?\d|#)/i.test(term.trim());
+    const sizeHits = !looksLikeSize ? [] : rows.filter(function (row) {
+      const cell = row.cells[0] ? normalizeTerm(row.cells[0].textContent).replace(/^#/, "") : "";
+      return norm !== "" && cell.indexOf(norm) === 0;
+    });
+    rows.forEach(function (row) {
+      let show;
+      if (term === "") {
+        show = true;
+      } else if (sizeHits.length) {
+        show = sizeHits.indexOf(row) !== -1;
+      } else {
+        show = row.textContent.toLowerCase().indexOf(term.toLowerCase()) !== -1;   // pass 2: whole row
+      }
+      row.style.display = show ? "" : "none";
+      if (show) {
+        shown += 1;
+      }
+    });
+
+    // Friendly empty state
+    let empty = table.querySelector("tbody tr.no-match");
+    if (shown === 0 && term !== "") {
+      if (!empty) {
+        empty = document.createElement("tr");
+        empty.className = "no-match";
+        empty.innerHTML = '<td colspan="' + (table.rows[0] ? table.rows[0].cells.length : 1) + '">No matches</td>';
+        table.querySelector("tbody").appendChild(empty);
+      }
+      empty.style.display = "";
+    } else if (empty) {
+      empty.style.display = "none";
+    }
+  }
+
   function initTableFilters(scope) {
     (scope || document).querySelectorAll("input[data-filter-table]").forEach(function (input) {
       if (input.dataset.filterReady) {
@@ -461,18 +584,42 @@
       }
       input.dataset.filterReady = "1";
       input.addEventListener("input", function () {
-        const term = input.value.trim().toLowerCase();
-        const ids = input.dataset.filterTable.split(",");   // one box can filter several tables
-        ids.forEach(function (id) {
+        const term = input.value.trim();
+        input.dataset.filterTable.split(",").forEach(function (id) {   // one box can filter several tables
           const table = document.getElementById(id.trim());
-          if (!table) {
-            return;
+          if (table) {
+            filterTable(table, term);
           }
-          table.querySelectorAll("tbody tr").forEach(function (row) {
-            row.style.display = row.textContent.toLowerCase().indexOf(term) !== -1 ? "" : "none";
-          });
         });
       });
+    });
+    enhanceTables(scope);                        // tables rendered later get the same treatment
+  }
+
+  // ---------- Table helpers: tall tables scroll in a box (sticky header works), keyboard access ----------
+  function enhanceTables(scope) {
+    (scope || document).querySelectorAll(".table-wrap").forEach(function (wrap) {
+      const table = wrap.querySelector("table");
+      if (!table) {
+        return;
+      }
+      // Long tables get their own scroll box so the header row stays visible
+      wrap.classList.toggle("tall", table.querySelectorAll("tbody tr").length > 15);
+      // Scrollable regions must be reachable and named for keyboard / screen reader users
+      if (!wrap.hasAttribute("tabindex")) {
+        let label = "Table";
+        let el = wrap.previousElementSibling;
+        while (el && !/^H[2-4]$/.test(el.tagName) && !(el.classList && el.classList.contains("toolbar"))) {
+          el = el.previousElementSibling;
+        }
+        const heading = el && /^H[2-4]$/.test(el.tagName) ? el : wrap.closest("section, .tab-panel, .calc, main").querySelector("h2, h3");
+        if (heading) {
+          label = heading.textContent.trim();
+        }
+        wrap.setAttribute("tabindex", "0");
+        wrap.setAttribute("role", "region");
+        wrap.setAttribute("aria-label", label);
+      }
     });
   }
 
@@ -562,11 +709,21 @@
     row.innerHTML = '<button type="button" class="btn primary">Send to pad</button>' +
       '<button type="button" class="btn link-btn" data-all="1">All</button>' +
       '<button type="button" class="btn link-btn" data-all="0">None</button>';
-    row.querySelector(".primary").addEventListener("click", function () {
+    const sendBtn = row.querySelector(".primary");
+    sendBtn.addEventListener("click", function () {
       const text = resultText(container);
-      if (text) {
-        window.DFM_PAD.append(text);
+      if (!text) {
+        return;
       }
+      window.DFM_PAD.append(text);
+      // Brief confirmation on the button itself
+      sendBtn.textContent = "Added \u2713";
+      sendBtn.classList.add("sent");
+      clearTimeout(sendBtn._timer);
+      sendBtn._timer = setTimeout(function () {
+        sendBtn.textContent = "Send to pad";
+        sendBtn.classList.remove("sent");
+      }, 1500);
     });
     row.querySelectorAll("[data-all]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -583,8 +740,162 @@
     readSetting: readSetting,
     writeSetting: writeSetting,
     renderResults: renderResults,
-    resultActions: resultActions
+    resultActions: resultActions,
+    enhanceTables: enhanceTables,
+    normalizeTerm: normalizeTerm
   };
+
+  // ---------- Previous / next page links (from nav order) ----------
+  function buildPager(rootPrefix, pageId) {
+    const main = document.getElementById("main");
+    const footer = main ? main.querySelector(".site-footer") : null;
+    if (!main || pageId === "home") {
+      return;
+    }
+    // Every page in menu order (Quick Rules counts once, as its own page)
+    const pages = [];
+    (window.DFM_NAV || []).forEach(function (group) {
+      if (group.page) {
+        pages.push(group.page);
+      } else {
+        group.items.forEach(function (item) {
+          pages.push(item);
+        });
+      }
+    });
+    const index = pages.findIndex(function (p) {
+      return p.id === pageId;
+    });
+    if (index === -1) {
+      return;
+    }
+    const prev = pages[index - 1];
+    const next = pages[index + 1];
+    const pager = document.createElement("nav");
+    pager.className = "page-pager";
+    pager.setAttribute("aria-label", "Previous and next page");
+    pager.innerHTML =
+      (prev ? '<a class="pager-prev" href="' + rootPrefix + prev.href + '"><small>Previous</small>' + prev.title + "</a>" : "<span></span>") +
+      (next ? '<a class="pager-next" href="' + rootPrefix + next.href + '"><small>Next</small>' + next.title + "</a>" : "<span></span>");
+    main.insertBefore(pager, footer);
+  }
+
+  // ---------- Back to top button (appears after one screen of scrolling) ----------
+  function buildBackToTop() {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "to-top";
+    btn.setAttribute("aria-label", "Back to top");
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    btn.hidden = true;
+    btn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    document.body.appendChild(btn);
+    window.addEventListener("scroll", function () {
+      btn.hidden = window.scrollY < window.innerHeight;
+    }, { passive: true });
+  }
+
+  // ---------- Skip link for keyboard users ----------
+  function buildSkipLink() {
+    const main = document.getElementById("main");
+    if (!main) {
+      return;
+    }
+    main.setAttribute("tabindex", "-1");         // lets the skip link move focus to the content
+    const link = document.createElement("a");
+    link.className = "skip-link";
+    link.href = "#main";
+    link.textContent = "Skip to content";
+    document.body.insertBefore(link, document.body.firstChild);
+  }
+
+  // ---------- Click a diagram to view it full size ----------
+  function initLightbox() {
+    document.addEventListener("click", function (event) {
+      const img = event.target.closest("figure.diagram img");
+      if (!img || event.target.closest("a")) {
+        return;                                  // diagrams that are links keep their link
+      }
+      const box = document.createElement("div");
+      box.className = "lightbox";
+      box.setAttribute("role", "dialog");
+      box.setAttribute("aria-label", "Enlarged diagram. Press Escape or click to close.");
+      box.innerHTML = '<button type="button" class="icon-btn lightbox-close" aria-label="Close">&times;</button>' +
+        '<div class="lightbox-scroll"><img src="' + img.getAttribute("src") + '" alt="' + escapeText(img.alt) + '"></div>' +
+        (img.closest("figure").querySelector("figcaption") ?
+          '<p class="lightbox-caption">' + escapeText(img.closest("figure").querySelector("figcaption").textContent) + "</p>" : "");
+      function close() {
+        box.remove();
+        document.body.classList.remove("lightbox-open");
+        document.removeEventListener("keydown", onKey);
+        img.focus({ preventScroll: true });
+      }
+      function onKey(e) {
+        if (e.key === "Escape") {
+          close();
+        }
+      }
+      box.addEventListener("click", function (e) {
+        // Click on the backdrop or close button closes; clicks on the image (for panning on phones) do not
+        if (e.target === box || e.target.closest(".lightbox-close")) {
+          close();
+        }
+      });
+      document.addEventListener("keydown", onKey);
+      document.body.appendChild(box);
+      document.body.classList.add("lightbox-open");
+      box.querySelector(".lightbox-close").focus();
+    });
+
+    // Mark diagrams as enlargeable (cursor + keyboard: Enter on a focused diagram)
+    document.querySelectorAll("figure.diagram img").forEach(function (img) {
+      if (img.closest("a")) {
+        return;
+      }
+      img.classList.add("zoomable");
+      img.setAttribute("tabindex", "0");
+      img.setAttribute("title", "Click to enlarge");
+      img.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          img.click();
+        }
+      });
+    });
+  }
+
+  // ---------- Keyboard shortcuts ----------
+  function initShortcuts() {
+    document.addEventListener("keydown", function (event) {
+      const target = event.target;
+      const typing = target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+      if (typing || event.ctrlKey || event.metaKey || event.altKey) {
+        return;                                  // never steal keys while typing or from browser shortcuts
+      }
+      if (event.key === "/") {
+        const search = document.querySelector(".site-search-input");
+        if (search) {
+          event.preventDefault();
+          search.focus();
+        }
+      } else if (event.key === "b") {
+        const back = document.querySelector(".nav-back");
+        if (back) {
+          back.click();
+        }
+      } else if (event.key === "p" && window.DFM_PAD) {
+        event.preventDefault();
+        window.DFM_PAD.toggle();
+      } else if (event.key === "t") {
+        const themeBtn = document.querySelector(".theme-btn");
+        if (themeBtn) {
+          themeBtn.click();
+        }
+      }
+    });
+  }
 
   // ---------- Start up ----------
   document.addEventListener("DOMContentLoaded", function () {
@@ -598,6 +909,11 @@
     spyOnSamePageGroups(pageId);
     initTabs();
     initTableFilters();
+    buildPager(rootPrefix, pageId);
+    buildBackToTop();
+    buildSkipLink();
+    initLightbox();
+    initShortcuts();
 
     // Close the phone menu after a nav link is tapped
     document.querySelectorAll(".sidebar a:not(.active)").forEach(function (link) {

@@ -21,7 +21,7 @@
   --accent-strong: #154f80;   /* link hover */
   --tip: #1d7a4f;             /* tip callout stripe */
   --tip-soft: #e5f4ec;        /* tip callout background */
-  --warn: #b0590e;            /* warning callout stripe */
+  --warn: #9a4d0b;            /* warning callout stripe (4.5:1 on its soft background) */
   --warn-soft: #fcf0e3;       /* warning callout background */
   --rule: #6a3fb5;            /* "design rule" callout stripe */
   --rule-soft: #f0eafb;       /* design rule callout background */
@@ -222,7 +222,7 @@ img, svg { max-width: 100%; height: auto; }
   height: 34px;
   border-radius: 6px;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
   font-size: 0.78rem;
   letter-spacing: 0.5px;
 }
@@ -232,18 +232,6 @@ img, svg { max-width: 100%; height: auto; }
   font-weight: 400;
   font-size: 0.75rem;
   color: var(--text-muted);
-}
-
-.nav-filter {
-  margin: 14px 16px 6px;
-  padding: 8px 10px;
-  width: calc(100% - 32px);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--bg);
-  color: var(--text);
-  font: inherit;
-  font-size: 0.9rem;
 }
 
 .nav-group { padding: 8px 0; }
@@ -601,9 +589,10 @@ figure.diagram figcaption {
   background: var(--surface);
 }
 
-.do-dont h4 { margin: 0 0 8px; }
-.do-dont .do h4 { color: var(--good); }
-.do-dont .dont h4 { color: var(--bad); }
+.do-dont h3,
+.do-dont h4 { margin: 0 0 8px; padding: 0; border: none; font-size: 1rem; }
+.do-dont .do h3, .do-dont .do h4 { color: var(--good); }
+.do-dont .dont h3, .do-dont .dont h4 { color: var(--bad); }
 .do-dont ul { margin: 0; padding-left: 1.2em; }
 
 /* ---------- Badges ---------- */
@@ -1049,4 +1038,385 @@ label.result-row:has(input:not(:checked)) .result-value {
 .btn.link-btn {
   padding: 4px 10px;
   font-size: 0.82rem;
+}
+
+
+/* =====================================================================
+   Navigation, search, pad drawer and page tools
+   ===================================================================== */
+
+/* Collapse all / Expand all row in the sidebar */
+.nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 16px 2px;
+  padding: 6px 4px 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.nav-tools span { flex: 1; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.nav-tool-btn {
+  padding: 2px 6px;
+  border: none;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.nav-tool-btn:hover { text-decoration: underline; }
+
+.sidebar-footer kbd { font-size: 0.72rem; padding: 0 4px; }
+
+/* Top bar: menu | breadcrumb | search | pad | theme */
+.crumb { display: flex; align-items: center; gap: 8px; min-width: 0; }
+
+.crumb-group {
+  padding: 2px 6px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.crumb-group:hover { background: var(--accent-soft); }
+.crumb-sep { color: var(--text-muted); }
+.crumb-page { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-muted); }
+
+.topbar-search { position: relative; flex: 0 1 340px; }
+.search-toggle { display: none; }
+
+.site-search-input {
+  width: 100%;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  background: var(--surface);
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(480px, 92vw);
+  max-height: 70vh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  z-index: 60;
+}
+
+.search-results li { margin: 0; }
+
+.search-results a {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.search-results li.active a,
+.search-results a:hover { background: var(--accent-soft); text-decoration: none; }
+
+.search-kind {
+  grid-row: span 2;
+  align-self: start;
+  margin-top: 2px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.search-title { font-weight: 600; color: var(--heading); }
+.search-context { font-size: 0.8rem; color: var(--text-muted); }
+.search-empty { padding: 10px; font-size: 0.88rem; color: var(--text-muted); }
+
+/* Pad button with a line-count badge */
+.pad-btn { position: relative; }
+
+.pad-count {
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  min-width: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* Scratch pad drawer (every page except the calculators page) */
+.pad-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  width: min(400px, 100vw);
+  padding: 14px 18px 18px;
+  background: var(--surface);
+  border-left: 1px solid var(--card-border);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.pad-drawer[hidden] { display: none; }
+
+.pad-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.pad-drawer-head h2 { margin: 0; padding: 0; border: none; font-size: 1.2rem; }
+.pad-drawer .scratch { flex: 1; min-height: 0; }
+.pad-drawer textarea { flex: 1; min-height: 200px; }
+
+/* Previous / next page links above the footer */
+.page-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.page-pager a {
+  display: block;
+  padding: 12px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--heading);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page-pager a:hover { border-color: var(--accent); text-decoration: none; }
+.page-pager small { display: block; font-weight: 400; font-size: 0.78rem; color: var(--text-muted); }
+.page-pager .pager-next { text-align: right; grid-column: 2; }
+
+/* Back to top */
+.to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 35;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--card-border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.to-top[hidden] { display: none; }
+.to-top:hover { border-color: var(--accent); }
+
+/* Skip link: hidden until focused with the keyboard */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 12px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: 0 0 6px 6px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+.skip-link:focus { top: 0; }
+main:focus { outline: none; }
+
+/* Click-to-enlarge diagrams */
+img.zoomable { cursor: zoom-in; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 14, 22, 0.82);
+  cursor: zoom-out;
+}
+
+.lightbox-scroll {
+  max-width: 96vw;
+  max-height: 84vh;
+  overflow: auto;
+  border-radius: var(--radius);
+  background: #ffffff;
+}
+
+.lightbox-scroll img {
+  display: block;
+  width: min(92vw, 1500px);
+  max-width: none;
+  height: auto;
+  cursor: default;
+}
+
+.lightbox-caption { max-width: 900px; margin: 12px 0 0; color: #e6edf5; font-size: 0.9rem; text-align: center; }
+
+.lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #ffffff;
+  color: #1c2733;
+  font-size: 1.4rem;
+}
+
+/* Phones: show the diagram larger than the screen so it can be panned */
+@media (max-width: 700px) {
+  .lightbox { padding: 12px; }
+  .lightbox-scroll img { width: 900px; }
+}
+
+body.lightbox-open { overflow: hidden; }
+
+/* =====================================================================
+   Tables, links, focus, motion, line length
+   ===================================================================== */
+
+/* Long tables scroll inside their own box so the sticky header row stays visible */
+.table-wrap.tall { max-height: 72vh; overflow: auto; }
+th { z-index: 2; }
+
+/* Wide size tables: the first (size) column stays visible while scrolling sideways */
+table.sticky-first td:first-child,
+table.sticky-first th:first-child {
+  position: sticky;
+  left: 0;
+  white-space: nowrap;
+  background: var(--surface);
+  box-shadow: 1px 0 0 var(--border);
+}
+
+table.sticky-first td:first-child { z-index: 1; }
+table.sticky-first th:first-child { z-index: 3; background: var(--table-head); }
+table.sticky-first tbody tr:nth-child(even) td:first-child { background: var(--surface); }
+table.sticky-first tbody tr:hover td:first-child { background: var(--accent-soft); }
+
+tr.no-match td { padding: 14px; color: var(--text-muted); font-style: italic; text-align: center; }
+
+/* Links in text are underlined, not just colored (readability and accessibility) */
+main a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.glance-list a, .tile a, a.card, .tile-links a, .page-pager a, .search-results a,
+.nav-link, .nav-home, .nav-back, .brand { text-decoration: none; }
+main a:hover { text-decoration-thickness: 2px; }
+
+/* Clear focus ring for keyboard users on every interactive element */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Comfortable line length for running text (tables and figures keep full width) */
+.content > p,
+.content > ul,
+.content > ol,
+.callout p { max-width: 80ch; }
+
+/* Respect the "reduce motion" system setting */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .tile:hover { transform: none; }
+}
+
+/* Send to pad confirmation state */
+.btn.primary.sent { background: var(--good); border-color: var(--good); }
+
+/* Phones and tablets: icon search, lock page scroll behind open panels */
+@media (max-width: 960px) {
+  body.nav-open, body.pad-open { overflow: hidden; }
+  .page-pager { grid-template-columns: 1fr; }
+  .page-pager .pager-next { grid-column: 1; }
+}
+
+@media (max-width: 700px) {
+  .topbar-search { flex: 0 0 auto; position: static; }
+  .search-toggle { display: inline-grid; }
+  .site-search { display: none; }
+  .topbar-search.open .site-search {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 5;                      /* covers the other top bar buttons while searching */
+    padding: 9px 10px;
+    background: var(--bg);
+  }
+  .topbar-search.open .search-results { width: auto; left: 0; right: 0; }
+  .crumb-page { display: none; }
+  .crumb-sep { display: none; }
+}
+
+/* =====================================================================
+   Print: content only, every tab printed with its label
+   ===================================================================== */
+@media print {
+  .tabs, .toolbar, .calc-actions, .pad-panel, .pad-drawer, .page-pager, .to-top,
+  .skip-link, .lightbox, .topbar-search, .nav-scrim { display: none !important; }
+  .tab-panel[hidden] { display: block !important; }
+  .tab-panel::before {
+    content: attr(data-tab-label);
+    display: block;
+    margin: 14px 0 4px;
+    font-weight: 700;
+  }
+  .table-wrap, .table-wrap.tall { max-height: none; overflow: visible; border: none; }
+  tr, figure, .callout, .glance { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  main a { text-decoration: none; }
 }
