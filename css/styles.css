@@ -10,6 +10,8 @@
   --surface: #ffffff;         /* cards, tables, sidebar */
   --surface-alt: #eef2f7;     /* table stripes, code blocks */
   --border: #d6dde6;          /* hairlines and table borders */
+  --card-border: #d6dde6;     /* outline of cards, tables, panels */
+  --table-head: #eef2f7;      /* table header row background */
   --text: #1c2733;            /* body text */
   --text-muted: #5a6878;      /* captions, secondary text */
   --heading: #0f1b2a;         /* headings */
@@ -37,18 +39,20 @@
 /* ---------- Dark theme tokens: follows the OS unless the user picked light ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f151c;
-    --surface: #17202a;
-    --surface-alt: #1e2935;
-    --border: #2c3a49;
-    --text: #d9e1ea;
-    --text-muted: #93a3b5;
-    --heading: #f1f5f9;
-    --accent: #5aa9e6;
-    --accent-soft: #1b3348;
-    --accent-strong: #8cc4f0;
+    --bg: #0a0f15;
+    --surface: #152030;
+    --surface-alt: #1c2b3d;
+    --border: #2a3d53;
+    --card-border: rgba(64, 160, 255, 0.55);
+    --table-head: #20344d;
+    --text: #dbe3ec;
+    --text-muted: #9aabbf;
+    --heading: #f3f7fb;
+    --accent: #4ea8ff;
+    --accent-soft: #17324f;
+    --accent-strong: #8ec8ff;
     --tip: #4cc38a;
-    --tip-soft: #15302a;
+    --tip-soft: #12302a;
     --warn: #f0a35a;
     --warn-soft: #3a2a18;
     --rule: #b29af0;
@@ -56,25 +60,27 @@
     --bad: #f28b82;
     --good: #4cc38a;
     --diagram-bg: #f4f6f9;
-    --shadow: none;
+    --shadow: 0 0 0 1px rgba(64, 160, 255, 0.06), 0 4px 14px rgba(0, 0, 0, 0.35);
     color-scheme: dark;
   }
 }
 
 /* ---------- Dark theme tokens when the user picked dark with the toggle ---------- */
 :root[data-theme="dark"] {
-  --bg: #0f151c;
-  --surface: #17202a;
-  --surface-alt: #1e2935;
-  --border: #2c3a49;
-  --text: #d9e1ea;
-  --text-muted: #93a3b5;
-  --heading: #f1f5f9;
-  --accent: #5aa9e6;
-  --accent-soft: #1b3348;
-  --accent-strong: #8cc4f0;
+  --bg: #0a0f15;
+  --surface: #152030;
+  --surface-alt: #1c2b3d;
+  --border: #2a3d53;
+  --card-border: rgba(64, 160, 255, 0.55);
+  --table-head: #20344d;
+  --text: #dbe3ec;
+  --text-muted: #9aabbf;
+  --heading: #f3f7fb;
+  --accent: #4ea8ff;
+  --accent-soft: #17324f;
+  --accent-strong: #8ec8ff;
   --tip: #4cc38a;
-  --tip-soft: #15302a;
+  --tip-soft: #12302a;
   --warn: #f0a35a;
   --warn-soft: #3a2a18;
   --rule: #b29af0;
@@ -82,7 +88,7 @@
   --bad: #f28b82;
   --good: #4cc38a;
   --diagram-bg: #f4f6f9;
-  --shadow: none;
+  --shadow: 0 0 0 1px rgba(64, 160, 255, 0.06), 0 4px 14px rgba(0, 0, 0, 0.35);
   color-scheme: dark;
 }
 
@@ -239,17 +245,47 @@ img, svg { max-width: 100%; height: auto; }
 
 .nav-group { padding: 8px 0; }
 
+/* Group label is a toggle button at the top of each nav group */
 .nav-group-title {
-  margin: 10px 20px 4px;
-  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 8px 20px;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
+  cursor: pointer;
+  text-align: left;
 }
 
+.nav-group-title:hover { color: var(--accent); }
+
+/* Chevron points right when closed, down when open */
+.chevron {
+  flex: 0 0 auto;
+  transition: transform 0.15s ease;
+}
+
+.nav-group.open > .nav-group-title .chevron,
+.nav-link.open .chevron { transform: rotate(90deg); }
+
+/* Closed groups hide their links (unless the filter box is in use) */
+.nav-group-items { display: none; }
+.nav-group.open > .nav-group-items,
+.sidebar.filtering .nav-group-items { display: block; }
+
 .nav-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding: 6px 20px 6px 24px;
   border-left: 3px solid transparent;
   color: var(--text);
@@ -269,8 +305,9 @@ img, svg { max-width: 100%; height: auto; }
   font-weight: 600;
 }
 
-/* Section links of the current page, nested under its nav entry */
+/* Section links of the current page, nested under its nav entry; hidden when its link is collapsed */
 .nav-sub { margin: 2px 0 6px; }
+.nav-link.active:not(.open) + .nav-sub { display: none; }
 
 .nav-sub a {
   display: block;
@@ -348,35 +385,6 @@ img, svg { max-width: 100%; height: auto; }
   max-width: 70ch;
 }
 
-/* ---------- "Key numbers" summary cards ---------- */
-.key-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 14px;
-  margin: 20px 0 28px;
-}
-
-.key-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  box-shadow: var(--shadow);
-}
-
-.key-card .value {
-  display: block;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--heading);
-}
-
-.key-card .label {
-  display: block;
-  font-size: 0.86rem;
-  color: var(--text-muted);
-}
-
 /* ---------- Generic cards (home page tiles etc.) ---------- */
 .card-grid {
   display: grid;
@@ -388,7 +396,7 @@ img, svg { max-width: 100%; height: auto; }
 .card {
   display: block;
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 18px;
   box-shadow: var(--shadow);
@@ -436,7 +444,7 @@ a.card:hover {
 .table-wrap {
   overflow-x: auto;              /* wide tables scroll sideways on phones */
   margin: 14px 0 22px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   background: var(--surface);
 }
@@ -457,7 +465,7 @@ th, td {
 th {
   position: sticky;              /* header row stays visible in long tables */
   top: 0;
-  background: var(--surface-alt);
+  background: var(--table-head);
   color: var(--heading);
   font-weight: 600;
   white-space: nowrap;
@@ -548,7 +556,7 @@ figure.diagram {
   margin: 20px 0 26px;
   padding: 16px;
   background: var(--diagram-bg);   /* diagrams always sit on a light panel */
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   text-align: center;
 }
@@ -585,7 +593,7 @@ figure.diagram figcaption {
 .do-dont > div {
   padding: 14px 16px;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   background: var(--surface);
 }
 
@@ -620,7 +628,7 @@ figure.diagram figcaption {
 
 .calc {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 16px 18px;
   box-shadow: var(--shadow);
@@ -770,3 +778,155 @@ tr.best td { background: var(--tip-soft) !important; font-weight: 600; }
 
 /* Wider content area for tool pages */
 .content.wide { max-width: 1440px; }
+
+
+/* ---------- "At a glance" summary list at the top of a page ---------- */
+.glance {
+  margin: 4px 0 28px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.glance-title {
+  padding: 8px 16px;
+  background: var(--table-head);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.glance-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.glance-list li {
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Each item: value column, description, arrow; the whole row links to its section */
+.glance-list a,
+.glance-list .glance-item {
+  display: grid;
+  grid-template-columns: minmax(110px, 34%) 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 9px 16px;
+  color: var(--text);
+}
+
+.glance-list a::after {
+  content: "\203A";                /* single right angle quote as an arrow */
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.glance-list a:hover {
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+.glance-list a:hover::after { color: var(--accent); }
+
+.glance-list .value {
+  font-weight: 700;
+  color: var(--accent-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.glance-list .label {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Home page quick-link tiles ---------- */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 18px;
+  margin: 8px 0 32px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.tile:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Illustration band at the top of the tile; the whole band links to the main page */
+.tile-art {
+  display: block;
+  background: var(--diagram-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.tile-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tile-body { padding: 14px 18px 16px; }
+
+.tile-body h2 {
+  margin: 0 0 4px;
+  padding: 0;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.tile-body h2 a { color: var(--heading); }
+.tile-body h2 a:hover { color: var(--accent); text-decoration: none; }
+
+.tile-body p {
+  margin: 0 0 10px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.tile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile-links li { margin: 0; }
+
+.tile-links a {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.tile-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
